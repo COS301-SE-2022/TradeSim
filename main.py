@@ -1,6 +1,8 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template
+from flask_bootstrap import Bootstrap
 
 app =  Flask(__name__, template_folder='apps/client/templates')
+Bootstrap(app)
 
 @app.route("/")
 def index():
