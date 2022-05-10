@@ -1,6 +1,11 @@
-from apps/client import build_front
+from flask import Flask, render_template, url_for
 
-front = build_front()
+app =  Flask(__name__, template_folder='apps/client/templates')
 
-if __name__ == '__main__':
-    front.run(debug=True)
+@app.route("/")
+def index():
+    return render_template("login.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
