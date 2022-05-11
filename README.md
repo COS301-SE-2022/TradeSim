@@ -41,5 +41,15 @@ https://github.com/COS301-SE-2022/TradeSim.wiki.git
 
 -----------------------------------------------------
 
+<h3> Short profile description of each team member. </h3>
+
+Sean Nkosi: 
+Sibusiso Mngomezulu: 
+Rachel Hamilton: 
+Regan Shen: 
+Michael Viljoen: 
+
+-----------------------------------------------------
+
 simfin api key NBpcYHWZApdpErjTNUHBQiiWQ9RZSvcd
 finnhub api key c9tmuvaad3i1pjtupqi0
