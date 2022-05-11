@@ -24,3 +24,8 @@ request_url4 = "https://finnhub.io/api/v1/stock/profile2?"
 api_request4 = requests.get(request_url4, params = {'symbol': 'AAPL' ,'token': api_key})
 response4 = api_request4.json()
 print(response4)
+
+request_url5 = "https://finnhub.io/api/v1/stock/metric?"
+api_request5 = requests.get(request_url5, params = {'symbol': 'AAPL' ,'token': api_key, 'metric' : 'all'})
+response5 = api_request5.json()
+print(response5)
