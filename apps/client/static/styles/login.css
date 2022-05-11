@@ -1,5 +1,7 @@
-body {font-family: Arial, Helvetica, sans-serif;}
-form {border: 3px solid #f1f1f1;}
+form {
+    border: 3px solid #f1f1f1;
+}
+
 input,
 button {
   width: 100%;
@@ -11,7 +13,6 @@ button {
   display: inline-block;
   font-size: 17px;
   line-height: 20px;
-  /* remove underline from anchors */
 }
 
 button{
@@ -19,11 +20,8 @@ button{
     color: white;
 }
 
-input{ border: 1px solid black }
-
-span.psw {
-  float: right;
-  padding-top: 16px;
+input{ 
+    border: 1px solid black 
 }
 
 .main{
@@ -38,6 +36,7 @@ span.psw {
     background-color: lightgray;
 }
 .login-page{
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
