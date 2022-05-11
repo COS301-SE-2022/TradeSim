@@ -43,11 +43,26 @@ https://github.com/COS301-SE-2022/TradeSim.wiki.git
 
 <h3> Short profile description of each team member. </h3>
 
-Sean Nkosi: 
-Sibusiso Mngomezulu: 
-Rachel Hamilton: 
-Regan Shen: 
-Michael Viljoen: 
+<b> Sean Nkosi: </b> <br>
+About: <br>
+LinkedIn profile link: 
+
+<b> Sibusiso Mngomezulu: </b> <br>
+About: <br>
+LinkedIn profile link:
+
+<b> Rachel Hamilton: </b> <br>
+About: <br>
+LinkedIn profile link:
+
+<b> Regan Shen: </b> <br>
+About: <br>
+LinkedIn profile link:
+
+<b> Michael Viljoen: </b> <br>
+About: <br>
+LinkedIn profile link:
+
 
 -----------------------------------------------------
 
