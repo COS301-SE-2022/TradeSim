@@ -1,3 +1,4 @@
+import IndustrySector
 import requests
 
 api_key = "NBpcYHWZApdpErjTNUHBQiiWQ9RZSvcd"
@@ -5,10 +6,6 @@ api_key = "NBpcYHWZApdpErjTNUHBQiiWQ9RZSvcd"
 
 def listallcompanies():
     request_url = 'https://simfin.com/api/v2/companies/list'
-
-    columns = []
-
-    output = []
 
     parameters = {"api-key": api_key}
 
@@ -57,4 +54,7 @@ def statements():
 
                     output += data['data']
 
+
 listOfAllCompanies = listallcompanies()
+
+DictionaryOfSectors = IndustrySector.getFile()
