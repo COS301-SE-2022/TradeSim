@@ -1,5 +1,4 @@
 
-
 ----------------------------------------------------
 
 <h1> <b> AiPi </b> </h1>
@@ -38,7 +37,32 @@ Rachel Hamilton - u20453478
 
 <h3> Wiki Project Board Link: </h3>
 
-https://github.com/COS301-SE-2022/TradeSim.wiki.git
+https://github.com/COS301-SE-2022/TradeSim/wiki/TradeSim
+
+-----------------------------------------------------
+
+<h3> Short profile description of each team member. </h3>
+
+<b> Sean Nkosi: </b> <br>
+About: <br>
+LinkedIn profile link: 
+
+<b> Sibusiso Mngomezulu: </b> <br>
+About: <br>
+LinkedIn profile link:
+
+<b> Rachel Hamilton: </b> <br>
+About: <br>
+LinkedIn profile link:
+
+<b> Regan Shen: </b> <br>
+About: <br>
+LinkedIn profile link:
+
+<b> Michael Viljoen: </b> <br>
+About: <br>
+LinkedIn profile link:
+
 
 -----------------------------------------------------
 
