@@ -38,7 +38,7 @@ Rachel Hamilton - u20453478
 
 <h3> Wiki Project Board Link: </h3>
 
-https://github.com/rachhamiltonn/TradeSim.wiki.git
+https://github.com/COS301-SE-2022/TradeSim.wiki.git
 
 -----------------------------------------------------
 
