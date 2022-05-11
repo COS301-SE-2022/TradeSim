@@ -2,7 +2,7 @@ import csv
 
 def getFile():
     dictOfValues = {"IndustryID" : ["Sector","Industry"]}
-    with open('../Database/industries.csv', 'r') as csvFile:
+    with open('../databases/industries.csv', 'r') as csvFile:
         reader = csv.reader(csvFile)
         temp = 0
         for x in reader:
