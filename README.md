@@ -30,5 +30,17 @@ Rachel Hamilton - u20453478
 
 -----------------------------------------------------
 
+<h3> SRS document link: </h3>
+
+[SRS_AiPi.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8673717/SRS_AiPi.pdf)
+
+-----------------------------------------------------
+
+<h3> Wiki Project Board Link: </h3>
+
+[SRS_AiPi.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8673717/SRS_AiPi.pdf)
+
+-----------------------------------------------------
+
 simfin api key NBpcYHWZApdpErjTNUHBQiiWQ9RZSvcd
 finnhub api key c9tmuvaad3i1pjtupqi0
