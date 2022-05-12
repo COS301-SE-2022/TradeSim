@@ -53,7 +53,7 @@ LinkedIn profile link:
 
 <b> Rachel Hamilton: </b> <br>
 About: My name is Rachel Hamilton, I am a 3rd year BSC Computer Science student. I consider myself a person with good leadership skills. I have experience in coding in multiple languages, including, C++, Java, Python, Javascript etc. I have an interest in software development & web development. <br>
-LinkedIn profile link: www.linkedin.com/in/rachel-hamilton-a39382234
+LinkedIn profile link:
 
 <b> Regan Shen: </b> <br>
 About: My name is Regan Shen. I was born on December 1st 2001 in westville, Durban. I am currently in my 3rd year, studying Bsc Computer Science at the University of Pretoria. I really enjoy spending time with my friends and attending social events. I have an interest in Software Development and more focused on the backend. <br>
@@ -65,6 +65,8 @@ LinkedIn profile link:  https://www.linkedin.com/in/michael-viljoen-bb873923a
 
 
 -----------------------------------------------------
+<h3>Demo 1 video</h3>
+https://youtu.be/93PcgcoHgbU
 
 simfin api key NBpcYHWZApdpErjTNUHBQiiWQ9RZSvcd
 finnhub api key c9tmuvaad3i1pjtupqi0
