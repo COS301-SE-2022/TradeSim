@@ -12,12 +12,12 @@
         justify-content: center;
         align-items: center;
         padding: 0px;
-        position: absolute;
+        position: fixed;
         width: 532px;
         height: 50px;
         left: 124px;
         top: 244px;
-        background: rgba(0, 1, 23, 0.85);
+        background: #F7F7F7;
         border: 1px solid #5EFF5A;
         border-radius: 16px;
       }
@@ -29,12 +29,12 @@
         justify-content: center;
         align-items: center;
         padding: 0px;
-        position: absolute;
+        position: fixed;
         width: 532px;
         height: 50px;
         left: 705px;
         top: 244px;
-        background: rgba(0, 1, 23, 0.85);
+        background: #F7F7F7;
         border-radius: 16px;
       } 
       
@@ -45,12 +45,12 @@
         justify-content: center;
         align-items: center;
         padding: 0px;
-        position: absolute;
+        position: fixed;
         width: 532px;
         height: 50px;
         left: 124px;
         top: 456.24px;
-        background: rgba(0, 1, 23, 0.85);
+        background: #F7F7F7;
         border-radius: 16px;
       }
 
@@ -60,21 +60,106 @@
         justify-content: center;
         align-items: center;
         padding: 0px;
-        position: absolute;
+        position: fixed;
         width: 532px;
         height: 50px;
         left: 124px;
         top: 670.24px;
-        background: rgba(0, 1, 23, 0.85);
+        background: #F7F7F7;
         border-radius: 16px;
       }
+
+      .header {
+        
+        padding: 80px;
+        left: 124px;
+        text-align: center;
+        color: #FFFFFF;
+}
+
+
+      .min{
+           
+        color: #A8A8A8;
+        position:relative; 
+        left:345px; 
+        top:55px
+      }
+
+      .max{
+        position:relative; 
+        left:950px; 
+        top:40px;  
+        color: #A8A8A8;
+      }
+
+      .quantity{
+        position:relative; 
+        left:140px; 
+        top:145px;  
+        color: #A8A8A8;
+      }
+
+      .price{
+        position:relative; 
+        left:140px; 
+        top:345px;  
+        color: #A8A8A8;
+      }
+
+      .set-etf{
+        
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 6px;
+        position: absolute;
+        width: 121px;
+        height: 52px;
+        left: 940px;
+        top: 480px;
+        background: #3730A3;
+        border-radius: 6px;
+      }
+
       </style>
 
 <body style="background-color: #3E495A;">
     
       
-    <h1>class ="heading" Set rules</h1>
+  
+    <div class="header">
+        <h1>Set rules</h1>
+      </div>
 
+      <div class="min">
+        <text>MIN</text>
+      </div>
+
+      <button class="set-etf">Set</button>
+
+      <div class="max">
+        <text>MAX</text>
+      </div>
+
+      <div class="quantity">
+        <text>Quantity</text>
+      </div>
+
+      <div class="price">
+        <text>Price</text>
+      </div>
+
+
+      
+      
+      
     <form class="min">
         <input type="text" placeholder="$" name="min">
       </form>

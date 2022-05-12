@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+
+
+      .header {
+        
+        padding: 80px;
+        left: 124px;
+        text-align: center;
+        color: #FFFFFF;
+}
+.left-arrow {
+        
+    color: white;  
+  position: fixed;
+  top: 40;
+  left: 100px;
+}
+
+.add-button {
+        
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 6px;
+        position: absolute;
+        width: 121px;
+        height: 52px;
+        left: 1240px;
+        top: 340px;
+        background: #3730A3;
+        border-radius: 6px;
+      }
+
+
+      .remove-button {
+        
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 6px;
+        position: absolute;
+        width: 121px;
+        height: 52px;
+        left: 1240px;
+        top: 440px;
+        background: #3730A3;
+        border-radius: 6px;
+      } 
+
+
+
+
+      .right-arrow {
+        
+            
+    color: white;  
+  position: relative;
+  top: 20px;
+  left: 1000px;
+}
+
+.dropbtn {
+    border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 6px;
+  position: fixed;
+  width: 121px;
+  height: 52px;
+  left: 1240px;
+  top: 150px;
+  background: #3730A3;
+  border-radius: 6px;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+
+    
+      </style>
+
+<body style="background-color: #3E495A;">
+    
+
+
+
+    <div class="header">
+        <h1>ETF</h1>
+    </div>
+
+    
+    <p class="left-arrow">&#8592;</p>
+
+    <p class="right-arrow">&#8594;</p>
+    
+    <href><button class="add-button">Add</button>
+    <button class="remove-button">Remove</button>
+
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Date</button>
+        <div id="myDropdown" class="dropdown-content">
+          <a href="#date">Daily</a>
+          <a href="#about">Week</a>
+          <a href="#contact">Yearly</a>
+        </div>
+      </div>
+
+
+      
+
+      <script>
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+        
+        window.onclick = function(event) {
+          if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        }
+        </script>
+
+
+
+
+</body>
+</html>
