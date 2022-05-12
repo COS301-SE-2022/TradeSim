@@ -21,7 +21,7 @@ def home():
     return render_template("home.html")
 
 @app.route("/add")
-def home():
+def add():
     return render_template("add.html")
 
 if __name__ == "__main__":
