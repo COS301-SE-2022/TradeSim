@@ -1,4 +1,3 @@
-import IndustrySector
 import requests
 
 api_key = "NBpcYHWZApdpErjTNUHBQiiWQ9RZSvcd"
@@ -21,22 +20,35 @@ def listallcompanies():
     #     print(listComp[x])
     return listComp
 
-def CompaniesByIndustry():
+
+def CompaniesByIndustry(value):
+    #This function will return the symbols of the comapnies in a industry or Sector
     request_url = 'https://simfin.com/api/v2/finder?api-key=NBpcYHWZApdpErjTNUHBQiiWQ9RZSvcd'
-    meta = {"id": 7, "value": 2021, "operator": "eq"}
-    condition = {"operator": "start", "value": "100"}
-    search = [{"indicatorId": "0-73", "meta": [meta], "condition": condition}]
+    # This function returns companies that are in a certain field and their last clossing price is greater that 15$
+    meta = {"id": 7, "value": 2022, "operator": "eq"}
+    condition = {"operator": "start", "value": value}
+
+    # This search function is for the last clossing time
+    # meta1 = {"id": 7, "value": 2022, "operator": "eq"}
+    # condition1 = {"operator": "be", "value": 15}
+
+    meta1 = {"id": 7, "value": 2022, "operator": "eq"}
+    condition1 = {"operator": "diff", "value": 0}
+
+    search = [{"indicatorId": "0-73", "meta": [meta], "condition": condition},
+              {"indicatorId": "0-71", "meta": [meta1], "condition": condition1}]
     parameters = {"search": search, "resultsPerPage": 0}
 
-
-    request = requests.post(request_url, json = parameters)
+    request = requests.post(request_url, json=parameters)
 
     data = request.json()
-    arrayOfInfo = []
+    listOfSymbols = []
     for x in data['results']:
-        arrayOfInfo.append(x)
+        each = x['values'][1]
+        listOfSymbols.append(each['value'])
 
-    return arrayOfInfo
+
+    return listOfSymbols
     # listComp = []
     # size = len(data['data'])
     # for x in range(size):
@@ -45,7 +57,6 @@ def CompaniesByIndustry():
     # print(data['columns'])
     # for x in range(size):
     #     print(listComp[x])
-
 
 
 def statements():
@@ -78,9 +89,3 @@ def statements():
                         columns = data['columns']
 
                     output += data['data']
-
-
-if __name__ == '__main__':
-    CompaniesByIndustry()
-    # listOfAllCompanies = listallcompanies()
-    # DictionaryOfSectors = IndustrySector.getFile()
