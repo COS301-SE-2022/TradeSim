@@ -44,24 +44,24 @@ https://github.com/COS301-SE-2022/TradeSim/wiki/TradeSim
 <h3> Short profile description of each team member. </h3>
 
 <b> Sean Nkosi: </b> <br>
-About: <br>
-LinkedIn profile link: 
+About: I am a BIT student who is a full stack developer and enjoy learning new frameworks. In my free time if I’m not sleeping I'm eating and if I'm not eating I'm playing sports.<br>
+LinkedIn profile link: https://www.linkedin.com/in/sean-nkosi-47b7901ba
 
 <b> Sibusiso Mngomezulu: </b> <br>
-About: <br>
+About: Hi my name is Sbu, I am studing computer science at the  University of Pretoria, I really enjoy my degree and have a passion for computer science.<br>
 LinkedIn profile link:
 
 <b> Rachel Hamilton: </b> <br>
-About: <br>
+About: My name is Rachel Hamilton, I am a 3rd year BSC Computer Science student. I consider myself a person with good leadership skills. I have experience in coding in multiple languages, including, C++, Java, Python, Javascript etc. I have an interest in software development & web development. <br>
 LinkedIn profile link:
 
 <b> Regan Shen: </b> <br>
-About: <br>
-LinkedIn profile link:
+About: My name is Regan Shen. I was born on December 1st 2001 in westville, Durban. I am currently in my 3rd year, studying Bsc Computer Science at the University of Pretoria. I really enjoy spending time with my friends and attending social events. I have an interest in Software Development and more focused on the backend. <br>
+LinkedIn profile link: https://www.linkedin.com/in/regan-shen-b8a73b23a/
 
 <b> Michael Viljoen: </b> <br>
-About: <br>
-LinkedIn profile link:
+About: I am a year student at UP studying Bsc Computer Science, over the years I have had the opportunity to learnt multiple languages including C++, Java, Python, JavaScript, PHP and more.<br>
+LinkedIn profile link:  https://www.linkedin.com/in/michael-viljoen-bb873923a
 
 
 -----------------------------------------------------
