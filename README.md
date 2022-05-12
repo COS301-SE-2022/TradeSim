@@ -74,3 +74,7 @@ finnhub api key c9tmuvaad3i1pjtupqi0
 <a href='https://coveralls.io/github/COS301-SE-2022/TradeSim?branch=main'><img src='https://coveralls.io/repos/github/COS301-SE-2022/TradeSim/badge.svg?branch=main' alt='Coverage Status' /></a>
 
 <a href="https://app.travis-ci.com/MichaelViljoen/TradeSim"><img src="https://app.travis-ci.com/MichaelViljoen/TradeSim.svg?branch=main"></a>
+
+<a href="https://requires.io/github/MichaelViljoen/TradeSim/requirements/?branch=main"><img src="https://requires.io/github/MichaelViljoen/TradeSim/requirements.svg?branch=main" alt="Requirements Status" /></a>
+
+<img alt="PingPong status" src="https://img.shields.io/pingpong/status/sp_257456a7d8c142d4a6b69880301241a6">
