@@ -70,3 +70,4 @@ simfin api key NBpcYHWZApdpErjTNUHBQiiWQ9RZSvcd
 finnhub api key c9tmuvaad3i1pjtupqi0
 
 <a href="https://github.com/COS301-SE-2022/TradeSim/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/COS301-SE-2022/TradeSim"></a>
+<a href='https://coveralls.io/github/COS301-SE-2022/TradeSim?branch=main'><img src='https://coveralls.io/repos/github/COS301-SE-2022/TradeSim/badge.svg?branch=main' alt='Coverage Status' /></a>
