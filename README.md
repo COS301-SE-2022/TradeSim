@@ -31,7 +31,7 @@ Rachel Hamilton - u20453478
 
 <h3> SRS document link: </h3>
 
-[SRS_AiPi.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8673717/SRS_AiPi.pdf)
+[SRS_AiPi.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8680875/SRS_AiPi.pdf)
 
 -----------------------------------------------------
 
