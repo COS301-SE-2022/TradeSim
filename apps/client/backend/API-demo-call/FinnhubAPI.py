@@ -1,3 +1,5 @@
+import json
+
 import requests
 
 api_key = "c9tmuvaad3i1pjtupqi0"
@@ -36,6 +38,10 @@ def getQuote(symbol):
     request_url = "https://finnhub.io/api/v1/quote?symbol="+symbol+"&token="
     api_request = requests.get(request_url + api_key)
     response = api_request.json()
+
+    if "error" in response:
+        return None;
+
     list = []
     list.append(response["c"])
     if(response["dp"]== None):
