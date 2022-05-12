@@ -20,6 +20,25 @@ def listallcompanies():
     #     print(listComp[x])
     return listComp
 
+def listallGeneralCompanyInformation(id):
+    request_url = 'https://simfin.com/api/v2/companies/general'
+
+    parameters = {"id": id,"api-key": api_key}
+
+    request = requests.get(request_url, parameters)
+    data = request.json()
+    listComp = []
+    p =data['columns']
+    print(p)
+    size = len(data['data'])
+    for x in range(size):
+        listComp.append(data['data'][x])
+
+    # print(data['columns'])
+    # for x in range(size):
+    #     print(listComp[x])
+    return listComp
+
 
 def CompaniesByIndustry(value):
     #This function will return the symbols of the comapnies in a industry or Sector

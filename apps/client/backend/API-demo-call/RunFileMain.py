@@ -19,8 +19,6 @@ def addToETFByIndustryAndPercentageGain(IndustryID, Percentage, howManyStocks):
         temp = FinnhubAPI.getQuote(name)
         if temp!= None:
             myDictionary[name] = temp
-        else:
-            print("Error " + name)
 
     namePercentage = {}
     for x in myDictionary:
@@ -28,19 +26,34 @@ def addToETFByIndustryAndPercentageGain(IndustryID, Percentage, howManyStocks):
 
     StocksToUse = dict(sorted(namePercentage.items(), key = operator.itemgetter(1), reverse= True)[:howManyStocks])
     totalPrice = 0
+
+    p = Percentage/howManyStocks
     for names in StocksToUse:
         totalPrice = totalPrice + myDictionary[names][0]
-        Stocks.append(names)
+        temp = {names:p}
+        Stocks.append(temp)
 
     adjustedPrice = totalPrice/len(StocksToUse)
 
-    priceForFortyPercent = adjustedPrice*Percentage
+    percent = Percentage/100
+    priceAccountedForPercent = adjustedPrice*percent
 
 
-    return priceForFortyPercent
+    return priceAccountedForPercent
 
 
+def addToETFbyTicker(name, percentage):
+    quote = FinnhubAPI.getQuote(name)
+    if quote == None:
+        print("Error no ticker exists")
+        return None
+    value = quote[0]
+    percent = percentage / 100
+    temp = {name:percentage}
+    Stocks.append(temp)
+    priceAccountedForPercent = value * percent
 
+    return priceAccountedForPercent
 
 
 
@@ -49,19 +62,23 @@ def addToETFByIndustryAndPercentageGain(IndustryID, Percentage, howManyStocks):
 
 if __name__ == '__main__':
     #DictionaryOfSectors = IndustrySector.getFile() Use this to get all the industries and secotrs
-    # total = addToETFByIndustryAndPercentageGain(100006,40,5)
-    # print("Done airlines")
-    # total = total + addToETFByIndustryAndPercentageGain(103003,30,20)
-    # print("Done Restuarants")
-    # total = total + addToETFByIndustryAndPercentageGain(106005,20,10)
-    # print("Done Drug Manufacturers")
-    # print("ETF Value: ")
-    # print(str(total) + " USD")
-    #
-    # print("Companies in ETF: ")
-    # print(Stocks)
-
-    FinnhubAPI.BigFunction()
 
 
-    # listOfAllCompanies = listallcompanies()
+
+    total = addToETFByIndustryAndPercentageGain(100006,40,5)
+    print("Added airlines")
+    total = total + addToETFByIndustryAndPercentageGain(103003,30,20)
+    print("Added Restuarants")
+    total = total + addToETFByIndustryAndPercentageGain(106005,20,10)
+    print("Added Drug Manufacturers")
+    total = total + addToETFbyTicker("GOOGL", 10)
+    print("Added Google")
+    print("ETF Value: ")
+    print(str(total) + " USD")
+
+    print("Companies in ETF: ")
+    print(Stocks)
+
+
+
+
