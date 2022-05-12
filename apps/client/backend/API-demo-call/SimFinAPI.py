@@ -10,7 +10,6 @@ def listallcompanies():
     parameters = {"api-key": api_key}
 
     request = requests.get(request_url, parameters)
-
     data = request.json()
     listComp = []
     size = len(data['data'])
@@ -21,6 +20,32 @@ def listallcompanies():
     # for x in range(size):
     #     print(listComp[x])
     return listComp
+
+def CompaniesByIndustry():
+    request_url = 'https://simfin.com/api/v2/finder?api-key=NBpcYHWZApdpErjTNUHBQiiWQ9RZSvcd'
+    meta = {"id": 7, "value": 2021, "operator": "eq"}
+    condition = {"operator": "start", "value": "100"}
+    search = [{"indicatorId": "0-73", "meta": [meta], "condition": condition}]
+    parameters = {"search": search, "resultsPerPage": 0}
+
+
+    request = requests.post(request_url, json = parameters)
+
+    data = request.json()
+    arrayOfInfo = []
+    for x in data['results']:
+        arrayOfInfo.append(x)
+
+    return arrayOfInfo
+    # listComp = []
+    # size = len(data['data'])
+    # for x in range(size):
+    #     listComp.append(data['data'][x])
+
+    # print(data['columns'])
+    # for x in range(size):
+    #     print(listComp[x])
+
 
 
 def statements():
@@ -55,6 +80,7 @@ def statements():
                     output += data['data']
 
 
-listOfAllCompanies = listallcompanies()
-
-DictionaryOfSectors = IndustrySector.getFile()
+if __name__ == '__main__':
+    CompaniesByIndustry()
+    # listOfAllCompanies = listallcompanies()
+    # DictionaryOfSectors = IndustrySector.getFile()
