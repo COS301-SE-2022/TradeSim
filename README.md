@@ -1,6 +1,9 @@
 {<img src="https://coveralls.io/repos/github/COS301-SE-2022/TradeSim/badge.svg" alt="Coverage Status" />}[https://coveralls.io/github/COS301-SE-2022/TradeSim]
 
 https://coveralls.io/repos/github/COS301-SE-2022/TradeSim/badge.svg(Coverage Status)!:https://coveralls.io/github/COS301-SE-2022/TradeSim
+
+.. image:: https://coveralls.io/repos/github/COS301-SE-2022/TradeSim/badge.svg
+:target: https://coveralls.io/github/COS301-SE-2022/TradeSim
 ----------------------------------------------------
 
 <h1> <b> AiPi </b> </h1>
