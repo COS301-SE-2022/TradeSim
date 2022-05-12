@@ -38,5 +38,8 @@ def getQuote(symbol):
     response = api_request.json()
     list = []
     list.append(response["c"])
-    list.append(response['dp'])
-    print(list)
+    if(response["dp"]== None):
+        list.append(-100)
+    else:
+        list.append(response['dp'])
+    return list
