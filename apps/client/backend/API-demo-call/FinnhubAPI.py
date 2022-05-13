@@ -49,3 +49,4 @@ def getQuote(symbol):
     else:
         list.append(response['dp'])
     return list
+
