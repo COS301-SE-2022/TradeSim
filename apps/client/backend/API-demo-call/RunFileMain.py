@@ -63,7 +63,7 @@ def addToETFbyTicker(name, percentage):
 if __name__ == '__main__':
     #DictionaryOfSectors = IndustrySector.getFile() Use this to get all the industries and secotrs
 
-
+    # FinnhubAPI.historyPrice("GOOGL")
 
     total = addToETFByIndustryAndPercentageGain(100006,40,5)
     print("Added airlines")
