@@ -1,6 +1,6 @@
 import requests
 
-api_key = "NBpcYHWZApdpErjTNUHBQiiWQ9RZSvcd"
+api_key = ""
 
 
 def listallcompanies():
@@ -42,7 +42,7 @@ def listallGeneralCompanyInformation(id):
 
 def CompaniesByIndustry(value):
     #This function will return the symbols of the comapnies in a industry or Sector
-    request_url = 'https://simfin.com/api/v2/finder?api-key=NBpcYHWZApdpErjTNUHBQiiWQ9RZSvcd'
+    request_url = 'https://simfin.com/api/v2/finder?api-key=' + api_key
     # This function returns companies that are in a certain field and their last clossing price is greater that 15$
     meta = {"id": 7, "value": 2022, "operator": "eq"}
     condition = {"operator": "start", "value": value}
