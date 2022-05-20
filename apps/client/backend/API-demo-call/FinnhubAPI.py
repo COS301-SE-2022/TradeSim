@@ -2,7 +2,8 @@ import json
 
 import requests
 
-api_key = 
+api_key = ""
+
 
 def BigFunction():
     request_url = 'https://finnhub.io/api/v1/webhook/add?token='
