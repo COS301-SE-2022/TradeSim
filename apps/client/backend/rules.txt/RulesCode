@@ -1,0 +1,60 @@
+Rules to base stocks: - Code starts with 0
+
+Code 000: The system must allow the user to reject specific companies by name or ticker.
+-Parameters (ticker)
+
+Code 001: The system must allow the user to reject specific sectors by name.
+-Parameters (name)(This will be done by a drop down menu)
+
+Code 002: The system must allow the user to reject specific industries by name or ticker.
+-Parameters (name)(This will be done by a drop down menu)
+
+Code 003: The system must allow the user to reject companies based in specific countries.
+-Parameters (country)(This will be done by a drop down menu)
+
+Code 010: The system must allow the user to request a minimum amount of companies they want to invest in
+-Parameters (amount)
+
+Code 011: The system must allow the user to set the market cap min and max values.
+-Parameters (min,max) 
+
+Code 012: The system must allow the user to set the earnings min and max value.
+-Parameters (min,max) 
+
+Code 013: The system must allow the user to set a minimum and maximum price for shares.
+-Parameters (min,max) 
+
+
+Investing: Code starts with 1
+
+Code 100: The system must allow the user to set an amount to invest
+-Parameters (amount)
+
+Code 101: The system must allow the user to request certain companies by name or ticker.
+-Parameters (ticker,percentage)
+
+Code 102: The system must allow the user to request a percentage in a specific sector.
+-Parameters (Secotr,percentage,amountOfcompanies)
+
+Code 103: The system must allow the user to request a percentage in a specific industry by name or ticker
+-Parameters (Industry,percentage,amountOfcompanies)
+
+Code 104: The system must allow the user to request the companies with the highest market cap
+-Parameters (percentage,amountOfcompanies)
+
+Code 105: The system must allow the user to invest in companies based in specific countries
+-Parameters (Country,percentage,amountOfcompanies)
+
+Code 106: The system must allow the user to request the companies with the highest revenue
+-Parameters (percentage,amountOfcompanies)
+
+Rebalance: Code starts with 2
+
+Code 200: The system must allow the user to set a balance period and/or balance threshold percentage
+-Parameters (BalancePeriodInWeeks)
+
+Code 201: The system must allow the user to define a percentage that a stock can drop before the ETF sells the stock automatically
+-Parameters (percentageDrop)
+
+Code 202: The system must allow the user to set a time period in which it must reconsider its stocks
+-Parameters (ReconsiderPeriodInWeeks)
