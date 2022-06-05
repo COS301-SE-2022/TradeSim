@@ -1,94 +1,53 @@
 <!DOCTYPE html>
 <html>
-<style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Bootstrap Link-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='styles/main.css') }}"
+    />
+    <title>TradeSim Login</title>
+  </head>
+  <body>
+    <div class="main-div">
+      <div class="side-nav">
+        <a>Create ETF</a>
+        <a>Create ETF</a>
+        <a>Create ETF</a>
+        <a>Create ETF</a>
+      </div>
+      <div class="main-body">
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore
+          reprehenderit blanditiis nesciunt tempora sunt ratione at repellat cum
+          quasi, mollitia ea quo odit amet ipsa ipsam praesentium nulla qui hic.
+        </p>
+      </div>
+    </div>
+    <!-- <form class="search">
+      <input type="text" placeholder="Search for ETF..." name="search" />
+    </form>
 
+    <form class="import">
+      <input
+        type="text"
+        placeholder="Drag import file(.txt) here"
+        name="search"
+      />
+    </form>
 
-    form.search input[type=text] {
-        padding: 10px;
-        font-size: 17px;
-        border: 1px solid grey;
-        float: left;
-        width: 60%;
-        background: #F7F7F7;
-        border-radius: 10px;
-        top: 104px;  
-        position: absolute;
-        left: 122px; 
+    <button class="import-button">Import</button>
 
-      }
-
-      form.import input[type=text] {
-        padding: 10px;
-        font-size: 17px;
-        border: 1px solid grey;
-        float: left;
-        width: 30%;
-        background: #F7F7F7;
-        border-radius: 10px;
-        top: 180px;  
-        position: absolute;
-        left: 122px; 
-
-      }
-
-      .import-button {
-        
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 6px;
-  position: absolute;
-  width: 121px;
-  height: 52px;
-  left: 240px;
-  top: 250px;
-  background: #3730A3;
-  border-radius: 6px;
-}
-
-.set-button {
-        
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        border-radius: 6px;
-        position: absolute;
-        width: 121px;
-        height: 52px;
-        left: 240px;
-        top: 340px;
-        background: #3730A3;
-        border-radius: 6px;
-      }
-      
-
-
-    
-      </style>
-
-<body style="background-color: #3E495A;">
-    
-    <form class="search">
-        <input type="text" placeholder="Search for ETF..." name="search">
-      </form>
-
-     
-      <form class="import">
-        <input type="text" placeholder="Drag import file(.txt) here" name="search">
-      </form>  
-
-      <button class="import-button">Import</button>
-
-    <a href="/setRule"><button type="submit" class="set-button">Make ETF</button></a>
+    <a href="/setRule"
+      ><button type="submit" class="set-button">Make ETF</button></a
+    > -->
+  </body>
+</html>
