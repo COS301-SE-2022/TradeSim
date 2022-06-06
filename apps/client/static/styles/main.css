@@ -89,3 +89,7 @@ svg{
   justify-content: center;
   background-color: white;
 }
+
+.card{
+  margin-top: 50px;
+}
