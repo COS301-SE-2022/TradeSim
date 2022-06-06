@@ -93,3 +93,9 @@ svg{
 .card{
   margin-top: 50px;
 }
+
+.create-button-div{
+  width: 116px;
+  height: 45px;
+  margin-top: 20px;
+}
