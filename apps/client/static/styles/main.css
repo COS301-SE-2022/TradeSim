@@ -32,6 +32,60 @@
   width: 600px;
 }
 
-.epiuse-logo{
- padding-top: 40%;
+.epiuse-logo {
+  padding-top: 40%;
+}
+
+input {
+  width: 276px;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  margin: 5px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  border: 1px solid black;
+}
+
+.input{
+  width: 511px;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  margin: 5px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  border: 1px solid black;
+}
+
+h1{
+  color: #202254;
+  font-weight: bolder;
+  font-size: 32;
+  width: 200px;
+}
+
+.search-avatar{
+  width: 350px;
+}
+
+svg{
+  padding-left: 5px;
+}
+
+.create-header{
+  width: 250x;
+}
+
+.etf-body{
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
 }
