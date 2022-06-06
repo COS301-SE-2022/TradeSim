@@ -1,94 +1,70 @@
 <!DOCTYPE html>
-<html>
-<style>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Bootstrap Link-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    />
+    <!--Bootstrap Icons-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
+    />
+    <!--Bootstrap JS-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='styles/main.css') }}"
+    />
+    <title>TradeSim Login</title>
+  </head>
+  <body>
+    <div class="main-div">
+      <div class="side-nav">
+        <a href="/home"><i class="bi bi-house"></i> Home</a>
+        <a href="/add"><i class="bi bi-graph-up-arrow"></i> Create ETF</a>
+        <a href="#"><i class="bi bi-bar-chart-line"></i> Compare ETF</a>
+        <a href="#"><i class="bi bi-pencil-square"></i> Edit ETF</a>
+        <div class="epiuse-logo">
+          <img
+            src="data:image/png;base64,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"
+            
+            height="auto"
+          />
+        </div>
+      </div>
+      <div class="main-body">
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore
+          reprehenderit blanditiis nesciunt tempora sunt ratione at repellat cum
+          quasi, mollitia ea quo odit amet ipsa ipsam praesentium nulla qui hic.
+        </p>
+      </div>
+    </div>
+    <!-- <form class="search">
+      <input type="text" placeholder="Search for ETF..." name="search" />
+    </form>
 
+    <form class="import">
+      <input
+        type="text"
+        placeholder="Drag import file(.txt) here"
+        name="search"
+      />
+    </form>
 
-    form.search input[type=text] {
-        padding: 10px;
-        font-size: 17px;
-        border: 1px solid grey;
-        float: left;
-        width: 60%;
-        background: #F7F7F7;
-        border-radius: 10px;
-        top: 104px;  
-        position: absolute;
-        left: 122px; 
+    <button class="import-button">Import</button>
 
-      }
-
-      form.import input[type=text] {
-        padding: 10px;
-        font-size: 17px;
-        border: 1px solid grey;
-        float: left;
-        width: 30%;
-        background: #F7F7F7;
-        border-radius: 10px;
-        top: 180px;  
-        position: absolute;
-        left: 122px; 
-
-      }
-
-      .import-button {
-        
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 6px;
-  position: absolute;
-  width: 121px;
-  height: 52px;
-  left: 240px;
-  top: 250px;
-  background: #3730A3;
-  border-radius: 6px;
-}
-
-.set-button {
-        
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        border-radius: 6px;
-        position: absolute;
-        width: 121px;
-        height: 52px;
-        left: 240px;
-        top: 340px;
-        background: #3730A3;
-        border-radius: 6px;
-      }
-      
-
-
-    
-      </style>
-
-<body style="background-color: #3E495A;">
-    
-    <form class="search">
-        <input type="text" placeholder="Search for ETF..." name="search">
-      </form>
-
-     
-      <form class="import">
-        <input type="text" placeholder="Drag import file(.txt) here" name="search">
-      </form>  
-
-      <button class="import-button">Import</button>
-
-    <a href="/setRule"><button type="submit" class="set-button">Make ETF</button></a>
+    <a href="/setRule"
+      ><button type="submit" class="set-button">Make ETF</button></a
+    > -->
+  </body>
+</html>
