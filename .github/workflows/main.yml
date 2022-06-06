@@ -32,11 +32,10 @@ jobs:
       - name: install flask
         run: python -m pip install flask
         
-      - name: set flask
-        run: set FLASK_APP main
-        
       - name: run flask
-        run: python -m flask run
+        run:
+          set FLASK_APP=main
+          python -m flask run
         
 
           
