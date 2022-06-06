@@ -1,7 +1,12 @@
-from flask import Flask
+from flask import Flask, request, jsonify
+import flask
+from flask_cors import CORS
+import json
+
 
 amount = 0
 app = Flask(__name__)
+CORS(app)
 
 #Need to start the backend properly and get the whole thing working
 #When the Backend first recieves the Json Format it needs to add the rules and the amount into the database
@@ -82,9 +87,50 @@ def convertCodeToEtf(code, parameters):
         reconsiderPeriodInWeeks = parameters[0]
         #time period in which it must reconsider its stocks
 
-@app.route("/")
-def hello():
-    return "Hello, World!"
+@app.route("/createName", methods=["POST"])
+def createNameAndAmount():
+    data = request.get_json()
+    #This is function that is first called that has the name of the new ETF and the amount
+    #data is the array of the JSon of all the data recieved
+
+    dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
+    return dataJsonify
+
+@app.route("/createRules", methods=["POST"])
+def createRules():
+    data = request.get_json()
+    #This is function that contains all the new rules when the person submits
+    #data is the array of the JSon of all the data recieved
+
+    dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
+    return dataJsonify
+
+@app.route("/generateETF", methods=["POST"])
+def generateETF():
+    data = request.get_json()
+    #This is function that is used when a user wants to see the etf so the JSON that is passed needs to contain both the etf name and the date
+    #data is the array of the JSon of all the data recieved
+
+    dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
+    return dataJsonify
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.get_json()
+    #This is function that is used to login so the parameters need to be the username and password
+    #data is the array of the JSon of all the data recieved
+
+    dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
+    return dataJsonify
+
+@app.route("/register", methods=["POST"])
+def register():
+    data = request.get_json()
+    #This is function that is used to register parameters are to be set by frontend
+    #data is the array of the JSon of all the data recieved
+
+    dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
+    return dataJsonify
 
 if __name__ == "__main__":
         app.run("localhost", 6969)
