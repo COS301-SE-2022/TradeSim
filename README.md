@@ -41,6 +41,12 @@ https://github.com/COS301-SE-2022/TradeSim/wiki/TradeSim
 
 -----------------------------------------------------
 
+<h3> JSON formatting Link: </h3>
+
+[JSON_Format.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8854656/JSON_Format.pdf)
+
+-----------------------------------------------------
+
 <h3> Short profile description of each team member. </h3>
 
 <b> Sean Nkosi: </b> <br>
