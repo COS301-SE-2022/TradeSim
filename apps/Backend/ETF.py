@@ -27,7 +27,7 @@ class ETF:
             parameters = x[1]
             self.convertCodeToEtf(code,parameters)
 
-
+        print(self.listOfAllStocks)
         #The Best Thing to Do is run all the second Rule priorities by Themselves
         self.code011_012_013(self.priorityTwoRules)
 
@@ -66,7 +66,6 @@ class ETF:
         stockInformation = apiCalls.getShareMarketEarn(self.listOfAllStocks, self.date)
         tempStocks = stockInformation.copy()
         for x in rule:
-            print("Test")
             code = x[0]
             min = int(x[1])
             max = int(x[2])
@@ -103,6 +102,15 @@ class ETF:
 
         self.listOfAllStocks = finalStocks
 
+    def code001_002(self, idValue):
+        stocksToReject = apiCalls.CompaniesByIndustry(idValue)
+        tempStocks = self.listOfAllStocks.copy()
+        for x in stocksToReject:
+            if x in tempStocks:
+                tempStocks.remove(x)
+
+        self.listOfAllStocks = tempStocks
+
 
 
     def convertCodeToEtf(self,code, parameters):
@@ -114,10 +122,12 @@ class ETF:
             # The ticker is our only parameter
         elif code == "001":
             sectorID = parameters[0]
+            self.code001_002(sectorID)
             # Reject by specific Sector
             # The sectorID is our only parameter
         elif code == "002":
             industryID = parameters[0]
+            self.code001_002(industryID)
             # Reject by IndustryID
             # The industryID is our only parameter
         elif code == "003":
@@ -194,6 +204,7 @@ class ETF:
             # time period in which it must reconsider its stocks
 
     def prioritizeRules(self):
+        #Still need to implement a bit more here, This is just a first Glance
         newRuleList = []
         countPrioritize = 0
         while len(newRuleList) != len(self.rules):

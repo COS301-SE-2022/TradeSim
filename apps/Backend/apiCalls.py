@@ -114,7 +114,6 @@ def CompaniesByIndustry(value):
         each = x['values'][1]
         listOfSymbols.append(each['value'])
 
-    print(listOfSymbols)
     return listOfSymbols
 
 def getCountry(tickers):
