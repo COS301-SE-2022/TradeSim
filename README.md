@@ -30,7 +30,8 @@ Michael Viljoen - u20513667
 
 <h3> SRS document link: </h3>
 
-[SRS_AiPi.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8680875/SRS_AiPi.pdf)
+[SRS_AiPi-2.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8863733/SRS_AiPi-2.pdf)
+
 
 -----------------------------------------------------
 
