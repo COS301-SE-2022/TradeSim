@@ -1,8 +1,6 @@
 from flask import Flask, request, jsonify
-import flask
 from flask_cors import CORS
-import json
-
+from dbpass import *
 
 amount = 0
 app = Flask(__name__)
@@ -131,12 +129,34 @@ def login():
     data = request.get_json()
     email = data['Data'][0]
     password = data['Data'][1]
+    id  = 0000;
     # print(email)
     # print(password)
+
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password=getpass()
+    )
+
+    cursor = mydb.cursor()
+
+    cursor.execute("SELECT * FROM aipicapstone.accounts WHERE Email = email AND Password = password")
+    response = cursor.fetchall();
+    if len(response == 0):
+        #no user found
+        print("error")
+    else:
+        id = response[0][0]
+
+    #for Regan
+    #id to return is stored as id
     #This is function that is used to login so the parameters need to be the username and password
     #data is the array of the JSon of all the data recieved
 
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
+
+    mydb.close()
     return dataJsonify
 
 @app.route("/register", methods=["POST"])
@@ -145,10 +165,43 @@ def register():
     username = data['Data'][0]
     email = data['Data'][1]
     encodedPassword = data['Data'][2]
+    newid = 0000
+
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password=getpass()
+    )
+
+    cursor = mydb.cursor()
+
+    cursor.execute("SELECT count(*) FROM aipicapstone.accounts WHERE Email = email;")
+    response = cursor.fetchall();
+    if response[0] > 0:
+        print("error")
+        #handle error
+    else:
+        cursor.execute("SELECT count(*) FROM aipicapstone.accounts WHERE Username = username;")
+        response = cursor.fetchall();
+        if response[0] > 0:
+            print("error")
+            # handle error
+        else:
+            cursor.execute("SELECT Max(UserID) FROM aipicapstone.accounts;")
+            response = cursor.fetchall();
+            newid = response[0];
+            cursor.execute("INSERT INTO aipicapstone.accounts( UserID, Email, Username, Password) VALUES ( newid, email, username, encodedPassword);")
+
+
+
     #This is function that is used to register parameters are to be set by frontend
     #data is the array of the JSon of all the data recieved
 
+    #for regan
+    # newid = UserID of jusr registered account
+
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
+    mydb.close()
     return dataJsonify
 
 if __name__ == "__main__":
