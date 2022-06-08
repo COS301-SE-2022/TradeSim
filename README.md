@@ -25,12 +25,17 @@ Regan Shen - u20460067
 Michael Viljoen - u20513667
 
 
+=======
+Dev Ops
+Rachel Hamilton - u20453478
 
 -----------------------------------------------------
 
 <h3> SRS document link: </h3>
 
 [SRS_AiPi-2.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8863733/SRS_AiPi-2.pdf)
+=======
+[SRS_AiPi-2.pdf](https://github.com/rachhamiltonn/TradeSim/files/8682441/SRS_AiPi-2.pdf)
 
 
 -----------------------------------------------------
@@ -83,3 +88,29 @@ https://youtu.be/93PcgcoHgbU
 <a href="https://requires.io/github/MichaelViljoen/TradeSim/requirements/?branch=main"><img src="https://requires.io/github/MichaelViljoen/TradeSim/requirements.svg?branch=main" alt="Requirements Status" /></a>
 
 <img alt="PingPong status" src="https://img.shields.io/pingpong/status/sp_257456a7d8c142d4a6b69880301241a6">
+=======
+<h3> Short profile description of each team member. </h3>
+
+<b> Sean Nkosi: </b> <br>
+About: <br>
+LinkedIn profile link: 
+
+<b> Sibusiso Mngomezulu: </b> <br>
+About: <br>
+LinkedIn profile link:
+
+<b> Rachel Hamilton: </b> <br>
+About: <br>
+LinkedIn profile link:
+
+<b> Regan Shen: </b> <br>
+About: <br>
+LinkedIn profile link:
+
+<b> Michael Viljoen: </b> <br>
+About: <br>
+LinkedIn profile link:
+
+
+-----------------------------------------------------
+
