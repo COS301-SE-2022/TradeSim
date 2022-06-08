@@ -107,11 +107,13 @@ def createRules():
     listOfRules = data['Rules']
     #This is function that contains all the new rules when the person submits
     #data is the array of the JSon of all the data recieved
-    apiCalls.listallcompanies()
     names = apiCalls.listallcompanies()
-    first = apiCalls.getShareMarketEarn(names, "2018-06-29")
+    #first = apiCalls.getShareMarketEarn(names, "2018-06-29")
     #first contains all the shares with corresponding share Price, Market Cap and earnings, first is a dictionary so the index is the ticker of the share
 
+    #apiCalls.CompaniesByIndustry(106)
+    country = apiCalls.getCountry(['CRDF', 'CRDO', 'CREE', 'CRI', 'CRIS', 'CRL', 'CRM', 'CRNC', 'CROX', 'CRR', 'CRS', 'CRSP', 'CRSR', 'CRTO', 'CRUS', 'CRVS', 'CRWD', 'CRWS', 'CRY', 'CRZO'])
+    print(country)
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
     return dataJsonify
 

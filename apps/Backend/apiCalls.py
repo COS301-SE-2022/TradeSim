@@ -47,8 +47,6 @@ def getShareMarketEarn(t,date):
 
     arrayOfArrayOfTickers.append(shortArrayOftickers)
 
-
-
     for tick in arrayOfArrayOfTickers:
         request_url = 'https://simfin.com/api/v2/companies/prices'
         parameters = {"ticker": ",".join(tick), "start": startDay, "end": endDay, "api-key": api_key,
@@ -95,6 +93,45 @@ def getShareMarketEarn(t,date):
     print("Retrieved Share Price, Market Cap and Earnings Before Interest, Taxes, Depreciation, and Amortization")
 
     return allStocksDetails
+
+def CompaniesByIndustry(value):
+    #This function will return the symbols of the comapnies in a industry or Sector
+    request_url = 'https://simfin.com/api/v2/finder?api-key=' + api_key
+    meta = {"id": 7, "value": 2022, "operator": "eq"}
+    condition = {"operator": "start", "value": value}
+
+
+
+    meta1 = {"id": 7, "value": 2022, "operator": "eq"}
+    condition1 = {"operator": "diff", "value": 0}
+    search = [{"indicatorId": "0-73", "meta": [meta], "condition": condition},
+              {"indicatorId": "0-71", "meta": [meta1], "condition": condition1}]
+    parameters = {"search": search, "resultsPerPage": 0}
+    request = requests.post(request_url, json=parameters)
+    data = request.json()
+    listOfSymbols = []
+    for x in data['results']:
+        each = x['values'][1]
+        listOfSymbols.append(each['value'])
+
+    print(listOfSymbols)
+    return listOfSymbols
+
+def getCountry(tickers):
+    finHubApi = getFinHubApi()
+    request_url4 = "https://finnhub.io/api/v1/stock/profile2?"
+    stocksWithCountry = {}
+    for x in tickers:
+
+        api_request4 = requests.get(request_url4, params={'symbol': x, 'token': finHubApi})
+        response4 = api_request4.json()
+        if len(response4)!=0:
+            country = response4['country']
+            stocksWithCountry[x] = country
+        else:
+            stocksWithCountry[x] = None
+
+    return stocksWithCountry
 
 def getEndDay(date):
     strDate = date.split('-')
