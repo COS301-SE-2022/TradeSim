@@ -1,16 +1,21 @@
 import apiCalls
+from datetime import datetime,timedelta
 class ETF:
 
     stocksConfirmedIn = []
-    def __init__(self,UserID, etfID, rules):
+    def __init__(self,UserID, etfID, rules, date):
         self.UserID = UserID
         self.etfIF = etfID
         self.rules = rules
+        if date == None:
+            self.date = datetime.strftime(datetime.now() - timedelta(2),'%Y-%m-%d')
+        else:
+            self.date = date
         self.listOfAllStocks = []
+        self.priorityTwoRules = []
 
 
     def createETF(self):
-
 
         self.prioritizeRules()
 
@@ -22,10 +27,15 @@ class ETF:
             parameters = x[1]
             self.convertCodeToEtf(code,parameters)
 
+
+        #The Best Thing to Do is run all the second Rule priorities by Themselves
+        self.code011_012_013(self.priorityTwoRules)
+
         print(self.listOfAllStocks)
 
 
-        # first = apiCalls.getShareMarketEarn(names, "2018-06-29")
+        # first = apiCalls.getShareMarketEarn(self.listOfAllStocks, "2018-06-29")
+        # print(first)
         # first contains all the shares with corresponding share Price, Market Cap and earnings, first is a dictionary so the index is the ticker of the share
         # apiCalls.CompaniesByIndustry(106)
         # country = apiCalls.getCountry(
@@ -50,6 +60,50 @@ class ETF:
             else:
                 print("Stock Doesn't Exist")
                 # So we will need to return some way of saying that this stock doesnt exist
+
+    def code011_012_013(self,rule):
+        finalStocks = []
+        stockInformation = apiCalls.getShareMarketEarn(self.listOfAllStocks, self.date)
+        tempStocks = stockInformation.copy()
+        for x in rule:
+            print("Test")
+            code = x[0]
+            min = int(x[1])
+            max = int(x[2])
+            if code == "011":
+                # MarketCap
+                for stock in stockInformation:
+                    parameters = stockInformation[stock]
+                    marketCap = parameters[1]
+                    if marketCap!= None:
+                        if marketCap<min or marketCap>max:
+                            if stock in tempStocks:
+                                tempStocks.pop(stock)
+            if code == "012":
+                #Earning
+                for stock in stockInformation:
+                    parameters = stockInformation[stock]
+                    earning = parameters[2]
+                    if earning!= None:
+                        if earning<min or earning>max:
+                            if stock in tempStocks:
+                                tempStocks.pop(stock)
+            if code == "013":
+                #SharePrice
+                for stock in stockInformation:
+                    parameters = stockInformation[stock]
+                    share = parameters[0]
+                    if share!= None:
+                        if share<min or share>max:
+                            if stock in tempStocks:
+                                tempStocks.pop(stock)
+
+        for name in tempStocks:
+            finalStocks.append(name)
+
+        self.listOfAllStocks = finalStocks
+
+
 
     def convertCodeToEtf(self,code, parameters):
         # In here we will have many switch statements when we get the code and its parameters in order to know what to do with it
@@ -77,16 +131,28 @@ class ETF:
         elif code == "011":
             minMarketCap = parameters[0]
             maxMarketCap = parameters[1]
+            rule = [code,minMarketCap,maxMarketCap]
+            self.priorityTwoRules.append(rule)
+            #Here we add to the priority two rules so we only have to do one call
+
             # Market cap Min and Max
             # The min and max market Cap is our only parameter
         elif code == "012":
             minEarnings = parameters[0]
             maxEarnings = parameters[1]
+            rule = [code, minEarnings, maxEarnings]
+            self.priorityTwoRules.append(rule)
+            # Here we add to the priority two rules so we only have to do one call
+
             # Earnings Min and Max
             # The min and max earning is our only parameter
         elif code == "013":
             minPrice = parameters[0]
             maxPrice = parameters[1]
+            rule = [code, minPrice, maxPrice]
+            self.priorityTwoRules.append(rule)
+            # Here we add to the priority two rules so we only have to do one call
+
             # Price Min and Max
             # The min and max price is our only parameter
         elif code == "101":

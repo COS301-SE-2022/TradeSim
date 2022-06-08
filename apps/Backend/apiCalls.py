@@ -88,7 +88,7 @@ def getShareMarketEarn(t,date):
                     earningBefore = float(Ev)/float(earnCalc)
 
 
-                parameters = [sharePrice,marketCap,str(earningBefore)]
+                parameters = [sharePrice,marketCap,earningBefore]
                 allStocksDetails[nameOFstock] = parameters
     print("Retrieved Share Price, Market Cap and Earnings Before Interest, Taxes, Depreciation, and Amortization")
 
