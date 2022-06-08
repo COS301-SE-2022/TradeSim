@@ -134,8 +134,8 @@ def login():
     # print(password)
 
     mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
+        host="sql11.freemysqlhosting.net",
+        user="sql11498457",
         password=getpass()
     )
 
@@ -168,8 +168,8 @@ def register():
     newid = 0000
 
     mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
+        host="sql11.freemysqlhosting.net",
+        user="sql11498457",
         password=getpass()
     )
 
