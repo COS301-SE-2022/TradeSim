@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import flask
 from flask_cors import CORS
 import json
+import apiCalls
 
 
 amount = 0
@@ -108,7 +109,7 @@ def createRules():
     listOfRules = data['Rules']
     #This is function that contains all the new rules when the person submits
     #data is the array of the JSon of all the data recieved
-
+    apiCalls.listallcompanies()
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
     return dataJsonify
 
