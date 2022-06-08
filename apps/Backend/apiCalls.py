@@ -1,6 +1,8 @@
 import requests
+from dbpass import *
+from datetime import datetime
 
-api_key = ""
+api_key =  getapi()
 
 def listallcompanies():
     request_url = 'https://simfin.com/api/v2/companies/list'
@@ -16,6 +18,91 @@ def listallcompanies():
 
     # print(data['columns'])
     # for x in range(size):
-    #     print(listComp[x])
-    print(listComp)
-    return listComp
+    onlyTicker = []
+    for x in listComp:
+        onlyTicker.append(x[1])
+
+    print(onlyTicker)
+    return onlyTicker
+
+def getMarketCap(t,date):
+    allStocksWithMarketCap = {}
+    startDay = date
+    endDay = getEndDay(date)
+    tickers = t
+
+
+
+    request_url = 'https://simfin.com/api/v2/companies/prices'
+    parameters = {"ticker": ",".join(tickers), "start": startDay, "end": endDay, "api-key": api_key,
+                  "ratios": ""}
+    request = requests.get(request_url, parameters)
+    all_data = request.json()
+
+
+    for response_index, data in enumerate(all_data):
+        # make sure that data was found
+        if data['found'] and len(data['data']) > 0:
+            columns = data['columns']
+            tickerPos = -1
+            marketCapPos = -1
+            count = 0
+            for x in columns:
+                if x == "Ticker":
+                    tickerPos = count
+                if x == "Market-Cap":
+                    marketCapPos = count
+                count = count+1
+            firstArray = data['data'][0]
+            nameOFstock = firstArray[tickerPos]
+            marketCap = firstArray[marketCapPos]
+            allStocksWithMarketCap[nameOFstock] = marketCap
+
+    print(allStocksWithMarketCap)
+    return allStocksWithMarketCap
+
+def getEndDay(date):
+    strDate = date.split('-')
+    year = strDate[0]
+    month = strDate[1]
+    day = strDate[2]
+
+    intYear = int(year)
+    intMonth = int(month)
+    intDay = int(day)
+
+    newYear = intYear
+    newMonth = intMonth
+    newDay = intDay+4
+
+    arrayOf31Days = [1,3,5,7,8,10,12]
+    if intMonth in arrayOf31Days:
+        if newDay>31:
+            newDay = newDay-31
+            newMonth = newMonth+1
+    else:
+        if newMonth == 2:
+            if newDay>28:
+                newDay = newDay-28
+                newMonth = newMonth+1
+        else:
+            if newDay > 30:
+                newDay = newDay -30
+                newMonth = newMonth+1
+
+    if newMonth == 13:
+        newMonth = 1
+        newYear = newYear+1
+
+    strNewMonth= str(newMonth)
+    strNewDay = str(newDay)
+    if len(strNewMonth) == 1:
+        strNewMonth = "0"+strNewMonth
+    if len(strNewDay) == 1:
+        strNewDay = "0" + strNewDay
+
+    strDate = str(newYear)+"-"+strNewMonth+"-"+strNewDay
+    return strDate
+
+
+
