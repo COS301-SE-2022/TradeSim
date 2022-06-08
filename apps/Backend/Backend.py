@@ -90,8 +90,12 @@ def convertCodeToEtf(code, parameters):
 @app.route("/createName", methods=["POST"])
 def createNameAndAmount():
     data = request.get_json()
+    userID = data['Data'][0]
+    etfName = data['Data'][1]
+    amount = data['Data'][2]
     #This is function that is first called that has the name of the new ETF and the amount
     #data is the array of the JSon of all the data recieved
+
 
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
     return dataJsonify
@@ -99,6 +103,9 @@ def createNameAndAmount():
 @app.route("/createRules", methods=["POST"])
 def createRules():
     data = request.get_json()
+    UserID = data['UserID']
+    etfID = data['ETFid']
+    listOfRules = data['Rules']
     #This is function that contains all the new rules when the person submits
     #data is the array of the JSon of all the data recieved
 
@@ -108,6 +115,11 @@ def createRules():
 @app.route("/generateETF", methods=["POST"])
 def generateETF():
     data = request.get_json()
+    UserID = data['UserID']
+    ETFid = data['ETFid']
+    startDate = data['StartDate']
+    PeriodInDays = data['DatePeriodInDays']
+
     #This is function that is used when a user wants to see the etf so the JSON that is passed needs to contain both the etf name and the date
     #data is the array of the JSon of all the data recieved
 
@@ -117,6 +129,10 @@ def generateETF():
 @app.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
+    email = data['Data'][0]
+    password = data['Data'][1]
+    # print(email)
+    # print(password)
     #This is function that is used to login so the parameters need to be the username and password
     #data is the array of the JSon of all the data recieved
 
@@ -126,6 +142,9 @@ def login():
 @app.route("/register", methods=["POST"])
 def register():
     data = request.get_json()
+    username = data['Data'][0]
+    email = data['Data'][1]
+    encodedPassword = data['Data'][2]
     #This is function that is used to register parameters are to be set by frontend
     #data is the array of the JSon of all the data recieved
 
