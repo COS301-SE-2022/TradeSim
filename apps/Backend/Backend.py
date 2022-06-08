@@ -109,7 +109,9 @@ def createRules():
     #data is the array of the JSon of all the data recieved
     apiCalls.listallcompanies()
     names = apiCalls.listallcompanies()
-    apiCalls.getMarketCap(names, "2018-06-29")
+    first = apiCalls.getShareMarketEarn(names, "2018-06-29")
+    #first contains all the shares with corresponding share Price, Market Cap and earnings, first is a dictionary so the index is the ticker of the share
+
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
     return dataJsonify
 
