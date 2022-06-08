@@ -1,0 +1,36 @@
+1. The system must allow the user to request certain companies by name or ticker.
+  1.1. The system must allow the user to set a percentage in their specified company they want to invest in.
+
+2. The system must allow the user to request a percentage in a specific sector by name or ticker.
+  2.1. The system must allow the user to set a percentage in their specified sector they want to invest in.
+
+3. The system must allow the user to request a percentage in a specific industry by name or ticker.
+  3.1. The system must allow the user to select a specific percentage in their specified industry they want to invest in.
+
+4. The system must allow the user to request a minimum amount of companies they want to invest in.
+
+5. The system must allow the user to set a time period in which it must reconsider its stocks.
+
+6. The system must allow the user to define a percentage that a stock can drop before the ETF sells the stock automatically.
+
+7. The system must allow the user to set the market cap min and max values.
+
+8. The system must allow the user to set the earnings min and max value.
+
+9. The system must allow the user to set an amount to invest.
+
+10. The system must allow the user to reject specific companies by name or ticker.
+
+11. The system must allow the user to reject specific sectors by name or ticker.
+
+12. The system must allow the user to reject specific industries by name or ticker.
+
+13. The system must allow the user to invest in companies based in specific countries.
+
+13.1. The system must allow the user to set a percentage based on a country of a specific company.
+
+14. The system must allow the user to reject companies based in specific countries.
+
+15. The system must allow the user to set a minimum and maximum price for shares.
+
+16. The system must allow the user to set a balance period and/or balance threshold percentage.

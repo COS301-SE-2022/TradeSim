@@ -20,6 +20,13 @@ def register():
 def home():
     return render_template("home.html")
 
+@app.route("/add")
+def add():
+    return render_template("addETF.html")
+
+@app.route("/setRule")
+def setRule():
+    return render_template("set.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
-
