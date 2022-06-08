@@ -1,4 +1,4 @@
-name: Build Client
+name: Build python engine
 
 # Controls when the workflow will run
 on:
@@ -29,6 +29,10 @@ jobs:
       - name: upgrade pip
         run: python -m pip install --upgrade pip
         
+      - name: install flask
+        run: python -m pip install flask
+        
       - name: run flask
         run:
-          pyhton3 /apps/Backend/Backend.py
+          set FLASK_APP=Backend
+          python -m flask run
