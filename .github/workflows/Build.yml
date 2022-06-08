@@ -38,4 +38,4 @@ jobs:
           python -m flask run
           
       - name: run backend
-        run :
+        run : python3 backend.py
