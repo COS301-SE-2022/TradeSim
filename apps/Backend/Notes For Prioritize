@@ -19,3 +19,10 @@ Code 003 : Parameters (country)
 Code 102 : Parameters (Secotr,percentage)
 Code 103 : Parameters (Industry,percentage)
 Code 105 : Parameters (Country,percentage)
+
+
+
+
+NOTES FOR MYSELF (REGAN) DON'T WORRY MIKE ITS JUST MY CHAIN OF THOUGHT:
+Now we need to grab all the stocks and from here we need to start filtering out all the stocks and adding them one by one to the final array of all the stocks
+So first move is grab all the stocks
