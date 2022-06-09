@@ -31,7 +31,7 @@ def createRules():
     etfID = data['ETFid']
     listOfRules = data['Rules']
 
-    etfNew = ETF.ETF(UserID,etfID,listOfRules,None)
+    etfNew = ETF.ETF(UserID,etfID,listOfRules,None,1000000)
     etfNew.createETF()
     #This is a new ETF Oject
 

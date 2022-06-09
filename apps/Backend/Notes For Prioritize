@@ -1,6 +1,9 @@
  First Priority:
  Code 000: Parameters (ticker)
  Code 101 : Parameters (ticker,percentage)
+ Code 001 : Parameters (name)
+ Code 002 : Parameters (name)
+ Code 003 : Parameters (country)
 
  Second Priority:
  Code 011: Parameters (min,max)
@@ -12,9 +15,6 @@
 -Parameters (percentage,amountOfcompanies)
 
 Third Priority:
-Code 001 : Parameters (name)
-Code 002 : Parameters (name)
-Code 003 : Parameters (country)
 
 Code 102 : Parameters (Secotr,percentage)
 Code 103 : Parameters (Industry,percentage)
