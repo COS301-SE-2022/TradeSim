@@ -47,7 +47,16 @@ class ETF:
 
         HowMuchMoneyLeft = self.totalInvested/self.amount
         PercentToAdd = (1-HowMuchMoneyLeft)*100
+
         self.calculateAmountoFstocks(self.listOfAllStocks,PercentToAdd)
+
+        temp = {}
+        for y in self.stocksWithAmountOFShares:
+            if self.stocksWithAmountOFShares[y]!= 0:
+                temp[y] = self.stocksWithAmountOFShares[y]
+
+        self.stocksWithAmountOFShares = temp
+
         print(self.totalInvested)
         print(self.stocksWithAmountOFShares)
 
@@ -163,7 +172,7 @@ class ETF:
                 canAddMore = False #The totalInvested Hasn't Changed at all so we can't add more stocks so need to fix that
 
         self.totalInvested = self.totalInvested + totalInvested
-        print(totalInvested)
+        # print(totalInvested)
 
         for p in stockAndAmount:
             if p in self.stocksWithAmountOFShares:
