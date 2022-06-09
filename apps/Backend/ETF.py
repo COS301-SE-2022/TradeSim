@@ -2,7 +2,7 @@ import apiCalls
 from datetime import datetime,timedelta
 class ETF:
 
-    stocksConfirmedIn = []
+    stocksConfirmedIn = {}
     stocksWithAmountOFShares = {}
     totalInvested = 0
     def __init__(self,UserID, etfID, rules, date, amount):
@@ -40,7 +40,23 @@ class ETF:
             if code == "102" or code == "103" or code == "105":
                 self.convertCodeToEtf(code,parameters) #Now run all the third priorities
 
-        self.calculateAmountoFstocks(self.listOfAllStocks,50)
+        for indevidualStock in self.stocksConfirmedIn:
+            percent = self.stocksConfirmedIn[indevidualStock]
+            arrayS = [indevidualStock]
+            self.calculateAmountoFstocks(arrayS,percent)
+
+        HowMuchMoneyLeft = self.totalInvested/self.amount
+        PercentToAdd = (1-HowMuchMoneyLeft)*100
+
+        self.calculateAmountoFstocks(self.listOfAllStocks,PercentToAdd)
+
+        temp = {}
+        for y in self.stocksWithAmountOFShares:
+            if self.stocksWithAmountOFShares[y]!= 0:
+                temp[y] = self.stocksWithAmountOFShares[y]
+
+        self.stocksWithAmountOFShares = temp
+
         print(self.totalInvested)
         print(self.stocksWithAmountOFShares)
 
@@ -58,11 +74,11 @@ class ETF:
 
         self.listOfAllStocks = newListOFstocks
 
-    def code101(self, ticker):
+    def code101(self, ticker, percent):
             #First we want to check if the stock exists
             allStocksThatExists = apiCalls.listallcompanies()
             if ticker in allStocksThatExists:
-                self.stocksConfirmedIn.append(ticker)
+                self.stocksConfirmedIn[ticker] = percent
             else:
                 print("Stock Doesn't Exist")
                 # So we will need to return some way of saying that this stock doesnt exist
@@ -156,6 +172,7 @@ class ETF:
                 canAddMore = False #The totalInvested Hasn't Changed at all so we can't add more stocks so need to fix that
 
         self.totalInvested = self.totalInvested + totalInvested
+        # print(totalInvested)
 
         for p in stockAndAmount:
             if p in self.stocksWithAmountOFShares:
@@ -222,7 +239,7 @@ class ETF:
         elif code == "101":
             ticker = parameters[0]
             Percentage = parameters[1]
-            self.code101(ticker)
+            self.code101(ticker, Percentage)
             # companies by name or ticker.
         elif code == "102":
             SectorID = parameters[0]
