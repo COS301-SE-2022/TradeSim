@@ -121,3 +121,16 @@ label{
   color: white;
   border-radius: 20px;
 }
+
+.graph-mock{
+  color: white;
+  display: flex;
+  justify-content: center;
+  height: 150px;
+}
+
+.graph{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+}
