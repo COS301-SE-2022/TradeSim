@@ -60,7 +60,7 @@ LinkedIn profile link: https://www.linkedin.com/in/sean-nkosi-47b7901ba
 
 <b> Sibusiso Mngomezulu: </b> <br>
 About: Hi my name is Sbu, I am studing computer science at the  University of Pretoria, I really enjoy my degree and have a passion for computer science.<br>
-LinkedIn profile link:
+LinkedIn profile link: https://www.linkedin.com/in/sibusiso-mngomezulu-16358323a/
 
 <b> Rachel Hamilton: </b> <br>
 About: My name is Rachel Hamilton, I am a 3rd year BSC Computer Science student. I consider myself a person with good leadership skills. I have experience in coding in multiple languages, including, C++, Java, Python, Javascript etc. I have an interest in software development & web development. <br>
@@ -89,27 +89,6 @@ https://youtu.be/93PcgcoHgbU
 
 <img alt="PingPong status" src="https://img.shields.io/pingpong/status/sp_257456a7d8c142d4a6b69880301241a6">
 =======
-<h3> Short profile description of each team member. </h3>
-
-<b> Sean Nkosi: </b> <br>
-About: <br>
-LinkedIn profile link: 
-
-<b> Sibusiso Mngomezulu: </b> <br>
-About: <br>
-LinkedIn profile link:
-
-<b> Rachel Hamilton: </b> <br>
-About: <br>
-LinkedIn profile link:
-
-<b> Regan Shen: </b> <br>
-About: <br>
-LinkedIn profile link:
-
-<b> Michael Viljoen: </b> <br>
-About: <br>
-LinkedIn profile link:
 
 
 -----------------------------------------------------
