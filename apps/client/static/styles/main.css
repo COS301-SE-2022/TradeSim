@@ -72,6 +72,10 @@ h1{
   width: 200px;
 }
 
+h2{
+  color: #2022548d;
+}
+
 .search-avatar{
   width: 350px;
   margin-left: auto;
@@ -116,4 +120,17 @@ label{
   background-color: #202254;
   color: white;
   border-radius: 20px;
+}
+
+.graph-mock{
+  color: white;
+  display: flex;
+  justify-content: center;
+  height: 150px;
+}
+
+.graph{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
 }
