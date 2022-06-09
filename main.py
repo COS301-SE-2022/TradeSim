@@ -20,13 +20,9 @@ def register():
 def home():
     return render_template("home.html")
 
-@app.route("/add", methods=["POST", "GET"])
+@app.route("/add")
 def add():
-    if request.method == "POST":
-        EtfName = request.form["etfName"]
-        EtfAmount = request.form["etfAmount"]
-    else:
-        return render_template("addETF.html")
+    return render_template("addETF.html")
 
 @app.route("/setRule")
 def setRule():
