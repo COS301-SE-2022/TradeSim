@@ -3,10 +3,13 @@ from datetime import datetime,timedelta
 class ETF:
 
     stocksConfirmedIn = []
-    def __init__(self,UserID, etfID, rules, date):
+    stocksWithAmountOFShares = {}
+    totalInvested = 0
+    def __init__(self,UserID, etfID, rules, date, amount):
         self.UserID = UserID
         self.etfIF = etfID
         self.rules = rules
+        self.amount = amount
         if date == None:
             self.date = datetime.strftime(datetime.now() - timedelta(2),'%Y-%m-%d')
         else:
@@ -21,27 +24,29 @@ class ETF:
 
         self.listOfAllStocks = apiCalls.listallcompanies()
 
-        print(self.listOfAllStocks)
+
         for x in self.rules:
             code = x[0]
             parameters = x[1]
+            if code == "102" or code == "103" or code == "105":
+                break # Need to stop the programn before it reaches third priority to call or the second priority in one call
             self.convertCodeToEtf(code,parameters)
-
-        print(self.listOfAllStocks)
         #The Best Thing to Do is run all the second Rule priorities by Themselves
         self.code011_012_013(self.priorityTwoRules)
 
-        print(self.listOfAllStocks)
+        for x in self.rules:
+            code = x[0]
+            parameters = x[1]
+            if code == "102" or code == "103" or code == "105":
+                self.convertCodeToEtf(code,parameters) #Now run all the third priorities
+
+        self.calculateAmountoFstocks(self.listOfAllStocks,50)
+        print(self.totalInvested)
+        print(self.stocksWithAmountOFShares)
 
 
-        # first = apiCalls.getShareMarketEarn(self.listOfAllStocks, "2018-06-29")
-        # print(first)
-        # first contains all the shares with corresponding share Price, Market Cap and earnings, first is a dictionary so the index is the ticker of the share
-        # apiCalls.CompaniesByIndustry(106)
-        # country = apiCalls.getCountry(
-        #     ['CRDF', 'CRDO', 'CREE', 'CRI', 'CRIS', 'CRL', 'CRM', 'CRNC', 'CROX', 'CRR', 'CRS', 'CRSP', 'CRSR', 'CRTO',
-        #      'CRUS', 'CRVS', 'CRWD', 'CRWS', 'CRY', 'CRZO'])
-        # print(country)
+
+
 
 
     def code000(self,ticker):
@@ -55,7 +60,8 @@ class ETF:
 
     def code101(self, ticker):
             #First we want to check if the stock exists
-            if ticker in self.listOfAllStocks:
+            allStocksThatExists = apiCalls.listallcompanies()
+            if ticker in allStocksThatExists:
                 self.stocksConfirmedIn.append(ticker)
             else:
                 print("Stock Doesn't Exist")
@@ -110,6 +116,54 @@ class ETF:
                 tempStocks.remove(x)
 
         self.listOfAllStocks = tempStocks
+
+    def code102_103(self,idValue, percentage):
+        stocksInSector = apiCalls.CompaniesByIndustry(idValue)
+        stocksInBoth = []
+        for x in stocksInSector:
+            if x in self.listOfAllStocks:
+                stocksInBoth.append(x)
+
+        self.calculateAmountoFstocks(stocksInBoth,percentage)
+
+
+
+
+    def calculateAmountoFstocks(self, stocks, percentage):
+        percent = percentage / 100
+        moneyToInvest = self.amount * percent
+        stockAndAmount = {}
+
+        valuesForSaidStocks = apiCalls.getShareMarketEarn(stocks, self.date)
+        totalInvested = 0
+        canAddMore = True
+        for x in valuesForSaidStocks:
+            stockAndAmount[x] = 0
+#            Create all the stocks and show it has 0 bought stocks
+
+        while canAddMore!=False:
+            testTime = totalInvested
+            for stock in valuesForSaidStocks:
+                parameters = valuesForSaidStocks[stock]
+                sharePrice = parameters[0]
+                temp = totalInvested + sharePrice
+                if temp <= moneyToInvest:
+                    totalInvested = totalInvested + sharePrice
+                    amountStock = stockAndAmount[stock]
+                    amountStock = amountStock+1
+                    stockAndAmount[stock] = amountStock
+            if testTime == totalInvested:
+                canAddMore = False #The totalInvested Hasn't Changed at all so we can't add more stocks so need to fix that
+
+        self.totalInvested = self.totalInvested + totalInvested
+
+        for p in stockAndAmount:
+            if p in self.stocksWithAmountOFShares:
+                temp = self.stocksWithAmountOFShares[p]
+                temp = temp + stockAndAmount[p]
+                self.stocksWithAmountOFShares[p] = temp
+            else:
+                self.stocksWithAmountOFShares[p] = stockAndAmount[p]
 
 
 
@@ -174,11 +228,13 @@ class ETF:
             SectorID = parameters[0]
             Percentage = parameters[1]
             amountOfCompanies = parameters[2]
+            self.code102_103(SectorID,Percentage)
             # percentage in a specific sector
         elif code == "103":
             industryID = parameters[0]
             Percentage = parameters[1]
             amountOfCompanies = parameters[2]
+            self.code102_103(industryID, Percentage)
             # percentage in a specific industry
         elif code == "104":
             percentage = parameters[0]
@@ -212,13 +268,13 @@ class ETF:
                 code = rule[0]
                 parameters = rule[1]
                 if countPrioritize == 0:
-                    if code == "000" or code == "101":
+                    if code == "000" or code == "101" or code == "001" or code == "002" or code == "003":
                         newRuleList.append(rule)
                 if countPrioritize == 1:
                     if code == "011" or code == "012" or code == "013" or code == "104":
                         newRuleList.append(rule)
                 if countPrioritize == 3:
-                    if code == "001" or code == "002" or code == "003" or code == "102" or code == "103" or code == "105":
+                    if code == "102" or code == "103" or code == "105":
                         newRuleList.append(rule)
             countPrioritize = countPrioritize +1
 
