@@ -32,7 +32,7 @@ def createRules():
     listOfRules = data['Rules']
 
     etfNew = ETF.ETF(UserID,etfID,listOfRules,None,1000000)
-    etfNew.createETF()
+    data = etfNew.createETF()
     #This is a new ETF Oject
 
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
