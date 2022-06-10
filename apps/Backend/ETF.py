@@ -2,9 +2,7 @@ import apiCalls
 from datetime import datetime,timedelta
 class ETF:
 
-    stocksConfirmedIn = {}
-    stocksWithAmountOFShares = {}
-    totalInvested = 0
+
     def __init__(self,UserID, etfID, rules, date, amount):
         self.UserID = UserID
         self.etfIF = etfID
@@ -16,6 +14,9 @@ class ETF:
             self.date = date
         self.listOfAllStocks = []
         self.priorityTwoRules = []
+        self.stocksConfirmedIn = {}
+        self.stocksWithAmountOFShares = {}
+        self.totalInvested = 0
 
 
     def createETF(self):
@@ -57,10 +58,12 @@ class ETF:
 
         self.stocksWithAmountOFShares = temp
 
+        print(self.etfIF)
+        print("=====================")
         print(self.totalInvested)
         print(self.stocksWithAmountOFShares)
 
-
+        return self.stocksWithAmountOFShares
 
 
 
