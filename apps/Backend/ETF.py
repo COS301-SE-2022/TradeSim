@@ -145,6 +145,15 @@ class ETF:
 
         self.calculateAmountoFstocks(stocksInBoth,percentage)
 
+    def code105(self, country, percentage):
+        stocksInExchange = apiCalls.companiesByExchange(country)
+        stocksInBoth = []
+        for x in stocksInExchange:
+            if x in self.listOfAllStocks:
+                stocksInBoth.append(x)
+
+        self.calculateAmountoFstocks(stocksInBoth, percentage)
+
     def code003(self,country):
         companiesToReject = apiCalls.companiesByExchange(country)
 
@@ -274,6 +283,7 @@ class ETF:
             country = parameters[0]
             percentage = parameters[1]
             amountOfCompanies = parameters[2]
+            self.code105(country,percentage)
             # companies based in specific countries exchange
         elif code == "106":
             percentage = parameters[0]

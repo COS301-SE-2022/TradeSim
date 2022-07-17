@@ -193,7 +193,7 @@ def companiesByExchange(country):
         listOFComanies.append(sym)
 
 
-    print(listOFComanies)
+
     return listOFComanies
 
 
