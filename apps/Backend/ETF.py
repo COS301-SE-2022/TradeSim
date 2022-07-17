@@ -145,6 +145,15 @@ class ETF:
 
         self.calculateAmountoFstocks(stocksInBoth,percentage)
 
+    def code003(self,country):
+        companiesToReject = apiCalls.companiesByExchange(country)
+
+        tempStocks = self.listOfAllStocks.copy()
+        for x in companiesToReject:
+            if x in tempStocks:
+                tempStocks.remove(x)
+
+        self.listOfAllStocks = tempStocks
 
 
 
@@ -206,7 +215,8 @@ class ETF:
             # The industryID is our only parameter
         elif code == "003":
             country = parameters[0]
-            # Reject by country
+            self.code003(country)
+            # Reject by Country exchange
             # The country is our only parameter
         elif code == "010":
             amountOfCompanies = parameters[0]
@@ -264,7 +274,7 @@ class ETF:
             country = parameters[0]
             percentage = parameters[1]
             amountOfCompanies = parameters[2]
-            # companies based in specific countries
+            # companies based in specific countries exchange
         elif code == "106":
             percentage = parameters[0]
             amountOfCompanies = parameters[1]
@@ -281,6 +291,7 @@ class ETF:
 
     def prioritizeRules(self):
         #Still need to implement a bit more here, This is just a first Glance
+        #We can even make this abit more dynamic by having array of all the codes for the roles
         newRuleList = []
         countPrioritize = 0
         while len(newRuleList) != len(self.rules):
