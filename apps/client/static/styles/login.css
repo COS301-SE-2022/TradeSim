@@ -4,52 +4,53 @@ form {
 
 input,
 button {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 4px;
-  margin: 5px 0;
-  opacity: 0.85;
-  display: inline-block;
-  font-size: 17px;
-  line-height: 20px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    margin: 5px 0;
+    opacity: 0.85;
+    display: inline-block;
+    font-size: 17px;
+    line-height: 20px;
 }
 
-button{
+button {
     background-color: #000583 !important;
     color: white;
 }
 
-input{ 
-    border: 1px solid black 
+input {
+    border: 1px solid black
 }
 
-.main{
+.main {
     width: 50%;
 }
 
-#login{
+#login {
     padding: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: lightgray;
 }
-.login-page{
+
+.login-page {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    
 }
-#logo-div{
+
+#logo-div {
     background-color: #000583;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#login-body{
+#login-body {
     border-radius: 5px;
     padding: 20px;
     display: flex;
@@ -58,16 +59,16 @@ input{
     background-color: white;
 }
 
-h2{
+h2 {
     font-size: 15px;
     color: gray;
 }
 
-h1{
+h1 {
     font-size: 25px;
 }
 
-.app-name{
+.app-name {
     color: white;
     padding-top: 20px;
 }
