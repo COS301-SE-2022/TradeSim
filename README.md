@@ -35,8 +35,7 @@ Rachel Hamilton - u20453478
 
 [SRS_AiPi-2.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8863733/SRS_AiPi-2.pdf)
 =======
-[SRS_AiPi-2.pdf](https://github.com/rachhamiltonn/TradeSim/files/8682441/SRS_AiPi-2.pdf)
-
+[SRS_AiPi.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8877618/SRS_AiPi.pdf)
 
 -----------------------------------------------------
 
@@ -60,7 +59,7 @@ LinkedIn profile link: https://www.linkedin.com/in/sean-nkosi-47b7901ba
 
 <b> Sibusiso Mngomezulu: </b> <br>
 About: Hi my name is Sbu, I am studing computer science at the  University of Pretoria, I really enjoy my degree and have a passion for computer science.<br>
-LinkedIn profile link:
+LinkedIn profile link: https://www.linkedin.com/in/sibusiso-mngomezulu-16358323a/
 
 <b> Rachel Hamilton: </b> <br>
 About: My name is Rachel Hamilton, I am a 3rd year BSC Computer Science student. I consider myself a person with good leadership skills. I have experience in coding in multiple languages, including, C++, Java, Python, Javascript etc. I have an interest in software development & web development. <br>
@@ -79,6 +78,9 @@ LinkedIn profile link:  https://www.linkedin.com/in/michael-viljoen-bb873923a
 <h3>Demo 1 video</h3>
 https://youtu.be/93PcgcoHgbU
 
+<h3>Demo 2 video</h3>
+https://drive.google.com/file/d/1EASvBRaTXEXfRLsbcI6tsiiK8YLsFm_e/view?usp=sharing
+
 <a href="https://github.com/COS301-SE-2022/TradeSim/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/COS301-SE-2022/TradeSim"></a>
 
 <a href='https://coveralls.io/github/COS301-SE-2022/TradeSim?branch=main'><img src='https://coveralls.io/repos/github/COS301-SE-2022/TradeSim/badge.svg?branch=main' alt='Coverage Status' /></a>
@@ -89,27 +91,6 @@ https://youtu.be/93PcgcoHgbU
 
 <img alt="PingPong status" src="https://img.shields.io/pingpong/status/sp_257456a7d8c142d4a6b69880301241a6">
 =======
-<h3> Short profile description of each team member. </h3>
-
-<b> Sean Nkosi: </b> <br>
-About: <br>
-LinkedIn profile link: 
-
-<b> Sibusiso Mngomezulu: </b> <br>
-About: <br>
-LinkedIn profile link:
-
-<b> Rachel Hamilton: </b> <br>
-About: <br>
-LinkedIn profile link:
-
-<b> Regan Shen: </b> <br>
-About: <br>
-LinkedIn profile link:
-
-<b> Michael Viljoen: </b> <br>
-About: <br>
-LinkedIn profile link:
 
 
 -----------------------------------------------------
