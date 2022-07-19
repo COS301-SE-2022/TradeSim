@@ -2,9 +2,7 @@ import apiCalls
 from datetime import datetime,timedelta
 class ETF:
 
-    stocksConfirmedIn = []
-    stocksWithAmountOFShares = {}
-    totalInvested = 0
+
     def __init__(self,UserID, etfID, rules, date, amount):
         self.UserID = UserID
         self.etfIF = etfID
@@ -16,6 +14,9 @@ class ETF:
             self.date = date
         self.listOfAllStocks = []
         self.priorityTwoRules = []
+        self.stocksConfirmedIn = {}
+        self.stocksWithAmountOFShares = {}
+        self.totalInvested = 0
 
 
     def createETF(self):
@@ -40,11 +41,29 @@ class ETF:
             if code == "102" or code == "103" or code == "105":
                 self.convertCodeToEtf(code,parameters) #Now run all the third priorities
 
-        self.calculateAmountoFstocks(self.listOfAllStocks,50)
+        for indevidualStock in self.stocksConfirmedIn:
+            percent = self.stocksConfirmedIn[indevidualStock]
+            arrayS = [indevidualStock]
+            self.calculateAmountoFstocks(arrayS,percent)
+
+        HowMuchMoneyLeft = self.totalInvested/self.amount
+        PercentToAdd = (1-HowMuchMoneyLeft)*100
+
+        self.calculateAmountoFstocks(self.listOfAllStocks,PercentToAdd)
+
+        temp = {}
+        for y in self.stocksWithAmountOFShares:
+            if self.stocksWithAmountOFShares[y]!= 0:
+                temp[y] = self.stocksWithAmountOFShares[y]
+
+        self.stocksWithAmountOFShares = temp
+
+        print(self.etfIF)
+        print("=====================")
         print(self.totalInvested)
         print(self.stocksWithAmountOFShares)
 
-
+        return self.stocksWithAmountOFShares
 
 
 
@@ -58,11 +77,11 @@ class ETF:
 
         self.listOfAllStocks = newListOFstocks
 
-    def code101(self, ticker):
+    def code101(self, ticker, percent):
             #First we want to check if the stock exists
             allStocksThatExists = apiCalls.listallcompanies()
             if ticker in allStocksThatExists:
-                self.stocksConfirmedIn.append(ticker)
+                self.stocksConfirmedIn[ticker] = percent
             else:
                 print("Stock Doesn't Exist")
                 # So we will need to return some way of saying that this stock doesnt exist
@@ -126,6 +145,24 @@ class ETF:
 
         self.calculateAmountoFstocks(stocksInBoth,percentage)
 
+    def code105(self, country, percentage):
+        stocksInExchange = apiCalls.companiesByExchange(country)
+        stocksInBoth = []
+        for x in stocksInExchange:
+            if x in self.listOfAllStocks:
+                stocksInBoth.append(x)
+
+        self.calculateAmountoFstocks(stocksInBoth, percentage)
+
+    def code003(self,country):
+        companiesToReject = apiCalls.companiesByExchange(country)
+
+        tempStocks = self.listOfAllStocks.copy()
+        for x in companiesToReject:
+            if x in tempStocks:
+                tempStocks.remove(x)
+
+        self.listOfAllStocks = tempStocks
 
 
 
@@ -156,6 +193,7 @@ class ETF:
                 canAddMore = False #The totalInvested Hasn't Changed at all so we can't add more stocks so need to fix that
 
         self.totalInvested = self.totalInvested + totalInvested
+        # print(totalInvested)
 
         for p in stockAndAmount:
             if p in self.stocksWithAmountOFShares:
@@ -186,7 +224,8 @@ class ETF:
             # The industryID is our only parameter
         elif code == "003":
             country = parameters[0]
-            # Reject by country
+            self.code003(country)
+            # Reject by Country exchange
             # The country is our only parameter
         elif code == "010":
             amountOfCompanies = parameters[0]
@@ -222,7 +261,7 @@ class ETF:
         elif code == "101":
             ticker = parameters[0]
             Percentage = parameters[1]
-            self.code101(ticker)
+            self.code101(ticker, Percentage)
             # companies by name or ticker.
         elif code == "102":
             SectorID = parameters[0]
@@ -244,7 +283,8 @@ class ETF:
             country = parameters[0]
             percentage = parameters[1]
             amountOfCompanies = parameters[2]
-            # companies based in specific countries
+            self.code105(country,percentage)
+            # companies based in specific countries exchange
         elif code == "106":
             percentage = parameters[0]
             amountOfCompanies = parameters[1]
@@ -261,6 +301,7 @@ class ETF:
 
     def prioritizeRules(self):
         #Still need to implement a bit more here, This is just a first Glance
+        #We can even make this abit more dynamic by having array of all the codes for the roles
         newRuleList = []
         countPrioritize = 0
         while len(newRuleList) != len(self.rules):

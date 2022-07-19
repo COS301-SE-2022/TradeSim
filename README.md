@@ -35,8 +35,7 @@ Rachel Hamilton - u20453478
 
 [SRS_AiPi-2.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8863733/SRS_AiPi-2.pdf)
 =======
-[SRS_AiPi-2.pdf](https://github.com/rachhamiltonn/TradeSim/files/8682441/SRS_AiPi-2.pdf)
-
+[SRS_AiPi.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8877618/SRS_AiPi.pdf)
 
 -----------------------------------------------------
 
@@ -78,6 +77,9 @@ LinkedIn profile link:  https://www.linkedin.com/in/michael-viljoen-bb873923a
 -----------------------------------------------------
 <h3>Demo 1 video</h3>
 https://youtu.be/93PcgcoHgbU
+
+<h3>Demo 2 video</h3>
+https://drive.google.com/file/d/1EASvBRaTXEXfRLsbcI6tsiiK8YLsFm_e/view?usp=sharing
 
 <a href="https://github.com/COS301-SE-2022/TradeSim/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/COS301-SE-2022/TradeSim"></a>
 

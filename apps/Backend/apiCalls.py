@@ -175,5 +175,27 @@ def getEndDay(date):
     strDate = str(newYear)+"-"+strNewMonth+"-"+strNewDay
     return strDate
 
+def companiesByExchange(country):
+    #This function will get companies that are based in specific exchnages in respected countries
+    request_url = "https://finnhub.io/api/v1/stock/symbol?exchange=" + country + "&token="
+
+    api_request = requests.get(request_url + getFinHubApi())
+    response = api_request.json()
+
+    if "error" in response:
+        return None
+
+    listOFComanies = []
+    for x in response:
+        temp = x["symbol"]
+        str = temp.split(".")
+        sym = str[0]
+        listOFComanies.append(sym)
+
+
+
+    return listOFComanies
+
+
 
 

@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, url_for
+from flask import Flask, redirect, render_template, url_for, request
 from flask_bootstrap import Bootstrap
 
 app =  Flask(__name__, template_folder='apps/client/templates', static_folder='apps/client/static')
