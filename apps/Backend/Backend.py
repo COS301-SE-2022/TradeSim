@@ -113,6 +113,7 @@ def register():
         print("Email taken")
         res = '{ "status":"failure", "error":"email taken"}'
         res = jsonify(res)
+        mydb.close()
         return res
         #handle error
     else:
@@ -122,6 +123,7 @@ def register():
             print("username taken")
             res = '{ "status":"failure", "error":"username taken"}'
             res = jsonify(res)
+            mydb.close()
             return res
             # handle error
         else:
@@ -147,6 +149,7 @@ def register():
 
             res = '{ "status":"success", "error":"successfully signed up"}'
             res = jsonify(res)
+            mydb.close()
             return res
 
 if __name__ == "__main__":
