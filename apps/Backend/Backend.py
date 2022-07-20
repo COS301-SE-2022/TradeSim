@@ -89,48 +89,65 @@ def login():
 
 @app.route("/register", methods=["POST"])
 def register():
+
+    print("recieved request for registration");
     data = request.get_json()
     username = data['Data'][0]
     email = data['Data'][1]
-    encodedPassword = data['Data'][2]
-    newid = 0000
+    password = data['Data'][2]
 
     mydb = mysql.connector.connect(
         host="sql11.freemysqlhosting.net",
-        user="sql11498457",
+        user="sql11507637",
         password=getpass()
     )
 
+    print("connected to db");
+
     cursor = mydb.cursor()
 
-    cursor.execute("SELECT count(*) FROM aipicapstone.accounts WHERE Email = email;")
-    response = cursor.fetchall();
-    if response[0] > 0:
-        print("error")
+    cursor.execute("SELECT count(*) FROM sql11507637.accounts WHERE Email = "+'"'+email+'"'+";")
+    response = cursor.fetchall()
+
+    if response[0] != (0,):
+        print("Email taken")
+        res = '{ "status":"failure", "error":"email taken"}'
+        res = jsonify(res)
+        return res
         #handle error
     else:
-        cursor.execute("SELECT count(*) FROM aipicapstone.accounts WHERE Username = username;")
-        response = cursor.fetchall();
-        if response[0] > 0:
-            print("error")
+        cursor.execute("SELECT count(*) FROM sql11507637.accounts WHERE Username = "+'"'+username+'"'+";")
+        response = cursor.fetchall()
+        if response[0] != (0,):
+            print("username taken")
+            res = '{ "status":"failure", "error":"username taken"}'
+            res = jsonify(res)
+            return res
             # handle error
         else:
-            cursor.execute("SELECT Max(UserID) FROM aipicapstone.accounts;")
-            response = cursor.fetchall();
-            newid = response[0];
-            cursor.execute("INSERT INTO aipicapstone.accounts( UserID, Email, Username, Password) VALUES ( newid, email, username, encodedPassword);")
+            cursor.execute("SELECT Max(UserID) FROM sql11507637.accounts;")
+            response = cursor.fetchall()
+            # print (response[0])
+            if(response[0] == (None,)):
+                newid = 0
+            else:
+                # print(response[0][0])
+                newid = response[0][0] + 1
 
+            # det = str(newid) + ',"' + email + '","' + username + '","' + str(password) + '"'
+            # det = "INSERT INTO sql11507637.accounts( UserID, Email, Username, Password) VALUES ("+det+");"
+            # print(det)
 
+            sql = "INSERT INTO sql11507637.accounts( UserID, Email, Username, Password) VALUES (%s, %s, %s, %s)"
+            val = (newid, email, username, password)
+            cursor.execute(sql, val)
+            mydb.commit()
 
-    #This is function that is used to register parameters are to be set by frontend
-    #data is the array of the JSon of all the data recieved
+            print("account added")
 
-    #for regan
-    # newid = UserID of jusr registered account
-
-    dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
-    mydb.close()
-    return dataJsonify
+            res = '{ "status":"success", "error":"successfully signed up"}'
+            res = jsonify(res)
+            return res
 
 if __name__ == "__main__":
         app.run("localhost", 6969)
