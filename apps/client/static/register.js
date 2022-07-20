@@ -22,8 +22,7 @@ function validateform() {
         flag = false;
     }
 
-
-        alert("test1")
+    
         password = hash(password);
         const details =
         {
