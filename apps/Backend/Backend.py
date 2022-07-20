@@ -55,37 +55,37 @@ def generateETF():
 @app.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
-    email = data['Data'][0]
+    name = data['Data'][0]
     password = data['Data'][1]
-    id  = 0000;
-    # print(email)
-    # print(password)
+
 
     mydb = mysql.connector.connect(
         host="sql11.freemysqlhosting.net",
-        user="sql11498457",
+        user="sql11507637",
         password=getpass()
     )
 
     cursor = mydb.cursor()
 
-    cursor.execute("SELECT * FROM aipicapstone.accounts WHERE Email = email AND Password = password")
+    cursor.execute("SELECT UserID FROM sql11507637.accounts WHERE Username = "+'"'+ name +'"'+ "  AND Password = "+'"'+ str(password) +'"'+ ";")\
+
     response = cursor.fetchall();
-    if len(response == 0):
+    print (response)
+    if response == []:
         #no user found
-        print("error")
+        print("login not found")
+        res = '{ "status":"failure", "error":"Username or Password incorrect"}'
+        res = jsonify(res)
+        mydb.close()
+        return res
     else:
         id = response[0][0]
+        res = '{ "status":"success", "id":"' + str(id) + '"}'
+        res = jsonify(res)
+        mydb.close()
+        return res
 
-    #for Regan
-    #id to return is stored as id
-    #This is function that is used to login so the parameters need to be the username and password
-    #data is the array of the JSon of all the data recieved
 
-    dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
-
-    mydb.close()
-    return dataJsonify
 
 @app.route("/register", methods=["POST"])
 def register():
