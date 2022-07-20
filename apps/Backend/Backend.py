@@ -80,6 +80,7 @@ def login():
         return res
     else:
         id = response[0][0]
+        print("user " + str(id) + " logged in")
         res = '{ "status":"success", "id":"' + str(id) + '"}'
         res = jsonify(res)
         mydb.close()
