@@ -12,12 +12,6 @@ function validateform() {
         flag = false;
     }
 
-    // if (document.getElementById("name").value != document.getElementById("cpsw").value) {
-    //     alert("Passwords do not match");
-    // } else {
-    //     return true;
-    // }
-
 
     var firstpassword = document.myform.password.value;
     var secondpassword = document.myform.cpsw.value;
@@ -33,4 +27,13 @@ function validateform() {
         return false;
     }
 
+}
+
+function checkETF() {
+    var etfname = document.myform.etfName.value;
+    if (etfname == null || etfname == "") {
+        alert("Please name your ETF");
+        flag = false;
+    }
+    return true;
 }
