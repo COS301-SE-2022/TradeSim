@@ -149,13 +149,29 @@ class ETF:
         for stock in sortedStocks:
             if count ==amountOfCompanies:
                 break
-            if stock in self.stocksConfirmedIn:
-                alreadyPercent = self.stocksConfirmedIn[stock]
-                self.stocksConfirmedIn[stock] =  (alreadyPercent + indivdual)
+            if stock[0] in self.stocksConfirmedIn:
+                alreadyPercent = self.stocksConfirmedIn[stock[0]]
+                self.stocksConfirmedIn[stock[0]] =  (alreadyPercent + indivdual)
             else:
                 self.stocksConfirmedIn[stock[0]] = indivdual
             count = count+1
 
+
+    def code106(self, percentage, amountOfCompanies):
+        strDate = self.date.split('-')
+        indivdual = percentage / amountOfCompanies
+        year = strDate[0]
+        stockInformation = apiCalls.CompaniesRevenue(year)
+        count = 0
+        for stock in stockInformation:
+            if count == amountOfCompanies:
+                break
+            if stock in self.stocksConfirmedIn:
+                alreadyPercent = self.stocksConfirmedIn[stock]
+                self.stocksConfirmedIn[stock] = (alreadyPercent + indivdual)
+            else:
+                self.stocksConfirmedIn[stock] = indivdual
+            count = count + 1
 
 
 
@@ -322,6 +338,7 @@ class ETF:
         elif code == "106":
             percentage = parameters[0]
             amountOfCompanies = parameters[1]
+            self.code106(percentage,amountOfCompanies)
             # companies with the highest revenue
         elif code == "200":
             balancePeriodInWeeks = parameters[0]

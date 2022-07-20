@@ -5,7 +5,7 @@
  Code 002 : Parameters (name) *
  Code 003 : Parameters (country) *
  Code 104 : Parameters (percentage)*
- Code 106 : Parameters (Percentage)
+ Code 106 : Parameters (Percentage)*
 
  Second Priority:
  Code 011: Parameters (min,max) *
