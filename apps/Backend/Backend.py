@@ -24,19 +24,60 @@ def createNameAndAmount():
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
     return dataJsonify
 
-@app.route("/createRules", methods=["POST"])
-def createRules():
+@app.route("/createName", methods=["POST"])
+def createNameAndAmount():
     data = request.get_json()
-    UserID = data['UserID']
-    etfID = data['ETFid']
-    listOfRules = data['Rules']
+    userID = data['Data'][0]
+    etfName = data['Data'][1]
+    amount = data['Data'][2]
+    #This is function that is first called that has the name of the new ETF and the amount
+    #data is the array of the JSon of all the data recieved
 
-    etfNew = ETF.ETF(UserID,etfID,listOfRules,None,1000000)
-    data = etfNew.createETF()
-    #This is a new ETF Oject
+    mydb = mysql.connector.connect(
+        host="sql11.freemysqlhosting.net",
+        user="sql11507637",
+        password=getpass()
+    )
 
-    dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
-    return dataJsonify
+    cursor = mydb.cursor(buffered=True)
+
+    # print(userID)
+    # print(etfName)
+    # print(amount)
+
+    cursor.execute( "SELECT * FROM sql11507637.ETFS WHERE UserID = " + '"' + str(userID) + '"' + "  AND ETFName = " + '"' + etfName + '"' + ";")
+    response = cursor.fetchall();
+    # print(response)
+
+    if response == []:
+#             etfname not taken for user
+        cursor.execute("SELECT Max(ETFID) FROM sql11507637.ETFS;")
+        #print(response)
+        if (response == []):
+            etfID = 0
+        else:
+            # print(response[0][0])
+            etfID = response[0][0] + 1
+
+
+        rules = ""
+        cdate = date.today()
+        sql = "INSERT INTO sql11507637.ETFS( ETFID, USERID, ETFName, Amount, Rules, CreationDate) VALUES (%s, %s, %s, %s, %s, %s)"
+        val = (etfID, userID, etfName, amount, rules, cdate)
+        cursor.execute(sql, val)
+        mydb.commit()
+
+        print("etf added")
+
+        res = '{ "status":"success", "error":"successfully signed up"}'
+        res = jsonify(res)
+        mydb.close()
+        return res
+    else:
+        res = '{ "status":"failure", "error":"Name already used by user"}'
+        res = jsonify(res)
+        mydb.close()
+        return res
 
 @app.route("/generateETF", methods=["POST"])
 def generateETF():
