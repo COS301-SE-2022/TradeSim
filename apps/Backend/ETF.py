@@ -41,6 +41,8 @@ class ETF:
             if code == "102" or code == "103" or code == "105":
                 self.convertCodeToEtf(code,parameters) #Now run all the third priorities
 
+
+
         for indevidualStock in self.stocksConfirmedIn:
             percent = self.stocksConfirmedIn[indevidualStock]
             arrayS = [indevidualStock]
@@ -81,7 +83,11 @@ class ETF:
             #First we want to check if the stock exists
             allStocksThatExists = apiCalls.listallcompanies()
             if ticker in allStocksThatExists:
-                self.stocksConfirmedIn[ticker] = percent
+                if ticker in self.stocksConfirmedIn:
+                    alreadypercent = self.stocksConfirmedIn[ticker]
+                    self.stocksConfirmedIn[ticker] = (percent + alreadypercent)
+                else:
+                    self.stocksConfirmedIn[ticker] = percent
             else:
                 print("Stock Doesn't Exist")
                 # So we will need to return some way of saying that this stock doesnt exist
@@ -126,6 +132,33 @@ class ETF:
             finalStocks.append(name)
 
         self.listOfAllStocks = finalStocks
+
+    def code104(self, percentage, amountOfCompanies):
+        stockInformation = apiCalls.getShareMarketEarn(self.listOfAllStocks, self.date)
+        stocksWithMarketCap = {}
+        for stock in stockInformation:
+            parameters = stockInformation[stock]
+            marketCap = parameters[1]
+            if marketCap != None:
+                stocksWithMarketCap[stock] = marketCap
+        sortedStocks = sorted(stocksWithMarketCap.items(),key=lambda x:x[1],reverse = True)
+        #So now we have the stocks with the highest market cap we now need to get their share price, which we already have
+        indivdual = percentage/amountOfCompanies
+
+        count = 0
+        for stock in sortedStocks:
+            if count ==amountOfCompanies:
+                break
+            if stock in self.stocksConfirmedIn:
+                alreadyPercent = self.stocksConfirmedIn[stock]
+                self.stocksConfirmedIn[stock] =  (alreadyPercent + indivdual)
+            else:
+                self.stocksConfirmedIn[stock[0]] = indivdual
+            count = count+1
+
+
+
+
 
     def code001_002(self, idValue):
         stocksToReject = apiCalls.CompaniesByIndustry(idValue)
@@ -278,6 +311,7 @@ class ETF:
         elif code == "104":
             percentage = parameters[0]
             amountOfCompanies = parameters[1]
+            self.code104(percentage, amountOfCompanies)
             # companies with the highest market cap
         elif code == "105":
             country = parameters[0]
@@ -309,10 +343,10 @@ class ETF:
                 code = rule[0]
                 parameters = rule[1]
                 if countPrioritize == 0:
-                    if code == "000" or code == "101" or code == "001" or code == "002" or code == "003":
+                    if code == "000" or code == "101" or code == "001" or code == "002" or code == "003" or code == "104" or code == "106":
                         newRuleList.append(rule)
                 if countPrioritize == 1:
-                    if code == "011" or code == "012" or code == "013" or code == "104":
+                    if code == "011" or code == "012" or code == "013":
                         newRuleList.append(rule)
                 if countPrioritize == 3:
                     if code == "102" or code == "103" or code == "105":
