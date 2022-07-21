@@ -28,13 +28,9 @@ def add():
 def comparedate():
     return render_template("compare-date.html")
 
-@app.route("/setRule")
-def setRule():
-    return render_template("set.html")
-
-@app.route("/edit")
+@app.route("/addRule")
 def edit():
-    return render_template("edit.html")
+    return render_template("addRule.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
