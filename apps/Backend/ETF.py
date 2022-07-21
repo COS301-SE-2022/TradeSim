@@ -8,10 +8,11 @@ class ETF:
         self.etfIF = etfID
         self.rules = rules
         self.amount = amount
-        if date == None:
+        if date == "":
             self.date = datetime.strftime(datetime.now() - timedelta(2),'%Y-%m-%d')
         else:
-            self.date = date
+            self.date = datetime.strptime(date,'%Y-%m-%d')
+            self.date = datetime.strftime(self.date,'%Y-%m-%d')
         self.listOfAllStocks = []
         self.priorityTwoRules = []
         self.stocksConfirmedIn = {}
