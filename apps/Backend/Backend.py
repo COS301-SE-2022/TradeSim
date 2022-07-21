@@ -76,7 +76,7 @@ def createRules():
     date = data['date']
     amount = data['amount']
 
-    etfNew = ETF.ETF(UserID,etfID,listOfRules,date,amount)
+    etfNew = ETF.ETF(UserID,etfID,listOfRules,date,int(amount))
     data = etfNew.createETF()
     #This is a new ETF Oject
 
