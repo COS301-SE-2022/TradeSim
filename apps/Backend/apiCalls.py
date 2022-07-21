@@ -218,4 +218,52 @@ def CompaniesRevenue(year):
 
     return listOfSymbols
 
+def getSharePriceHistory(t,date,endDate):
+    allStocksDetails = {}
+    startDay = date
+    endDay = endDate
+    tickers = t
 
+
+
+    arrayOfArrayOfTickers = []
+    shortArrayOftickers = []
+    toSize = 0
+    tempCount = 0
+    for x in tickers:
+        shortArrayOftickers.append(x)
+        if toSize==50:
+            toSize = 0
+            arrayOfArrayOfTickers.append(shortArrayOftickers)
+            shortArrayOftickers = []
+            tempCount = tempCount+1
+        toSize = toSize +1
+
+    arrayOfArrayOfTickers.append(shortArrayOftickers)
+
+    allStocksDetails = {}
+
+    for tick in arrayOfArrayOfTickers:
+        request_url = 'https://simfin.com/api/v2/companies/prices'
+        parameters = {"ticker": ",".join(tick), "start": startDay, "end": endDay, "api-key": api_key,
+                      "ratios": ""}
+        request = requests.get(request_url, parameters)
+        all_data = request.json()
+
+
+        for response_index, data in enumerate(all_data):
+            # make sure that data was found
+            if data['found'] and len(data['data']) > 0:
+                dateAndPrice = {}
+                ticker = {}
+                ticker = data['data'][0][1]
+                for d in data['data']:
+                    dateGiven = d[2]
+                    closingPrice = d[6]
+                    dateAndPrice[dateGiven] = closingPrice
+                allStocksDetails[ticker] = dateAndPrice
+        print("Hello")
+
+
+
+    return allStocksDetails
