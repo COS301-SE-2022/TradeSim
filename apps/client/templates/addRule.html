@@ -12,6 +12,7 @@
     <!--Bootstrap JS-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" />
     <link rel="stylesheet" type="text/css" href="main.css" />
+    <script src="rules.js"></script>
     <title>TradeSim Add ETF</title>
 </head>
 
@@ -48,8 +49,8 @@
                 <div class="card2" id="etfbody" style="width:1125px ; position: relative; bottom: 30px; right: 12px">
                     <label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Select rule: </b></label>
                     <div class="custom-select" style="width:200px; display: inline-block; position: relative; left: 12px; top: 8px;">
-                        <select>
-                          <option value="0">Select rule:</option>
+                        <select id="rule">
+                          <option value="0" id="r0" >Select rule:</option>
                           <option value="1" id="r1">000: The system must allow the user to reject specific companies by name or ticker.</option>
                           <option value="2" id="r2">001: The system must allow the user to reject specific sectors by name.</option>
                           <option value="3" id="r3">002: The system must allow the user to reject specific industries by name or ticker.</option>
@@ -73,8 +74,10 @@
                     </div>
 
                     <div class="create-button-div-add row">
-                        <button class="create-btn" style="width: 120px; display: inline-block; position: relative; left: 952px; bottom: 22px;">Add Rule</button>
+                        <button class="create-btn" style="width: 120px; display: inline-block; position: relative; left: 952px; bottom: 22px;" onclick="addRule()">Add Rule</button>
                     </div>
+
+
 
                     <!-- <label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Select percentage: </b> </label> -->
                     <!-- <div class="custom-select" style="width:200px; display: inline-block; position: relative; left: 390px; top: 8px;">
@@ -104,11 +107,14 @@
 
 
 
+            <div class="addRule" id="addRule"></div>
 
 
-            <div class="create-button-div-add row">
+
+
+            <!-- <div class="create-button-div-add row">
                 <button class="create-btn" style=" width: 120px; position: fixed; bottom: 10px; left: 310px;">Add Rule</button>
-            </div>
+            </div> -->
 
             <div class="create-button-div-add row">
                 <a href="home.html"> <button class="create-btn" style=" width: 120px; position: fixed; bottom: 10px; right: 20px;">Create ETF</button></a>
