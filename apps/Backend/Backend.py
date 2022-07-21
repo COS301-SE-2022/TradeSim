@@ -208,7 +208,7 @@ def getETFS():
 
     cursor.execute("SELECT * FROM sql11507637.ETFS WHERE UserID = " + '"' + str(userID) + '"' + "  ;")
     response = cursor.fetchall();
-    print(response)
+    #print(response)
 
     if response != []:
         #   etfs exist
