@@ -26,6 +26,7 @@ function validatenaa() {
          if(jd.status == "failure")
          {
              console.log(jd.error);
+             alert(jd.error)
          }
          else
          {
