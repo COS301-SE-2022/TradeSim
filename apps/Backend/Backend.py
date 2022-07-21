@@ -20,19 +20,6 @@ def createNameAndAmount():
     #This is function that is first called that has the name of the new ETF and the amount
     #data is the array of the JSon of all the data recieved
 
-
-    dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
-    return dataJsonify
-
-@app.route("/createName", methods=["POST"])
-def createNameAndAmount():
-    data = request.get_json()
-    userID = data['Data'][0]
-    etfName = data['Data'][1]
-    amount = data['Data'][2]
-    #This is function that is first called that has the name of the new ETF and the amount
-    #data is the array of the JSon of all the data recieved
-
     mydb = mysql.connector.connect(
         host="sql11.freemysqlhosting.net",
         user="sql11507637",
@@ -52,7 +39,8 @@ def createNameAndAmount():
     if response == []:
 #             etfname not taken for user
         cursor.execute("SELECT Max(ETFID) FROM sql11507637.ETFS;")
-        #print(response)
+        response = cursor.fetchall();
+        # print(response)
         if (response == []):
             etfID = 0
         else:
