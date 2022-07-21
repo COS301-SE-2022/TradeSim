@@ -12,6 +12,7 @@
     <!--Bootstrap JS-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" />
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+    <script src="{{ url_for('static',filename='home.js') }}"></script>
     <title>TradeSim Home</title>
 </head>
 
@@ -46,26 +47,12 @@
             <div class="create-header">
                 <h2>Your ETF's</h2>
             </div>
-            <div class="graph row">
-                <div class="card col">
-                    <label for="etf"><b>SPY: </b></label>
-                    <div class="graph-mock">*DISPLAY GRAPH HERE*</div>
-                </div>
-                <div class="card col ml-2">
-                    <label for="etf"><b>QQQ: </b></label>
-                    <div class="graph-mock">*DISPLAY GRAPH HERE*</div>
-                </div>
-            </div>
-            <div class="graph row">
-                <div class="card col">
-                    <label for="etf"><b>VOO: </b></label>
-                    <div class="graph-mock">*DISPLAY GRAPH HERE*</div>
-                </div>
-                <div class="card col">
-                    <label for="etf"><b>IWM: </b></label>
-                    <div class="graph-mock">*DISPLAY GRAPH HERE*</div>
-                </div>
-            </div>
+            <script>getETFS()</script>
+            <a id="etfs">
+
+            </a>
+
+
         </div>
     </div>
 </body>
