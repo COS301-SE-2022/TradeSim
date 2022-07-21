@@ -66,6 +66,22 @@ def createNameAndAmount():
         res = jsonify(res)
         mydb.close()
         return res
+    
+@app.route("/createRules", methods=["POST"])
+def createRules():
+    data = request.get_json()
+    UserID = data['UserID']
+    etfID = data['ETFid']
+    listOfRules = data['Rules']
+    date = data['date']
+    amount = data['amount']
+
+    etfNew = ETF.ETF(UserID,etfID,listOfRules,date,amount)
+    data = etfNew.createETF()
+    #This is a new ETF Oject
+
+    dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
+    return dataJsonify
 
 @app.route("/generateETF", methods=["POST"])
 def generateETF():
