@@ -40,8 +40,8 @@ def createNameAndAmount():
 #             etfname not taken for user
         cursor.execute("SELECT Max(ETFID) FROM sql11507637.ETFS;")
         response = cursor.fetchall();
-        # print(response)
-        if (response == []):
+        print(response)
+        if (response == [(None,)]):
             etfID = 0
         else:
             # print(response[0][0])
