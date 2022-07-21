@@ -196,6 +196,26 @@ def companiesByExchange(country):
 
     return listOFComanies
 
+def CompaniesRevenue(year):
+    #This function will return the symbols of the comapnies in a industry or Sector
+    request_url = 'https://simfin.com/api/v2/finder?api-key=' + api_key
+    meta = {"id": 7, "value": year, "operator": "eq"}
+    condition = {"operator": "bt", "value": 10000}
 
+    meta1 = {"id": 7, "value": 2022, "operator": "eq"}
+    condition1 = {"operator": "diff", "value": 0}
+    search = [{"indicatorId": "1-1", "meta": [meta], "condition": condition},
+              {"indicatorId": "0-71", "meta": [meta1], "condition": condition1}]
+    parameters = {"search": search, "resultsPerPage": 0}
+    request = requests.post(request_url, json=parameters)
+    data = request.json()
+    listOfSymbols = {}
+    for x in data['results']:
+        value = x["values"]
+        revenue = value[0]["value"]
+        ticker = value[1]["value"]
+        listOfSymbols[ticker] = revenue
+
+    return listOfSymbols
 
 

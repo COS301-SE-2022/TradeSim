@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="css/style.css" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,7 +12,7 @@
     <!--Bootstrap JS-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" />
     <link rel="stylesheet" type="text/css" href="main.css" />
-    <title>TradeSim Home</title>
+    <title>TradeSim Edit ETF</title>
 </head>
 
 <body>
@@ -32,7 +31,7 @@
         <div class="main-body">
             <div class="row">
                 <div class="create-header">
-                    <h1>Edit ETF</h1>
+                    <h1>Edit Rules</h1>
                 </div>
                 <div class="search-avatar">
                     <input type="text" placeholder="Search" name="search" /><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -44,37 +43,69 @@
             </svg>
                 </div>
             </div>
-            <div class="create-header">
 
-                <h3>Select one of your ETF's to edit</h3>
-            </div>
-            <div class="graph row">
-                <div class="card col">
-                    <label for="etf"><b>SPY: </b></label>
-                    <div class="graph-mock">*DISPLAY GRAPH HERE*</div>
-                </div>
-                <div class="card col ml-2">
-                    <label for="etf"><b>QQQ: </b></label>
-                    <div class="graph-mock">*DISPLAY GRAPH HERE*</div>
-                </div>
-            </div>
-            <div class="graph row">
-                <div class="card col">
-                    <label for="etf"><b>VOO: </b></label>
-                    <div class="graph-mock">*DISPLAY GRAPH HERE*</div>
-                </div>
-                <div class="card col">
-                    <label for="etf"><b>IWM: </b></label>
-                    <div class="graph-mock">*DISPLAY GRAPH HERE*</div>
+
+            <div class="amount-input-row">
+                <div class="card2" id="etfbody">
+                    <label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Select rule: </b></label>
+                    <div class="custom-select" style="width:200px; display: inline-block; position: relative; left: 12px; top: 8px;">
+                        <select>
+                          <option value="0">Select rule:</option>
+                          <option value="1">request certain companies by name or ticker</option>
+                          <option value="2">request a percentage in a specific sector.</option>
+                          <option value="3">request a percentage in a specific industry by name or ticker</option>
+                          <option value="4">request the companies with the highest market cap</option>
+                          <option value="5">invest in companies based in specific countries</option>
+                          <option value="6">request the companies with the highest revenue</option>
+                          <option value="7">set a balance period and/or balance threshold percentage</option>
+                          <option value="8">set a time period in which it must reconsider its stocks</option>
+                          <option value="9">define a percentage that a stock can drop before the ETF sells the stock automatically</option>
+                          <option value="10">reject specific companies by name or ticker.</option>
+                          <option value="11">reject specific sectors by name.</option>
+                          <option value="12">reject specific industries by name or ticker.</option>
+                          <option value="13">reject companies based in specific countries.</option>
+                          <option value="14">request a minimum amount of companies they want to invest in</option>
+                          <option value="15">set the market cap min and max values.</option>
+                          <option value="16">set the earnings min and max value.</option>
+                          <option value="17">set a minimum and maximum price for shares.</option>
+                        </select>
+                    </div>
+                    <!-- <label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Select percentage: </b> </label> -->
+                    <div class="custom-select" style="width:200px; display: inline-block; position: relative; left: 390px; top: 8px;">
+                        <select>
+                            <option value="0">Select %:</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7 </option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                    </div>
+                    <!-- <label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Name: </b> </label> -->
+                    <div class="custom-select" style="display: inline-block; position: relative; left: 322px; top: 5px;">
+                        <input type="text" placeholder="Name of rule" style=" width:100px; height:25px; font-size: 12px; ">
+                    </div>
 
                 </div>
+            </div>
+
+
+
+            <div class="create-button-div-add row">
+                <button class="create-btn" style=" width: 120px; position: fixed; bottom: 10px; left: 310px;">Add Rule</button>
+            </div>
+
+            <div class="create-button-div-add row">
+                <a href="home.html"> <button class="create-btn" style=" width: 120px; position: fixed; bottom: 10px; right: 20px;">Make Changes</button></a>
             </div>
         </div>
-
-        <div class="create-button-div-add row">
-            <a href="editRules.html"> <button class="create-btn" style=" width: 120px; position: fixed; bottom: 10px; right: 20px;">Edit ETF</button></a>
-        </div>
-    </div>
     </div>
 </body>
 
