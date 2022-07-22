@@ -8,10 +8,13 @@ class ETF:
         self.etfIF = etfID
         self.rules = rules
         self.amount = amount
-        if date == None:
+        self.now = False
+        if date == "":
+            self.now = True
             self.date = datetime.strftime(datetime.now() - timedelta(2),'%Y-%m-%d')
         else:
-            self.date = date
+            self.date = datetime.strptime(date,'%Y-%m-%d')
+            self.date = datetime.strftime(self.date,'%Y-%m-%d')
         self.listOfAllStocks = []
         self.priorityTwoRules = []
         self.stocksConfirmedIn = {}
@@ -232,12 +235,13 @@ class ETF:
             for stock in valuesForSaidStocks:
                 parameters = valuesForSaidStocks[stock]
                 sharePrice = parameters[0]
-                temp = totalInvested + sharePrice
-                if temp <= moneyToInvest:
-                    totalInvested = totalInvested + sharePrice
-                    amountStock = stockAndAmount[stock]
-                    amountStock = amountStock+1
-                    stockAndAmount[stock] = amountStock
+                if sharePrice>0:
+                    temp = totalInvested + sharePrice
+                    if temp <= moneyToInvest:
+                        totalInvested = totalInvested + sharePrice
+                        amountStock = stockAndAmount[stock]
+                        amountStock = amountStock+1
+                        stockAndAmount[stock] = amountStock
             if testTime == totalInvested:
                 canAddMore = False #The totalInvested Hasn't Changed at all so we can't add more stocks so need to fix that
 
@@ -371,3 +375,33 @@ class ETF:
             countPrioritize = countPrioritize +1
 
         self.rules = newRuleList
+
+    def getPriceOverTime(self):
+        etfValueByday = {}
+        if self.now == True:
+            print("error")
+            #We then need to get history of the stocks from 10 years ago
+
+        else:
+            start = self.date
+            endday = self.date = datetime.strftime(datetime.now(),'%Y-%m-%d')
+            listOfStocks = []
+            for stock in self.stocksWithAmountOFShares:
+                listOfStocks.append(stock)
+            stockInfo = apiCalls.getSharePriceHistory(listOfStocks,start,endday)
+            print(stockInfo["AAPL"])
+            for x in stockInfo:
+                data = stockInfo[x]
+                for d in data:
+                    etfValueByday[d] = 0
+                break
+
+            for x in stockInfo:
+                data = stockInfo[x]
+                for d in data:
+                    if d in etfValueByday:
+                        price = data[d]*self.stocksWithAmountOFShares[x]
+                        etfValueByday[d] = etfValueByday[d]+price
+            print(etfValueByday)
+            #We need to get the prices of the stocks from now up until today
+        return etfValueByday
