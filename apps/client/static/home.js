@@ -82,13 +82,9 @@ function getUserID()
 function getGraph(uID, etfid, rules, amount, date)
 {
 
+    rules = "[" + rules + "]"
     const details2=
     {
-        // "UserID" : '"' + uID + '"',
-        // "ETFid" : '"' + etfid + '"',
-        // "Rules" : '"' + rules + '"',
-        // "date" : '"' + date + '"',
-        // "amount" : '"' + amount + '"'
 
         "UserID" : uID,
         "ETFid" :  etfid,
@@ -111,7 +107,7 @@ function getGraph(uID, etfid, rules, amount, date)
      ).then(response=> response.json())
          .then(data =>{
          console.log(data)
-         // const jd = JSON.parse(data)
-         // console.log(jd)
+         //code to graph it
      });
 }
+
