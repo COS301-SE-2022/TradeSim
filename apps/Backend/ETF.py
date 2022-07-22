@@ -20,6 +20,7 @@ class ETF:
         self.stocksConfirmedIn = {}
         self.stocksWithAmountOFShares = {}
         self.totalInvested = 0
+        self.c200 = {}
 
 
     def createETF(self):
@@ -309,45 +310,48 @@ class ETF:
             # The min and max price is our only parameter
         elif code == "101":
             ticker = parameters[0]
-            Percentage = parameters[1]
+            Percentage = int(parameters[1])
             self.code101(ticker, Percentage)
             # companies by name or ticker.
         elif code == "102":
             SectorID = parameters[0]
-            Percentage = parameters[1]
+            Percentage = int(parameters[1])
             amountOfCompanies = parameters[2]
             self.code102_103(SectorID,Percentage)
             # percentage in a specific sector
         elif code == "103":
             industryID = parameters[0]
-            Percentage = parameters[1]
+            Percentage = int(parameters[1])
             amountOfCompanies = parameters[2]
             self.code102_103(industryID, Percentage)
             # percentage in a specific industry
         elif code == "104":
-            percentage = parameters[0]
-            amountOfCompanies = parameters[1]
+            percentage = int(parameters[0])
+            amountOfCompanies = int(parameters[1])
             self.code104(percentage, amountOfCompanies)
             # companies with the highest market cap
         elif code == "105":
             country = parameters[0]
-            percentage = parameters[1]
+            percentage = int(parameters[1])
             amountOfCompanies = parameters[2]
             self.code105(country,percentage)
             # companies based in specific countries exchange
         elif code == "106":
-            percentage = parameters[0]
-            amountOfCompanies = parameters[1]
+            percentage = int(parameters[0])
+            amountOfCompanies = int(parameters[1])
             self.code106(percentage,amountOfCompanies)
             # companies with the highest revenue
         elif code == "200":
-            balancePeriodInWeeks = parameters[0]
+            balancePeriodInWeeks = int(parameters[0])
+            self.c200["200"] = balancePeriodInWeeks
             # balance period and/or balance threshold percentage
         elif code == "201":
-            percentageDrop = parameters[0]
+            percentageDrop = int(parameters[0])
+            self.c200["201"] = percentageDrop
             # percentage that a stock can drop before the ETF sells the stock automatically
         elif code == "202":
-            reconsiderPeriodInWeeks = parameters[0]
+            reconsiderPeriodInWeeks = int(parameters[0])
+            self.c200["202"] = reconsiderPeriodInWeeks
             # time period in which it must reconsider its stocks
 
     def prioritizeRules(self):
@@ -360,7 +364,7 @@ class ETF:
                 code = rule[0]
                 parameters = rule[1]
                 if countPrioritize == 0:
-                    if code == "000" or code == "101" or code == "001" or code == "002" or code == "003" or code == "104" or code == "106":
+                    if code == "000" or code == "101" or code == "001" or code == "002" or code == "003" or code == "104" or code == "106" or code == "200" or code == "201" or code == "202":
                         newRuleList.append(rule)
                 if countPrioritize == 1:
                     if code == "011" or code == "012" or code == "013":
@@ -371,6 +375,32 @@ class ETF:
             countPrioritize = countPrioritize +1
 
         self.rules = newRuleList
+
+    def code200_201_202(self):
+        if len(self.c200) == 0:
+            print("No rechecking of stocks")
+            #We do nothing because all the stocks have been checked
+        else:
+            for rule in self.c200:
+                if rule == "202":
+                    listOfDates = []
+                    reachedDate = False
+                    timePeriod = self.c200[rule]*7
+                    startingDate = datetime.strptime(self.date,'%Y-%m-%d')
+                    dateNow = datetime.now()
+                    listOfDates.append(self.date)
+                    while reachedDate == False:
+                        if startingDate> dateNow:
+                            reachedDate = True
+                            d = datetime.strftime(datetime.now(), '%Y-%m-%d')
+                            listOfDates.append(d)
+                        else:
+                            d = datetime.strftime(startingDate + timedelta(timePeriod), '%Y-%m-%d')
+                            listOfDates.append(d)
+                            startingDate = datetime.strptime(d,'%Y-%m-%d')
+                    print(listOfDates)
+
+
 
     def getPriceOverTime(self):
         etfValueByday = {}
