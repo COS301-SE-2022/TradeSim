@@ -183,54 +183,54 @@ def register():
             
 @app.route("/getETFS", methods=["POST"])
 def getETFS():
-     data = request.get_json()
-    # userID = data['Data'][0]
-    #
-    # mydb = mysql.connector.connect(
-    #     host="sql11.freemysqlhosting.net",
-    #     user="sql11507637",
-    #     password=getpass()
-    # )
-    #
-    # cursor = mydb.cursor(buffered=True)
-    #
-    # cursor.execute("SELECT * FROM sql11507637.ETFS WHERE UserID = " + '"' + str(userID) + '"' + "  ;")
-    # response = cursor.fetchall();
-    # #print(response)
-    #
-    # if response != []:
-    #     #   etfs exist
-    #     cursor.execute("SELECT count(*) FROM sql11507637.ETFS WHERE UserID = " + '"' + str(userID) + '"' + "  ;")
-    #     count = cursor.fetchall();
-    #     count = count[0][0]
-    #     # print(count)
-    #     etfs ='['
-    #     for i in range(count):
-    #         etfs += '{"ETFID":"' + str(response[i][0]) + '",'
-    #         etfs += '"UserID":"' + str(response[i][1]) + '",'
-    #         etfs += '"ETFName":"' + str(response[i][2]) + '",'
-    #         etfs += '"Amount":"' + str(response[i][3]) + '",'
-    #         etfs += '"Rules":"' + str(response[i][4]) + '",'
-    #         etfs += '"Date":"' + str(response[i][5]) + '"}'
-    #         if i != count - 1:
-    #             etfs += ','
-    #
-    #     etfs += "]"
-    #
-    #     res = '{ "status":"success", "Data":' + etfs +'}'
-    #     res = jsonify(res)
-    #     mydb.close()
-    #     return res
-    # else:   #no ETFS found
-    #     res = '{ "status":"failure", "error":"No ETFS made"}'
-    #     res = jsonify(res)
-    #     mydb.close()
-    #     return res
-    #
-    #         res = '{ "status":"success", "error":"successfully signed up"}'
-    #         res = jsonify(res)
-    #         mydb.close()
-    #         return res
+    data = request.get_json()
+    userID = data['Data'][0]
+    
+    mydb = mysql.connector.connect(
+        host="sql11.freemysqlhosting.net",
+        user="sql11507637",
+        password=getpass()
+    )
+    
+    cursor = mydb.cursor(buffered=True)
+    
+    cursor.execute("SELECT * FROM sql11507637.ETFS WHERE UserID = " + '"' + str(userID) + '"' + "  ;")
+    response = cursor.fetchall();
+    #print(response)
+    
+    if response != []:
+        #   etfs exist
+        cursor.execute("SELECT count(*) FROM sql11507637.ETFS WHERE UserID = " + '"' + str(userID) + '"' + "  ;")
+        count = cursor.fetchall();
+        count = count[0][0]
+        # print(count)
+        etfs ='['
+        for i in range(count):
+            etfs += '{"ETFID":"' + str(response[i][0]) + '",'
+            etfs += '"UserID":"' + str(response[i][1]) + '",'
+            etfs += '"ETFName":"' + str(response[i][2]) + '",'
+            etfs += '"Amount":"' + str(response[i][3]) + '",'
+            etfs += '"Rules":"' + str(response[i][4]) + '",'
+            etfs += '"Date":"' + str(response[i][5]) + '"}'
+            if i != count - 1:
+                etfs += ','
+    
+        etfs += "]"
+    
+        res = '{ "status":"success", "Data":' + etfs +'}'
+        res = jsonify(res)
+        mydb.close()
+        return res
+    else:   #no ETFS found
+        res = '{ "status":"failure", "error":"No ETFS made"}'
+        res = jsonify(res)
+        mydb.close()
+        return res
+    
+            res = '{ "status":"success", "error":"successfully signed up"}'
+            res = jsonify(res)
+            mydb.close()
+            return res
 
 if __name__ == "__main__":
         app.run("localhost", 6969)
