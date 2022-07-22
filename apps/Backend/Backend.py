@@ -85,20 +85,6 @@ def createRules():
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
     return dataJsonify
 
-@app.route("/generateETF", methods=["POST"])
-def generateETF():
-    data = request.get_json()
-    UserID = data['UserID']
-    ETFid = data['ETFid']
-    startDate = data['StartDate']
-    PeriodInDays = data['DatePeriodInDays']
-
-    #This is function that is used when a user wants to see the etf so the JSON that is passed needs to contain both the etf name and the date
-    #data is the array of the JSon of all the data recieved
-
-    dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
-    return dataJsonify
-
 @app.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
