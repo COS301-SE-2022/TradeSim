@@ -30,7 +30,7 @@ function validatenaa() {
          }
          else
          {
-             window.location.href = "/home"
+             window.location.href = "/addRule"
          }
 
 
