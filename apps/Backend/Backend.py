@@ -229,6 +229,68 @@ def getETFS():
         res = jsonify(res)
         mydb.close()
         return res
+@app.route("/setRule", methods=["POST"])
+def setRule():
+    data = request.get_json()
+
+    etfID = data['Data'][0]
+    param1 = data['Data'][1]
+    param2 = data['Data'][2]
+    param3 = data['Data'][3]
+    rulecode = data['Data'][4]
+
+
+    mydb = mysql.connector.connect(
+        host="sql11.freemysqlhosting.net",
+        user="sql11507637",
+        password=getpass()
+    )
+
+    cursor = mydb.cursor(buffered=True)
+
+    cursor.execute("SELECT Rules FROM sql11507637.ETFS WHERE ETFID = " + '"' + str(etfID) + '"' + "  ;")
+    response = cursor.fetchall();
+    # print(response[0][0])
+    rulesdb = ''
+
+    if param2 == "":
+
+        if response[0][0] == '': #no rules exist
+
+            rulesdb = "[\"" + str(rulecode) + "\",[\"" + param1 + "\"]]"
+
+        else:   #rules exist
+
+            rulesdb = response[0][0] + ",[\"" + str(rulecode) + "\",[\"" + param1 + "\"]]"
+
+    elif param3 == "":
+        if response[0][0] == '':  # no rules exist
+
+            rulesdb = "[\"" + str(rulecode) + "\",[\"" + param1 + "\",\"" + param2 + "\"]]"
+
+        else:  # rules exist
+
+            rulesdb = response[0][0] + ",[\"" + str(rulecode) + "\",[\"" + param1 + "\",\"" + param2 + "\"]]"
+
+    else:
+        if response[0][0] == '':  # no rules exist
+
+            rulesdb = "[\"" + str(rulecode) + "\",[\"" + param1 + "\",\"" + param2 + "\",\"" + param3 + "\"]]"
+
+        else:  # rules exist
+
+            rulesdb = response[0][0] + ",[\"" + str(rulecode) + "\",[\"" + param1 + "\",\"" + param2 + "\",\"" + param3 + "\"]]"
+
+    print(rulesdb)
+
+    cursor.execute("UPDATE sql11507637.ETFS SET Rules = " + "'" +  rulesdb + "'" + " WHERE(ETFID = " + '"' + str(etfID) + '"' + ");")
+    mydb.commit()
+    # response = cursor.fetchall();
+
+    res = '{ "status":"succesful"}'
+    res = jsonify(res)
+    mydb.close()
+    return res
 
 @app.route("/changename", methods=["POST"])
 def changename():
