@@ -68,6 +68,12 @@ class ETF:
         print("=====================")
         print(self.totalInvested)
         print(self.stocksWithAmountOFShares)
+        self.cleanUpStocks()
+
+        #=====================================================
+
+
+        #=====================================================
 
         return self.stocksWithAmountOFShares
 
@@ -245,7 +251,6 @@ class ETF:
                         stockAndAmount[stock] = amountStock
             if testTime == totalInvested:
                 canAddMore = False #The totalInvested Hasn't Changed at all so we can't add more stocks so need to fix that
-
         self.totalInvested = self.totalInvested + totalInvested
         # print(totalInvested)
 
@@ -256,6 +261,62 @@ class ETF:
                 self.stocksWithAmountOFShares[p] = temp
             else:
                 self.stocksWithAmountOFShares[p] = stockAndAmount[p]
+
+
+    def cleanUpStocks(self):
+
+        removeSingStocks = {}
+        listOfValueStocks = []
+
+        for x in self.stocksWithAmountOFShares:
+            if self.stocksWithAmountOFShares[x] > 1:
+                removeSingStocks[x] = self.stocksWithAmountOFShares[x]
+                listOfValueStocks.append(x)
+
+        valuesForSaidStocks = apiCalls.getShareMarketEarn(listOfValueStocks, self.date)
+        totalInvested = 0
+        for x in removeSingStocks:
+            parameters = valuesForSaidStocks[x]
+            sharePrice = parameters[0]
+            amountInvestedInEachStock = sharePrice*removeSingStocks[x]
+            totalInvested = totalInvested + amountInvestedInEachStock
+
+        print(removeSingStocks)
+        print(totalInvested)
+        print("Now lets clean up and get more stocks")
+        moneyLeft = self.amount-totalInvested
+        noMoreMoNEY = False
+        tempMoney = 0
+        while noMoreMoNEY==False:
+            tempMoney = moneyLeft
+            print(tempMoney)
+            for stock in removeSingStocks:
+                parameters = valuesForSaidStocks[stock]
+                sharePrice = parameters[0]
+                temp = moneyLeft-sharePrice
+                if temp>0:
+                    moneyLeft = temp
+                    removeSingStocks[stock] = removeSingStocks[stock]+1
+
+            if tempMoney == moneyLeft:
+                noMoreMoNEY = True
+
+
+        totalInvested1 = 0
+        for x in removeSingStocks:
+            parameters = valuesForSaidStocks[x]
+            sharePrice = parameters[0]
+            amountInvestedInEachStock = sharePrice * removeSingStocks[x]
+            totalInvested1 = totalInvested1 + amountInvestedInEachStock
+
+
+        self.stocksWithAmountOFShares = removeSingStocks
+        self.totalInvested = totalInvested1
+
+
+
+
+
 
 
 
