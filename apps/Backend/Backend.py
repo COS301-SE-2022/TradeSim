@@ -363,5 +363,28 @@ def clearrules():
     mydb.close()
     return res
 
+@app.route("/deleteetf", methods=["POST"])
+def deleteetf():
+    data = request.get_json()
+
+    etfID = data['Data'][0]
+
+    mydb = mysql.connector.connect(
+        host="sql11.freemysqlhosting.net",
+        user="sql11507637",
+        password=getpass()
+    )
+
+    cursor = mydb.cursor(buffered=True)
+
+    cursor.execute("DELETE FROM sql11507637.ETFS WHERE (ETFID = '" + str(etfID) + "');")
+    mydb.commit()
+    # response = cursor.fetchall();
+
+    res = '{ "status":"succesful"}'
+    res = jsonify(res)
+    mydb.close()
+    return res
+
 if __name__ == "__main__":
         app.run("localhost", 6969)
