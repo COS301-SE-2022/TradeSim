@@ -1,3 +1,4 @@
+
 function getETFS()
 {
     var userID = getUserID()
@@ -34,19 +35,13 @@ function getETFS()
 
              for(var i = 0; i < numofetfs; i++)
              {
-                 if(i % 2 == 0)
-                 {
-                     document.getElementById("table1").innerHTML += "<tr id='row" + i / 2 +"'></tr>"
-                     document.getElementById("row" + i / 2).innerHTML += "<th>" +
-                         jd.Data[i].ETFName + getGraph(userID, jd.Data[i].ETFID, jd.Data[i].Rules, jd.Data[i].Amount, jd.Data[i].Date) +
-                         "</th>"
-                 }
-                 else
-                 {
-                    document.getElementById("row" + (i -1) /2).innerHTML += "<th>" +
-                        jd.Data[i].ETFName + getGraph(userID, jd.Data[i].ETFID, jd.Data[i].Rules, jd.Data[i].Amount, jd.Data[i].Date) +
-                        "</th>"
-                 }
+
+                 document.getElementById("table1").innerHTML += "<tr id='row" + i + "'></tr>"
+                 document.getElementById("row" + i).innerHTML += "<th>" +
+                     '<div id="' + i + '" style="width:100%;max-width:900px"></div>' +
+                     "</th></tr>"
+                    getGraph(jd.Data[i].ETFName, userID, jd.Data[i].ETFID, jd.Data[i].Rules, jd.Data[i].Amount, jd.Data[i].Date, i)
+
 
              }
 
@@ -79,10 +74,12 @@ function getUserID()
   return "";
 }
 
-function getGraph(uID, etfid, rules, amount, date)
+function getGraph(name, uID, etfid, rules, amount, date, chartnum)
 {
 
-    rules = "[" + rules + "]"
+    var xA = [];
+    var yA = [];
+
     const details2=
     {
 
@@ -94,7 +91,7 @@ function getGraph(uID, etfid, rules, amount, date)
 
     }
 
-    // console.log(JSON.stringify(details2));
+    console.log(JSON.stringify(details2));
     fetch("http://127.0.0.1:6969/createRules",
 {
     method: 'POST',
@@ -107,7 +104,52 @@ function getGraph(uID, etfid, rules, amount, date)
      ).then(response=> response.json())
          .then(data =>{
          console.log(data)
-         //code to graph it
-     });
-}
 
+         // for(var i = 0; i < data.Values.length; i++)
+         // {
+         //     xA.push()
+         //     yA.push()
+         // }
+         var prevy = 0
+         for(key in data.Values)
+         {
+             if(data.Values[key] > prevy/10)
+             {
+                xA.push(key)
+                yA.push(data.Values[key])
+                 prevy = data.Values[key]
+             }
+
+         }
+         console.log(xA)
+         console.log(yA)
+
+          var data = [{
+          x: xA,
+          y: yA,
+          mode:"lines"
+         }];
+
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
+
+        var layout =
+        {
+          xaxis: {title: "date"},
+          yaxis: {title: "price in dollars"},
+          title: name
+    };
+
+
+    Plotly.newPlot(String(chartnum), data, layout);
+
+
+
+
+     });
+
+}
