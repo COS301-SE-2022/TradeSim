@@ -10,8 +10,9 @@
     <!--Bootstrap Icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css" />
     <!--Bootstrap JS-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" />
-    <link rel="stylesheet" type="text/css" href="main.css" />
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+    <script src="{{ url_for('static',filename='compare.js') }}"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>>
     <title>TradeSim Compare ETF</title>
 </head>
 
@@ -44,58 +45,56 @@
                 </div>
             </div>
 
-
+            <div class="card" id="etf-body" style=" display:inline-block; position: relative; bottom: 30px; width: 1200px">
+                    <label for="etf"><b>Select Date: </b></label>
+                    <input  type="date" id="selectdate" name="date">
+                    <div class="create-button-div-add row" style=" display:inline-block">
+                    <button class="create-btn" style=" width: 120px; display:inline-block; position: relative; left: 20px;">Compare</button>
+                    </div>
+            </div>
             <div class="amount-input-row">
-                <div class="card2" id="etfbody" style="width:1125px ; position: relative; bottom: 30px; right: 12px">
+                <div class="card2" id="etfbody" style="width:1125px ; position: relative; bottom: 70px; right: 0px">
                     <label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>1st ETF </b></label>
                     <div class="custom-select" style="width:200px; display: inline-block; position: relative; left: 12px; top: 8px;">
-                        <select id="rule">
-                          <option value="0" id="r0" >Select ETF 1:</option>
-                          <option value="1" id="r1">QQQ</option>
-                          <option value="2" id="r2">RPQ</option>
-                          <option value="3" id="r3">XTZ</option>
-                          <option value="4" id="r4">POK</option>
-                        </select>
-                    </div>
-                    <label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>2nd ETF </b></label>
-                    <div class="custom-select" style="width:200px; display: inline-block; position: relative; left: 12px; top: 8px;">
-                        <select id="rule">
-                          <option value="0" id="r0" >Select ETF 2:</option>
-                          <option value="1" id="r1">QQQ</option>
-                          <option value="2" id="r2">RPQ</option>
-                          <option value="3" id="r3">XTZ</option>
-                          <option value="4" id="r4">POK</option>
+                        <select id="etf1">
+                          <option disabled selected hidden value="0" id="r0" >Select ETF 1:</option>
+
                         </select>
                     </div>
 
+                    <div class="create-button-div-add row">
+                        <button class="create-btn" onclick="confirm(1)" style="width: 120px; display: inline-block; position: relative; left: 225px; bottom: 20px;">Confirm</button>
+                    </div>
+
+                </div>
+
+            </div>
+            <a id="notes1"></a>
+            <div id="chart1" style="width:100%;max-width:900px"></div>
+
+
+             <div class="amount-input-row">
+                <div class="card2" id="etfbody" style="width:1125px ; position: relative; bottom: 70px; right: 0px">
+                    <label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>2nd ETF </b></label>
+                    <div class="custom-select" style="width:200px; display: inline-block; position: relative; left: 12px; top: 8px;">
+                        <select id="etf2">
+                          <option disabled selected hidden value="0" id="r0" >Select ETF 2:</option>
+
+                        </select>
+                    </div>
+
+                    <div class="create-button-div-add row">
+                        <button class="create-btn" onclick="confirm(2)" style="width: 120px; display: inline-block; position: relative; left: 225px; bottom: 20px;">Confirm</button>
+                    </div>
 
                 </div>
             </div>
+            <a id="notes2"></a>
+            <div id="chart2" style="width:100%;max-width:900px"></div>
+            <script> getETFS()</script>
 
-
-            <div class="etf-name row">
-                <div class="card" id="etf-body" style=" display:inline-block; position: relative; bottom: 70px;">
-                    <label for="etf"><b>Select Date: </b></label>
-                    <input type="date" id="select date" name="date">
-                    <div class="create-button-div-add row" style=" display:inline-block">
-                        <button class="create-btn" style=" width: 120px; display:inline-block; position: relative; left: 20px;">Compare</button>
-                    </div>
-                </div>
-
-                <div class="graph row" style="position: relative; bottom: 70px;">
-                    <div class="card col">
-                        <label for="etf"><b>SPY: </b></label>
-                        <div class="graph-mock">*DISPLAY GRAPH HERE*</div>
-                    </div>
-
-                    <div class="graph row" style="position: relative; bottom: 50px;">
-                        <div class="card col">
-                            <label for="etf"><b>QQQ: </b></label>
-                            <div class="graph-mock">*DISPLAY GRAPH HERE*</div>
-                        </div>
-
-                    </div>
-                </div>
+        </div>
+    </div>
 </body>
 
 </html>
