@@ -173,3 +173,9 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum)
 
 
 }
+
+function changedate()
+{
+    confirm(1)
+    confirm(2)
+}
