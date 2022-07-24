@@ -2346,7 +2346,7 @@ async function ConfirmRule(rulecode)
         }
 
 
-        rulecode = "012"
+        rulecode = "013"
         var eID = document.getElementById("options").value;
         var param1 = document.getElementById("inputsmin").value;
         var param2 = document.getElementById("inputsmax").value;
