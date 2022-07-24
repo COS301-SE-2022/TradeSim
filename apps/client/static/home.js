@@ -103,13 +103,9 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum)
     body:JSON.stringify(details2)}
      ).then(response=> response.json())
          .then(data =>{
+
          console.log(data)
 
-         // for(var i = 0; i < data.Values.length; i++)
-         // {
-         //     xA.push()
-         //     yA.push()
-         // }
          var prevy = 0
          for(key in data.Values)
          {
@@ -142,14 +138,13 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum)
           xaxis: {title: "date"},
           yaxis: {title: "price in dollars"},
           title: name
-    };
-
+        };
 
     Plotly.newPlot(String(chartnum), data, layout);
+    return
+     }).catch((error) => {
+      alert( "ETF " + name + " does not generate any stocks!")
+    });
 
-
-
-
-     });
 
 }
