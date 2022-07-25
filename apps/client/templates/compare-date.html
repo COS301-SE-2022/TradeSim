@@ -43,7 +43,7 @@
                     <button onclick="changedate()" class="create-btn" style=" width: 120px; display:inline-block; position: relative; left: 20px;">Compare</button>
                     </div>
             </div>
-            <div class="amount-input-row">
+            <div class="amount-input-row" style="height:90px">
                 <div class="card2" id="etfbody" style="width:1125px ; position: relative; bottom: 70px; right: 0px">
                     <label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>1st ETF </b></label>
                     <div class="custom-select" style="width:200px; display: inline-block; position: relative; left: 12px; top: 8px;">
@@ -55,17 +55,18 @@
 
                     <div class="create-button-div-add row">
                         <button class="create-btn" onclick="confirm(1)" style="width: 120px; display: inline-block; position: relative; left: 225px; bottom: 20px;">Confirm</button>
+                        <a id="load1"></a>
                     </div>
 
                 </div>
 
             </div>
-            <a id="load1"></a>
+
             <a id="notes1"></a>
             <div id="chart1" style="width:100%;max-width:900px"></div>
 
 
-             <div class="amount-input-row">
+             <div class="amount-input-row" style="height:90px">
                 <div class="card2" id="etfbody" style="width:1125px ; position: relative; bottom: 70px; right: 0px">
                     <label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>2nd ETF </b></label>
                     <div class="custom-select" style="width:200px; display: inline-block; position: relative; left: 12px; top: 8px;">
@@ -77,17 +78,14 @@
 
                     <div class="create-button-div-add row">
                         <button class="create-btn" onclick="confirm(2)" style="width: 120px; display: inline-block; position: relative; left: 225px; bottom: 20px;">Confirm</button>
+                        <a id="load2"></a>
                     </div>
 
                 </div>
             </div>
-            <a id="load2"></a>
+
             <a id="notes2"></a>
             <div id="chart2" style="width:100%;max-width:900px"></div>
             <script> getETFS()</script>
 
         </div>
-    </div>
-</body>
-
-</html>
