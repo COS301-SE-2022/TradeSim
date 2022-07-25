@@ -65,8 +65,9 @@ function getUserID()
   return "";
 }
 
-function confirm(chartnum)
+async function confirm(chartnum)
 {
+
     info = JSON.parse(document.getElementById("etf" + chartnum).value)
 
     date = document.getElementById("selectdate").value;
@@ -78,13 +79,18 @@ function confirm(chartnum)
     {
         date = "2021-01-01"
     }
-
+    //document.getElementById("load" + chartnum).innerHTML = "LOADING... <br>"
     getGraph(info.ETFName, getUserID(), info.ETFID, info.Rules, info.Amount, date, chartnum)
+
+
+
 
 }
 
 function getGraph(name, uID, etfid, rules, amount, date, chartnum)
 {
+
+    document.getElementById("load" + chartnum).innerHTML = name + " Loading<br>"
 
     var xA = [];
     var yA = [];
@@ -166,9 +172,10 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum)
      }
 
 
-
+    document.getElementById("load" + chartnum).innerHTML = ""
      }).catch((error) => {
-      alert( "ETF " + name + " does not generate any stocks!")
+         document.getElementById("load" + chartnum).innerHTML = name + " could not generate ETF<br>"
+      // alert( "ETF " + name + " does not generate any stocks!")
     });
 
 
@@ -179,3 +186,4 @@ function changedate()
     confirm(1)
     confirm(2)
 }
+
