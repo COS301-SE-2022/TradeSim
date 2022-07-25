@@ -33,6 +33,11 @@ function getETFS()
 
              document.getElementById("etfs").innerHTML += "<table id='table1'>"
 
+              for(var i = 0; i < numofetfs; i++)
+             {
+                 document.getElementById("loading").innerHTML += "<a id='load" + i + "'>" + jd.Data[i].ETFName + " LOADING... <br></a>"
+             }
+
              for(var i = 0; i < numofetfs; i++)
              {
 
@@ -125,7 +130,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum)
           y: yA,
           mode:"lines"
          }];
-         
+
         var layout =
         {
           xaxis: {title: "date"},
@@ -133,10 +138,13 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum)
           title: name
         };
 
-    Plotly.newPlot(String(chartnum), data, layout);
-    return
+        Plotly.newPlot(String(chartnum), data, layout);
+        document.getElementById("load" + chartnum).innerHTML = ""
+        return
      }).catch((error) => {
-      alert( "ETF " + name + " does not generate any stocks!")
+
+        document.getElementById("load" + chartnum).innerHTML = name + " could not generate ETF<br>"
+        //alert( "ETF " + name + " does not generate any stocks!")
     });
 
 
