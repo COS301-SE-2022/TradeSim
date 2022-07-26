@@ -1,3 +1,5 @@
+import random
+
 import apiCalls
 from datetime import datetime,timedelta
 class ETF:
@@ -16,8 +18,9 @@ class ETF:
             self.date = datetime.strptime(date,'%Y-%m-%d')
             self.date = datetime.strftime(self.date,'%Y-%m-%d')
         self.listOfAllStocks = []
-        self.priorityTwoRules = []
         self.stocksConfirmedIn = {}
+        self.priorityTwoRules = []
+        self.bnfirmedIn = {}
         self.stocksWithAmountOFShares = {}
         self.totalInvested = 0
         self.c200 = {}
@@ -55,7 +58,19 @@ class ETF:
         HowMuchMoneyLeft = self.totalInvested/self.amount
         PercentToAdd = (1-HowMuchMoneyLeft)*100
 
-        self.calculateAmountoFstocks(self.listOfAllStocks,PercentToAdd)
+        random.seed(6)
+        endPos = len(self.listOfAllStocks) - 1
+        listOfPos = []
+        if endPos <= 19:
+            for i in range(endPos + 1):
+                listOfPos.append(i)
+        else:
+            listOfPos = random.sample(range(0, endPos), 20)
+        stocksOnlyOneFinal = []
+        for pos in listOfPos:
+            stocksOnlyOneFinal.append(self.listOfAllStocks[pos])
+
+        self.calculateAmountoFstocks(stocksOnlyOneFinal,PercentToAdd)
 
         temp = {}
         for y in self.stocksWithAmountOFShares:
@@ -68,7 +83,9 @@ class ETF:
         print("=====================")
         print(self.totalInvested)
         print(self.stocksWithAmountOFShares)
-        self.cleanUpStocks()
+        #self.cleanUpStocks()
+        #print(self.stocksWithAmountOFShares)
+        #print(self.totalInvested)
 
         #=====================================================
 
@@ -202,7 +219,19 @@ class ETF:
             if x in self.listOfAllStocks:
                 stocksInBoth.append(x)
 
-        self.calculateAmountoFstocks(stocksInBoth,percentage)
+        random.seed(6)
+        endPos = len(stocksInBoth) - 1
+        listOfPos = []
+        if endPos <= 10:
+            for i in range(endPos + 1):
+                listOfPos.append(i)
+        else:
+            listOfPos = random.sample(range(0, endPos), 20)
+        stocksOnlyOneFinal = []
+        for pos in listOfPos:
+            stocksOnlyOneFinal.append(stocksInBoth[pos])
+
+        self.calculateAmountoFstocks(stocksOnlyOneFinal,percentage)
 
     def code105(self, country, percentage):
         stocksInExchange = apiCalls.companiesByExchange(country)
@@ -211,7 +240,19 @@ class ETF:
             if x in self.listOfAllStocks:
                 stocksInBoth.append(x)
 
-        self.calculateAmountoFstocks(stocksInBoth, percentage)
+        random.seed(6)
+        endPos = len(stocksInBoth) - 1
+        listOfPos = []
+        if endPos <= 10:
+            for i in range(endPos + 1):
+                listOfPos.append(i)
+        else:
+            listOfPos = random.sample(range(0, endPos), 20)
+        stocksOnlyOneFinal = []
+        for pos in listOfPos:
+            stocksOnlyOneFinal.append(stocksInBoth[pos])
+
+        self.calculateAmountoFstocks(stocksOnlyOneFinal, percentage)
 
     def code003(self,country):
         companiesToReject = apiCalls.companiesByExchange(country)
@@ -267,11 +308,34 @@ class ETF:
 
         removeSingStocks = {}
         listOfValueStocks = []
+        stocksOnlyOne = []
 
         for x in self.stocksWithAmountOFShares:
             if self.stocksWithAmountOFShares[x] > 1:
                 removeSingStocks[x] = self.stocksWithAmountOFShares[x]
                 listOfValueStocks.append(x)
+            else:
+                if "old" in x:
+                    #Do nothing
+                    print("contains")
+                else:
+                    stocksOnlyOne.append(x)
+
+        random.seed(53)
+        endPos = len(stocksOnlyOne)-1
+        listOfPos = []
+        if endPos<=19:
+            for i in range(endPos+1):
+                listOfPos.append(i)
+        else:
+            listOfPos = random.sample(range(0,endPos),20)
+        stocksOnlyOneFinal = []
+        for pos in listOfPos:
+            stock = stocksOnlyOne[pos]
+            removeSingStocks[stock] = 1
+            stocksOnlyOneFinal.append(stock)
+            listOfValueStocks.append(stock)
+
 
         valuesForSaidStocks = apiCalls.getShareMarketEarn(listOfValueStocks, self.date)
         totalInvested = 0
@@ -281,16 +345,12 @@ class ETF:
             amountInvestedInEachStock = sharePrice*removeSingStocks[x]
             totalInvested = totalInvested + amountInvestedInEachStock
 
-        print(removeSingStocks)
-        print(totalInvested)
-        print("Now lets clean up and get more stocks")
         moneyLeft = self.amount-totalInvested
         noMoreMoNEY = False
         tempMoney = 0
         while noMoreMoNEY==False:
             tempMoney = moneyLeft
-            print(tempMoney)
-            for stock in removeSingStocks:
+            for stock in stocksOnlyOneFinal:
                 parameters = valuesForSaidStocks[stock]
                 sharePrice = parameters[0]
                 temp = moneyLeft-sharePrice
