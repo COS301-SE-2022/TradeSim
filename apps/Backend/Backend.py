@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import ETF
 from dbpass import *
+import mysql.connector
+from datetime import date
 
 amount = 0
 app = Flask(__name__)
@@ -21,8 +23,8 @@ def createNameAndAmount():
     #data is the array of the JSon of all the data recieved
 
     mydb = mysql.connector.connect(
-        host="sql11.freemysqlhosting.net",
-        user="sql11507637",
+        host="database-1.ctw2tablscgc.us-east-1.rds.amazonaws.com",
+        user="aipicapstone",
         password=getpass()
     )
 
@@ -32,13 +34,13 @@ def createNameAndAmount():
     # print(etfName)
     # print(amount)
 
-    cursor.execute( "SELECT * FROM sql11507637.ETFS WHERE UserID = " + '"' + str(userID) + '"' + "  AND ETFName = " + '"' + etfName + '"' + ";")
+    cursor.execute( "SELECT * FROM aipicapstone.ETFS WHERE UserID = " + '"' + str(userID) + '"' + "  AND ETFName = " + '"' + etfName + '"' + ";")
     response = cursor.fetchall();
     # print(response)
 
     if response == []:
 #             etfname not taken for user
-        cursor.execute("SELECT Max(ETFID) FROM sql11507637.ETFS;")
+        cursor.execute("SELECT Max(ETFID) FROM aipicapstone.ETFS;")
         response = cursor.fetchall();
         print(response)
         if (response == [(None,)]):
@@ -49,8 +51,8 @@ def createNameAndAmount():
 
 
         rules = ""
-        cdate = date.today()
-        sql = "INSERT INTO sql11507637.ETFS( ETFID, USERID, ETFName, Amount, Rules, CreationDate) VALUES (%s, %s, %s, %s, %s, %s)"
+        cdate = "2022-01-01"
+        sql = "INSERT INTO aipicapstone.ETFS( ETFID, USERID, ETFName, Amount, Rules, CreationDate) VALUES (%s, %s, %s, %s, %s, %s)"
         val = (etfID, userID, etfName, amount, rules, cdate)
         cursor.execute(sql, val)
         mydb.commit()
@@ -66,7 +68,7 @@ def createNameAndAmount():
         res = jsonify(res)
         mydb.close()
         return res
-    
+
 @app.route("/createRules", methods=["POST"])
 def createRules():
     data = request.get_json()
@@ -76,7 +78,6 @@ def createRules():
     date = data['date']
     amount = data['amount']
 
-
     etfNew = ETF.ETF(UserID,etfID,listOfRules,date,int(amount))
     etfNew.createETF()
     data = etfNew.getPriceOverTime()
@@ -84,6 +85,8 @@ def createRules():
 
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
     return dataJsonify
+
+
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -93,14 +96,14 @@ def login():
 
 
     mydb = mysql.connector.connect(
-        host="sql11.freemysqlhosting.net",
-        user="sql11507637",
+        host="database-1.ctw2tablscgc.us-east-1.rds.amazonaws.com",
+        user="aipicapstone",
         password=getpass()
     )
 
     cursor = mydb.cursor()
 
-    cursor.execute("SELECT UserID FROM sql11507637.accounts WHERE Username = "+'"'+ name +'"'+ "  AND Password = "+'"'+ str(password) +'"'+ ";")\
+    cursor.execute("SELECT UserID FROM aipicapstone.accounts WHERE Username = "+'"'+ name +'"'+ "  AND Password = "+'"'+ str(password) +'"'+ ";")\
 
     response = cursor.fetchall();
     print (response)
@@ -119,8 +122,6 @@ def login():
         mydb.close()
         return res
 
-
-
 @app.route("/register", methods=["POST"])
 def register():
 
@@ -131,8 +132,8 @@ def register():
     password = data['Data'][2]
 
     mydb = mysql.connector.connect(
-        host="sql11.freemysqlhosting.net",
-        user="sql11507637",
+        host="database-1.ctw2tablscgc.us-east-1.rds.amazonaws.com",
+        user="aipicapstone",
         password=getpass()
     )
 
@@ -140,7 +141,7 @@ def register():
 
     cursor = mydb.cursor()
 
-    cursor.execute("SELECT count(*) FROM sql11507637.accounts WHERE Email = "+'"'+email+'"'+";")
+    cursor.execute("SELECT count(*) FROM aipicapstone.accounts WHERE Email = "+'"'+email+'"'+";")
     response = cursor.fetchall()
 
     if response[0] != (0,):
@@ -151,7 +152,7 @@ def register():
         return res
         #handle error
     else:
-        cursor.execute("SELECT count(*) FROM sql11507637.accounts WHERE Username = "+'"'+username+'"'+";")
+        cursor.execute("SELECT count(*) FROM aipicapstone.accounts WHERE Username = "+'"'+username+'"'+";")
         response = cursor.fetchall()
         if response[0] != (0,):
             print("username taken")
@@ -161,7 +162,7 @@ def register():
             return res
             # handle error
         else:
-            cursor.execute("SELECT Max(UserID) FROM sql11507637.accounts;")
+            cursor.execute("SELECT Max(UserID) FROM aipicapstone.accounts;")
             response = cursor.fetchall()
             # print (response[0])
             if(response[0] == (None,)):
@@ -171,36 +172,41 @@ def register():
                 newid = response[0][0] + 1
 
             # det = str(newid) + ',"' + email + '","' + username + '","' + str(password) + '"'
-            # det = "INSERT INTO sql11507637.accounts( UserID, Email, Username, Password) VALUES ("+det+");"
+            # det = "INSERT INTO aipicapstone.accounts( UserID, Email, Username, Password) VALUES ("+det+");"
             # print(det)
 
-            sql = "INSERT INTO sql11507637.accounts( UserID, Email, Username, Password) VALUES (%s, %s, %s, %s)"
+            sql = "INSERT INTO aipicapstone.accounts( UserID, Email, Username, Password) VALUES (%s, %s, %s, %s)"
             val = (newid, email, username, password)
             cursor.execute(sql, val)
             mydb.commit()
 
             print("account added")
-            
+
+            res = '{ "status":"success", "error":"successfully signed up"}'
+            res = jsonify(res)
+            mydb.close()
+            return res
+
 @app.route("/getETFS", methods=["POST"])
 def getETFS():
     data = request.get_json()
     userID = data['Data'][0]
 
     mydb = mysql.connector.connect(
-        host="sql11.freemysqlhosting.net",
-        user="sql11507637",
+        host="database-1.ctw2tablscgc.us-east-1.rds.amazonaws.com",
+        user="aipicapstone",
         password=getpass()
     )
 
     cursor = mydb.cursor(buffered=True)
 
-    cursor.execute("SELECT * FROM sql11507637.ETFS WHERE UserID = " + '"' + str(userID) + '"' + "  ;")
+    cursor.execute("SELECT * FROM aipicapstone.ETFS WHERE UserID = " + '"' + str(userID) + '"' + "  ;")
     response = cursor.fetchall();
     # print(response)
 
     if response != []:
         #   etfs exist
-        cursor.execute("SELECT count(*) FROM sql11507637.ETFS WHERE UserID = " + '"' + str(userID) + '"' + "  ;")
+        cursor.execute("SELECT count(*) FROM aipicapstone.ETFS WHERE UserID = " + '"' + str(userID) + '"' + "  ;")
         count = cursor.fetchall();
         count = count[0][0]
         # print(count)
@@ -210,12 +216,14 @@ def getETFS():
             etfs += '"UserID":"' + str(response[i][1]) + '",'
             etfs += '"ETFName":"' + str(response[i][2]) + '",'
             etfs += '"Amount":"' + str(response[i][3]) + '",'
-            etfs += '"Rules":' + str(response[i][4]) + ','
+            etfs += '"Rules":[' + str(response[i][4]) + '],'
             etfs += '"Date":"' + str(response[i][5]) + '"}'
             if i != count - 1:
                 etfs += ','
 
         etfs += "]"
+
+        print(etfs)
 
 
 
@@ -229,6 +237,7 @@ def getETFS():
         res = jsonify(res)
         mydb.close()
         return res
+
 @app.route("/setRule", methods=["POST"])
 def setRule():
     data = request.get_json()
@@ -241,14 +250,14 @@ def setRule():
 
 
     mydb = mysql.connector.connect(
-        host="sql11.freemysqlhosting.net",
-        user="sql11507637",
+        host="database-1.ctw2tablscgc.us-east-1.rds.amazonaws.com",
+        user="aipicapstone",
         password=getpass()
     )
 
     cursor = mydb.cursor(buffered=True)
 
-    cursor.execute("SELECT Rules FROM sql11507637.ETFS WHERE ETFID = " + '"' + str(etfID) + '"' + "  ;")
+    cursor.execute("SELECT Rules FROM aipicapstone.ETFS WHERE ETFID = " + '"' + str(etfID) + '"' + "  ;")
     response = cursor.fetchall();
     # print(response[0][0])
     rulesdb = ''
@@ -283,7 +292,7 @@ def setRule():
 
     print(rulesdb)
 
-    cursor.execute("UPDATE sql11507637.ETFS SET Rules = " + "'" +  rulesdb + "'" + " WHERE(ETFID = " + '"' + str(etfID) + '"' + ");")
+    cursor.execute("UPDATE aipicapstone.ETFS SET Rules = " + "'" +  rulesdb + "'" + " WHERE(ETFID = " + '"' + str(etfID) + '"' + ");")
     mydb.commit()
     # response = cursor.fetchall();
 
@@ -300,14 +309,14 @@ def changename():
     newName = data['Data'][1]
 
     mydb = mysql.connector.connect(
-        host="sql11.freemysqlhosting.net",
-        user="sql11507637",
+        host="database-1.ctw2tablscgc.us-east-1.rds.amazonaws.com",
+        user="aipicapstone",
         password=getpass()
     )
 
     cursor = mydb.cursor(buffered=True)
 
-    cursor.execute("UPDATE sql11507637.ETFS SET ETFName = " + "'" +  newName + "'" + " WHERE(ETFID = " + '"' + str(etfID) + '"' + ");")
+    cursor.execute("UPDATE aipicapstone.ETFS SET ETFName = " + "'" +  newName + "'" + " WHERE(ETFID = " + '"' + str(etfID) + '"' + ");")
     mydb.commit()
     # response = cursor.fetchall();
 
@@ -324,14 +333,14 @@ def changeamount():
     newAmount = data['Data'][1]
 
     mydb = mysql.connector.connect(
-        host="sql11.freemysqlhosting.net",
-        user="sql11507637",
+        host="database-1.ctw2tablscgc.us-east-1.rds.amazonaws.com",
+        user="aipicapstone",
         password=getpass()
     )
 
     cursor = mydb.cursor(buffered=True)
 
-    cursor.execute("UPDATE sql11507637.ETFS SET Amount = " + "'" +  str(newAmount) + "'" + " WHERE(ETFID = " + '"' + str(etfID) + '"' + ");")
+    cursor.execute("UPDATE aipicapstone.ETFS SET Amount = " + "'" +  str(newAmount) + "'" + " WHERE(ETFID = " + '"' + str(etfID) + '"' + ");")
     mydb.commit()
     # response = cursor.fetchall();
 
@@ -347,14 +356,14 @@ def clearrules():
     etfID = data['Data'][0]
 
     mydb = mysql.connector.connect(
-        host="sql11.freemysqlhosting.net",
-        user="sql11507637",
+        host="database-1.ctw2tablscgc.us-east-1.rds.amazonaws.com",
+        user="aipicapstone",
         password=getpass()
     )
 
     cursor = mydb.cursor(buffered=True)
 
-    cursor.execute("UPDATE sql11507637.ETFS SET Rules = " + "'" + "'" + " WHERE(ETFID = " + '"' + str(etfID) + '"' + ");")
+    cursor.execute("UPDATE aipicapstone.ETFS SET Rules = " + "'" + "'" + " WHERE(ETFID = " + '"' + str(etfID) + '"' + ");")
     mydb.commit()
     # response = cursor.fetchall();
 
@@ -370,14 +379,14 @@ def deleteetf():
     etfID = data['Data'][0]
 
     mydb = mysql.connector.connect(
-        host="sql11.freemysqlhosting.net",
-        user="sql11507637",
+        host="database-1.ctw2tablscgc.us-east-1.rds.amazonaws.com",
+        user="aipicapstone",
         password=getpass()
     )
 
     cursor = mydb.cursor(buffered=True)
 
-    cursor.execute("DELETE FROM sql11507637.ETFS WHERE (ETFID = '" + str(etfID) + "');")
+    cursor.execute("DELETE FROM aipicapstone.ETFS WHERE (ETFID = '" + str(etfID) + "');")
     mydb.commit()
     # response = cursor.fetchall();
 
