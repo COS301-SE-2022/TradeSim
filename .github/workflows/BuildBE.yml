@@ -39,4 +39,6 @@ jobs:
           
       - name: run Unit and Integration testing
         run:
-            python -m AutomatedTesting
+            pip install pytest
+            pip install pytest-cov
+            pytest main.py
