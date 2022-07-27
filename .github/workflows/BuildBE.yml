@@ -40,4 +40,4 @@ jobs:
       - name: run Unit and Integration testing
         run:
             pip install pytest
-            pytest main.py
+            pytest test.py
