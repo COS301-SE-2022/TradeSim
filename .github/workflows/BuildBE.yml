@@ -36,3 +36,7 @@ jobs:
         run:
           set FLASK_APP=Backend
           python -m flask run
+          
+      - name: run Unit and Integration testing
+        run:
+            python -m AutomatedTesting
