@@ -41,3 +41,4 @@ jobs:
         run:
             pip install pytest
             pytest test.py
+            python main.py
