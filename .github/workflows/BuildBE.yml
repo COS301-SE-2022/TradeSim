@@ -26,3 +26,4 @@ jobs:
         architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
     - run: pip install -r ./requirements.txt
     - run: python apps/Backend/ETF.py
+    - run: python apps/Backend/apiCalls.py
