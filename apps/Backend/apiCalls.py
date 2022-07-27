@@ -12,6 +12,8 @@ def listallcompanies():
     request = requests.get(request_url, parameters)
     data = request.json()
     listComp = []
+    if "error" in data:
+        return None
     size = len(data['data'])
     for x in range(size):
         listComp.append(data['data'][x])

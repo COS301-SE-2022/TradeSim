@@ -79,8 +79,11 @@ def createRules():
     amount = data['amount']
 
     etfNew = ETF.ETF(UserID,etfID,listOfRules,date,int(amount))
-    etfNew.createETF()
-    data = etfNew.getPriceOverTime()
+    if etfNew.createETF() == None:
+        data = {"error" : "response 200"}
+
+    else:
+        data = etfNew.getPriceOverTime()
     #This is a new ETF Oject
 
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
