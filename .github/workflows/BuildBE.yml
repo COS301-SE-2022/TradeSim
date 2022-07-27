@@ -40,5 +40,4 @@ jobs:
       - name: run Unit and Integration testing
         run:
             pip install pytest
-            pip install pytest-cov
-            python main.py
+            pytest main.py
