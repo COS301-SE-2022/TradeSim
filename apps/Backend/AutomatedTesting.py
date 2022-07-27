@@ -1,7 +1,7 @@
 import requests
+import ETF
 
 def testAutomated():
-    url = 'http://127.0.0.1:6969/createRules'
     CreateRules = {
         "UserID": 1,
         "ETFid": 11,
@@ -16,10 +16,18 @@ def testAutomated():
         "amount": 1000000
     }
 
-    print("Sending request")
-    x = requests.post(url, json=CreateRules)
 
-    print(x.text)
+
+    data = CreateRules
+    UserID = data['UserID']
+    etfID = data['ETFid']
+    listOfRules = data['Rules']
+    date = data['date']
+    amount = data['amount']
+
+    etfNew = ETF.ETF(UserID, etfID, listOfRules, date, int(amount))
+    if etfNew.createETF() == None:
+        data = {"error": "response 200"}
 
 
 if __name__ == "__main__":
