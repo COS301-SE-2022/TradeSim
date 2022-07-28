@@ -115,6 +115,7 @@ https://youtu.be/93PcgcoHgbU
 https://drive.google.com/file/d/1EASvBRaTXEXfRLsbcI6tsiiK8YLsFm_e/view?usp=sharing
 
 <h3>Demo 3 video</h3>
+https://drive.google.com/file/d/1DFqvln2hRjkHIWyFr79-aT3l1FamqXQr/view?usp=sharing
 
 <a href="https://github.com/COS301-SE-2022/TradeSim/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/COS301-SE-2022/TradeSim"></a>
 
