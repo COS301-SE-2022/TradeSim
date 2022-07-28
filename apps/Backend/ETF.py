@@ -31,6 +31,8 @@ class ETF:
         self.prioritizeRules()
 
         self.listOfAllStocks = apiCalls.listallcompanies()
+        if self.listOfAllStocks == None:
+            return None
 
 
         for x in self.rules:
@@ -61,11 +63,11 @@ class ETF:
         random.seed(6)
         endPos = len(self.listOfAllStocks) - 1
         listOfPos = []
-        if endPos <= 19:
+        if endPos <= 29:
             for i in range(endPos + 1):
                 listOfPos.append(i)
         else:
-            listOfPos = random.sample(range(0, endPos), 20)
+            listOfPos = random.sample(range(0, endPos), 30)
         stocksOnlyOneFinal = []
         for pos in listOfPos:
             stocksOnlyOneFinal.append(self.listOfAllStocks[pos])
@@ -222,7 +224,7 @@ class ETF:
         random.seed(6)
         endPos = len(stocksInBoth) - 1
         listOfPos = []
-        if endPos <= 10:
+        if endPos <= 19:
             for i in range(endPos + 1):
                 listOfPos.append(i)
         else:
@@ -243,7 +245,7 @@ class ETF:
         random.seed(6)
         endPos = len(stocksInBoth) - 1
         listOfPos = []
-        if endPos <= 10:
+        if endPos <= 19:
             for i in range(endPos + 1):
                 listOfPos.append(i)
         else:
@@ -529,7 +531,7 @@ class ETF:
         if self.now == True:
             #We then need to get history of the stocks from 10 years ago
             start = self.date
-            endday = self.date = datetime.strftime(datetime.now(), '%Y-%m-%d')
+            endday = datetime.strftime(datetime.now(), '%Y-%m-%d')
             listOfStocks = []
             for stock in self.stocksWithAmountOFShares:
                 listOfStocks.append(stock)
@@ -551,7 +553,7 @@ class ETF:
 
         else:
             start = self.date
-            endday = self.date = datetime.strftime(datetime.now(),'%Y-%m-%d')
+            endday = datetime.strftime(datetime.now(),'%Y-%m-%d')
             listOfStocks = []
             for stock in self.stocksWithAmountOFShares:
                 listOfStocks.append(stock)
