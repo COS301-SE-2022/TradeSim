@@ -33,10 +33,6 @@ Rachel Hamilton - u20453478
 
 <h3> SRS document link: </h3>
 
-Demo 3:
-[SRS_AiPi-3.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9214147/SRS_AiPi-3.pdf)
-
-
 Demo 2:
 [SRS_AiPi-2.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8863733/SRS_AiPi-2.pdf)
 
@@ -48,6 +44,8 @@ Demo 1:
 <h3> Wiki Project Board Link: </h3>
 
 https://github.com/COS301-SE-2022/TradeSim/wiki/TradeSim
+
+![scrumboard demo 3](https://user-images.githubusercontent.com/92848541/181635724-da7c5d73-b0e9-424d-8539-655ae58b83a8.JPG)
 
 -----------------------------------------------------
 
