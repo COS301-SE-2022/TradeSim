@@ -32,10 +32,9 @@ Rachel Hamilton - u20453478
 -----------------------------------------------------
 
 <h3> SRS document link: </h3>
-Demo 2:
 
+Demo 2:
 [SRS_AiPi-2.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8863733/SRS_AiPi-2.pdf)
-=======
 
 Demo 1:
 [SRS_AiPi.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8877618/SRS_AiPi.pdf)
@@ -48,9 +47,9 @@ https://github.com/COS301-SE-2022/TradeSim/wiki/TradeSim
 
 -----------------------------------------------------
 
-<h3> JSON formatting Link: </h3>
+<h3> Coding Conventions: </h3>
 
-[JSON_Format.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8859556/JSON_Format.pdf)
+[CodingConventions.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9212979/CodingConventions.pdf)
 
 -----------------------------------------------------
 
