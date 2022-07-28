@@ -11,7 +11,7 @@ function addRule() {
     {
         counter++;
         rule.innerHTML = '<div class="amount-input-row">' +
-            '<div class="card2" id="etfbody" style="width:1125px ; position: relative; bottom: 110px; right: 12px">' +
+            '<div class="card2" id="etfbody" style="width:108% ; position: relative; bottom: 110px; right: 12px">' +
             '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Rule:</b></label>' +
             '<div class="custom-select" style="display: inline-block; position: relative; top:5px; left:25px;">' +
             '<input id="input1" type="text" placeholder="ticker name of company" style=" width:250px; height:25px; font-size: 12px; ">' +
@@ -632,7 +632,7 @@ function confirm()
 
     document.getElementById("etfeditor").innerHTML =
         "<div class=\"amount-input-row\">\n" +
-            '<div class="card2" id="etfbody" style="width:1125px ; position: relative; bottom: 70px; right: 12px">' +
+            '<div class="card2" id="etfbody" style="width:108% ; position: relative; bottom: 70px; right: 12px">' +
                 '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>EDIT NAME:</b></label>' +
                 '<div class="custom-select" style="display: inline-block; position: relative; top:5px; left:25px;">' +
                     '<input id="inputname" type="text" placeholder="Name" style=" width:100px; height:25px; font-size: 12px; ">' +
@@ -650,7 +650,7 @@ function confirm()
 
     document.getElementById("ruleadder").innerHTML =
         "<div class=\"amount-input-row\">\n" +
-        "                <div class=\"card2\" id=\"etfbody\" style=\"width:1125px ; position: relative; bottom: 95px; right: 12px\">\n" +
+        "                <div class=\"card2\" id=\"etfbody\" style=\"width:108% ; position: relative; bottom: 95px; right: 12px\">\n" +
         "                    <label for=\"etf\" style=\" color: white; position: relative; top: 8px; left: 10px;\" id=\"label2\"><b>Select rule: </b></label>\n" +
         "                    <div class=\"custom-select\" style=\"width:200px; display: inline-block; position: relative; left: 12px; top: 8px;\">\n" +
         "\n" +
@@ -2075,7 +2075,6 @@ function getRules()
      });
 }
 
-
 async function ConfirmRule(rulecode)
 {
 
@@ -2866,4 +2865,3 @@ function deleteETF()
 
      });
 }
-
