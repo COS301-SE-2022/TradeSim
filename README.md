@@ -70,10 +70,10 @@ https://github.com/COS301-SE-2022/TradeSim/wiki/TradeSim
 -----------------------------------------------------
 
 <h3>Technology Requirements</h3>
-Backend - Python
-Frontend - HTML, CSS, JavaScript, Python
-Wireframes - Figma
-Database - AWS 
+<p>Backend - Python</p>
+<p>Frontend - HTML, CSS, JavaScript, Python </p>
+<p>Wireframes - Figma </p>
+<p>Database - AWS </p>
 
 -----------------------------------------------------
 
