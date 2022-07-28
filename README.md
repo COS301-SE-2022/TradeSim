@@ -69,6 +69,16 @@ https://github.com/COS301-SE-2022/TradeSim/wiki/TradeSim
 
 -----------------------------------------------------
 
+<h3>Technology Requirements</h3>
+Backend - Python
+Frontend - HTML, CSS, JavaScript, Python
+Wireframes - Figma
+Database - AWS 
+
+-----------------------------------------------------
+
+
+
 <h3> Short profile description of each team member. </h3>
 
 <b> Sean Nkosi: </b> <br>
