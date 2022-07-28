@@ -19,52 +19,70 @@
 <body>
 
 <script> getETFS()</script>
-{#        <div class="main-body">#}
+
+  <div class="main-div">
+            <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon"/>
+  	<label for="menu-icon"></label>
+  	<nav class="nav">
+  		<ul class="pt-5">
+  			<li><a href="/home">Home</a></li>
+  			<li><a href="/addETF">Create ETF</a></li>
+  			<li><a href="/compare-date">Compare ETF's</a></li>
+  			<li><a href="/addRule">Edit ETF</a></li>
+            <li><a href="/login">Logout</a></li>
+  		</ul>
+  	</nav>
+
+<div class="main-body">
             <div class="row">
                 <div class="create-header">
-                    <h1>Compare</h1>
+                    <h1 style = "position: relative; top: 39%; right: 52%">Compare</h1>
                 </div>
             </div>
 
-            <div class="card" id="etf-body" style=" display:inline-block; position: relative; bottom: 30px; width: 100%">
-                    <label for="etf"><b>Select Date: </b></label>
-                    <input  type="date" id="selectdate" name="date">
+            <div class="card" id="etf-body" style=" display:inline-block; position: relative; top: 20pt; right: 100pt; width: 130%">
+                    <label for="etf" style ="position: relative; bottom: 35pt; left:3%"><b>Select Date: </b></label>
+                    <input  type="date" id="selectdate" name="date" style = "position: relative; bottom: 35pt; left:4%">
                     <div class="create-button-div-add row" style=" display:inline-block">
-                    <label for="etf" style=" color: white; position: relative; top: 8px; left: 1%;" id="label2"><b>1st ETF </b></label>
-                    <div class="custom-select" style="width:70%; display: inline-block; position: relative; left: 3%; top: 8px;">
+                    <label for="etf" style=" color: white; position: relative; top: 30pt; left:20%;" id="label2"><b>1st ETF </b></label>
+                    <div class="custom-select" style="width:70%; display: inline-block; position: relative; top: 30pt; left:20%;">
                         <select id="etf1">
                           <option disabled selected hidden value="0" id="r0" >Select ETF 1:</option>
                         </select>
                     </div>
-                    <label for="etf" style=" color: white; position: relative; top: 8px; left: 1%;" id="label2"><b>2nd ETF </b></label>
-                    <div class="custom-select" style="width:70%; display: inline-block; position: relative; left: 3%; top: 8px;">
+                    <label for="etf" style=" color: white; position: relative; bottom: 7pt; left:55%" id="label2"><b>2nd ETF </b></label>
+                    <div class="custom-select" style="width:70%; display: inline-block; position: relative; bottom: 7pt; left:55%;">
                         <select id="etf2">
                           <option disabled selected hidden value="0" id="r0" >Select ETF 1:</option>
                         </select>
                     </div>
-                    <button onclick="changedate()" class="create-btn" style=" width: 130%; display:inline-block; position: relative; left: 28%;">Compare</button>
+                    <button onclick="changedate()" class="create-btn" style=" width: 35%; display:inline-block; position: relative; left: 120%; bottom:27pt;">Compare</button>
                     </div>
             </div>
 
-            <table style="width:100%;" >
+    <table style="width:100%; "  >
                 <tr>
-                    <td style="width:50%">
-                        <div id="chart1" style="width:100%;max-width:200%; position: relative; bottom: 23%"></div>
+                    <td style="width:50%; position:relative; left:30pt">
+                        <div id="chart1" style="width:100%;max-width:200%; position: relative; top: 35pt"></div>
                     </td>
                     <td style="width:50%">
-                        <div id="chart2" style="width:100%;max-width:200%; position: relative; bottom: 23%"></div>
+                        <div id="chart2" style="width:100%;max-width:200%; position: relative; top: 35pt"></div>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <a id="notes1" ></a>
+                        <a id="notes1" style = "position: relative; top:30pt; color:#1f2029;"></a>
                     </td>
                     <td>
-                        <a id="notes2" ></a>
+                        <a id="notes2" style ="position: relative; top:30pt; color:#1f2029;" ></a>
                     </td>
                 </tr>
-            </table>
+</table>
+
+
 
         </div>
-{#    </div>#}
+    </div>
+
+
 </body>
