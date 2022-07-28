@@ -53,6 +53,22 @@ https://github.com/COS301-SE-2022/TradeSim/wiki/TradeSim
 
 -----------------------------------------------------
 
+
+<h3> Technical installation manual: </h3>
+
+[technical installation manual.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9213420/technical.installation.manual.pdf)
+
+
+-----------------------------------------------------
+
+
+<h3> User Manual: </h3>
+
+[User Manual AiPi.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9213423/User.Manual.AiPi.pdf)
+
+
+-----------------------------------------------------
+
 <h3> Short profile description of each team member. </h3>
 
 <b> Sean Nkosi: </b> <br>
