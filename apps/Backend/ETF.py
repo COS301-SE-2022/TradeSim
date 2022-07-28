@@ -5,8 +5,8 @@ from datetime import datetime,timedelta
 class ETF:
 
 
-    def __init__(self,UserID, etfID, rules, date, amount):
-        self.UserID = UserID
+    def __init__(self,userID, etfID, rules, date, amount):
+        self.userID = userID
         self.etfID = etfID
         self.rules = rules
         self.amount = amount
@@ -57,8 +57,8 @@ class ETF:
             arrayS = [indevidualStock]
             self.calculateAmountoFstocks(arrayS,percent)
 
-        HowMuchMoneyLeft = self.totalInvested/self.amount
-        PercentToAdd = (1-HowMuchMoneyLeft)*100
+        howMuchMoneyLeft = self.totalInvested/self.amount
+        percentToAdd = (1-howMuchMoneyLeft)*100
 
         random.seed(6)
         endPos = len(self.listOfAllStocks) - 1
@@ -72,7 +72,7 @@ class ETF:
         for pos in listOfPos:
             stocksOnlyOneFinal.append(self.listOfAllStocks[pos])
 
-        self.calculateAmountoFstocks(stocksOnlyOneFinal,PercentToAdd)
+        self.calculateAmountoFstocks(stocksOnlyOneFinal,percentToAdd)
 
         temp = {}
         for y in self.stocksWithAmountOFShares:
@@ -80,19 +80,6 @@ class ETF:
                 temp[y] = self.stocksWithAmountOFShares[y]
 
         self.stocksWithAmountOFShares = temp
-
-        print(self.etfID)
-        print("=====================")
-        print(self.totalInvested)
-        print(self.stocksWithAmountOFShares)
-        #self.cleanUpStocks()
-        #print(self.stocksWithAmountOFShares)
-        #print(self.totalInvested)
-
-        #=====================================================
-
-
-        #=====================================================
 
         return self.stocksWithAmountOFShares
 
@@ -119,7 +106,7 @@ class ETF:
                     self.stocksConfirmedIn[ticker] = percent
             else:
                 print("Stock Doesn't Exist")
-                # So we will need to return some way of saying that this stock doesnt exist
+                # So we will need to return some way of saying that this stock doesnt exist this will be a error code
 
     def code011_012_013(self,rule):
         finalStocks = []
@@ -190,7 +177,7 @@ class ETF:
         strDate = self.date.split('-')
         indivdual = percentage / amountOfCompanies
         year = strDate[0]
-        stockInformation = apiCalls.CompaniesRevenue(year)
+        stockInformation = apiCalls.companiesRevenue(year)
         count = 0
         for stock in stockInformation:
             if count == amountOfCompanies:
@@ -206,7 +193,7 @@ class ETF:
 
 
     def code001_002(self, idValue):
-        stocksToReject = apiCalls.CompaniesByIndustry(idValue)
+        stocksToReject = apiCalls.companiesByIndustry(idValue)
         tempStocks = self.listOfAllStocks.copy()
         for x in stocksToReject:
             if x in tempStocks:
@@ -215,7 +202,7 @@ class ETF:
         self.listOfAllStocks = tempStocks
 
     def code102_103(self,idValue, percentage):
-        stocksInSector = apiCalls.CompaniesByIndustry(idValue)
+        stocksInSector = apiCalls.companiesByIndustry(idValue)
         stocksInBoth = []
         for x in stocksInSector:
             if x in self.listOfAllStocks:
@@ -295,7 +282,7 @@ class ETF:
             if testTime == totalInvested:
                 canAddMore = False #The totalInvested Hasn't Changed at all so we can't add more stocks so need to fix that
         self.totalInvested = self.totalInvested + totalInvested
-        # print(totalInvested)
+
 
         for p in stockAndAmount:
             if p in self.stocksWithAmountOFShares:
@@ -318,8 +305,7 @@ class ETF:
                 listOfValueStocks.append(x)
             else:
                 if "old" in x:
-                    #Do nothing
-                    print("contains")
+                    stocksOnlyOne = stocksOnlyOne
                 else:
                     stocksOnlyOne.append(x)
 
@@ -501,8 +487,7 @@ class ETF:
 
     def code200_201_202(self):
         if len(self.c200) == 0:
-            print("No rechecking of stocks")
-            #We do nothing because all the stocks have been checked
+            return None
         else:
             for rule in self.c200:
                 if rule == "202":
@@ -521,7 +506,7 @@ class ETF:
                             d = datetime.strftime(startingDate + timedelta(timePeriod), '%Y-%m-%d')
                             listOfDates.append(d)
                             startingDate = datetime.strptime(d,'%Y-%m-%d')
-                    print(listOfDates)
+                    print(listOfDates) #This print is here for testing purposes for demo 4
 
 
 
@@ -548,7 +533,7 @@ class ETF:
                     if d in etfValueByday:
                         price = data[d] * self.stocksWithAmountOFShares[x]
                         etfValueByday[d] = etfValueByday[d] + price
-            print(etfValueByday)
+
             # We need to get the prices of the stocks from now up until today
 
         else:
@@ -571,10 +556,10 @@ class ETF:
                     if d in etfValueByday:
                         price = data[d]*self.stocksWithAmountOFShares[x]
                         etfValueByday[d] = etfValueByday[d]+price
-            print(etfValueByday)
+
             #We need to get the prices of the stocks from now up until today
 
-        toReturn["UserID"] = self.UserID
+        toReturn["UserID"] = self.userID
         toReturn["ETFid"] = self.etfID
         toReturn["CashOverFlow"] = self.amount - self.totalInvested
         toReturn["Stocks"] = self.stocksWithAmountOFShares

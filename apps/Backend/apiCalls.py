@@ -18,8 +18,7 @@ def listallcompanies():
     for x in range(size):
         listComp.append(data['data'][x])
 
-    # print(data['columns'])
-    # for x in range(size):
+
     onlyTicker = []
     for x in listComp:
         onlyTicker.append(x[1])
@@ -92,11 +91,11 @@ def getShareMarketEarn(t,date):
 
                 parameters = [sharePrice,marketCap,earningBefore]
                 allStocksDetails[nameOFstock] = parameters
-    print("Retrieved Share Price, Market Cap and Earnings Before Interest, Taxes, Depreciation, and Amortization")
+
 
     return allStocksDetails
 
-def CompaniesByIndustry(value):
+def companiesByIndustry(value):
     #This function will return the symbols of the comapnies in a industry or Sector
     request_url = 'https://simfin.com/api/v2/finder?api-key=' + api_key
     meta = {"id": 7, "value": 2022, "operator": "eq"}
@@ -198,7 +197,7 @@ def companiesByExchange(country):
 
     return listOFComanies
 
-def CompaniesRevenue(year):
+def companiesRevenue(year):
     #This function will return the symbols of the comapnies in a industry or Sector
     request_url = 'https://simfin.com/api/v2/finder?api-key=' + api_key
     meta = {"id": 7, "value": year, "operator": "eq"}
@@ -264,7 +263,7 @@ def getSharePriceHistory(t,date,endDate):
                     closingPrice = d[6]
                     dateAndPrice[dateGiven] = closingPrice
                 allStocksDetails[ticker] = dateAndPrice
-        print("Hello")
+
 
 
 
