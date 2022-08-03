@@ -227,9 +227,9 @@ body{
   transform: translateY(-50%);
 }
 h1{
-  /*font-family: 'Montserrat', sans-serif;*/
-   font-family:  Rockwell, "Courier Bold";
-    position: relative;
+  font-family: 'Montserrat', sans-serif;
+  /* font-family:  Rockwell, "Courier Bold";*/
+  /*  position: relative;*/
     left: 180%;
     top:20%;
     /*text-align: center;*/
@@ -244,7 +244,7 @@ h1{
   /*  webkit-text-fill-color:#404255;*/
   text-fill-color: transparent;
 
-  color: #1f2029;
+  /*color: #1f2029;*/
     width:400pt;
 }
 
