@@ -32,10 +32,12 @@ Rachel Hamilton - u20453478
 -----------------------------------------------------
 
 <h3> SRS document link: </h3>
-Demo 2:
 
+Demo 3:
+[SRS_AiPi-3.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9214147/SRS_AiPi-3.pdf)
+
+Demo 2:
 [SRS_AiPi-2.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8863733/SRS_AiPi-2.pdf)
-=======
 
 Demo 1:
 [SRS_AiPi.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8877618/SRS_AiPi.pdf)
@@ -46,13 +48,41 @@ Demo 1:
 
 https://github.com/COS301-SE-2022/TradeSim/wiki/TradeSim
 
------------------------------------------------------
-
-<h3> JSON formatting Link: </h3>
-
-[JSON_Format.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8859556/JSON_Format.pdf)
+![scrumboard demo 3](https://user-images.githubusercontent.com/92848541/181635724-da7c5d73-b0e9-424d-8539-655ae58b83a8.JPG)
 
 -----------------------------------------------------
+
+<h3> Coding Conventions: </h3>
+
+[CodingConventions.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9212979/CodingConventions.pdf)
+
+-----------------------------------------------------
+
+
+<h3> Technical installation manual: </h3>
+
+[technical installation manual.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9213420/technical.installation.manual.pdf)
+
+
+-----------------------------------------------------
+
+
+<h3> User Manual: </h3>
+
+[User Manual AiPi.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9213423/User.Manual.AiPi.pdf)
+
+
+-----------------------------------------------------
+
+<h3>Technology Requirements</h3>
+<p>Backend - Python</p>
+<p>Frontend - HTML, CSS, JavaScript, Python </p>
+<p>Wireframes - Figma </p>
+<p>Database - AWS </p>
+
+-----------------------------------------------------
+
+
 
 <h3> Short profile description of each team member. </h3>
 
@@ -83,6 +113,9 @@ https://youtu.be/93PcgcoHgbU
 
 <h3>Demo 2 video</h3>
 https://drive.google.com/file/d/1EASvBRaTXEXfRLsbcI6tsiiK8YLsFm_e/view?usp=sharing
+
+<h3>Demo 3 video</h3>
+https://drive.google.com/file/d/1DFqvln2hRjkHIWyFr79-aT3l1FamqXQr/view?usp=sharing
 
 <a href="https://github.com/COS301-SE-2022/TradeSim/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/COS301-SE-2022/TradeSim"></a>
 

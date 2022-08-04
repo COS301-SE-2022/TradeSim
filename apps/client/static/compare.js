@@ -77,9 +77,9 @@ async function confirm(chartnum)
 
     if(date == '')
     {
-        date = "2021-01-01"
+        date = "2022-01-01"
     }
-    //document.getElementById("load" + chartnum).innerHTML = "LOADING... <br>"
+    //document.getElementById("notes" + chartnum).innerHTML = "LOADING... <br>"
     getGraph(info.ETFName, getUserID(), info.ETFID, info.Rules, info.Amount, date, chartnum)
 
 
@@ -90,7 +90,7 @@ async function confirm(chartnum)
 function getGraph(name, uID, etfid, rules, amount, date, chartnum)
 {
 
-    document.getElementById("load" + chartnum).innerHTML = name + " Loading<br>"
+    document.getElementById("notes" + chartnum).innerHTML = name + " Loading<br>"
 
     var xA = [];
     var yA = [];
@@ -172,9 +172,9 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum)
      }
 
 
-    document.getElementById("load" + chartnum).innerHTML = ""
+    // document.getElementById("notes" + chartnum).innerHTML = ""
      }).catch((error) => {
-         document.getElementById("load" + chartnum).innerHTML = name + " could not generate ETF<br>"
+         document.getElementById("notes" + chartnum).innerHTML = name + " could not generate ETF<br>"
       // alert( "ETF " + name + " does not generate any stocks!")
     });
 
