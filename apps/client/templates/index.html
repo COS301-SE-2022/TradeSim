@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+       <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='styles/materialize.css') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='styles/custom.css') }}"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="{{ url_for('static',filename='main.js') }}" defer></script>
+    </head>
+
+    <body>
+        <div class="container">
+            <nav class="nav-extended">
+                <div class="nav-wrapper">
+                  <a class="logo" href="https://epiuselabs.com" target="_blank"><img src="{{ url_for('static',filename='EPI-USELabs_Logo_White.png') }}" height="50"></a>
+                  <a href="#" class="brand-logo center">TradeSim</a>
+                  <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                  <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="login.html"><i class="material-icons">power_settings_new</i></a></li>
+                  </ul>
+                </div>
+                <div class="nav-content">
+                  <ul class="tabs tabs-transparent">
+                      <li class="tab"><a href="#homeTab">Home</a></li>
+                      <li class="tab"><a href="#manageTab">Manage</a></li>
+                      <li class="tab"><a href="#compareTab">Compare</a></li>
+                  </ul>
+                </div>
+            </nav>
+        
+        
+          <div id="homeTab" class="col s12"></div>
+          <div id="manageTab" class="col s12"></div>
+          <div id="compareTab" class="col s12"></div>
+        </div>
+    </body>
+  </html>
