@@ -43,15 +43,15 @@ async function fetchHtmlAsText(url) {
 async function loadTabsContent() {
     //home
     let contentDiv = document.getElementById('homeTab');
-    contentDiv.innerHTML = await fetchHtmlAsText('home.html');
+    contentDiv.innerHTML = await fetchHtmlAsText('home');
 
     //manage
     contentDiv = document.getElementById('manageTab');
-    contentDiv.innerHTML = await fetchHtmlAsText('manage.html');
+    contentDiv.innerHTML = await fetchHtmlAsText('addETF');
 
     //compare
     contentDiv = document.getElementById('compareTab');
-    contentDiv.innerHTML = await fetchHtmlAsText('compare.html');
+    contentDiv.innerHTML = await fetchHtmlAsText('compare-date');
 
     //Accordion setup
     var elem = document.querySelector('.collapsible.expandable');
