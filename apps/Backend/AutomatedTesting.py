@@ -1,5 +1,6 @@
 import requests
 import ETF
+import unitTesting
 
 def testAutomated():
     CreateRules = {
@@ -16,8 +17,6 @@ def testAutomated():
         "amount": 1000000
     }
 
-
-
     data = CreateRules
     UserID = data['UserID']
     etfID = data['ETFid']
@@ -28,6 +27,8 @@ def testAutomated():
     etfNew = ETF.ETF(UserID, etfID, listOfRules, date, int(amount))
     if etfNew.createETF() == None:
         data = {"error": "response 200"}
+
+    unitTesting.UnitTest.main()
 
 
 if __name__ == "__main__":

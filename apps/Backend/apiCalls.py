@@ -268,3 +268,49 @@ def getSharePriceHistory(t,date,endDate):
 
 
     return allStocksDetails
+
+def getCompanyInformation(t):
+
+    allStocksDetails = {}
+
+    js = {}
+
+
+    request_url = 'https://simfin.com/api/v2/companies/general'
+    parameters = {"ticker": t,"api-key": api_key}
+    request = requests.get(request_url, parameters)
+    all_data = request.json()
+
+
+    for response_index, data in enumerate(all_data):
+        # make sure that data was found
+        if data['found'] and len(data['data']) > 0:
+            finalData = data['data']
+            ticker = finalData[1]
+            companyName = finalData[2]
+            industryID = finalData[3]
+            summary = finalData[6]
+
+            js = {"Company Name" : companyName, "IndustryID" : industryID, "Summary" : summary}
+
+    return js
+
+def finhubInformation(t):
+    request_url = "https://finnhub.io/api/v1/stock/profile2?symbol=" + t + "&token="
+
+    api_request = requests.get(request_url + getFinHubApi())
+    response = api_request.json()
+
+    if "error" in response:
+        return None
+
+
+    country = response["country"]
+    exchange = response["exchange"]
+    ipo = response["ipo"]
+    logo = response["logo"]
+    website = response["weburl"]
+    js = {"Country" : country, "Exchange" : exchange, "IPO" : ipo, "Logo" : logo, "WebSite" : website}
+    return js
+
+
