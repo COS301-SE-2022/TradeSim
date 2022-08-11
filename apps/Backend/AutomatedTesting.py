@@ -28,7 +28,6 @@ def testAutomated():
     if etfNew.createETF() == None:
         data = {"error": "response 200"}
 
-    unitTesting.UnitTest.main()
 
 
 if __name__ == "__main__":
