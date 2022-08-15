@@ -20,6 +20,9 @@ def register():
 def home():
     return render_template("home.html")
 
+@app.route("/index")
+def basepage():
+    return render_template("index.html")
 @app.route("/addETF")
 def add():
     return render_template("addETF.html")
