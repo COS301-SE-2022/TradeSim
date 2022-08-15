@@ -27,7 +27,7 @@
     <div class="card horizontal">
       <div class="card-stacked">
         <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4"><i class="material-icons">info</i> Compare </span>
+            <span class="card-title activator grey-text text-darken-4"><i class="material-icons left">info</i> Compare </span>
         </div>
         <div class="card-action">
           <div id="etf-body" style=" display:inline-block; position: relative; top: 25pt; right: 25pt; width: 100%">
@@ -35,18 +35,19 @@
                     <input  type="date" id="selectdate" name="date" style = "position: relative; bottom: 35pt; left:4%">
                     <div class="create-button-div-add row" style=" display:inline-block">
                     <label for="etf" style=" color: white; position: relative; top: 30pt; left:20%;" id="label2"><b>1st ETF </b></label>
-                    <div class="custom-select" style="width:70%; display: inline-block; position: relative; top: 30pt; left:20%;">
+                    <div class="custom-select" style="width:50%; display: inline-block; position: relative; top: 30pt; left:5%;">
                         <select id="etf1">
                           <option disabled selected hidden value="0" id="r0" >Select ETF 1:</option>
                         </select>
                     </div>
                     <label for="etf" style=" color: white; position: relative; bottom: 7pt; left:55%" id="label2"><b>2nd ETF </b></label>
-                    <div class="custom-select" style="width:70%; display: inline-block; position: relative; bottom: 7pt; left:55%;">
+                    <div class="custom-select" style="width:50%; display: inline-block; position: relative; bottom: 27pt; left:65%;">
                         <select id="etf2">
-                          <option disabled selected hidden value="0" id="r0" >Select ETF 1:</option>
+                          <option disabled selected hidden value="0" id="r0" >Select ETF 2:</option>
                         </select>
                     </div>
-                    <button onclick="changedate()" class="create-btn" style=" width: 35%; display:inline-block; position: relative; left: 100%; bottom:27pt;">Compare</button>
+                        <br/>
+                    <button onclick="changedate()" class="create-btn" style="width: 35%; display:inline-block; position: relative; left: 7%">Compare</button>
                     </div>
             </div>
         </div>
