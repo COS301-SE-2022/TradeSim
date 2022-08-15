@@ -31,7 +31,7 @@ function validateform() {
          {
              document.cookie = "UserIDAI= " + jd.id;
              document.getElementById("response").innerHTML = '';
-             window.location.href = "/home"
+             window.location.href = "/index"
          }
 
 

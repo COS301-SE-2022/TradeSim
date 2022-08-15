@@ -21,26 +21,16 @@
 <script> getETFS()</script>
 
   <div class="main-div">
-            <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon"/>
-  	<label for="menu-icon"></label>
-  	<nav class="nav">
-  		<ul class="pt-5">
-  			<li><a href="/home">Home</a></li>
-  			<li><a href="/addETF">Create ETF</a></li>
-  			<li><a href="/compare-date">Compare ETF's</a></li>
-  			<li><a href="/addRule">Edit ETF</a></li>
-            <li><a href="/login">Logout</a></li>
-  		</ul>
-  	</nav>
-
 <div class="main-body">
-            <div class="row">
-                <div class="create-header">
-                    <h1 style = "position: relative; top: 39%; right: 52%">Compare</h1>
-                </div>
-            </div>
-
-            <div class="card" id="etf-body" style=" display:inline-block; position: relative; top: 20pt; right: 100pt; width: 130%">
+    <div class="col s12 m7">
+{#    <h2 class="header">Compare</h2>#}
+    <div class="card horizontal">
+      <div class="card-stacked">
+        <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4"><i class="material-icons">info</i> Compare </span>
+        </div>
+        <div class="card-action">
+          <div id="etf-body" style=" display:inline-block; position: relative; top: 25pt; right: 25pt; width: 100%">
                     <label for="etf" style ="position: relative; bottom: 35pt; left:3%"><b>Select Date: </b></label>
                     <input  type="date" id="selectdate" name="date" style = "position: relative; bottom: 35pt; left:4%">
                     <div class="create-button-div-add row" style=" display:inline-block">
@@ -59,6 +49,17 @@
                     <button onclick="changedate()" class="create-btn" style=" width: 35%; display:inline-block; position: relative; left: 100%; bottom:27pt;">Compare</button>
                     </div>
             </div>
+        </div>
+      </div>
+    </div>
+  </div>
+            <div class="row">
+{#                <div class="create-header">#}
+{#                    <h1 style = "position: relative; top: 39%; right: 52%">Compare</h1>#}
+{#                </div>#}
+            </div>
+
+
 
     <table style="width:100%; "  >
                 <tr>
