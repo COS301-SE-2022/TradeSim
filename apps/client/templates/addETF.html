@@ -64,21 +64,36 @@
                          <input id="last_name" type="text" class="validate">
                            {#<i class="material-icons left">attach_money</i> #}<label for="last_name">Amount ($)</label>
                         </div>
+
+                            <a class="waves-effect waves-light btn blue right"> Save </a>
+                            <a class="waves-effect waves-light btn blue right me-2"> Cancel </a>
+
                         </div>
 
                           <div class="card-content">
                           <span class="card-title activator grey-text text-darken-4"><i class="material-icons left">add</i> Add Rule </span>
                         </div>
-
-                         <div class="card-action">
-                          <div class="input-field col s6">
-                          {# <i class="material-icons left">show_chart</i> #}<input id="first_name" type="text" class="validate">
-                          <label for="first_name">ETF Name</label>
+                          <div class="card-action">
+                              <select>
+                              <option value="" disabled selected>Choose your option</option>
+                              <option value="1">Option 1</option>
+                              <option value="2">Option 2</option>
+                              <option value="3">Option 3</option>
+                            </select>
+                            <label>Select a rule</label>
+                           <div class="input-field col s6">
+                          <input id="first_name" type="text" class="validate">
+                          <label for="first_name">Min ($)</label>
                         </div>
                         <div class="input-field col s6">
                          <input id="last_name" type="text" class="validate">
-                           {#<i class="material-icons left">attach_money</i> #}<label for="last_name">Amount ($)</label>
+                         <label for="last_name">Max ($)</label>
                         </div>
+                              <a class="waves-effect waves-light btn blue right"> Add </a>
+                          </div>
+                          <div class="card-content">
+                          <span class="card-title activator grey-text text-darken-4"><i class="material-icons left">menu</i> All Rules </span>
+                          <p>list all rules here</p>
                         </div>
                       </div>
                     </div>
