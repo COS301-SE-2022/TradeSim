@@ -104,6 +104,18 @@ def tickerInfo():
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
     return dataJsonify
 
+@app.route("/news", methods=["POST"])
+def news():
+    data = request.get_json()
+    category = data['category']
+    #Different categories = general, forex, crypto, merger
+
+    data = info.newsInformation(category)
+
+
+
+    dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
+    return dataJsonify
 
 @app.route("/login", methods=["POST"])
 def login():

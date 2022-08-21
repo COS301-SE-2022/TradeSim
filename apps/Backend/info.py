@@ -47,3 +47,14 @@ def stockInformation(ticker):
 
     print(finalJson)
     return finalJson
+
+def newsInformation(category):
+    if category == "":
+        category = "general"
+    data = apiCalls.getNews(category)
+    for x in data:
+        date = x['date']
+        stringDate = datetime.utcfromtimestamp(int(date)).strftime('%Y-%m-%d')
+        x['date'] = stringDate
+
+    return data
