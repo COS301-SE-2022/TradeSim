@@ -4,7 +4,6 @@ import apiCalls
 from datetime import datetime,timedelta
 class ETF:
 
-
     def __init__(self,userID, etfID, rules, date, amount):
         self.userID = userID
         self.etfID = etfID
@@ -486,6 +485,7 @@ class ETF:
         self.rules = newRuleList
 
     def code200_201_202(self):
+        toReturn = []
         if len(self.c200) == 0:
             return None
         else:
@@ -496,69 +496,78 @@ class ETF:
                     timePeriod = self.c200[rule]*7
                     startingDate = datetime.strptime(self.date,'%Y-%m-%d')
                     dateNow = datetime.now()
-                    listOfDates.append(self.date)
+
                     while reachedDate == False:
-                        if startingDate> dateNow:
+                        if startingDate > dateNow:
                             reachedDate = True
                             d = datetime.strftime(datetime.now(), '%Y-%m-%d')
                             listOfDates.append(d)
                         else:
+                            temp = datetime.strftime(startingDate,'%Y-%m-%d')
+                            listOfDates.append(temp)
                             d = datetime.strftime(startingDate + timedelta(timePeriod), '%Y-%m-%d')
-                            listOfDates.append(d)
                             startingDate = datetime.strptime(d,'%Y-%m-%d')
-                    print(listOfDates) #This print is here for testing purposes for demo 4
+                    length = len(listOfDates)
+                    newListOfDates = []
+                    for i in range(length):
+                        if i==(length-1):
+                            break
+                        else:
+                            start = listOfDates[i]
+                            end = listOfDates[i+1]
+                            temp = [start,end]
+                            newListOfDates.append(temp)
+                    tempAmount = self.amount
+                    rulesWithOutBalancing = []
+                    for rule in self.rules:
+                        code = rule[0]
+                        if code != "200" and code != "201" and code != "202":
+                            rulesWithOutBalancing.append(rule)
+                    print(newListOfDates)
+                    for dates in newListOfDates:
+                        start = dates[0]
+                        end = dates[1]
+                        tempEtf = ETF(self.userID,self.etfID,rulesWithOutBalancing,start,tempAmount)
+                        tempEtf.createETF()
+                        data = tempEtf.rebalancingValueForETF(start,end)
+                        cashOverflow = data['CashOverFlow']
+                        values = data['Values']
+                        stockValue = 0
+                        for x in values:
+                            stockValue = values[x]
+                        invested = cashOverflow + stockValue
+                        tempAmount = invested
+                        toReturn.append(data)
+                        print(data)
+            return toReturn
+                        #Issue I am coming accross from is now that when i create a new etf it will reabalncing forever and it is a continues fucntion
+                        #This print is here for testing purposes for demo 4
 
 
 
-    def getPriceOverTime(self):
+
+
+    def rebalancingValueForETF(self,startDate,endDate):
         etfValueByday = {}
         toReturn = {}
-        if self.now == True:
-            #We then need to get history of the stocks from 10 years ago
-            start = self.date
-            endday = datetime.strftime(datetime.now(), '%Y-%m-%d')
-            listOfStocks = []
-            for stock in self.stocksWithAmountOFShares:
-                listOfStocks.append(stock)
-            stockInfo = apiCalls.getSharePriceHistory(listOfStocks, start, endday)
-            for x in stockInfo:
-                data = stockInfo[x]
-                for d in data:
-                    etfValueByday[d] = 0
-                break
+        start = startDate
+        endday = endDate
+        listOfStocks = []
+        for stock in self.stocksWithAmountOFShares:
+            listOfStocks.append(stock)
+        stockInfo = apiCalls.getSharePriceHistory(listOfStocks, start, endday)
+        for x in stockInfo:
+            data = stockInfo[x]
+            for d in data:
+                etfValueByday[d] = 0
+            break
 
-            for x in stockInfo:
-                data = stockInfo[x]
-                for d in data:
-                    if d in etfValueByday:
-                        price = data[d] * self.stocksWithAmountOFShares[x]
-                        etfValueByday[d] = etfValueByday[d] + price
-
-            # We need to get the prices of the stocks from now up until today
-
-        else:
-            start = self.date
-            endday = datetime.strftime(datetime.now(),'%Y-%m-%d')
-            listOfStocks = []
-            for stock in self.stocksWithAmountOFShares:
-                listOfStocks.append(stock)
-            stockInfo = apiCalls.getSharePriceHistory(listOfStocks,start,endday)
-            for x in stockInfo:
-                data = stockInfo[x]
-                for d in data:
-                    etfValueByday[d] = 0
-                break
-
-
-            for x in stockInfo:
-                data = stockInfo[x]
-                for d in data:
-                    if d in etfValueByday:
-                        price = data[d]*self.stocksWithAmountOFShares[x]
-                        etfValueByday[d] = etfValueByday[d]+price
-
-            #We need to get the prices of the stocks from now up until today
-
+        for x in stockInfo:
+            data = stockInfo[x]
+            for d in data:
+                if d in etfValueByday:
+                    price = data[d] * self.stocksWithAmountOFShares[x]
+                    etfValueByday[d] = etfValueByday[d] + price
         toReturn["UserID"] = self.userID
         toReturn["ETFid"] = self.etfID
         toReturn["CashOverFlow"] = self.amount - self.totalInvested
@@ -566,3 +575,62 @@ class ETF:
         toReturn["Values"] = etfValueByday
 
         return toReturn
+
+
+    def getPriceOverTime(self):
+        etfValueByday = {}
+        toReturn = {}
+        if len(self.c200) == 0:
+            if self.now == True:
+                # We then need to get history of the stocks from 10 years ago
+                start = self.date
+                endday = datetime.strftime(datetime.now(), '%Y-%m-%d')
+                listOfStocks = []
+                for stock in self.stocksWithAmountOFShares:
+                    listOfStocks.append(stock)
+                stockInfo = apiCalls.getSharePriceHistory(listOfStocks, start, endday)
+                for x in stockInfo:
+                    data = stockInfo[x]
+                    for d in data:
+                        etfValueByday[d] = 0
+                    break
+
+                for x in stockInfo:
+                    data = stockInfo[x]
+                    for d in data:
+                        if d in etfValueByday:
+                            price = data[d] * self.stocksWithAmountOFShares[x]
+                            etfValueByday[d] = etfValueByday[d] + price
+
+                # We need to get the prices of the stocks from now up until today
+
+            else:
+                start = self.date
+                endday = datetime.strftime(datetime.now(), '%Y-%m-%d')
+                listOfStocks = []
+                for stock in self.stocksWithAmountOFShares:
+                    listOfStocks.append(stock)
+                stockInfo = apiCalls.getSharePriceHistory(listOfStocks, start, endday)
+                for x in stockInfo:
+                    data = stockInfo[x]
+                    for d in data:
+                        etfValueByday[d] = 0
+                    break
+
+                for x in stockInfo:
+                    data = stockInfo[x]
+                    for d in data:
+                        if d in etfValueByday:
+                            price = data[d] * self.stocksWithAmountOFShares[x]
+                            etfValueByday[d] = etfValueByday[d] + price
+
+                # We need to get the prices of the stocks from now up until today
+
+            toReturn["UserID"] = self.userID
+            toReturn["ETFid"] = self.etfID
+            toReturn["CashOverFlow"] = self.amount - self.totalInvested
+            toReturn["Stocks"] = self.stocksWithAmountOFShares
+            toReturn["Values"] = etfValueByday
+            return toReturn
+        else:
+            return self.code200_201_202()
