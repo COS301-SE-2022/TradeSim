@@ -5,6 +5,20 @@ import csv
 
 def stockInformation(ticker):
     simFinInfo = apiCalls.getCompanyInformation(ticker)
+    if simFinInfo == None:
+        allStocks = apiCalls.listallcompanies()
+        if len(ticker)<2:
+            return {"Found" : "False"}
+        beginOfTicker = ticker[:2]
+        arrayOfPossible = []
+        for stock in allStocks:
+            temp = stock[:2]
+            if beginOfTicker == temp:
+                print(stock)
+                arrayOfPossible.append(stock)
+        print(arrayOfPossible)
+        js = {"Found" : "False", "PossibleStock" : arrayOfPossible}
+        return js
     finhubInfo = apiCalls.finhubInformation(ticker)
     #Now we need to connect to that excel document to get the industry
     industryID = str(simFinInfo["IndustryID"])
@@ -33,7 +47,7 @@ def stockInformation(ticker):
 
     priceOverTime = stockPrice[ticker]
 
-    finalJson = {}
+    finalJson = {"Found" : "True"}
     finalJson["Ticker"] = ticker
     finalJson["Company Name"] = simFinInfo["Company Name"]
     finalJson["Country"] = finhubInfo["Country"]

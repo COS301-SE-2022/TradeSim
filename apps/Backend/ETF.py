@@ -453,10 +453,6 @@ class ETF:
             balancePeriodInWeeks = int(parameters[0])
             self.c200["200"] = balancePeriodInWeeks
             # balance period and/or balance threshold percentage
-        elif code == "201":
-            percentageDrop = int(parameters[0])
-            self.c200["201"] = percentageDrop
-            # percentage that a stock can drop before the ETF sells the stock automatically
         elif code == "202":
             reconsiderPeriodInWeeks = int(parameters[0])
             self.c200["202"] = reconsiderPeriodInWeeks
@@ -472,7 +468,7 @@ class ETF:
                 code = rule[0]
                 parameters = rule[1]
                 if countPrioritize == 0:
-                    if code == "000" or code == "101" or code == "001" or code == "002" or code == "003" or code == "104" or code == "106" or code == "200" or code == "201" or code == "202":
+                    if code == "000" or code == "101" or code == "001" or code == "002" or code == "003" or code == "104" or code == "106" or code == "200" or code == "202":
                         newRuleList.append(rule)
                 if countPrioritize == 1:
                     if code == "011" or code == "012" or code == "013":
@@ -484,7 +480,7 @@ class ETF:
 
         self.rules = newRuleList
 
-    def code200_201_202(self):
+    def code200_202(self):
         toReturn = {}
         collectionOfVlaues = {}
         collectionOfStocks = {}
@@ -493,7 +489,7 @@ class ETF:
             return None
         else:
             for rule in self.c200:
-                if rule == "202":
+                if rule == "200":
                     listOfDates = []
                     reachedDate = False
                     timePeriod = self.c200[rule]*7
@@ -527,7 +523,7 @@ class ETF:
                     rulesWithOutBalancing = []
                     for rule in self.rules:
                         code = rule[0]
-                        if code != "200" and code != "201" and code != "202":
+                        if code != "200" and code != "202":
                             rulesWithOutBalancing.append(rule)
 
                     for dates in newListOfDates:
@@ -648,4 +644,4 @@ class ETF:
             toReturn["Values"] = etfValueByday
             return toReturn
         else:
-            return self.code200_201_202()
+            return self.code200_202()

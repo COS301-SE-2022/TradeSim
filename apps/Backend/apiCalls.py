@@ -292,6 +292,8 @@ def getCompanyInformation(t):
             summary = finalData[6]
 
             js = {"Company Name" : companyName, "IndustryID" : industryID, "Summary" : summary}
+        else:
+            js = None
 
     return js
 
