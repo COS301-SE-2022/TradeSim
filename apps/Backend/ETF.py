@@ -485,7 +485,10 @@ class ETF:
         self.rules = newRuleList
 
     def code200_201_202(self):
-        toReturn = []
+        toReturn = {}
+        collectionOfVlaues = {}
+        collectionOfStocks = {}
+        cashOverflow = 0
         if len(self.c200) == 0:
             return None
         else:
@@ -515,6 +518,9 @@ class ETF:
                         else:
                             start = listOfDates[i]
                             end = listOfDates[i+1]
+                            tempDate = datetime.strptime(end, '%Y-%m-%d')
+                            if (end!=datetime.strftime(datetime.now(), '%Y-%m-%d')):
+                                end = datetime.strftime(tempDate - timedelta(1), '%Y-%m-%d')
                             temp = [start,end]
                             newListOfDates.append(temp)
                     tempAmount = self.amount
@@ -523,7 +529,7 @@ class ETF:
                         code = rule[0]
                         if code != "200" and code != "201" and code != "202":
                             rulesWithOutBalancing.append(rule)
-                    print(newListOfDates)
+
                     for dates in newListOfDates:
                         start = dates[0]
                         end = dates[1]
@@ -537,8 +543,17 @@ class ETF:
                             stockValue = values[x]
                         invested = cashOverflow + stockValue
                         tempAmount = invested
-                        toReturn.append(data)
-                        print(data)
+                        cashOverflow = data['CashOverFlow']
+                        collectionOfStocks[start] = data['Stocks']
+                        for y in data['Values']:
+                            collectionOfVlaues[y] = data['Values'][y]
+
+            toReturn["UserID"] = self.userID
+            toReturn["ETFid"] = self.etfID
+            toReturn["CashOverFlow"] = cashOverflow
+            toReturn["Stocks"] = collectionOfStocks
+            toReturn["Values"] = collectionOfVlaues
+
             return toReturn
                         #Issue I am coming accross from is now that when i create a new etf it will reabalncing forever and it is a continues fucntion
                         #This print is here for testing purposes for demo 4
