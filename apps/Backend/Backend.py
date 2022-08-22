@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import ETF
+import info
 from dbpass import *
 import mysql.connector
 from datetime import date
@@ -84,11 +85,27 @@ def createRules():
 
     else:
         data = etfNew.getPriceOverTime()
-    #This is a new ETF Oject
+
 
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
     return dataJsonify
 
+@app.route("/tickerInfo", methods=["POST"])
+def tickerInfo():
+    data = request.get_json()
+    ticker = data['ticker']
+
+    data = info.stockInformation(ticker)
+    # etfNew = ETF.ETF(UserID,etfID,listOfRules,date,int(amount))
+    # if etfNew.createETF() == None:
+    #     data = {"error" : "response 200"}
+    #
+    # else:
+    #     data = etfNew.getPriceOverTime()
+
+
+    dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
+    return dataJsonify
 
 
 @app.route("/login", methods=["POST"])

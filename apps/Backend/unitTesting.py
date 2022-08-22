@@ -1,12 +1,15 @@
+import json
 import unittest
 import apiCalls
+import requests
 import ETF
+from flask import Flask, request, jsonify
 
 
 class UnitTest(unittest.TestCase):
 
     def test_listAllCompanies(self):
-        self.assertEqual(len(apiCalls.listallcompanies()), 3155, "The length of the list should be 3155")
+        self.assertEqual(len(apiCalls.listallcompanies()), 3161, "The length of the list should be 3161")
     def test_AddEndDate(self):
         startDate = "2016-06-06"
         endDate = apiCalls.getEndDay(startDate)
@@ -42,6 +45,31 @@ class UnitTest(unittest.TestCase):
             if x == "GOOG":
                 passedTest = True
         self.assertEqual(passedTest, True, "The rule states that GOOG needs to be in the stock")
+
+    def test_e2eConnection(self):
+        url = 'http://127.0.0.1:6969/createRules'
+        CreateRules = {
+            "UserID": 1,
+            "ETFid": 23,
+            "Rules": [
+
+            ],
+            "date": "2020-02-10",
+            "amount": 1000000
+        }
+
+        print("Sending request")
+        x = requests.post(url, json=CreateRules)
+
+
+        data = json.loads(x.text)
+        print("E2e Connection")
+        print(data)
+        ETFid = data["ETFid"]
+        if ETFid == 23:
+            passedTest = True
+        self.assertEqual(passedTest, True, "The ETDid should be 23")
+
 
 if __name__ == '__main__':
     unittest.main()
