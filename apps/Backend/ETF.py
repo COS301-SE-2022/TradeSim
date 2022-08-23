@@ -23,6 +23,7 @@ class ETF:
         self.stocksWithAmountOFShares = {}
         self.totalInvested = 0
         self.c200 = {}
+        self.arrayOfRulesWithPercentage = []
 
 
     def createETF(self):
@@ -207,6 +208,7 @@ class ETF:
             if x in self.listOfAllStocks:
                 stocksInBoth.append(x)
 
+        print(stocksInBoth)
         random.seed(6)
         endPos = len(stocksInBoth) - 1
         listOfPos = []
@@ -218,7 +220,6 @@ class ETF:
         stocksOnlyOneFinal = []
         for pos in listOfPos:
             stocksOnlyOneFinal.append(stocksInBoth[pos])
-
         self.calculateAmountoFstocks(stocksOnlyOneFinal,percentage)
 
     def code105(self, country, percentage):
@@ -258,7 +259,6 @@ class ETF:
         percent = percentage / 100
         moneyToInvest = self.amount * percent
         stockAndAmount = {}
-
         valuesForSaidStocks = apiCalls.getShareMarketEarn(stocks, self.date)
         totalInvested = 0
         canAddMore = True
@@ -426,12 +426,16 @@ class ETF:
             Percentage = int(parameters[1])
             amountOfCompanies = parameters[2]
             self.code102_103(SectorID,Percentage)
+            js = {"102": [SectorID, Percentage]}
+            self.arrayOfRulesWithPercentage.append(js)
             # percentage in a specific sector
         elif code == "103":
             industryID = parameters[0]
             Percentage = int(parameters[1])
             amountOfCompanies = parameters[2]
             self.code102_103(industryID, Percentage)
+            js = {"103" : [industryID,Percentage]}
+            self.arrayOfRulesWithPercentage.append(js)
             # percentage in a specific industry
         elif code == "104":
             percentage = int(parameters[0])
@@ -443,6 +447,8 @@ class ETF:
             percentage = int(parameters[1])
             amountOfCompanies = parameters[2]
             self.code105(country,percentage)
+            js = {"105": [country, percentage]}
+            self.arrayOfRulesWithPercentage.append(js)
             # companies based in specific countries exchange
         elif code == "106":
             percentage = int(parameters[0])
@@ -480,77 +486,197 @@ class ETF:
 
         self.rules = newRuleList
 
-    def code200_202(self):
+    def code200(self,time):
         toReturn = {}
         collectionOfVlaues = {}
         collectionOfStocks = {}
         cashOverflow = 0
+        listOfDates = []
+        reachedDate = False
+        timePeriod = time * 7
+        startingDate = datetime.strptime(self.date, '%Y-%m-%d')
+        dateNow = datetime.now()
+
+        while reachedDate == False:
+            if startingDate > dateNow:
+                reachedDate = True
+                d = datetime.strftime(datetime.now(), '%Y-%m-%d')
+                listOfDates.append(d)
+            else:
+                temp = datetime.strftime(startingDate, '%Y-%m-%d')
+                listOfDates.append(temp)
+                d = datetime.strftime(startingDate + timedelta(timePeriod), '%Y-%m-%d')
+                startingDate = datetime.strptime(d, '%Y-%m-%d')
+        length = len(listOfDates)
+        newListOfDates = []
+        for i in range(length):
+            if i == (length - 1):
+                break
+            else:
+                start = listOfDates[i]
+                end = listOfDates[i + 1]
+                tempDate = datetime.strptime(end, '%Y-%m-%d')
+                if (end != datetime.strftime(datetime.now(), '%Y-%m-%d')):
+                    end = datetime.strftime(tempDate - timedelta(1), '%Y-%m-%d')
+                temp = [start, end]
+                newListOfDates.append(temp)
+        tempAmount = self.amount
+        rulesWithOutBalancing = []
+        for rule in self.rules:
+            code = rule[0]
+            if code != "200" and code != "202":
+                rulesWithOutBalancing.append(rule)
+
+        for dates in newListOfDates:
+            start = dates[0]
+            end = dates[1]
+            tempEtf = ETF(self.userID, self.etfID, rulesWithOutBalancing, start, tempAmount)
+            tempEtf.createETF()
+            data = tempEtf.rebalancingValueForETF(start, end)
+            cashOverflow = data['CashOverFlow']
+            values = data['Values']
+            stockValue = 0
+            for x in values:
+                stockValue = values[x]
+            invested = cashOverflow + stockValue
+            tempAmount = invested
+            cashOverflow = data['CashOverFlow']
+            collectionOfStocks[start] = data['Stocks']
+            for y in data['Values']:
+                collectionOfVlaues[y] = data['Values'][y]
+
+        toReturn["UserID"] = self.userID
+        toReturn["ETFid"] = self.etfID
+        toReturn["CashOverFlow"] = cashOverflow
+        toReturn["Stocks"] = collectionOfStocks
+        toReturn["Values"] = collectionOfVlaues
+
+        return toReturn
+
+    def code202(self,allDetails,timePeriod):
+        #The first thing that needs to be done is to find all the dates according to time periods
+        #Then just go through all the stocks to find the matching
+        listOfDates = []
+        reachedDate = False
+        timePeriod = timePeriod * 7
+        startingDate = datetime.strptime(self.date, '%Y-%m-%d')
+        dateNow = datetime.now()
+
+        while reachedDate == False:
+            if startingDate > dateNow:
+                reachedDate = True
+                d = datetime.strftime(datetime.now(), '%Y-%m-%d')
+                listOfDates.append(d)
+            else:
+                temp = datetime.strftime(startingDate, '%Y-%m-%d')
+                listOfDates.append(temp)
+                d = datetime.strftime(startingDate + timedelta(timePeriod), '%Y-%m-%d')
+                startingDate = datetime.strptime(d, '%Y-%m-%d')
+        length = len(listOfDates)
+        newListOfDates = []
+        for i in range(length):
+            if i == (length - 1):
+                break
+            else:
+                start = listOfDates[i]
+                end = listOfDates[i + 1]
+                tempDate = datetime.strptime(end, '%Y-%m-%d')
+                if (end != datetime.strftime(datetime.now(), '%Y-%m-%d')):
+                    end = datetime.strftime(tempDate - timedelta(1), '%Y-%m-%d')
+                temp = [start, end]
+                newListOfDates.append(temp)
+        print(newListOfDates)
+        stockDetails = allDetails["Stocks"]
+        print(self.stocksConfirmedIn)
+        print(self.arrayOfRulesWithPercentage)
+        print(stockDetails)
+
+    def code200_202(self):
+        allDetails = {}
         if len(self.c200) == 0:
             return None
         else:
             for rule in self.c200:
                 if rule == "200":
-                    listOfDates = []
-                    reachedDate = False
-                    timePeriod = self.c200[rule]*7
-                    startingDate = datetime.strptime(self.date,'%Y-%m-%d')
-                    dateNow = datetime.now()
+                    temp = self.code200(self.c200[rule])
+                    # Need to understand that rebalancing of the stock must come after the reconsidering of stocks. As then I will have all the stocks to look at.
+                    allDetails = temp
+            for rule in self.c200:
+                if rule == "202":
+                    storeRebalncePeriod = self.c200[rule]
+                    self.c200 = {}
+                    if len(allDetails) == 0:
+                        allDetails = self.getPriceOverTime()
+                    self.code202(allDetails,storeRebalncePeriod)
 
-                    while reachedDate == False:
-                        if startingDate > dateNow:
-                            reachedDate = True
-                            d = datetime.strftime(datetime.now(), '%Y-%m-%d')
-                            listOfDates.append(d)
-                        else:
-                            temp = datetime.strftime(startingDate,'%Y-%m-%d')
-                            listOfDates.append(temp)
-                            d = datetime.strftime(startingDate + timedelta(timePeriod), '%Y-%m-%d')
-                            startingDate = datetime.strptime(d,'%Y-%m-%d')
-                    length = len(listOfDates)
-                    newListOfDates = []
-                    for i in range(length):
-                        if i==(length-1):
-                            break
-                        else:
-                            start = listOfDates[i]
-                            end = listOfDates[i+1]
-                            tempDate = datetime.strptime(end, '%Y-%m-%d')
-                            if (end!=datetime.strftime(datetime.now(), '%Y-%m-%d')):
-                                end = datetime.strftime(tempDate - timedelta(1), '%Y-%m-%d')
-                            temp = [start,end]
-                            newListOfDates.append(temp)
-                    tempAmount = self.amount
-                    rulesWithOutBalancing = []
-                    for rule in self.rules:
-                        code = rule[0]
-                        if code != "200" and code != "202":
-                            rulesWithOutBalancing.append(rule)
 
-                    for dates in newListOfDates:
-                        start = dates[0]
-                        end = dates[1]
-                        tempEtf = ETF(self.userID,self.etfID,rulesWithOutBalancing,start,tempAmount)
-                        tempEtf.createETF()
-                        data = tempEtf.rebalancingValueForETF(start,end)
-                        cashOverflow = data['CashOverFlow']
-                        values = data['Values']
-                        stockValue = 0
-                        for x in values:
-                            stockValue = values[x]
-                        invested = cashOverflow + stockValue
-                        tempAmount = invested
-                        cashOverflow = data['CashOverFlow']
-                        collectionOfStocks[start] = data['Stocks']
-                        for y in data['Values']:
-                            collectionOfVlaues[y] = data['Values'][y]
+                    #we now do the rebalancing
+                    # toReturn = {}
+                    # collectionOfVlaues = {}
+                    # collectionOfStocks = {}
+                    # cashOverflow = 0
+                    # listOfDates = []
+                    # reachedDate = False
+                    # timePeriod = self.c200[rule]*7
+                    # startingDate = datetime.strptime(self.date,'%Y-%m-%d')
+                    # dateNow = datetime.now()
+                    #
+                    # while reachedDate == False:
+                    #     if startingDate > dateNow:
+                    #         reachedDate = True
+                    #         d = datetime.strftime(datetime.now(), '%Y-%m-%d')
+                    #         listOfDates.append(d)
+                    #     else:
+                    #         temp = datetime.strftime(startingDate,'%Y-%m-%d')
+                    #         listOfDates.append(temp)
+                    #         d = datetime.strftime(startingDate + timedelta(timePeriod), '%Y-%m-%d')
+                    #         startingDate = datetime.strptime(d,'%Y-%m-%d')
+                    # length = len(listOfDates)
+                    # newListOfDates = []
+                    # for i in range(length):
+                    #     if i==(length-1):
+                    #         break
+                    #     else:
+                    #         start = listOfDates[i]
+                    #         end = listOfDates[i+1]
+                    #         tempDate = datetime.strptime(end, '%Y-%m-%d')
+                    #         if (end!=datetime.strftime(datetime.now(), '%Y-%m-%d')):
+                    #             end = datetime.strftime(tempDate - timedelta(1), '%Y-%m-%d')
+                    #         temp = [start,end]
+                    #         newListOfDates.append(temp)
+                    # tempAmount = self.amount
+                    # rulesWithOutBalancing = []
+                    # for rule in self.rules:
+                    #     code = rule[0]
+                    #     if code != "200" and code != "202":
+                    #         rulesWithOutBalancing.append(rule)
+                    #
+                    # for dates in newListOfDates:
+                    #     start = dates[0]
+                    #     end = dates[1]
+                    #     tempEtf = ETF(self.userID,self.etfID,rulesWithOutBalancing,start,tempAmount)
+                    #     tempEtf.createETF()
+                    #     data = tempEtf.rebalancingValueForETF(start,end)
+                    #     cashOverflow = data['CashOverFlow']
+                    #     values = data['Values']
+                    #     stockValue = 0
+                    #     for x in values:
+                    #         stockValue = values[x]
+                    #     invested = cashOverflow + stockValue
+                    #     tempAmount = invested
+                    #     cashOverflow = data['CashOverFlow']
+                    #     collectionOfStocks[start] = data['Stocks']
+                    #     for y in data['Values']:
+                    #         collectionOfVlaues[y] = data['Values'][y]
+                    #
+                    # toReturn["UserID"] = self.userID
+                    # toReturn["ETFid"] = self.etfID
+                    # toReturn["CashOverFlow"] = cashOverflow
+                    # toReturn["Stocks"] = collectionOfStocks
+                    # toReturn["Values"] = collectionOfVlaues
+                    #
+                    # return toReturn
 
-            toReturn["UserID"] = self.userID
-            toReturn["ETFid"] = self.etfID
-            toReturn["CashOverFlow"] = cashOverflow
-            toReturn["Stocks"] = collectionOfStocks
-            toReturn["Values"] = collectionOfVlaues
-
-            return toReturn
                         #Issue I am coming accross from is now that when i create a new etf it will reabalncing forever and it is a continues fucntion
                         #This print is here for testing purposes for demo 4
 
@@ -640,8 +766,26 @@ class ETF:
             toReturn["UserID"] = self.userID
             toReturn["ETFid"] = self.etfID
             toReturn["CashOverFlow"] = self.amount - self.totalInvested
-            toReturn["Stocks"] = self.stocksWithAmountOFShares
+            collectionOfStocks = {self.date : self.stocksWithAmountOFShares}
+            toReturn["Stocks"] = collectionOfStocks
             toReturn["Values"] = etfValueByday
             return toReturn
         else:
             return self.code200_202()
+
+    def code102_103ReturnStocks(self,idValue):
+        stocksInSector = apiCalls.companiesByIndustry(idValue)
+        stocksInBoth = []
+        for x in stocksInSector:
+            if x in self.listOfAllStocks:
+                stocksInBoth.append(x)
+
+        print(stocksInBoth)
+        return stocksInBoth
+
+    def code105ReturnStocks(self, country):
+        stocksInExchange = apiCalls.companiesByExchange(country)
+        stocksInBoth = []
+        for x in stocksInExchange:
+            if x in self.listOfAllStocks:
+                stocksInBoth.append(x)
