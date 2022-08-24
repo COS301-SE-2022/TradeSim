@@ -32,6 +32,11 @@ def comparedate():
 def edit():
     return render_template("addRule.html")
 
+@app.route("/ticker")
+def tick():
+    return render_template("ticker.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True)
 
