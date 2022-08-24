@@ -23,7 +23,9 @@
 
     color: #3F5161;
 }
-
+select{
+    display: block !important;
+}
 .side-nav a:hover {
     background-color: gray;
     transition: 0.5s;
@@ -165,15 +167,15 @@ label {
 
 /* drop down add rules */
 
-.custom-select {
-    position: relative;
-    left: 10px;
-    font-family: Arial;
-}
+/*.custom-select {*/
+/*    position: relative;*/
+/*    left: 10px;*/
+/*    font-family: Arial;*/
+/*}*/
 
-.select-selected {
-    background-color: white;
-}
+/*.select-selected {*/
+/*    background-color: white;*/
+/*}*/
 
 .card2 {
     margin-top: 50px;
