@@ -33,6 +33,9 @@ select{
     text-transform: uppercase;
 }
 
+nav{
+    background-color: #3F5161 !important;
+}
 .main-body {
     margin-left: auto;
     margin-right: auto;
