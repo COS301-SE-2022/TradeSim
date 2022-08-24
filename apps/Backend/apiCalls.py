@@ -187,12 +187,15 @@ def companiesByExchange(country):
         return None
 
     listOFComanies = []
+    # for x in response:
+    #     temp = x["symbol"]
+    #     str = temp.split(".")
+    #     sym = str[0]
+    #     listOFComanies.append(sym)
+
     for x in response:
         temp = x["symbol"]
-        str = temp.split(".")
-        sym = str[0]
-        listOFComanies.append(sym)
-
+        listOFComanies.append(temp)
 
 
     return listOFComanies

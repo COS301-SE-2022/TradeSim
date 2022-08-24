@@ -19,9 +19,14 @@ def stockInformation(ticker):
         print(arrayOfPossible)
         js = {"Found" : "False", "PossibleStock" : arrayOfPossible}
         return js
-    finhubInfo = apiCalls.finhubInformation(ticker)
+    sym = ticker
+    if "." in ticker:
+        stings = ticker.split(".")
+        sym = stings[0]
+    finhubInfo = apiCalls.finhubInformation(sym)
     #Now we need to connect to that excel document to get the industry
-    industryID = str(simFinInfo["IndustryID"])
+    temp = simFinInfo["IndustryID"]
+    industryID = str(temp)
     file = open('databases\industries.csv')
     type(file)
     csvreader = csv.reader(file)

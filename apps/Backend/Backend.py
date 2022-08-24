@@ -80,11 +80,13 @@ def createRules():
     amount = data['amount']
 
     etfNew = ETF.ETF(UserID,etfID,listOfRules,date,int(amount))
-    try:
-        etfNew.createETF()
-        data = etfNew.getPriceOverTime()
-    except:
-        data = {"Error" : "Please try changing your rules as there is a contradiction causing problems"}
+    etfNew.createETF()
+    data = etfNew.getPriceOverTime()
+    # try:
+    #     etfNew.createETF()
+    #     data = etfNew.getPriceOverTime()
+    # except:
+    #     data = {"Error" : "Please try changing your rules as there is a contradiction causing problems"}
 
 
 
