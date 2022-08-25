@@ -589,20 +589,158 @@ class ETF:
                 temp = [start, end]
                 newListOfDates.append(temp)
         stockDetails = allDetails["Stocks"]
+        cashOverflow = allDetails["CashOverFlow"]
 
         ###############################################
-        totalPercentageSoFar = 0
-        #Temporary work space
+        # totalPercentageSoFar = 0
+        # #Temporary work space
+        # justStocks = []
+        # for stock in self.stocksConfirmedIn:
+        #     percentage = self.stocksConfirmedIn[stock]
+        #     js = {percentage : [stock]}
+        #     totalPercentageSoFar = totalPercentageSoFar + percentage
+        #     percentageBasedStocks.append(js)
+        #--Need below
+        tempDates = []
+        for dateNow in stockDetails:
+            tempDates.append(dateNow)
+        length = len(tempDates)
+        reconsiderDates = []
+        for i in range(length):
+            if i == (length - 1):
+                break
+            else:
+                start = tempDates[i]
+                end = tempDates[i + 1]
+                js = [start,end]
+            reconsiderDates.append(js)
+        # --
+        # for dateNow in stockDetails:
+        #     stocks = stockDetails[dateNow]
+        #     for stock in stocks:
+        #         justStocks.append(stock)
+        # for rule in self.arrayOfRulesWithPercentage:
+        #     if rule[0] == " 105":
+        #         country = rule[1]
+        #         percentage = rule[2]
+        #         stocksThatCount = self.code105ReturnStocks(country)
+        #         tempArray = []
+        #         for x in stocksThatCount:
+        #             if x in justStocks:
+        #                 tempArray.append(x)
+        #         js = {percentage: tempArray}
+        #         totalPercentageSoFar = totalPercentageSoFar + percentage
+        #         percentageBasedStocks.append(js)
+        #     else:
+        #         secOrIndID =  rule[1]
+        #         percentage = rule[2]
+        #         stocksThatCount = self.code102_103ReturnStocks(secOrIndID)
+        #         tempArray = []
+        #         for x in stocksThatCount:
+        #             if x in justStocks:
+        #                 tempArray.append(x)
+        #         js = {percentage :tempArray}
+        #         totalPercentageSoFar = totalPercentageSoFar + percentage
+        #         percentageBasedStocks.append(js)
+        #
+        #
+        # tempJustStocks = justStocks.copy()
+        # for stock in justStocks:
+        #     for set in percentageBasedStocks:
+        #         for per in set:
+        #             arrayOfStocks = set[per]
+        #             if stock in arrayOfStocks:
+        #                 tempJustStocks.remove(stock)
+        # left = 100 - totalPercentageSoFar
+        # js = {left : tempJustStocks}
+        # percentageBasedStocks.append(js)
+
+        # print(percentageBasedStocks)
+        # print(allDetails)
+
+
+
+        percentageBasedStocks = self.getStockDetialsForRebalancing(stockDetails, self.date)
+        updatedDetailsStock = stockDetails.copy()
+        updatedAmount = self.amount
+
+        for x in newListOfDates:
+            startDate = x[0]
+            endDate = x[1]
+            if endDate == datetime.strftime(datetime.now(), '%Y-%m-%d'):
+                break
+            currentDetails = updatedDetailsStock[startDate]
+            for dates in tempDates:
+                if startDate < dates and endDate>=dates:
+                    percentageBasedStocks = self.getStockDetialsForRebalancing(stockDetails, dates)
+                    currentDetails = stockDetails[dates].copy()
+
+            info = self.algorithmForRebalncing(percentageBasedStocks,currentDetails,startDate,endDate,updatedAmount)
+            newDetails = info[0]
+            updatedAmount = info[1]
+            cashOverflow[endDate] = info[2]
+            updatedDetailsStock[endDate] = newDetails
+
+        sortedStocks = {}
+        finalCashOverflow = {}
+        for x in sorted(updatedDetailsStock.keys()):
+            sortedStocks[x] = updatedDetailsStock[x]
+            finalCashOverflow[x] = cashOverflow[x]
+
+        finalDates = []
+        for key in sortedStocks:
+            finalDates.append(key)
+        finalDates.append(datetime.strftime(datetime.now(), '%Y-%m-%d'))
+
+        finalDatesStartEnd = []
+        length = len(finalDates)
+        for i in range(length):
+            if i == (length - 1):
+                break
+            else:
+                start = finalDates[i]
+                end = finalDates[i + 1]
+                js = [start, end]
+                finalDatesStartEnd.append(js)
+
+        for x in finalDatesStartEnd:
+            startDate = x[0]
+            endDate = x[1]
+            blah = self.redefinedGetValues(sortedStocks[startDate], startDate, endDate)
+            for y in blah:
+                etfValue[y] = blah[y]
+        toReturn = {}
+
+
+            #now we get the value of the stocks now and get what the cash overflow is for now
+
+        #percentageBasedStocks contains all the stocks and the percentage that the group of stocks must make up
+        #Only need to do this once and then from there we get the dates and change the amoutn of stocks bought form there
+
+
+        #Now need to add in the reconsidering part of the rebalacing
+        ###############################################
+        toReturn["UserID"] = self.userID
+        toReturn["ETFid"] = self.etfID
+        toReturn["CashOverFlow"] = finalCashOverflow
+        toReturn["Stocks"] = sortedStocks
+        toReturn["Values"] = etfValue
+        return toReturn
+
+    def getStockDetialsForRebalancing(self,stockDetails,date):
+        percentageBasedStocks = []
         justStocks = []
+        totalPercentageSoFar = 0
         for stock in self.stocksConfirmedIn:
             percentage = self.stocksConfirmedIn[stock]
-            js = {percentage : [stock]}
+            js = {percentage: [stock]}
             totalPercentageSoFar = totalPercentageSoFar + percentage
             percentageBasedStocks.append(js)
-        for dateNow in stockDetails:
-            stocks = stockDetails[dateNow]
-            for stock in stocks:
-                justStocks.append(stock)
+
+
+        stocks = stockDetails[date]
+        for stock in stocks:
+            justStocks.append(stock)
         for rule in self.arrayOfRulesWithPercentage:
             if rule[0] == " 105":
                 country = rule[1]
@@ -638,40 +776,8 @@ class ETF:
         left = 100 - totalPercentageSoFar
         js = {left : tempJustStocks}
         percentageBasedStocks.append(js)
+        return percentageBasedStocks
 
-        print(percentageBasedStocks)
-        print(allDetails)
-
-        print(newListOfDates)
-        updatedDetailsStock = stockDetails.copy()
-        updatedAmount = self.amount
-        for x in newListOfDates:
-            startDate = x[0]
-            endDate = x[1]
-            currentDetails = updatedDetailsStock[startDate]
-            info = self.algorithmForRebalncing(percentageBasedStocks,currentDetails,startDate,endDate,updatedAmount)
-            newDetails = info[0]
-            updatedAmount = info[1]
-            cashOverflow = info[2]
-            updatedDetailsStock[endDate] = newDetails
-            print(updatedAmount)
-            print(cashOverflow)
-            blah = self.redefinedGetValues(currentDetails,startDate,endDate)
-            for x in blah:
-                etfValue[x] = blah[x]
-        print(updatedDetailsStock)
-        print(etfValue)
-
-
-            #now we get the value of the stocks now and get what the cash overflow is for now
-
-        #percentageBasedStocks contains all the stocks and the percentage that the group of stocks must make up
-        #Only need to do this once and then from there we get the dates and change the amoutn of stocks bought form there
-
-
-        #Now need to add in the reconsidering part of the rebalacing
-        ###############################################
-        print(stockDetails)
 
     def code200_202(self):
         allDetails = {}
@@ -689,7 +795,8 @@ class ETF:
                     self.c200 = {}
                     if len(allDetails) == 0:
                         allDetails = self.getPriceOverTime()
-                    self.code202(allDetails,storeRebalncePeriod)
+                    allDetails = self.code202(allDetails,storeRebalncePeriod)
+        return allDetails
 
     def algorithmForRebalncing(self,stocksWithPercentage,stocksWithValues,startDate,endDate,amount):
         etfValueByday = {}
