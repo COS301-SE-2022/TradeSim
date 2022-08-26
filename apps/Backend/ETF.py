@@ -1,5 +1,4 @@
 import random
-import matplotlib.pyplot as plt
 import apiCalls
 from datetime import datetime,timedelta
 class ETF:
