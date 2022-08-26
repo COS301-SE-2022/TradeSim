@@ -80,11 +80,14 @@ def createRules():
     amount = data['amount']
 
     etfNew = ETF.ETF(UserID,etfID,listOfRules,date,int(amount))
-    if etfNew.createETF() == None:
-        data = {"error" : "response 200"}
+    etfNew.createETF()
+    data = etfNew.getPriceOverTime()
+    # try:
+    #     etfNew.createETF()
+    #     data = etfNew.getPriceOverTime()
+    # except:
+    #     data = {"Error" : "Please try changing your rules as there is a contradiction causing problems"}
 
-    else:
-        data = etfNew.getPriceOverTime()
 
 
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
@@ -107,6 +110,18 @@ def tickerInfo():
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
     return dataJsonify
 
+@app.route("/news", methods=["POST"])
+def news():
+    data = request.get_json()
+    category = data['category']
+    #Different categories = general, forex, crypto, merger
+
+    data = info.newsInformation(category)
+
+
+
+    dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
+    return dataJsonify
 
 @app.route("/login", methods=["POST"])
 def login():

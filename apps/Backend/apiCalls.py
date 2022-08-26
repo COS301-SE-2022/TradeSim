@@ -187,12 +187,15 @@ def companiesByExchange(country):
         return None
 
     listOFComanies = []
+    # for x in response:
+    #     temp = x["symbol"]
+    #     str = temp.split(".")
+    #     sym = str[0]
+    #     listOFComanies.append(sym)
+
     for x in response:
         temp = x["symbol"]
-        str = temp.split(".")
-        sym = str[0]
-        listOFComanies.append(sym)
-
+        listOFComanies.append(temp)
 
 
     return listOFComanies
@@ -292,6 +295,8 @@ def getCompanyInformation(t):
             summary = finalData[6]
 
             js = {"Company Name" : companyName, "IndustryID" : industryID, "Summary" : summary}
+        else:
+            js = None
 
     return js
 
@@ -313,4 +318,25 @@ def finhubInformation(t):
     js = {"Country" : country, "Exchange" : exchange, "IPO" : ipo, "Logo" : logo, "WebSite" : website}
     return js
 
+def getNews(category):
+    request_url = "https://finnhub.io/api/v1/news?category=" + category +"&token="
+
+    api_request = requests.get(request_url + getFinHubApi())
+    response = api_request.json()
+
+    if "error" in response:
+        return None
+
+    listOfNews = []
+    for x in response:
+        date = x['datetime']
+        headline = x['headline']
+        image = x['image']
+        source = x['source']
+        summary = x['summary']
+        url = x['url']
+        js ={'date' : date, 'headline' : headline, 'image' : image, 'source' : source, 'summary' : summary, 'url' : url}
+        listOfNews.append(js)
+
+    return listOfNews
 
