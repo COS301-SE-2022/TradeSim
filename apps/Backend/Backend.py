@@ -60,7 +60,7 @@ def createNameAndAmount():
 
         print("etf added")
 
-        res = '{ "status":"success", "error":"successfully signed up"}'
+        res = '{ "status":"success", "error":"successfully added ETF"}'
         res = jsonify(res)
         mydb.close()
         return res
@@ -461,7 +461,7 @@ def getETFS():
             etfs += '"UserID":"' + str(response[i][1]) + '",'
             etfs += '"ETFName":"' + str(response[i][2]) + '",'
             etfs += '"Amount":"' + str(response[i][3]) + '",'
-            etfs += '"Rules":[' + str(response[i][4]) + '],'
+            etfs += '"Rules":"' + str(response[i][4]) + '",'
             etfs += '"Date":"' + str(response[i][5]) + '"}'
             if i != count - 1:
                 etfs += ','
@@ -474,6 +474,63 @@ def getETFS():
         return res
     else:   #no ETFS found
         res = '{ "status":"failure", "error":"ETF not found"}'
+        res = jsonify(res)
+        mydb.close()
+        return res
+
+@app.route("/import", methods=["POST"])
+def createNameAndAmount():
+    data = request.get_json()
+    userID = data['Data'][0]
+    etfName = data['Data'][1]
+    amountnew = data['Data'][2]
+    rules = data['Data'][3]
+    cdate = data['Data'][4]
+    
+    # This is function that is first called that has the name of the new ETF and the amount
+    # data is the array of the JSon of all the data recieved
+
+    mydb = mysql.connector.connect(
+        host="database-1.ctw2tablscgc.us-east-1.rds.amazonaws.com",
+        user="aipicapstone",
+        password=getpass()
+    )
+
+    cursor = mydb.cursor(buffered=True)
+
+    # print(userID)
+    # print(etfName)
+    # print(amount)
+
+    cursor.execute("SELECT * FROM aipicapstone.ETFS WHERE UserID = " + '"' + str(
+        userID) + '"' + "  AND ETFName = " + '"' + etfName + '"' + ";")
+    response = cursor.fetchall();
+    # print(response)
+
+    if response == []:
+        #             etfname not taken for user
+        cursor.execute("SELECT Max(ETFID) FROM aipicapstone.ETFS;")
+        response = cursor.fetchall();
+        print(response)
+        if (response == [(None,)]):
+            etfID = 0
+        else:
+            # print(response[0][0])
+            etfID = response[0][0] + 1
+
+        sql = "INSERT INTO aipicapstone.ETFS( ETFID, USERID, ETFName, Amount, Rules, CreationDate) VALUES (%s, %s, %s, %s, %s, %s)"
+        val = (etfID, userID, etfName, amountnew, rules, cdate)
+        cursor.execute(sql, val)
+        mydb.commit()
+
+        print("etf added")
+
+        res = '{ "status":"success", "error":" ETF added"}'
+        res = jsonify(res)
+        mydb.close()
+        return res
+    else:
+        res = '{ "status":"failure", "error":"Name already used by user"}'
         res = jsonify(res)
         mydb.close()
         return res
