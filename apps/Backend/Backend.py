@@ -431,7 +431,7 @@ def deleteetf():
     return res
 
 @app.route("/export", methods=["POST"])
-def getETFS():
+def export():
 
     data = request.get_json()
     userID = data['Data'][0]
@@ -479,7 +479,7 @@ def getETFS():
         return res
 
 @app.route("/import", methods=["POST"])
-def createNameAndAmount():
+def import():
     data = request.get_json()
     userID = data['Data'][0]
     etfName = data['Data'][1]
