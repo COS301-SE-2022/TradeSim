@@ -47,25 +47,22 @@
                   <div class="row">
                     <div class="input-field col s12">
                       <i class="material-icons prefix">search</i>
-                      <input type="text" id="autocomplete-input" class="autocomplete">
+                      <input type="text" id="tickerInput" class="autocomplete">
                       <label for="autocomplete-input">Search for tickers...</label>
-                      <a class="waves-effect waves-light btn blue right"> Search </a>
+                      <a class="waves-effect waves-light btn blue right" onclick="searchTicker()"> Search </a>
                     </div>
-                    <table>
+                    <table id="results">
                         <thead>
                           <tr>
                               <th>Company Name</th>
-                              <th>Industry ID</th>
+                              <th>Ticker</th>
+                              <th>Sector</th>
                               <th>Summary</th>
                           </tr>
                         </thead>
 
-                        <tbody>
-                          <tr>
-                            <td>Apple</td>
-                            <td>Tech</td>
-                            <td>lorem ipsum</td>
-                          </tr>
+                        <tbody id="response">
+                        
                         </tbody>
                       </table>
                   </div>
