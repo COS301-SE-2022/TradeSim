@@ -23,6 +23,9 @@ function searchTicker() {
          ).then(response=> response.json())
              .then(data =>{
              console.log("data",data)
-             document.getElementById("response").innerHTML += `<tr><td>${data['Company Name']}</td><td>${data.Ticker}</td><td>${data.Sector}</td><td>${data.Summary}</td></tr>`;
-         });
+                 if (data.Ticker != null)
+                    document.getElementById("response").innerHTML += `<tr><td>${data['Company Name']}</td><td>${data.Ticker}</td><td>${data.Sector}</td><td>${data.Summary}</td></tr>`;
+                 else
+                     document.getElementById("response").innerHTML += `<tr><td>Company with ticker name: <b>${tick}</b> not found. Did you mean: <b>${data.PossibleStock}</b>?</td></tr>`;
+             });
 }
