@@ -31,12 +31,12 @@ function searchTicker() {
             console.log("name of Graph", graphName);
             obj = data.PriceHistory;
             console.log("Price History", obj);
-            if (data.Ticker != null)
+            if (data.Ticker != null) {
                 document.getElementById("response").innerHTML = `<tr><td>${data['Company Name']}</td><td>${data.Ticker}</td><td>${data.Sector}</td><td>${data.Summary}</td></tr>`;
-            else
+                getGraph(graphName, obj);
+            } else {
                 document.getElementById("response").innerHTML = `<tr><td>Company with ticker name: <b>${tick}</b> not found. Did you mean: <b>${data.PossibleStock}</b>?</td></tr>`;
-
-            getGraph(graphName, obj);
+            }
         });
 }
 
