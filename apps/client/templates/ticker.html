@@ -16,6 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="{{ url_for('static',filename='rules.js') }}"></script>
+    <script src="{{ url_for('static',filename='ticker.js') }}"></script>
     <title>TradeSim Tickers</title>
 </head>
 
@@ -48,7 +49,25 @@
                       <i class="material-icons prefix">search</i>
                       <input type="text" id="autocomplete-input" class="autocomplete">
                       <label for="autocomplete-input">Search for tickers...</label>
+                      <a class="waves-effect waves-light btn blue right"> Search </a>
                     </div>
+                    <table>
+                        <thead>
+                          <tr>
+                              <th>Company Name</th>
+                              <th>Industry ID</th>
+                              <th>Summary</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr>
+                            <td>Apple</td>
+                            <td>Tech</td>
+                            <td>lorem ipsum</td>
+                          </tr>
+                        </tbody>
+                      </table>
                   </div>
                 </div>
             </div>
