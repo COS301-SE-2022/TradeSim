@@ -479,7 +479,7 @@ def export():
         return res
 
 @app.route("/import", methods=["POST"])
-def import():
+def Import():
     data = request.get_json()
     userID = data['Data'][0]
     etfName = data['Data'][1]
