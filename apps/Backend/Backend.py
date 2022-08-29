@@ -10,9 +10,10 @@ amount = 0
 app = Flask(__name__)
 CORS(app)
 
-#Need to start the backend properly and get the whole thing working
-#When the Backend first recieves the Json Format it needs to add the rules and the amount into the database
-#The Json format needs to also have an coloumn that show if its a creation of a new etf or generating a new etf
+
+# Need to start the backend properly and get the whole thing working
+# When the Backend first recieves the Json Format it needs to add the rules and the amount into the database
+# The Json format needs to also have an coloumn that show if its a creation of a new etf or generating a new etf
 
 @app.route("/createName", methods=["POST"])
 def createNameAndAmount():
@@ -20,8 +21,8 @@ def createNameAndAmount():
     userID = data['Data'][0]
     etfName = data['Data'][1]
     amount = data['Data'][2]
-    #This is function that is first called that has the name of the new ETF and the amount
-    #data is the array of the JSon of all the data recieved
+    # This is function that is first called that has the name of the new ETF and the amount
+    # data is the array of the JSon of all the data recieved
 
     mydb = mysql.connector.connect(
         host="database-1.ctw2tablscgc.us-east-1.rds.amazonaws.com",
@@ -35,12 +36,13 @@ def createNameAndAmount():
     # print(etfName)
     # print(amount)
 
-    cursor.execute( "SELECT * FROM aipicapstone.ETFS WHERE UserID = " + '"' + str(userID) + '"' + "  AND ETFName = " + '"' + etfName + '"' + ";")
+    cursor.execute("SELECT * FROM aipicapstone.ETFS WHERE UserID = " + '"' + str(
+        userID) + '"' + "  AND ETFName = " + '"' + etfName + '"' + ";")
     response = cursor.fetchall();
     # print(response)
 
     if response == []:
-#             etfname not taken for user
+        #             etfname not taken for user
         cursor.execute("SELECT Max(ETFID) FROM aipicapstone.ETFS;")
         response = cursor.fetchall();
         print(response)
@@ -49,7 +51,6 @@ def createNameAndAmount():
         else:
             # print(response[0][0])
             etfID = response[0][0] + 1
-
 
         rules = ""
         cdate = "2022-01-01"
@@ -70,6 +71,7 @@ def createNameAndAmount():
         mydb.close()
         return res
 
+
 @app.route("/createRules", methods=["POST"])
 def createRules():
     data = request.get_json()
@@ -79,7 +81,7 @@ def createRules():
     date = data['date']
     amount = data['amount']
 
-    etfNew = ETF.ETF(UserID,etfID,listOfRules,date,int(amount))
+    etfNew = ETF.ETF(UserID, etfID, listOfRules, date, int(amount))
     etfNew.createETF()
     data = etfNew.getPriceOverTime()
     # try:
@@ -88,10 +90,9 @@ def createRules():
     # except:
     #     data = {"Error" : "Please try changing your rules as there is a contradiction causing problems"}
 
-
-
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
     return dataJsonify
+
 
 @app.route("/tickerInfo", methods=["POST"])
 def tickerInfo():
@@ -106,29 +107,27 @@ def tickerInfo():
     # else:
     #     data = etfNew.getPriceOverTime()
 
-
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
     return dataJsonify
+
 
 @app.route("/news", methods=["POST"])
 def news():
     data = request.get_json()
     category = data['category']
-    #Different categories = general, forex, crypto, merger
+    # Different categories = general, forex, crypto, merger
 
     data = info.newsInformation(category)
 
-
-
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
     return dataJsonify
+
 
 @app.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
     name = data['Data'][0]
     password = data['Data'][1]
-
 
     mydb = mysql.connector.connect(
         host="database-1.ctw2tablscgc.us-east-1.rds.amazonaws.com",
@@ -138,12 +137,13 @@ def login():
 
     cursor = mydb.cursor()
 
-    cursor.execute("SELECT UserID FROM aipicapstone.accounts WHERE Username = "+'"'+ name +'"'+ "  AND Password = "+'"'+ str(password) +'"'+ ";")\
-
+    cursor.execute(
+        "SELECT UserID FROM aipicapstone.accounts WHERE Username = " + '"' + name + '"' + "  AND Password = " + '"' + str(
+            password) + '"' + ";")
     response = cursor.fetchall();
-    print (response)
+    print(response)
     if response == []:
-        #no user found
+        # no user found
         print("login not found")
         res = '{ "status":"failure", "error":"Username or Password incorrect"}'
         res = jsonify(res)
@@ -157,9 +157,9 @@ def login():
         mydb.close()
         return res
 
+
 @app.route("/register", methods=["POST"])
 def register():
-
     print("recieved request for registration");
     data = request.get_json()
     username = data['Data'][0]
@@ -176,7 +176,7 @@ def register():
 
     cursor = mydb.cursor()
 
-    cursor.execute("SELECT count(*) FROM aipicapstone.accounts WHERE Email = "+'"'+email+'"'+";")
+    cursor.execute("SELECT count(*) FROM aipicapstone.accounts WHERE Email = " + '"' + email + '"' + ";")
     response = cursor.fetchall()
 
     if response[0] != (0,):
@@ -185,9 +185,9 @@ def register():
         res = jsonify(res)
         mydb.close()
         return res
-        #handle error
+        # handle error
     else:
-        cursor.execute("SELECT count(*) FROM aipicapstone.accounts WHERE Username = "+'"'+username+'"'+";")
+        cursor.execute("SELECT count(*) FROM aipicapstone.accounts WHERE Username = " + '"' + username + '"' + ";")
         response = cursor.fetchall()
         if response[0] != (0,):
             print("username taken")
@@ -200,7 +200,7 @@ def register():
             cursor.execute("SELECT Max(UserID) FROM aipicapstone.accounts;")
             response = cursor.fetchall()
             # print (response[0])
-            if(response[0] == (None,)):
+            if (response[0] == (None,)):
                 newid = 0
             else:
                 # print(response[0][0])
@@ -221,6 +221,7 @@ def register():
             res = jsonify(res)
             mydb.close()
             return res
+
 
 @app.route("/getETFS", methods=["POST"])
 def getETFS():
@@ -245,7 +246,7 @@ def getETFS():
         count = cursor.fetchall();
         count = count[0][0]
         # print(count)
-        etfs ='['
+        etfs = '['
         for i in range(count):
             etfs += '{"ETFID":"' + str(response[i][0]) + '",'
             etfs += '"UserID":"' + str(response[i][1]) + '",'
@@ -260,18 +261,16 @@ def getETFS():
 
         print(etfs)
 
-
-
-
-        res = '{ "status":"success", "Data":' + etfs +'}'
+        res = '{ "status":"success", "Data":' + etfs + '}'
         res = jsonify(res)
         mydb.close()
         return res
-    else:   #no ETFS found
+    else:  # no ETFS found
         res = '{ "status":"failure", "error":"No ETFS made"}'
         res = jsonify(res)
         mydb.close()
         return res
+
 
 @app.route("/setRule", methods=["POST"])
 def setRule():
@@ -282,7 +281,6 @@ def setRule():
     param2 = data['Data'][2]
     param3 = data['Data'][3]
     rulecode = data['Data'][4]
-
 
     mydb = mysql.connector.connect(
         host="database-1.ctw2tablscgc.us-east-1.rds.amazonaws.com",
@@ -299,11 +297,11 @@ def setRule():
 
     if param2 == "":
 
-        if response[0][0] == '': #no rules exist
+        if response[0][0] == '':  # no rules exist
 
             rulesdb = "[\"" + str(rulecode) + "\",[\"" + param1 + "\"]]"
 
-        else:   #rules exist
+        else:  # rules exist
 
             rulesdb = response[0][0] + ",[\"" + str(rulecode) + "\",[\"" + param1 + "\"]]"
 
@@ -323,11 +321,13 @@ def setRule():
 
         else:  # rules exist
 
-            rulesdb = response[0][0] + ",[\"" + str(rulecode) + "\",[\"" + param1 + "\",\"" + param2 + "\",\"" + param3 + "\"]]"
+            rulesdb = response[0][0] + ",[\"" + str(
+                rulecode) + "\",[\"" + param1 + "\",\"" + param2 + "\",\"" + param3 + "\"]]"
 
     print(rulesdb)
 
-    cursor.execute("UPDATE aipicapstone.ETFS SET Rules = " + "'" +  rulesdb + "'" + " WHERE(ETFID = " + '"' + str(etfID) + '"' + ");")
+    cursor.execute("UPDATE aipicapstone.ETFS SET Rules = " + "'" + rulesdb + "'" + " WHERE(ETFID = " + '"' + str(
+        etfID) + '"' + ");")
     mydb.commit()
     # response = cursor.fetchall();
 
@@ -335,6 +335,7 @@ def setRule():
     res = jsonify(res)
     mydb.close()
     return res
+
 
 @app.route("/changename", methods=["POST"])
 def changename():
@@ -351,7 +352,8 @@ def changename():
 
     cursor = mydb.cursor(buffered=True)
 
-    cursor.execute("UPDATE aipicapstone.ETFS SET ETFName = " + "'" +  newName + "'" + " WHERE(ETFID = " + '"' + str(etfID) + '"' + ");")
+    cursor.execute("UPDATE aipicapstone.ETFS SET ETFName = " + "'" + newName + "'" + " WHERE(ETFID = " + '"' + str(
+        etfID) + '"' + ");")
     mydb.commit()
     # response = cursor.fetchall();
 
@@ -359,6 +361,7 @@ def changename():
     res = jsonify(res)
     mydb.close()
     return res
+
 
 @app.route("/changeamount", methods=["POST"])
 def changeamount():
@@ -375,7 +378,9 @@ def changeamount():
 
     cursor = mydb.cursor(buffered=True)
 
-    cursor.execute("UPDATE aipicapstone.ETFS SET Amount = " + "'" +  str(newAmount) + "'" + " WHERE(ETFID = " + '"' + str(etfID) + '"' + ");")
+    cursor.execute(
+        "UPDATE aipicapstone.ETFS SET Amount = " + "'" + str(newAmount) + "'" + " WHERE(ETFID = " + '"' + str(
+            etfID) + '"' + ");")
     mydb.commit()
     # response = cursor.fetchall();
 
@@ -383,6 +388,7 @@ def changeamount():
     res = jsonify(res)
     mydb.close()
     return res
+
 
 @app.route("/clearrules", methods=["POST"])
 def clearrules():
@@ -398,7 +404,8 @@ def clearrules():
 
     cursor = mydb.cursor(buffered=True)
 
-    cursor.execute("UPDATE aipicapstone.ETFS SET Rules = " + "'" + "'" + " WHERE(ETFID = " + '"' + str(etfID) + '"' + ");")
+    cursor.execute(
+        "UPDATE aipicapstone.ETFS SET Rules = " + "'" + "'" + " WHERE(ETFID = " + '"' + str(etfID) + '"' + ");")
     mydb.commit()
     # response = cursor.fetchall();
 
@@ -406,6 +413,7 @@ def clearrules():
     res = jsonify(res)
     mydb.close()
     return res
+
 
 @app.route("/deleteetf", methods=["POST"])
 def deleteetf():
@@ -430,9 +438,9 @@ def deleteetf():
     mydb.close()
     return res
 
+
 @app.route("/export", methods=["POST"])
 def export():
-
     data = request.get_json()
     userID = data['Data'][0]
     ETFname = data['Data'][1]
@@ -445,7 +453,9 @@ def export():
 
     cursor = mydb.cursor(buffered=True)
 
-    cursor.execute("SELECT * FROM aipicapstone.ETFS WHERE UserID = " + '"' + str(userID) + '"' + " AND ETFName = " + '"' + str(ETFname) + '"' + ";")
+    cursor.execute(
+        "SELECT * FROM aipicapstone.ETFS WHERE UserID = " + '"' + str(userID) + '"' + " AND ETFName = " + '"' + str(
+            ETFname) + '"' + ";")
     response = cursor.fetchall();
     # print(response)
 
@@ -455,7 +465,7 @@ def export():
         count = cursor.fetchall();
         count = count[0][0]
         # print(count)
-        etfs ='['
+        etfs = '['
         for i in range(count):
             etfs += '{"ETFID":"' + str(response[i][0]) + '",'
             etfs += '"UserID":"' + str(response[i][1]) + '",'
@@ -468,25 +478,26 @@ def export():
 
         etfs += "]"
 
-        res = '{ "status":"success", "Data":' + etfs +'}'
+        res = '{ "status":"success", "Data":' + etfs + '}'
         res = jsonify(res)
         mydb.close()
         return res
-    else:   #no ETFS found
+    else:  # no ETFS found
         res = '{ "status":"failure", "error":"ETF not found"}'
         res = jsonify(res)
         mydb.close()
         return res
 
+
 @app.route("/import", methods=["POST"])
-def import():
+def Import():
     data = request.get_json()
     userID = data['Data'][0]
     etfName = data['Data'][1]
     amountnew = data['Data'][2]
     rules = data['Data'][3]
     cdate = data['Data'][4]
-    
+
     # This is function that is first called that has the name of the new ETF and the amount
     # data is the array of the JSon of all the data recieved
 
@@ -535,5 +546,6 @@ def import():
         mydb.close()
         return res
 
+
 if __name__ == "__main__":
-        app.run("localhost", 6969)
+    app.run("localhost", 6969)
