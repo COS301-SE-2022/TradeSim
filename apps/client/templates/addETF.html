@@ -17,17 +17,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="{{ url_for('static',filename='addETF.js') }}"></script>
-{#     <script src="{{ url_for('static',filename='rules.js') }}"></script>#}
     <title>TradeSim Add ETF</title>
     </head>
 
 <body>
 <div class="container">
-
-            <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon"/>
-            <label for="menu-icon"></label>
-
-            <nav class="nav-extended">
+    <div class="main-div">
+     <nav class="nav-extended">
                 <div class="nav-wrapper">
                   <a class="logo" href="https://epiuselabs.com" target="_blank"><img src="static/EPI-USELabs_Logo_White.png" height="50"></a>
                   <a href="#" class="brand-logo center">TradeSim</a>
@@ -41,51 +37,23 @@
                       <li class="tab"><a href="/home">Home</a></li>
                       <li class="tab"><a href="/addETF">Manage</a></li>
                       <li class="tab"><a href="/compare-date">Compare</a></li>
-                      <li class="tab"><a href="/addRule">Tickers</a></li>
+                      <li class="tab"><a href="/ticker">Tickers</a></li>
                   </ul>
                 </div>
             </nav>
-
         <div class="main-body">
             <div class="row">
                 <div class="col-lg-3 col-md-3">
                     <a class="waves-effect waves-light btn blue" style="width: 100%; margin-top: 8px"><i class="material-icons left">add</i>NEW ETF</a>
                     <table class="highlight">
                         <div class="collection" id="collection">
-
-{#                            <script>getETFS()</script>#}
-
-{#                             <div class="amount-input-row">#}
-                <div class="card2" id="etfbody" style="width:108% ; position: relative; bottom: 12pt; right: 1%">
-
-                    <div class="custom-select" >
-
-                        <select id ="options">
-                          <option value="" disabled selected hidden>Choose ETF:</option>
-                            <script>getETFS()</script>
-
-                        </select>
-                    </div>
-
-{#                    <a class="collection-item"><i class="material-icons right blue-text"><button class="create-btn"   onclick="confirm()" >Confirm </button></i></a>#}
-                     <a class="waves-effect waves-light btn blue right" onclick="confirm()"> Confirm </a>
-
-
-
-{#                </div>#}
-
-
-{#                            <a class="collection-item">ETF 1<i class="material-icons right blue-text">delete</i></a>#}
-{#                            <a class="collection-item">ETF 2<i class="material-icons right blue-text">delete</i></a>#}
-{#                            <a class="collection-item">ETF 3<i class="material-icons right blue-text">delete</i></a>#}
-{#                            <script>getETFS()</script>#}
+                            <a class="collection-item">ETF 1<i class="material-icons right blue-text">delete</i></a>
+                            <a class="collection-item">ETF 2<i class="material-icons right blue-text">delete</i></a>
+                            <a class="collection-item">ETF 3<i class="material-icons right blue-text">delete</i></a>
                         </div>
-                        </div>
-
+{#                        <script>getETFS()</script>#}
                     </table>
-
                 </div>
-
                 <div class="col-lg-9 col-md-9">
                     <div class="card horizontal">
 
@@ -94,15 +62,14 @@
                            <span class="card-title activator grey-text text-darken-4"><i class="material-icons left">info</i> Details </span>
                         </div>
                         <div class="card-action">
-                          <div class="input-field col s6" >
-                          {# <i class="material-icons left">show_chart</i> #}<input id="etfName" required class="input" type="text" class="validate">
-                          <label for="first_name" >ETF Name</label>
+                          <div class="input-field col s6">
+                          {# <i class="material-icons left">show_chart</i> #}<input id="first_name" type="text" class="validate">
+                          <label for="first_name">ETF Name</label>
                         </div>
-                        <div class="input-field col s6" >
-                         <input id="etfAmount" required class="input" type="text" class="validate">
+                        <div class="input-field col s6">
+                         <input id="last_name" type="text" class="validate">
                            {#<i class="material-icons left">attach_money</i> #}<label for="last_name">Amount ($)</label>
                         </div>
-                              <div id="etfeditor"></div>
 
                             <a class="waves-effect waves-light btn blue right"> Save </a>
                             <a class="waves-effect waves-light btn blue right me-2"> Cancel </a>
@@ -111,45 +78,28 @@
 
                           <div class="card-content">
                           <span class="card-title activator grey-text text-darken-4"><i class="material-icons left">add</i> Add Rule </span>
-
                         </div>
-
                           <div class="card-action">
-                              <div id="ruleadder"></div>
-                              <div id="rule"></div>
+                              <select>
+                              <option value="" disabled selected>Choose your option</option>
+                              <option value="1">Option 1</option>
+                              <option value="2">Option 2</option>
+                              <option value="3">Option 3</option>
+                            </select>
 
-
-
-
-                        </select>
-
-{#                              <select>#}
-{#                              <option value="" disabled selected>Choose your option</option>#}
-{#                              <option value="1">Option 1</option>#}
-{#                              <option value="2">Option 2</option>#}
-{#                              <option value="3">Option 3</option>#}
-{#                            </select>#}
-
-
-
-
-
-{#                           <div class="input-field col s6">#}
-{#                          <input id="first_name" type="text" class="validate">#}
-{#                          <label for="first_name">Min ($)</label>#}
-{#                        </div>#}
-{#                        <div class="input-field col s6">#}
-{#                         <input id="last_name" type="text" class="validate">#}
-{#                         <label for="last_name">Max ($)</label>#}
-{#                        </div>#}
-
-
-                              <a class="waves-effect waves-light btn blue right" id=""> Add </a>
+                           <div class="input-field col s6">
+                          <input id="first_name" type="text" class="validate">
+                          <label for="first_name">Min ($)</label>
+                        </div>
+                        <div class="input-field col s6">
+                         <input id="last_name" type="text" class="validate">
+                         <label for="last_name">Max ($)</label>
+                        </div>
+                              <a class="waves-effect waves-light btn blue right"> Add </a>
                           </div>
                           <div class="card-content">
                           <span class="card-title activator grey-text text-darken-4"><i class="material-icons left">menu</i> All Rules </span>
-                           <div id="ruleslist"></div>
-
+                          <p>list all rules here</p>
                         </div>
                       </div>
                     </div>
