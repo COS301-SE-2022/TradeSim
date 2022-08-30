@@ -150,3 +150,5 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum)
 
 
 }
+
+
