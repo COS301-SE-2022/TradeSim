@@ -2,15 +2,15 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!--Bootstrap Link-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
     <!--Bootstrap Icons-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"/>
     <!--Bootstrap JS-->
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/main.css') }}">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- Compiled and minified JavaScript -->
@@ -22,48 +22,89 @@
 </head>
 
 <body>
-        <div class="container">
-            <nav class="nav-extended">
-                <div class="nav-wrapper">
-                  <a class="logo" href="https://epiuselabs.com" target="_blank"><img src="static/EPI-USELabs_Logo_White.png" height="50"></a>
-                  <a href="#" class="brand-logo center">TradeSim</a>
-                  <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                  <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="/login"><i class="material-icons">power_settings_new</i></a></li>
-                  </ul>
-                </div>
-                <div class="nav-content">
-                  <ul class="tabs tabs-transparent">
-                      <li class="tab"><a href="/home">Home</a></li>
-                      <li class="tab"><a href="/addETF">Manage</a></li>
-                      <li class="tab"><a href="/compare-date">Compare</a></li>
-                      <li class="tab"><a href="/ticker">Tickers</a></li>
-                  </ul>
-                </div>
-            </nav>
-
-        <div class="main-div">
-                <div class="main-body">
-                    <div class="row">
-                    <div class="create-header">
-{#                        <h1>Home</h1>#}
-                    </div>
-                </div>
-
-
-                <div class="create-header">
-{#                    <h2>Your ETF's</h2>#}
-                </div>
-                <div id="loading"></div>
-                <script>getETFS()</script>
-                <a id="etfs"> </a>
-
-              </div>
-
-          </div>
-          <div id="homeTab" class="col s12"></div>
-          <div id="manageTab" class="col s12"></div>
-          <div id="compareTab" class="col s12"></div>
+<div class="container">
+    <nav class="nav-extended">
+        <div class="nav-wrapper">
+            <a class="logo" href="https://epiuselabs.com" target="_blank"><img src="static/EPI-USELabs_Logo_White.png"
+                                                                               height="50"></a>
+            <a href="#" class="brand-logo center">TradeSim</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/login"><i class="material-icons">power_settings_new</i></a></li>
+            </ul>
         </div>
-    </body>
-  </html>
+        <div class="nav-content">
+            <ul class="tabs tabs-transparent">
+                <li class="tab"><a href="/home">Home</a></li>
+                <li class="tab"><a href="/addETF">Manage</a></li>
+                <li class="tab"><a href="/compare-date">Compare</a></li>
+                <li class="tab"><a href="/ticker">Tickers</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="row main-div">
+        <div class="col s10 main-body">
+            <div class="row">
+                <div class="create-header">
+                    {#                        <h1>Home</h1>#}
+                </div>
+            </div>
+
+
+            <div class="create-header">
+                {#                    <h2>Your ETF's</h2>#}
+            </div>
+            <div id="loading"></div>
+            <script>getETFS()</script>
+            <a id="etfs"> </a>
+
+        </div>
+        <div class="col s2">
+            <ul class="collection">
+                {#                <li class="collection-header"><h4>News</h4></li>#}
+                <li class="collection-item avatar">
+                    <img src="https://images.unsplash.com/photo-1632507127573-f4098f6f027f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                         alt="" class="circle">
+                    <span class="title">Headline</span>
+                    <p>ticker name <br>
+                        more info
+                    </p>
+                    <a href="#!" class="secondary-content"><i class="material-icons">open_in_new</i></a>
+                </li>
+                <li class="collection-item avatar">
+                    <img src="https://images.unsplash.com/photo-1632507127573-f4098f6f027f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                         alt="" class="circle">
+                    <span class="title">Headline</span>
+                    <p>ticker name <br>
+                        more info
+                    </p>
+                    <a href="#!" class="secondary-content"><i class="material-icons">open_in_new</i></a>
+                </li>
+                <li class="collection-item avatar">
+                    <img src="https://images.unsplash.com/photo-1632507127573-f4098f6f027f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                         alt="" class="circle">
+                    <span class="title">Headline</span>
+                    <p>ticker name <br>
+                        more info
+                    </p>
+                    <a href="#!" class="secondary-content"><i class="material-icons">open_in_new</i></a>
+                </li>
+                <li class="collection-item avatar">
+                    <img src="https://images.unsplash.com/photo-1632507127573-f4098f6f027f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                         alt="" class="circle">
+                    <span class="title">Headline</span>
+                    <p>ticker name <br>
+                        more info
+                    </p>
+                    <a href="#!" class="secondary-content"><i class="material-icons">open_in_new</i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="homeTab" class="col s12"></div>
+    <div id="manageTab" class="col s12"></div>
+    <div id="compareTab" class="col s12"></div>
+</div>
+</body>
+</html>
