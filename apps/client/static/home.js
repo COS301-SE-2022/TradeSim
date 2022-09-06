@@ -154,7 +154,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum)
 function getNews() {
     const details =
         {
-           "category": "general"
+           "category": "crypto"
         }
     fetch("http://127.0.0.1:6969/news",
         {
@@ -183,8 +183,8 @@ function getNews() {
 
 
             for (let i = 0; i < 10; i++ ) {
-                document.getElementById("response").innerHTML += `<tr><td>${data['Company Name']}</td><td>${data.Ticker}</td><td>${data.Sector}</td><td>${data.Summary}</td></tr>`;
-                getGraph(graphName, obj);
+                console.log("THE DATA: " + data[i].headline);
+                document.getElementById("news-col").innerHTML += `<li class="collection-item avatar"><img src=${data[i].image} class="circle"><span class="title">${data[i].headline}</span><p>${data[i].summary}</p><a href="${data[i].url}" class="secondary-content" target="_blank"><i class="material-icons">open_in_new</i></a></li>`;
             }
         });
 }
