@@ -61,6 +61,17 @@
 
         </div>
         <div class="col-4">
+            <a class='dropdown-trigger btn blue col-12 mt-2' href='#' data-target='dropdown'>Category</a>
+            <!-- Dropdown Structure -->
+            <ul id='dropdown' class='dropdown-content'>
+                <li value="general" onclick="getNews('general')"><a href="#!">General</a></li>
+                <li class="divider" tabindex="-1"></li>
+                <li value="crypto" onclick="getNews('crypto')"><a href="#!">Crypto</a></li>
+                <li class="divider" tabindex="-1"></li>
+                <li value="forex" onclick="getNews('forex')"><a href="#!">Forex</a></li>
+                <li class="divider" tabindex="-1"></li>
+                <li value="merger" onclick="getNews('merger')"><a href="#!">Merger</a></li>
+            </ul>
             <ul class="collection" id="news-col">
                 {#                <li class="collection-header"><h4>News</h4></li>#}
 
