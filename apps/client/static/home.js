@@ -55,7 +55,7 @@ function getETFS()
 
 
          }
-
+        getNews();
 
      });
 }
@@ -151,4 +151,41 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum)
 
 }
 
+function getNews() {
+    const details =
+        {
+           "category": "general"
+        }
+    fetch("http://127.0.0.1:6969/news",
+        {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            // Strigify the payload into JSON:
+            body: JSON.stringify(details)
+        }
+    ).then(response => response.json())
+        .then(data => {
+            console.log("data", data)
+            //date: "2022-09-06"
+            // headline
+            // "Energy Trade Risks Collapsing Over Margin Calls of $1.5 Trillion"
+            // image
+            // "https://data.bloomberglp.com/company/sites/2/2019/01/logobbg-wht.png"
+            // source
+            // "Bloomberg"
+            // summary
+            // "European energy trading risks grinding to a halt unless governments extend liquidity to cover margin calls of at least $1.5 trillion, according to Norwegian energy company Equinor ASA."
+            // url
+            // "https://www.bloomberg.com/news/articles/2022-09-06/energy-t
+
+
+            for (let i = 0; i < 10; i++ ) {
+                document.getElementById("response").innerHTML += `<tr><td>${data['Company Name']}</td><td>${data.Ticker}</td><td>${data.Sector}</td><td>${data.Summary}</td></tr>`;
+                getGraph(graphName, obj);
+            }
+        });
+}
 
