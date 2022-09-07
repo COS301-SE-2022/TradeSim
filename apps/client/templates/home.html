@@ -44,7 +44,7 @@
     </nav>
 
     <div class="row main-div">
-        <div class="col s10 main-body">
+        <div class="col-8 main-body">
             <div class="row">
                 <div class="create-header">
                     {#                        <h1>Home</h1>#}
@@ -60,45 +60,21 @@
             <a id="etfs"> </a>
 
         </div>
-        <div class="col s2">
-            <ul class="collection">
+        <div class="col-4">
+            <a class='dropdown-trigger btn blue col-12 mt-2' href='#' data-target='dropdown'>Category</a>
+            <!-- Dropdown Structure -->
+            <ul id='dropdown' class='dropdown-content'>
+                <li value="general" onclick="getNews('general')"><a href="#!">General</a></li>
+                <li class="divider" tabindex="-1"></li>
+                <li value="crypto" onclick="getNews('crypto')"><a href="#!">Crypto</a></li>
+                <li class="divider" tabindex="-1"></li>
+                <li value="forex" onclick="getNews('forex')"><a href="#!">Forex</a></li>
+                <li class="divider" tabindex="-1"></li>
+                <li value="merger" onclick="getNews('merger')"><a href="#!">Merger</a></li>
+            </ul>
+            <ul class="collection" id="news-col">
                 {#                <li class="collection-header"><h4>News</h4></li>#}
-                <li class="collection-item avatar">
-                    <img src="https://images.unsplash.com/photo-1632507127573-f4098f6f027f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                         alt="" class="circle">
-                    <span class="title">Headline</span>
-                    <p>ticker name <br>
-                        more info
-                    </p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">open_in_new</i></a>
-                </li>
-                <li class="collection-item avatar">
-                    <img src="https://images.unsplash.com/photo-1632507127573-f4098f6f027f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                         alt="" class="circle">
-                    <span class="title">Headline</span>
-                    <p>ticker name <br>
-                        more info
-                    </p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">open_in_new</i></a>
-                </li>
-                <li class="collection-item avatar">
-                    <img src="https://images.unsplash.com/photo-1632507127573-f4098f6f027f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                         alt="" class="circle">
-                    <span class="title">Headline</span>
-                    <p>ticker name <br>
-                        more info
-                    </p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">open_in_new</i></a>
-                </li>
-                <li class="collection-item avatar">
-                    <img src="https://images.unsplash.com/photo-1632507127573-f4098f6f027f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                         alt="" class="circle">
-                    <span class="title">Headline</span>
-                    <p>ticker name <br>
-                        more info
-                    </p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">open_in_new</i></a>
-                </li>
+
             </ul>
         </div>
     </div>
