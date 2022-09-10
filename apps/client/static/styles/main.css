@@ -489,5 +489,22 @@ h1{
 .menu-icon:checked ~ .nav ul li:nth-child(4){
   transition-delay: 1640ms;
 }
-
+#loader{
+    display: none;
+}
+#graph-content{
+    display: none;
+}
+#news-content{
+    display: none;
+}
+#loader.show{
+    display: inline-block;
+}
+#graph-content.show{
+    display: inline-block;
+}
+#news-content.show{
+    display: inline-block;
+}
 
