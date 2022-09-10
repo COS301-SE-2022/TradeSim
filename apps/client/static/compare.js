@@ -150,12 +150,20 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum)
         };
 
     Plotly.newPlot("chart" + String(chartnum), data2, layout);
-    document.getElementById("notes" + chartnum).innerHTML = "Cash Overflow: " + data.CashOverFlow + "<br>Stocks: <br>"
+    document.getElementById("notes" + chartnum).innerHTML = "Cash Overflow: " + data.CashOverFlow[details2.date] + "<br>Stocks: <br>"
 
      var i = 1;
      for(key in data.Stocks)
      {
-         document.getElementById("notes" + chartnum).innerHTML += key + " = " + data.Stocks[key] + " "
+         var stocks = "";
+         for (x in data.Stocks[x]){
+             // console.log((x));
+             // console.log((data.Stocks));
+             // console.log((data.Stocks[x]));
+             stocks += data.Stocks[x];
+         }
+         console.log(stocks);
+         document.getElementById("notes" + chartnum).innerHTML += key + " = " + stocks + " "
 
          if(i % 5 == 0)
          {

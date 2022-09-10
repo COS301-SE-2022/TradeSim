@@ -149,7 +149,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
 function getNews(value) {
     value = value || "";
 
-    console.log("cat",value)
+    console.log("cat", value)
     if (value != "") {
         details =
             {
@@ -191,7 +191,7 @@ function getNews(value) {
             var disp = ``;
             for (let i = 0; i < 10; i++) {
                 console.log("THE DATA: " + data[i].headline);
-                 disp += `<li class="collection-item avatar"><img src=${data[i].image} class="circle"><span class="title">${data[i].headline}</span><p>${data[i].summary}</p><a href="${data[i].url}" class="secondary-content" target="_blank"><i class="material-icons">open_in_new</i></a></li>`;
+                disp += `<li class="collection-item avatar"><div class="col-11"><img src=${data[i].image} class="circle"><span class="title">${data[i].headline}</span><p>${data[i].summary}</p></div><div class="col-1"><a href="${data[i].url}" class="secondary-content" target="_blank"><i class="material-icons">open_in_new</i></a></div></li>`;
             }
 
             document.getElementById("news-col").innerHTML = disp;
