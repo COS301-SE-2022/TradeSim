@@ -44,7 +44,12 @@
     </nav>
 
     <div class="row main-div">
-        <div class="col-8 main-body">
+        <div id="loader">
+            <div class="progress">
+                <div class="indeterminate"></div>
+            </div>
+        </div>
+        <div id="graph-content" class="col-8 main-body">
             <div class="row">
                 <div class="create-header">
                     {#                        <h1>Home</h1>#}
@@ -60,7 +65,7 @@
             <a id="etfs"> </a>
 
         </div>
-        <div class="col-4">
+        <div id="news-content" class="col-4">
             <a class='dropdown-trigger btn blue col-12 mt-2' href='#' data-target='dropdown'>Category</a>
             <!-- Dropdown Structure -->
             <ul id='dropdown' class='dropdown-content'>

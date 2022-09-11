@@ -6,9 +6,12 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 })
 
-function getETFS() {
-    var userID = getUserID()
 
+function getETFS() {
+    const loaderDiv = document.getElementById('loader');
+    loaderDiv.classList.add('show');
+
+    var userID = getUserID();
     const details =
         {
             "Data": [userID]
@@ -37,9 +40,9 @@ function getETFS() {
 
                 document.getElementById("etfs").innerHTML += "<table id='table1'>"
 
-                for (var i = 0; i < numofetfs; i++) {
-                    document.getElementById("loading").innerHTML += "<a id='load" + i + "'>" + jd.Data[i].ETFName + " LOADING... <br></a>"
-                }
+                // for (var i = 0; i < numofetfs; i++) {
+                //     document.getElementById("loading").innerHTML += "<a id='load" + i + "'>" + jd.Data[i].ETFName + " LOADING... <br></a>"
+                // }
 
                 for (var i = 0; i < numofetfs; i++) {
 
@@ -120,7 +123,10 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
             }
             console.log(xA)
             console.log(yA)
-
+            const mainContent1 = document.getElementById('graph-content');
+            mainContent1.classList.add('show');
+            const loaderDiv = document.getElementById('loader');
+            loaderDiv.classList.remove('show');
             var data = [{
                 x: xA,
                 y: yA,
@@ -131,7 +137,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
                 {
                     xaxis: {title: "date"},
                     yaxis: {title: "price in dollars"},
-                    title: name
+                    title: `<a href="/addETF">${name}</a>`
                 };
 
             Plotly.newPlot(String(chartnum), data, layout);
@@ -195,6 +201,8 @@ function getNews(value) {
             }
 
             document.getElementById("news-col").innerHTML = disp;
+            const mainContent2 = document.getElementById('news-content');
+            mainContent2.classList.add('show');
         });
 }
 
