@@ -2,6 +2,8 @@ var graphName;
 var obj;
 
 function searchTicker() {
+    const loaderDiv = document.getElementById('loader');
+    loaderDiv.classList.add('show');
     var showTable = document.getElementById("results");
     if (showTable.style.display === "none") {
         showTable.style.display = "block";
@@ -31,6 +33,8 @@ function searchTicker() {
             console.log("name of Graph", graphName);
             obj = data.PriceHistory;
             console.log("Price History", obj);
+            const loaderDiv = document.getElementById('loader');
+            loaderDiv.classList.remove('show');
             if (data.Ticker != null) {
                 document.getElementById("response").innerHTML = `<tr><td>${data['Company Name']}</td><td>${data.Ticker}</td><td>${data.Sector}</td><td>${data.Summary}</td></tr>`;
                 getGraph(graphName, obj);

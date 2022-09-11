@@ -1,0 +1,11 @@
+nav {
+    background-color: #3F5161 !important;
+}
+
+#loader {
+    display: none;
+}
+
+#loader.show {
+    display: inline-block;
+}
