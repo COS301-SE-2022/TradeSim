@@ -137,7 +137,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
                 {
                     xaxis: {title: "date"},
                     yaxis: {title: "price in dollars"},
-                    title: name
+                    title: `<a href="/addETF">${name}</a>`
                 };
 
             Plotly.newPlot(String(chartnum), data, layout);
