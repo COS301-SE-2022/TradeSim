@@ -12,3 +12,7 @@ nav {
 #results{
     display: none;
 }
+
+#results.show{
+    display: inline-block;
+}
