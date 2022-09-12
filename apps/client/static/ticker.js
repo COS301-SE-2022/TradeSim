@@ -4,10 +4,6 @@ var obj;
 function searchTicker() {
     const loaderDiv = document.getElementById('loader');
     loaderDiv.classList.add('show');
-    var showTable = document.getElementById("results");
-    if (showTable.style.display === "none") {
-        showTable.style.display = "block";
-    }
     var tick = document.getElementById('tickerInput').value;
     tick = tick.toUpperCase();
     console.log(tick);
@@ -35,11 +31,19 @@ function searchTicker() {
             console.log("Price History", obj);
             const loaderDiv = document.getElementById('loader');
             loaderDiv.classList.remove('show');
+            var showTable = document.getElementById("results");
+            if (!showTable.classList.contains('show')){
+                showTable.classList.add('show');
+            }
             if (data.Ticker != null) {
-                document.getElementById("response").innerHTML = `<tr><td>${data['Company Name']}</td><td>${data.Ticker}</td><td>${data.Sector}</td><td>${data.Summary}</td></tr>`;
+                document.getElementById("card-title").innerHTML = `<div class="row"><div class="col-8">${data.Ticker}:${data['Company Name']}</div><div class="col-4"><img src=${data.Logo} height="100%" width="100%"></div></div>`;
+                console.log(data['Company Name']);
+                document.getElementById("response").innerHTML = `<table><tbody><tr><td><b>Industry: </b>${data.Industry}</td></tr><tr><td>${data.Summary}</td></tr></tbody></table>`;
                 getGraph(graphName, obj);
             } else {
-                document.getElementById("response").innerHTML = `<tr><td>Company with ticker name: <b>${tick}</b> not found. Did you mean: <b>${data.PossibleStock}</b>?</td></tr>`;
+                document.getElementById("card-title").innerHTML = 'Error 404';
+                document.getElementById("notes").innerHTML = '';
+                document.getElementById("response").innerHTML = `<table><tbody><tr><td>Company with ticker name: <b>${tick}</b> not found. Did you mean: <b>${data.PossibleStock}</b>?</td></tr></tbody></table>`;
             }
         });
 }

@@ -9,3 +9,10 @@ nav {
 #loader.show {
     display: inline-block;
 }
+#results{
+    display: none;
+}
+
+#results.show{
+    display: inline-block;
+}
