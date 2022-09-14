@@ -147,23 +147,23 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
                 const loaderDiv = document.getElementById('loader-compare');
                 loaderDiv.classList.remove('show');
             }
-            document.getElementById("notes" + chartnum).innerHTML = "Cash Overflow: " + data.CashOverFlow[details2.date] + "<br>Stocks: <br>"
+            document.getElementById("notes" + chartnum).innerHTML = "Cash Overflow: $" + data.CashOverFlow[details2.date] + "<br>Stocks: <br>"
 
-            const loaderDiv = document.getElementById('loader');
-            loaderDiv.classList.remove('show');
-            console.log("SHARE");
+            // const loaderDiv = document.getElementById('loader');
+            // loaderDiv.classList.remove('show');
+            // console.log("SHARE");
 
             var i = 1;
             for (key in data.Stocks) {
                 var stocks = "";
-                for (x in data.Stocks[x]) {
-                    // console.log((x));
-                    // console.log((data.Stocks));
-                    // console.log((data.Stocks[x]));
-                    stocks += data.Stocks[x];
+                for (x in data.Stocks) {
+                    let arr = data.Stocks[x];
+                    for (const key in arr) {
+                        // console.log(`${key}: ${arr[key]}`);
+                        stocks += `${key}: ${arr[key]} `;
+                    }
                 }
-                console.log(stocks);
-                document.getElementById("notes" + chartnum).innerHTML += key + " = " + stocks + " "
+                document.getElementById("notes" + chartnum).innerHTML += key + " = " + '<br/>' + stocks + " "
 
                 if (i % 5 == 0) {
                     document.getElementById("notes" + chartnum).innerHTML += '<br>'
@@ -179,6 +179,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
 
             // document.getElementById("notes" + chartnum).innerHTML = ""
         }).catch((error) => {
+        console.log("Error Notes: ", error);
         document.getElementById("notes" + chartnum).innerHTML = name + " could not generate ETF<br>"
         // alert( "ETF " + name + " does not generate any stocks!")
     });
