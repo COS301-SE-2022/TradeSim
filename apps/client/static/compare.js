@@ -146,6 +146,12 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
             if (graphCount == 2) {
                 const loaderDiv = document.getElementById('loader-compare');
                 loaderDiv.classList.remove('show');
+
+                const showTbl1 = document.getElementById('tblnotes1');
+                showTbl1.classList.add('tblComp');
+
+                const showTbl2 = document.getElementById('tblnotes2');
+                showTbl2.classList.add('tblComp');
             }
             document.getElementById("notes" + chartnum).innerHTML = `<span class="card-title">Cash Overflow: $${data.CashOverFlow[details2.date]}</span><br>`;
 
@@ -163,7 +169,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
                         stocks += `<tr><td>${key}</td><td>${arr[key]}</td></tr> `;
                     }
                 }
-                document.getElementById("notes" + chartnum).innerHTML += `<table class="striped"><thead><tr><th>Name</th><th>Share</th></tr></thead><tbody>${stocks}</tbody></table>`;
+                document.getElementById("notes" + chartnum).innerHTML += `<table class="striped"><thead><tr><th>Stock Name</th><th>Share</th></tr></thead><tbody>${stocks}</tbody></table>`;
 
                 if (i % 5 == 0) {
                     document.getElementById("notes" + chartnum).innerHTML += '<br>'

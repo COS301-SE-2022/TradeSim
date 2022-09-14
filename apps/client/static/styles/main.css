@@ -574,7 +574,7 @@ tr, td, table, tbody {
     border-collapse: collapse;
 }
 
-#tblComp {
+.tblComp {
     height: 400px;
     overflow-y: scroll;
     /*-ms-overflow-style: none; !* IE and Edge *!*/
