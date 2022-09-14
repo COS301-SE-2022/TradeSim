@@ -169,7 +169,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
                         stocks += `<tr><td>${key}</td><td>${arr[key]}</td></tr> `;
                     }
                 }
-                document.getElementById("notes" + chartnum).innerHTML += `<table class="striped"><thead><tr><th>Stock Name</th><th>Share</th></tr></thead><tbody>${stocks}</tbody></table>`;
+                document.getElementById("notes" + chartnum).innerHTML += `<table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody>${stocks}</tbody></table>`;
 
                 if (i % 5 == 0) {
                     document.getElementById("notes" + chartnum).innerHTML += '<br>'
