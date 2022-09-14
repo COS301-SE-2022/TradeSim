@@ -53,6 +53,10 @@ nav {
     left: 420%;
 }
 
+.logo img {
+    padding: 10px 0 0 15px;
+}
+
 input {
     width: 276px;
     padding: 12px;
