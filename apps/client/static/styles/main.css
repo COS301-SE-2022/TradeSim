@@ -573,3 +573,14 @@ tr, td, table, tbody {
     border: 0 hidden;
     border-collapse: collapse;
 }
+
+#tblComp {
+    height: 400px;
+    overflow-y: scroll;
+    /*-ms-overflow-style: none; !* IE and Edge *!*/
+    /*scrollbar-width: none; !* Firefox *!*/
+}
+
+/*#tblComp::-webkit-scrollbar {*/
+/*    display: none;*/
+/*}*/
