@@ -584,3 +584,7 @@ tr, td, table, tbody {
 /*#tblComp::-webkit-scrollbar {*/
 /*    display: none;*/
 /*}*/
+
+#jsonfileinput{
+    border: none;
+}
