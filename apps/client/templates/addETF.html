@@ -23,7 +23,7 @@
 </head>
 
 <body>
-<div class="container">
+<div>
     <nav class="nav-extended">
         <div class="nav-wrapper">
             <a class="logo" href="https://epiuselabs.com" target="_blank"><img src="static/EPI-USELabs_Logo_White.png"
@@ -112,7 +112,7 @@
                             <div id="etfeditor"></div>
                             {#                            <a class="waves-effect waves-light btn blue right"  onclick="validatenaa()"> Save </a>#}
                             {#onclick="editname()"#}
-                            <a class="waves-effect waves-light btn blue right me-2" onclick="deleteETF()"> Delete
+                            <a class="waves-effect waves-light btn blue right" onclick="deleteETF()"> Delete
                                 ETF</a>
 
 
@@ -149,7 +149,7 @@
                             <div class="row">
                                 <div class="col-8"><span class="card-title activator grey-text text-darken-4"><i
                                         class="material-icons left">menu</i> All Rules </span></div>
-                                <div class="col-4"><input type="file" id="jsonfileinput"/><a class="waves-effect waves-light btn blue right" id="importBtn"> Import </a><a class="waves-effect waves-light btn blue right me-2" onclick="exportRules()"> Export </a></div>
+                                <div class="col-4">{# <input type="file" id="jsonfileinput"/><a class="waves-effect waves-light btn blue right" id="importBtn"> Import </a> #}<a class="waves-effect waves-light btn blue right" onclick="exportRules()"> Export </a>
                             </div>
                             <div id="ruleslist"></div>
 
