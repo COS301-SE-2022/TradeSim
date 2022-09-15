@@ -1,7 +1,9 @@
 nav {
     background-color: #3F5161 !important;
 }
-
+.logo img {
+    padding: 10px 0 0 15px;
+}
 #loader {
     display: none;
 }
