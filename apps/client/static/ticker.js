@@ -41,7 +41,7 @@ function searchTicker() {
                 document.getElementById("response").innerHTML = `<table><tbody><tr><td><b>Industry: </b>${data.Industry}</td></tr><tr><td>${data.Summary}</td></tr></tbody></table>`;
                 getGraph(graphName, obj);
             } else {
-                document.getElementById("card-title").innerHTML = 'Error 404';
+                document.getElementById("card-title").innerHTML = `Ticker: "${tick}" does not exist.`;
                 document.getElementById("notes").innerHTML = '';
                 document.getElementById("response").innerHTML = `<table><tbody><tr><td>Company with ticker name: <b>${tick}</b> not found. Did you mean: <b>${data.PossibleStock}</b>?</td></tr></tbody></table>`;
             }
