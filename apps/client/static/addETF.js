@@ -3,19 +3,19 @@ var string = "hello";
 var impJSON = [];
 var selectedValuee = "";
 var exportValues = new Array();
-window.onload = function () {
-    document.getElementById("jsonfileinput").addEventListener("change", function () {
-        var file_to_read = document.getElementById("jsonfileinput").files[0];
-        var fileread = new FileReader();
-        fileread.onload = function (e) {
-            var content = e.target.result;
-            const objImport = JSON.parse(content);
-            console.log(objImport);
-            impJSON.push(objImport);
-        };
-        fileread.readAsText(file_to_read);
-    });
-}
+// window.onload = function () {
+//     document.getElementById("jsonfileinput").addEventListener("change", function () {
+//         var file_to_read = document.getElementById("jsonfileinput").files[0];
+//         var fileread = new FileReader();
+//         fileread.onload = function (e) {
+//             var content = e.target.result;
+//             const objImport = JSON.parse(content);
+//             console.log(objImport);
+//             impJSON.push(objImport);
+//         };
+//         fileread.readAsText(file_to_read);
+//     });
+// }
 
 function validatenaa() {
 
@@ -1524,16 +1524,6 @@ function getRules() {
                 // document.getElementById("etfbody").innerHTML = jd.error
             } else {
                 console.log(jd);
-                document.getElementById('importBtn').onclick = function () {
-                    for (var x = 0; x < jd.Data.Length; x++) {
-                        if (jd.Data[x].ETFName == selectedValuee) {
-                            console.log("b4 JSON: ", jd.Data[x].Rules);
-                            jd.Data[x].Rules = impJSON;
-                            console.log("IMP JSON: ", impJSON);
-                            console.log("aftr JSON: ", jd.Data[x].Rules);
-                        }
-                    }
-                }
                 let numofetfs = jd.Data.length;
                 document.getElementById("ruleslist").innerHTML = '';
 
@@ -4364,3 +4354,13 @@ function exportRules() {
     document.body.removeChild(anchor);
 }
 
+// function importRules() {
+//     for (var x = 0; x < jd.Data.Length; x++) {
+//         if (jd.Data[x].ETFName == selectedValuee) {
+//             console.log("b4 JSON: ", jd.Data[x].Rules);
+//             jd.Data[x].Rules = impJSON;
+//             console.log("IMP JSON: ", impJSON);
+//             console.log("aftr JSON: ", jd.Data[x].Rules);
+//         }
+//     }
+// }
