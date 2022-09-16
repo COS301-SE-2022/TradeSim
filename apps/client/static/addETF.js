@@ -751,21 +751,6 @@ function addRule() {
             '</div>'
     }
 
-    if (document.getElementById('r17').selected == true) {
-        counter++;
-        rule.innerHTML = '<b >' + document.getElementById('r17').textContent + '</b>' + //style="color: black; position: relative; bottom: 180px; right: 10px;"
-            '<div class="amount-input-row">' +
-            '<div class="card2" id="etfbody" >' + //style="width:1125px ; position: relative; bottom: 110px; right: 12px"
-            //  '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Rule:</b></label>' +
-            '<div class="custom-select" >' + //style="display: inline-block; position: relative; top:5px; left:25px;"
-            '<input type="text" placeholder="Percentage drops" >' + //style=" width:350px; height:25px; font-size: 12px; "
-            // '<button class="create-btn" id="btn17"  onclick="ConfirmRule("201")">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 550px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(201)" >add</a>' +
-            '</div>' +
-            '</div>' +
-            '</div>'
-    }
-
     if (document.getElementById('r18').selected == true) {
         counter++;
         rule.innerHTML = '<b >' + document.getElementById('r18').textContent + '</b>' + //style="color: black; position: relative; bottom: 130px; right: 10px;"
@@ -773,7 +758,7 @@ function addRule() {
             '<div class="card2" id="etfbody">' + // style="width:1125px ; position: relative; bottom: 70px; right: 12px"
             // '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Rule:</b></label>' +
             '<div class="custom-select" >' + //style="display: inline-block; position: relative; top:5px; left:25px;"
-            '<input type="text" placeholder="Number of weeks until reconsideration" >' + //style=" width:350px; height:25px; font-size: 12px; "
+            '<input id="inputw" type="text" placeholder="Number of weeks until reconsideration" >' + //style=" width:350px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn18"  onclick="ConfirmRule("202")">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 550px; bottom: 1px;"
             '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(202)" >add</a>' +
             '</div>' +
@@ -1345,20 +1330,6 @@ function addRule2() {
             '</div>'
     }
 
-    if (document.getElementById('r17').selected == true) {
-        counter++;
-        rule.innerHTML = '<b >' + document.getElementById('r17').textContent + '</b>' + //style="color: black; position: relative; bottom: 180px; right: 10px;"
-            '<div class="amount-input-row">' +
-            '<div class="card2" id="etfbody" >' + //style="width:1125px ; position: relative; bottom: 110px; right: 12px"
-            //  '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Rule:</b></label>' +
-            '<div class="custom-select" >' + //style="display: inline-block; position: relative; top:5px; left:25px;"
-            '<input type="text" placeholder="Percentage drops" >' + //style=" width:350px; height:25px; font-size: 12px; "
-            // '<button class="create-btn" id="btn17"  onclick="ConfirmRule("201")">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 550px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(201)" >add</a>' +
-            '</div>' +
-            '</div>' +
-            '</div>'
-    }
 
     if (document.getElementById('r18').selected == true) {
         counter++;
@@ -1367,7 +1338,7 @@ function addRule2() {
             '<div class="card2" id="etfbody">' + // style="width:1125px ; position: relative; bottom: 70px; right: 12px"
             // '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Rule:</b></label>' +
             '<div class="custom-select" >' + //style="display: inline-block; position: relative; top:5px; left:25px;"
-            '<input type="text" placeholder="Number of weeks until reconsideration" >' + //style=" width:350px; height:25px; font-size: 12px; "
+            '<input id="inputw" type="text" placeholder="Number of weeks until reconsideration" >' + //style=" width:350px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn18"  onclick="ConfirmRule("202")">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 550px; bottom: 1px;"
             '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(202)" >add</a>' +
             '</div>' +
@@ -1422,9 +1393,8 @@ function confirm() {
         "                          <option value=\"13\" id=\"r13\">Request the companies with the highest market cap</option>\n" +
         "                          <option value=\"14\" id=\"r14\">Invest in companies based in specific countries</option>\n" +
         "                          <option value=\"15\" id=\"r15\">Request the companies with the highest revenue</option>\n" +
-        "                          <option  value=\"16\" id=\"r16\">200: Set a balance period</option>\n" +
-        "                          <option  value=\"17\" id=\"r17\">201: The system must allow the user to define a percentage that a stock can drop before the ETF sells the stock automatically</option>\n" +
-        "                          <option  value=\"18\" id=\"r18\">202: The system must allow the user to set a time period in which it must reconsider its stocks</option>\n" +
+        "                          <option  value=\"16\" id=\"r16\">Set a balance period</option>\n" +
+        "                          <option  value=\"18\" id=\"r18\">Set reconsider period</option>\n" +
         "\n" +
         "                        </select>\n" +
         "                    </div>\n" +
@@ -1472,9 +1442,8 @@ function confirm2() {
         "                          <option value=\"13\" id=\"r13\">Request the companies with the highest market cap</option>\n" +
         "                          <option value=\"14\" id=\"r14\">Invest in companies based in specific countries</option>\n" +
         "                          <option value=\"15\" id=\"r15\">Request the companies with the highest revenue</option>\n" +
-        "                          <option  value=\"16\" id=\"r16\">200: Set a balance period</option>\n" +
-        "                          <option  value=\"17\" id=\"r17\">201: The system must allow the user to define a percentage that a stock can drop before the ETF sells the stock automatically</option>\n" +
-        "                          <option  value=\"18\" id=\"r18\">202: The system must allow the user to set a time period in which it must reconsider its stocks</option>\n" +
+        "                          <option  value=\"16\" id=\"r16\">Set a balance period</option>\n" +
+        "                          <option  value=\"18\" id=\"r18\">Set reconsider period</option>\n" +
         "\n" +
         "                        </select>\n" +
         "                    </div>\n" +
@@ -2204,6 +2173,9 @@ function getRules() {
                                 document.getElementById("ruleslist").innerHTML += "Request the companies with the highest revenue: " + jd.Data[i].Rules[j][1] + "<br>"
                             } else if (jd.Data[i].Rules[j][0] == "200") {
                                 document.getElementById("ruleslist").innerHTML += "Set a balance period: " + jd.Data[i].Rules[j][1] + "<br>"
+                            }
+                            else if (jd.Data[i].Rules[j][0] == "202") {
+                                document.getElementById("ruleslist").innerHTML += "Set a reconsider period: " + jd.Data[i].Rules[j][1] + "<br>"
                             }
 
 
@@ -2963,6 +2935,9 @@ function getRules2() {
                             } else if (jd.Data[i].Rules[j][0] == "200") {
                                 document.getElementById("ruleslist").innerHTML += "Set a balance period: " + jd.Data[i].Rules[j][1] + "<br>"
                             }
+                                     else if (jd.Data[i].Rules[j][0] == "202") {
+                                document.getElementById("ruleslist").innerHTML += "Set a reconsider period: " + jd.Data[i].Rules[j][1] + "<br>"
+                            }
 
 
                         }
@@ -3519,7 +3494,9 @@ async function ConfirmRule(rulecode) {
 
 
             });
-    } else if (rulecode == 200) {
+    }
+    else if (rulecode == 200)
+    {
         if (document.getElementById("inputw").value == '') {
             alert("please enter value")
             return
@@ -3531,6 +3508,50 @@ async function ConfirmRule(rulecode) {
         }
 
         rulecode = "200"
+        var eID = document.getElementById("options").value;
+        var param1 = document.getElementById("inputw").value
+        var param2 = "";
+        var param3 = "";
+
+        const details =
+            {
+                "Data": [eID, param1, param2, param3, rulecode]
+            }
+
+        fetch("http://127.0.0.1:6969/setRule",
+            {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                // Strigify the payload into JSON:
+                body: JSON.stringify(details)
+            }
+        ).then(response => response.json())
+            .then(data => {
+                console.log(data)
+                const jd = JSON.parse(data)
+                console.log(jd)
+                document.getElementById("rule").innerHTML = ""
+
+
+            });
+
+    }
+        else if (rulecode == 202)
+    {
+        if (document.getElementById("inputw").value == '') {
+            alert("please enter value")
+            return
+        }
+
+        if (document.getElementById("inputw").value < 1) {
+            alert("please enter valid time period")
+            return
+        }
+
+        rulecode = "202"
         var eID = document.getElementById("options").value;
         var param1 = document.getElementById("inputw").value
         var param2 = "";
@@ -4148,6 +4169,50 @@ async function ConfirmRule2(rulecode) {
         //  var eID = document.getElementById("options").value;
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
+        var param1 = document.getElementById("inputw").value
+        var param2 = "";
+        var param3 = "";
+
+        const details =
+            {
+                "Data": [eID, param1, param2, param3, rulecode]
+            }
+
+        fetch("http://127.0.0.1:6969/setRule",
+            {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                // Strigify the payload into JSON:
+                body: JSON.stringify(details)
+            }
+        ).then(response => response.json())
+            .then(data => {
+                console.log(data)
+                const jd = JSON.parse(data)
+                console.log(jd)
+                document.getElementById("rule").innerHTML = ""
+
+
+            });
+
+    }
+            else if (rulecode == 202)
+    {
+        if (document.getElementById("inputw").value == '') {
+            alert("please enter value")
+            return
+        }
+
+        if (document.getElementById("inputw").value < 1) {
+            alert("please enter valid time period")
+            return
+        }
+
+        rulecode = "202"
+        var eID = document.getElementById("options").value;
         var param1 = document.getElementById("inputw").value
         var param2 = "";
         var param3 = "";
