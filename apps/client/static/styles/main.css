@@ -597,6 +597,10 @@ tr, td, table, tbody {
 /*    display: none;*/
 /*}*/
 
-#jsonfileinput{
+#jsonfileinput {
     border: none;
+}
+
+.brand-logo {
+    font-family: 'Raleway';
 }

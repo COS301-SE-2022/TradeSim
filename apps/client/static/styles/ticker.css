@@ -1,9 +1,11 @@
 nav {
     background-color: #3F5161 !important;
 }
+
 .logo img {
     padding: 10px 0 0 15px;
 }
+
 #loader {
     display: none;
 }
@@ -11,10 +13,15 @@ nav {
 #loader.show {
     display: inline-block;
 }
-#results{
+
+#results {
     display: none;
 }
 
-#results.show{
+#results.show {
     display: inline-block;
+}
+
+.brand-logo {
+    font-family: 'Raleway';
 }
