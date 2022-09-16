@@ -573,6 +573,14 @@ h1 {
     display: block;
 }
 
+#tblnoteshome {
+    display: none;
+}
+
+#tblnoteshome.show {
+    display: block;
+}
+
 tr, td, table, tbody {
     border: 0 hidden;
     border-collapse: collapse;

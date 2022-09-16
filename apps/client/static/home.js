@@ -49,11 +49,10 @@ function getETFS() {
                     //  var retrievedObject = localStorage.getItem('ETFName');
                     // alert(retrievedObject);
 
-                   getGraph(jd.Data[i].ETFName, userID, jd.Data[i].ETFID, jd.Data[i].Rules, jd.Data[i].Amount, jd.Data[i].Date, i)
+                    getGraph(jd.Data[i].ETFName, userID, jd.Data[i].ETFID, jd.Data[i].Rules, jd.Data[i].Amount, jd.Data[i].Date, i)
 
 
                 }
-
 
 
                 document.getElementById("etfs").innerHTML += "</table>"
@@ -67,24 +66,25 @@ function getETFS() {
 
 function confirm() {
     //document.getElementById("etfs").innerHTML = '.';
-     var replace = document.getElementById("etfs");
-     var ddl = document.getElementById("options");
-      var selectedValue = ddl.options[ddl.selectedIndex].id;
+    var replace = document.getElementById("etfs");
+    var ddl = document.getElementById("options");
+    var selectedValue = ddl.options[ddl.selectedIndex].id;
+    const loaderDiv = document.getElementById('loader');
+    loaderDiv.classList.add('show');
 
+    //    info = document.getElementById("options" ) //.value
+    //
+    // // date = document.getElementById("selectdate").value;
+    //
+    //  console.log(info)
+    // // console.log(date)
+    //
+    //
+    //  //document.getElementById("notes" + chartnum).innerHTML = "LOADING... <br>"
+    //  getGraph2(info.ETFName, getUserID(), info.ETFID, info.Rules, info.Amount, info.date)
+    //
 
-   //    info = document.getElementById("options" ) //.value
-   //
-   // // date = document.getElementById("selectdate").value;
-   //
-   //  console.log(info)
-   // // console.log(date)
-   //
-   //
-   //  //document.getElementById("notes" + chartnum).innerHTML = "LOADING... <br>"
-   //  getGraph2(info.ETFName, getUserID(), info.ETFID, info.Rules, info.Amount, info.date)
-   //
-
- var userID = getUserID();
+    var userID = getUserID();
     const details =
         {
             "Data": [userID]
@@ -114,82 +114,69 @@ function confirm() {
                 document.getElementById("display").innerHTML += "<table id='table1'>" //etfs
 
                 for (var i = 0; i < numofetfs; i++) {
-                    document.getElementById("row" +i).innerHTML = '';
-                    if (selectedValue == jd.Data[i].ETFName)
-                    {
+                    document.getElementById("row" + i).innerHTML = '';
+                    if (selectedValue == jd.Data[i].ETFName) {
                         document.getElementById("table1").innerHTML += "<tr id='row" + i + "'></tr>"
-                    document.getElementById("row" + i).innerHTML += "<th>" +
-                        '<div id="' + i + '" style="width:100%;max-width:900px"></div>' +
-                        "</th></tr>"
-                      //  document.getElementById("etfs").innerHTML = '.'
-                   getGraph3(jd.Data[i].ETFName, userID, jd.Data[i].ETFID, jd.Data[i].Rules, jd.Data[i].Amount, jd.Data[i].Date, i)
+                        document.getElementById("row" + i).innerHTML += "<th>" +
+                            '<div id="' + i + '" style="width:100%;max-width:900px"></div>' +
+                            "</th></tr>"
+                        //  document.getElementById("etfs").innerHTML = '.'
+                        getGraph3(jd.Data[i].ETFName, userID, jd.Data[i].ETFID, jd.Data[i].Rules, jd.Data[i].Amount, jd.Data[i].Date, i)
                     }
 
                 }
 
 
-
-                document.getElementById("display").innerHTML += "</table>"
-
-
-
-                 //   replace.replaceChildren();
-
+                document.getElementById("display").innerHTML += "</table>";
+                //   replace.replaceChildren();
 
 
             }
 
         });
 
-
 }
 
 
-function getETFS2(){
+function getETFS2() {
     var userID = getUserID()
 
     const details =
-    {
-        "Data" : [userID]
-    }
+        {
+            "Data": [userID]
+        }
 
-   fetch("http://127.0.0.1:6969/getETFS",
-{
-    method: 'POST',
-    headers: {
-        'Content-type': 'application/json',
-        'Accept': 'application/json'
-    },
-    // Strigify the payload into JSON:
-    body:JSON.stringify(details)}
-     ).then(response=> response.json())
-         .then(data =>{
-         console.log(data)
-         const jd = JSON.parse(data)
-         if(jd.status == "failure")
-         {
-             console.log(jd.error);
-             document.getElementById("etfs").innerHTML = jd.error
-         }
-         else {
-             console.log(jd);
-             let numofetfs = jd.Data.length;
+    fetch("http://127.0.0.1:6969/getETFS",
+        {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            // Strigify the payload into JSON:
+            body: JSON.stringify(details)
+        }
+    ).then(response => response.json())
+        .then(data => {
+            console.log(data)
+            const jd = JSON.parse(data)
+            if (jd.status == "failure") {
+                console.log(jd.error);
+                document.getElementById("etfs").innerHTML = jd.error
+            } else {
+                console.log(jd);
+                let numofetfs = jd.Data.length;
 
-             for (var i = 0; i < numofetfs; i++) {
-                 document.getElementById("options").innerHTML +=
-                     "<option value=" + '"' + jd.Data[i].ETFID + '"' + " id=" + '"' + jd.Data[i].ETFName + '"'  +">" + jd.Data[i].ETFName + "</option>"
-             }
-
+                for (var i = 0; i < numofetfs; i++) {
+                    document.getElementById("options").innerHTML +=
+                        "<option value=" + '"' + jd.Data[i].ETFID + '"' + " id=" + '"' + jd.Data[i].ETFName + '"' + ">" + jd.Data[i].ETFName + "</option>"
+                }
 
 
-         }
+            }
 
 
-
-
-
-
-     });
+        });
 }
 
 function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
@@ -249,13 +236,13 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
                 {
                     xaxis: {title: "date"},
                     yaxis: {title: "price in dollars"},
-                    title: `<a id="selectedVal"  href="/ETFinfo">${name}</a>` // href="/ETFinfo"
+                    title: `${name}` // href="/ETFinfo"
                 };
 
 
-           Plotly.newPlot(String(chartnum), data, layout);
+            Plotly.newPlot(String(chartnum), data, layout);
 
-         // ****  document.getElementById("load" + chartnum).innerHTML = ""
+            // ****  document.getElementById("load" + chartnum).innerHTML = ""
             return
         }).catch((error) => {
 
@@ -382,7 +369,7 @@ function getGraph3(name, uID, etfid, rules, amount, date, chartnum) {
                     title: name
                 };
 
-            Plotly.newPlot( String(chartnum), data2, layout);
+            Plotly.newPlot(String(chartnum), data2, layout);
             // graphCount++;
             // console.log("GraphCount: ", graphCount);
             // if (graphCount == 2) {
@@ -395,7 +382,7 @@ function getGraph3(name, uID, etfid, rules, amount, date, chartnum) {
             //     const showTbl2 = document.getElementById('tblnotes2');
             //     showTbl2.classList.add('tblComp');
             // }
-            document.getElementById("notes" ).innerHTML = `<span class="card-title">Cash Overflow: $${data.CashOverFlow[details2.date]}</span><br>`;
+            document.getElementById("compnotes").innerHTML = `<span class="card-title">Cash Overflow: $${data.CashOverFlow[details2.date]}</span><br>`;
 
             // const loaderDiv = document.getElementById('loader');
             // loaderDiv.classList.remove('show');
@@ -411,10 +398,10 @@ function getGraph3(name, uID, etfid, rules, amount, date, chartnum) {
                         stocks += `<tr><td>${key}</td><td>${arr[key]}</td></tr> `;
                     }
                 }
-                document.getElementById("notes" ).innerHTML += `<table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody>${stocks}</tbody></table>`;
+                document.getElementById("compnotes").innerHTML += `<table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody>${stocks}</tbody></table>`;
 
                 if (i % 5 == 0) {
-                    document.getElementById("notes" ).innerHTML += '<br>'
+                    document.getElementById("compnotes").innerHTML += '<br>'
                     i = 1;
                 } else {
                     i++
@@ -431,12 +418,16 @@ function getGraph3(name, uID, etfid, rules, amount, date, chartnum) {
                 //         }
                 //     }
                 // }
-                document.getElementById("notes" ).innerHTML += `<span class="card-title">Amount Invested: $</th></tr></thead><tbody>${details2.amount}</span></table>`;
+                document.getElementById("compnotes").innerHTML += `<span class="card-title">Amount Invested: $</th></tr></thead><tbody>${details2.amount}</span></table>`;
 
-              //  document.getElementById("notes" ).innerHTML += `<span class="card-title2">Rules: $${data.CashOverFlow[details2.Rules]}</span><br>`;
+                //  document.getElementById("notes" ).innerHTML += `<span class="card-title2">Rules: $${data.CashOverFlow[details2.Rules]}</span><br>`;
 
                 console.log(i)
+                const loadDisp = document.getElementById('tblnoteshome');
+                loadDisp.classList.add('show');
 
+                const remDiv = document.getElementById('loader');
+                remDiv.classList.remove('show');
 
             }
 
