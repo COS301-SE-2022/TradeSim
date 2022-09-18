@@ -604,3 +604,9 @@ tr, td, table, tbody {
 .brand-logo {
     font-family: 'Raleway';
 }
+
+#cardMargin {
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
