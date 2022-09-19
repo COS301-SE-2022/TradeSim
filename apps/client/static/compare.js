@@ -186,7 +186,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
                 }
 
                 if (i % 5 == 0) {
-                    document.getElementById("notes" + chartnum).innerHTML += '<br>'
+                    // document.getElementById("notes" + chartnum).innerHTML += '<br>'
                     i = 1;
                 } else {
                     i++
