@@ -4,6 +4,7 @@ var impJSON;
 var selectedValuee = "";
 var exportValues = new Array();
 var selEtfAmt = 0;
+var eName = "";
 
 window.onload = function () {
     document.getElementById("jsonfileinput").addEventListener("change", function () {
@@ -2224,6 +2225,7 @@ function getRules() {
                 }
 
                 //2
+                eName = selectedValue;
                 console.log(selectedValue);
 
                 document.getElementById("etfName").value = selectedValue;
@@ -4442,13 +4444,13 @@ function exportRules() {
 
 function importRules() {
     console.log("IMP JSON: ", impJSON);
-    var userID = getUserID()
-    var eID = document.getElementById("options").id;
-    var cdate = "2022-01-01"
+    var userID = getUserID();
+    console.log("Name: ", eName);
+    var cdate = "2022-01-01";
     console.log("Sel Amt: ", selEtfAmt);
     const details =
         {
-            "Data": [userID, eID, selEtfAmt, impJSON, cdate]
+            "Data": [userID, eName, selEtfAmt, impJSON, cdate]
         }
 
     fetch("http://127.0.0.1:6969/import",
@@ -4463,10 +4465,10 @@ function importRules() {
         }
     ).then(response => response.json())
         .then(data => {
-            console.log(data)
+            console.log("data:", data)
             const jd = JSON.parse(data)
-            console.log(jd)
-            window.location.href = "/addETF"
+            console.log("jd: ",jd)
+            // window.location.href = "/addETF"
         });
 }
 
