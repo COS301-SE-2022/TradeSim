@@ -586,9 +586,26 @@ tr, td, table, tbody {
     border-collapse: collapse;
 }
 
-.tblComp {
+#tblnotes1 {
+    display: none;
+}
+
+#tblnotes2 {
+    display: none;
+}
+
+#tblnotes1.tblComp {
     height: 400px;
     overflow-y: scroll;
+    display: block;
+    /*-ms-overflow-style: none; !* IE and Edge *!*/
+    /*scrollbar-width: none; !* Firefox *!*/
+}
+
+#tblnotes2.tblComp {
+    height: 400px;
+    overflow-y: scroll;
+    display: block;
     /*-ms-overflow-style: none; !* IE and Edge *!*/
     /*scrollbar-width: none; !* Firefox *!*/
 }

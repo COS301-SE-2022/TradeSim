@@ -1,5 +1,10 @@
 var graphCount = 0;
 
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems);
+  });
+
 function getETFS() {
     var userID = getUserID()
 
@@ -175,13 +180,13 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
                     // document.getElementById(x).innerHTML += `<tr><td>${x}</td><td>${arr[x]}</td></tr> `;
                     // }
                 }
-                document.getElementById("notes" + chartnum).innerHTML += `<div class="card" id="cardMargin"><span class="card-title">Cash Overflow on ${key}: $${(data.CashOverFlow[key]).toFixed(2)}</span><br><table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody id="${key+data.CashOverFlow[key]}"></tbody></table></div>`;
+                document.getElementById("notes" + chartnum).innerHTML += `<li><div class="collapsible-header"><i class="material-icons">date_range</i>Cash Overflow on ${key}: $${(data.CashOverFlow[key]).toFixed(2)}</div><div class="collapsible-body"><table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody id="${key+data.CashOverFlow[key]}"></tbody></table></div></li>`;
                 for (const works in stockArr){
                     document.getElementById(key+data.CashOverFlow[key]).innerHTML += `<tr><td>${works}</td><td>${stockArr[works]}</td></tr> `;
                 }
 
                 if (i % 5 == 0) {
-                    document.getElementById("notes" + chartnum).innerHTML += '<br>'
+                    // document.getElementById("notes" + chartnum).innerHTML += '<br>'
                     i = 1;
                 } else {
                     i++
