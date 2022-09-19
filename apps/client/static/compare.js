@@ -153,7 +153,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
                 const showTbl2 = document.getElementById('tblnotes2');
                 showTbl2.classList.add('tblComp');
             }
-            document.getElementById("notes" + chartnum).innerHTML = `<span class="card-title">Cash Overflow: $${data.CashOverFlow[details2.date]}</span><br>`;
+
 
             // const loaderDiv = document.getElementById('loader');
             // loaderDiv.classList.remove('show');
@@ -161,15 +161,24 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
 
             var i = 1;
             for (key in data.Stocks) {
+                var stockArr = data.Stocks[key];
+                // console.log("SArr: ", stockArr);
                 var stocks = "";
-                for (x in data.Stocks) {
-                    let arr = data.Stocks[x];
-                    for (const key in arr) {
-                        // console.log(`${key}: ${arr[key]}`);
-                        stocks += `<tr><td>${key}</td><td>${arr[key]}</td></tr> `;
-                    }
+                var test = "";
+                var arr = new Array();
+                for (const x in data.Stocks) {
+                    arr = data.Stocks[x];
+                    // for (const key in arr) {
+                    // console.log(`${key}: ${arr[key]}`);
+                    // console.log("x: ",x,"arr:",arr,"data:",data);
+                    console.log("KEY v2: ", x);
+                    // document.getElementById(x).innerHTML += `<tr><td>${x}</td><td>${arr[x]}</td></tr> `;
+                    // }
                 }
-                document.getElementById("notes" + chartnum).innerHTML += `<table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody>${stocks}</tbody></table>`;
+                document.getElementById("notes" + chartnum).innerHTML += `<div class="card" id="cardMargin"><span class="card-title">Cash Overflow on ${key}: $${(data.CashOverFlow[key]).toFixed(2)}</span><br><table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody id="${key+data.CashOverFlow[key]}"></tbody></table></div>`;
+                for (const works in stockArr){
+                    document.getElementById(key+data.CashOverFlow[key]).innerHTML += `<tr><td>${works}</td><td>${stockArr[works]}</td></tr> `;
+                }
 
                 if (i % 5 == 0) {
                     document.getElementById("notes" + chartnum).innerHTML += '<br>'

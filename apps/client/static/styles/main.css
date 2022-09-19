@@ -573,6 +573,14 @@ h1 {
     display: block;
 }
 
+#tblnoteshome {
+    display: none;
+}
+
+#tblnoteshome.show {
+    display: block;
+}
+
 tr, td, table, tbody {
     border: 0 hidden;
     border-collapse: collapse;
@@ -589,6 +597,16 @@ tr, td, table, tbody {
 /*    display: none;*/
 /*}*/
 
-#jsonfileinput{
+#jsonfileinput {
     border: none;
+}
+
+.brand-logo {
+    font-family: 'Raleway';
+}
+
+#cardMargin {
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
 }
