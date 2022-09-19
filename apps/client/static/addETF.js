@@ -1548,6 +1548,7 @@ function getRules()
              for (var i = 0; i < numofetfs; i++) {
                  if (jd.Data[i].ETFID == document.getElementById("options").value) {
                      console.log(jd.Data[i].Rules)
+                     exportValues.push(jd.Data[i].Rules);
                      for (var j = 0; j < jd.Data[i].Rules.length; j++) {
                          if (jd.Data[i].Rules[j][0] == "000") {
                              document.getElementById("ruleslist").innerHTML += "Reject Company by Ticker: " + jd.Data[i].Rules[j][1] + "<br>"
