@@ -1416,6 +1416,8 @@ function confirm() {
     console.log(document.getElementById("options").value)
     etfid = document.getElementById("options").value
 
+    const loaderDiv = document.getElementById('etfeditor');
+    loaderDiv.classList.add('etfeditor');
 
     document.getElementById("etfeditor").innerHTML +=
         //         '<div class="card2" id="etfbody" style="width:108% ; position: relative; bottom: 70px; right: 12px">' +
@@ -1427,10 +1429,10 @@ function confirm() {
         //             '<label for="etf" style=" color: white; position: relative; top: 8px; left: 35px;" id="label2"><b>EDIT AMOUNT:</b></label>' +
         //             '<div class="custom-select" style="display: inline-block; position: relative; top:5px; left:40px;">' +
         //                 '<input id="inputamount" type="text" placeholder="Amount" style=" width:100px; height:25px; font-size: 12px; ">' +
-        '<a class="waves-effect waves-light btn blue right" onclick="editamount()">Edit Amount</a>' + " " +
-        '<a class="waves-effect waves-light btn blue right" onclick="editname()">Edit Name</a>' + " " +
-        '<a class="waves-effect waves-light btn blue right" onclick="clearRules()">Clear Rules</a>'
-        //                 '<button class="create-btn" id="btn1" style="width: 70px; display: inline-block; position: relative; left: 400px; bottom: 1px;" onclick="deleteETF()">delete</button>' +
+        '<a class="waves-effect waves-light btn blue" onclick="editamount()">Edit Amount</a>' + " " +
+        '<a class="waves-effect waves-light btn blue" onclick="editname()">Edit Name</a>' + " " +
+        '<a class="waves-effect waves-light btn blue" onclick="clearRules()">Clear Rules</a>'
+    //                 '<button class="create-btn" id="btn1" style="width: 70px; display: inline-block; position: relative; left: 400px; bottom: 1px;" onclick="deleteETF()">delete</button>' +
 
     //     "</div>"
 

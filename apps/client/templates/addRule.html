@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/main.css') }}">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="shorcut icon" href="{{ url_for('static',filename='favicon/favicon.ico') }}">
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -51,10 +52,10 @@
     <div class="main-body">
         <div class="row">
             <div class="col-lg-3 col-md-3">
-                <a class="waves-effect waves-light btn blue" style="width: 100%; margin-top: 8px"
-                   onclick="location.href='/addRule'"><i class="material-icons left">add</i>NEW ETF</a>
+                {#                <a class="waves-effect waves-light btn blue mb-2" style="width: 100%; margin-top: 8px"#}
+                {#                   onclick="location.href='/addRule'"><i class="material-icons left">add</i>NEW ETF</a>#}
                 <table class="highlight">
-                    <div class="collection" id="collection">
+                    <div id="collection">
 
                         {#                            <script>getETFS()</script>#}
 
@@ -64,7 +65,7 @@
                         <div class="custom-select">
                             {#                           <div class="card2" id="etfbody" style="width:108% ; position: relative; bottom: 12pt; right: 1%">#}
 
-                            <select id="options">
+                            <select class="mt-2" id="options">
                                 <option value="" disabled selected hidden>Choose ETF:</option>
                                 <script>getETFS()</script>
 
@@ -73,7 +74,16 @@
                         <div class="hideID"></div>
 
                         {#                    <a class="collection-item"><i class="material-icons right blue-text"><button class="create-btn"   onclick="confirm()" >Confirm </button></i></a>#}
-                        <a class="waves-effect waves-light btn blue right" onclick="confirm()"> Confirm </a>
+                        <div class="fabManage">
+                            <a class="btn-floating waves-light blue tooltipped pulse" data-position="bottom"
+                               data-tooltip="Create New ETF" style="margin-top: 8px"
+                               onclick="location.href='/addRule'"><i class="material-icons left">add</i></a>
+                            <a
+                                    class="btn-floating waves-light btn blue right mt-2 tooltipped pulse"
+                                    data-position="bottom" data-tooltip="Confirm Selected ETF"
+                                    onclick="confirm()"> <i
+                                    class="material-icons left">check</i> </a>
+                        </div>
 
 
                         {#                </div>#}
