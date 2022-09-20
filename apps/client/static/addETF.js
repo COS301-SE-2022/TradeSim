@@ -7,6 +7,11 @@ var selEtfAmt = 0;
 var eName = "";
 var gloUserID = getUserID();
 
+document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('.tooltipped');
+    var instances = M.Tooltip.init(elems);
+});
+
 window.onload = function () {
     document.getElementById("jsonfileinput").addEventListener("change", function () {
         var file_to_read = document.getElementById("jsonfileinput").files[0];

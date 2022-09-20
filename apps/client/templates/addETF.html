@@ -48,11 +48,7 @@
     <div class="main-body">
         <div class="row">
             <div class="col-lg-3 col-md-3" id="etfBtn">
-                <input type="file" id="jsonfileinput"/>
-                <a class="waves-effect waves-light btn blue" id="importBtn" onclick="importRules()"><i
-                        class="material-icons left">arrow_downward</i> Import </a>
-                <a class="waves-effect waves-light btn blue mb-2" style="width: 100%; margin-top: 8px"
-                   onclick="location.href='/addRule'"><i class="material-icons left">add</i>NEW ETF</a>
+
 
                 <table class="highlight">
                     <div id="collection">
@@ -62,7 +58,7 @@
                         {#                             <div class="amount-input-row">#}
 
 
-                        <div class="custom-select">
+                        <div class="custom-select mt-2">
                             {#                           <div class="card2" id="etfbody" style="width:108% ; position: relative; bottom: 12pt; right: 1%">#}
 
                             <select id="options">
@@ -73,9 +69,21 @@
                         </div>
 
                         {#                    <a class="collection-item"><i class="material-icons right blue-text"><button class="create-btn"   onclick="confirm()" >Confirm </button></i></a>#}
-                        <a class="waves-effect waves-light btn blue right mt-2" onclick="confirm()"> Confirm </a>
-                        <a class="waves-effect waves-light btn blue left mt-2" id="exportBtn" onclick="exportRules()"><i
-                        class="material-icons left">arrow_upward</i>Export </a>
+                        <div class="fabManage"><a class="btn-floating waves-light btn blue right mt-2 tooltipped pulse"
+                                                  data-position="bottom" data-tooltip="Confirm Selected ETF"
+                            onclick="confirm()"> <i
+                                class="material-icons left">check</i> </a>
+                            <a class="btn-floating waves-light btn blue left mt-2 tooltipped pulse" data-position="bottom"
+                               data-tooltip="Export ETF" id="exportBtn" onclick="exportRules()"><i
+                                    class="material-icons left">arrow_upward</i>Export </a>
+                            <input type="file" id="jsonfileinput"/>
+                            <a class="btn-floating waves-light blue mb-2 tooltipped pulse" data-position="bottom"
+                               data-tooltip="Import ETF" id="importBtn" onclick="importRules()"><i
+                                    class="material-icons left">arrow_downward</i> Import </a>
+                            <a class="btn-floating waves-light blue mb-2 tooltipped pulse" data-position="bottom"
+                               data-tooltip="Create New ETF" style="margin-top: 8px"
+                                onclick="location.href='/addRule'"><i class="material-icons left">add</i>NEW ETF</a>
+                        </div>
 
 
                         {#                </div>#}

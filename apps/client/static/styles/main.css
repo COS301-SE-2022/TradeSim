@@ -629,16 +629,19 @@ tr, td, table, tbody {
     margin-left: 5px;
 }
 
-#importBtn{
-    width: 100%;
+#importBtn {
     margin-top: 8px;
 }
 
-#exportBtn{
+#exportBtn {
     display: none;
 }
 
-#exportBtn.show{
+#exportBtn.show {
     display: block;
 }
 
+.fabManage {
+    display: flex;
+    justify-content: space-between;
+}
