@@ -445,6 +445,8 @@ def export():
     userID = data['Data'][0]
     ETFname = data['Data'][1]
 
+    print (data['Data'][0] + " " + data['Data'][1])
+
     mydb = mysql.connector.connect(
         host="database-1.ctw2tablscgc.us-east-1.rds.amazonaws.com",
         user="aipicapstone",
@@ -461,17 +463,17 @@ def export():
 
     if response != []:
         #   etfs exist
-        cursor.execute("SELECT count(*) FROM aipicapstone.ETFS WHERE UserID = " + '"' + str(userID) + '"' + "  ;")
+        cursor.execute("SELECT count(*) FROM aipicapstone.ETFS WHERE UserID = " + '"' + str(userID) + '"' + " AND ETFName = " + '"' + str(ETFname) + '"' + ";")
         count = cursor.fetchall();
         count = count[0][0]
-        # print(count)
+        print(count)
         etfs = '['
         for i in range(count):
             etfs += '{"ETFID":"' + str(response[i][0]) + '",'
             etfs += '"UserID":"' + str(response[i][1]) + '",'
             etfs += '"ETFName":"' + str(response[i][2]) + '",'
             etfs += '"Amount":"' + str(response[i][3]) + '",'
-            etfs += '"Rules":"' + str(response[i][4]) + '",'
+            etfs += '"Rules":[' + str(response[i][4]) + '],'
             etfs += '"Date":"' + str(response[i][5]) + '"}'
             if i != count - 1:
                 etfs += ','
@@ -496,6 +498,8 @@ def Import():
     etfName = data['Data'][1]
     amountnew = data['Data'][2]
     rules = data['Data'][3]
+    rules = rules[1:0]
+    rules = rules[:-1]
     cdate = data['Data'][4]
 
     # This is function that is first called that has the name of the new ETF and the amount
