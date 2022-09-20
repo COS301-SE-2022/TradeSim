@@ -5,6 +5,7 @@ var selectedValuee = "";
 var exportValues = new Array();
 var selEtfAmt = 0;
 var eName = "";
+var gloUserID = getUserID();
 
 window.onload = function () {
     document.getElementById("jsonfileinput").addEventListener("change", function () {
@@ -4432,14 +4433,40 @@ function deleteETF() {
 
 
 function exportRules() {
-    const anchor = document.createElement("a");
-    anchor.href = URL.createObjectURL(new Blob([JSON.stringify(exportValues, null, 2)], {
-        type: "application/json"
-    }));
-    anchor.setAttribute("download", "rules.json");
-    document.body.appendChild(anchor);
-    anchor.click();
-    document.body.removeChild(anchor);
+    var expRules;
+    const details =
+        {
+            "Data": [gloUserID, eName]
+        }
+    console.log("Exp Dets: ", JSON.stringify(details))
+    fetch("http://127.0.0.1:6969/export",
+        {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            // Strigify the payload into JSON:
+            body: JSON.stringify(details)
+        }
+    ).then(response => response.json())
+        .then(data => {
+            console.log("data:", data)
+            expRules = JSON.parse(data)
+            console.log("jd: ", expRules)
+            // window.location.href = "/addETF"
+
+            const anchor = document.createElement("a");
+            anchor.href = URL.createObjectURL(new Blob([JSON.stringify(expRules, null, 2)], {
+                type: "application/json"
+            }));
+            anchor.setAttribute("download", "rules.json");
+            document.body.appendChild(anchor);
+            anchor.click();
+            document.body.removeChild(anchor);
+        });
+
+
 }
 
 function importRules() {
@@ -4452,7 +4479,7 @@ function importRules() {
         {
             "Data": [userID, eName, selEtfAmt, impJSON, cdate]
         }
-
+    console.log("Imp Dets: ", details)
     fetch("http://127.0.0.1:6969/import",
         {
             method: 'POST',
@@ -4467,7 +4494,7 @@ function importRules() {
         .then(data => {
             console.log("data:", data)
             const jd = JSON.parse(data)
-            console.log("jd: ",jd)
+            console.log("jd: ", jd)
             // window.location.href = "/addETF"
         });
 }
