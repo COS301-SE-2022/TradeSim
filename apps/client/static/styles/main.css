@@ -641,7 +641,7 @@ tr, td, table, tbody {
     display: block;
 }
 
-.fabManage {
+.fabManage, #etfeditor {
     display: flex;
     justify-content: space-between;
 }

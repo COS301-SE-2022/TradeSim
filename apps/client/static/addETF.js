@@ -233,13 +233,11 @@ function addRule() {
         counter++;
         rule.innerHTML =
             '<b >' + document.getElementById('r1').textContent + '</b>' + //style="color: black; position: relative; bottom: 180px; right: 10px;"
-            '<div class="amount-input-row">' +
             '<div class="card2" id="etfbody" >' + //style="width:108% ; position: relative; bottom: 110px; right: 12px"
             // '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Rule:</b></label>' +
             '<div class="custom-select">' + // style="display: inline-block; position: relative; top:5px; left:25px;"
             '<input id="input1" type="text" placeholder="ticker name of company" >' + //style=" width:250px; height:25px; font-size: 12px; "
             '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(0)" >add</a>' +  //style="width: 50px; display: inline-block; position: relative; left: 660px; bottom: 1px;"
-            '</div>' +
             '</div>' +
             '</div>'
     }
@@ -1419,8 +1417,7 @@ function confirm() {
     etfid = document.getElementById("options").value
 
 
-    document.getElementById("etfeditor").innerHTML =
-        "<div class=\"amount-input-row\">\n" +
+    document.getElementById("etfeditor").innerHTML +=
         //         '<div class="card2" id="etfbody" style="width:108% ; position: relative; bottom: 70px; right: 12px">' +
         //             '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>EDIT NAME:</b></label>' +
         //             '<div class="custom-select" style="display: inline-block; position: relative; top:5px; left:25px;">' +
@@ -1432,10 +1429,9 @@ function confirm() {
         //                 '<input id="inputamount" type="text" placeholder="Amount" style=" width:100px; height:25px; font-size: 12px; ">' +
         '<a class="waves-effect waves-light btn blue right" onclick="editamount()">Edit Amount</a>' + " " +
         '<a class="waves-effect waves-light btn blue right" onclick="editname()">Edit Name</a>' + " " +
-        '<a class="waves-effect waves-light btn blue right" onclick="clearRules()">Clear Rules</a>' +
+        '<a class="waves-effect waves-light btn blue right" onclick="clearRules()">Clear Rules</a>'
         //                 '<button class="create-btn" id="btn1" style="width: 70px; display: inline-block; position: relative; left: 400px; bottom: 1px;" onclick="deleteETF()">delete</button>' +
-        '</div>' +
-        '</div>'
+
     //     "</div>"
 
     document.getElementById("ruleadder").innerHTML =
