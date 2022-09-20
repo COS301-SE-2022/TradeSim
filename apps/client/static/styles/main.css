@@ -594,6 +594,11 @@ tr, td, table, tbody {
     display: none;
 }
 
+/*#tblnoteshome.tblComp {*/
+/*    height: 400px;*/
+/*    overflow-y: scroll;*/
+/*    display: block;*/
+/*}*/
 #tblnotes1.tblComp {
     height: 400px;
     overflow-y: scroll;
