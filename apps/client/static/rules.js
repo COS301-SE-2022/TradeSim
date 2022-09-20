@@ -630,7 +630,7 @@ function confirm()
     console.log(document.getElementById("options").value)
     etfid = document.getElementById("options").value
 
-    document.getElementById("etfeditor").innerHTML =
+    document.getElementById("etfeditor").innerHTML +=
         "<div class=\"amount-input-row\">\n" +
             '<div class="card2" id="etfbody" style=" position: relative; bottom: 70px; right: 12px">' +
                 '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>EDIT NAME:</b></label>' +

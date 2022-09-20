@@ -25,10 +25,6 @@
 
 <body>
 <div>
-
-    <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon"/>
-    <label for="menu-icon"></label>
-
     <nav class="nav-extended">
         <div class="nav-wrapper">
             <a class="logo" href="https://epiuselabs.com" target="_blank"><img src="static/EPI-USELabs_Logo_White.png"
@@ -123,12 +119,12 @@
                                 {#<i class="material-icons left">attach_money</i> #}
                                 {#                            <label for="last_name">Amount ($)</label>#}
                             </div>
-                            <div id="etfeditor"></div>
+                            <div class="col-12" id="etfeditor">
+                                <a class="waves-effect waves-light btn blue right" onclick="deleteETF()"> Delete
+                                    ETF</a>
+                                <a class="waves-effect waves-light btn blue right me-2" onclick="validatenaa2()"> Save </a>
+                            </div>
 
-                            <a class="waves-effect waves-light btn blue right" onclick="validatenaa2()"> Save </a>
-                            {#onclick="editname()"#}
-                            <a class="waves-effect waves-light btn blue right me-2" onclick="deleteETF()"> Delete
-                                ETF</a>
 
                         </div>
 
