@@ -616,6 +616,7 @@ tr, td, table, tbody {
 
 #jsonfileinput {
     border: none;
+    display: none;
 }
 
 .brand-logo {
@@ -626,4 +627,26 @@ tr, td, table, tbody {
     margin-top: 5px;
     margin-right: 5px;
     margin-left: 5px;
+}
+
+#importBtn {
+    margin-top: 8px;
+}
+
+#exportBtn {
+    display: none;
+}
+
+#exportBtn.show {
+    display: block;
+}
+
+.fabManage {
+    display: flex;
+    justify-content: space-between;
+}
+
+.etfeditor {
+    display: flex;
+    justify-content: space-between;
 }
