@@ -4,7 +4,7 @@ import ETF
 import info
 from dbpass import *
 import mysql.connector
-from datetime import date
+import json
 
 amount = 0
 app = Flask(__name__)
@@ -498,7 +498,8 @@ def Import():
     etfName = data['Data'][1]
     amountnew = data['Data'][2]
     rules = data['Data'][3]
-    rules = rules[1:0]
+    rules = json.dumps(rules)
+    rules = rules[1:]
     rules = rules[:-1]
     cdate = data['Data'][4]
 
