@@ -17,6 +17,28 @@ window.onload = function () {
             console.log(objImport);
             impJSON = objImport;
             console.log("IMP: ", impJSON);
+            const details =
+                {
+                    "Data": [gloUserID, impJSON.Data[0].ETFName, impJSON.Data[0].Amount, impJSON.Data[0].Rules, impJSON.Data[0].Date]
+                }
+            console.log("Imp Dets: ", details)
+            fetch("http://127.0.0.1:6969/import",
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    // Strigify the payload into JSON:
+                    body: JSON.stringify(details)
+                }
+            ).then(response => response.json())
+                .then(data => {
+                    console.log("data:", data)
+                    const jd = JSON.parse(data)
+                    console.log("jd: ", jd)
+                    // window.location.href = "/addETF"
+                });
         };
         fileread.readAsText(file_to_read);
     });
@@ -1391,6 +1413,7 @@ function confirm() {
     console.log(document.getElementById("options").value)
     etfid = document.getElementById("options").value
 
+
     document.getElementById("etfeditor").innerHTML =
         "<div class=\"amount-input-row\">\n" +
         //         '<div class="card2" id="etfbody" style="width:108% ; position: relative; bottom: 70px; right: 12px">' +
@@ -2243,7 +2266,8 @@ function getRules() {
                 }
                 selEtfAmt = amt;
                 console.log(amt);
-
+                const loaderDiv = document.getElementById('exportBtn');
+                loaderDiv.classList.add('show');
                 document.getElementById("etfAmount").value = "$" + amt;
                 //document.getElementById("last_name").remove();
 
@@ -4470,28 +4494,8 @@ function exportRules() {
 }
 
 function importRules() {
-    const details =
-        {
-            "Data": [gloUserID, impJSON.Data[0].ETFName, impJSON.Data[0].Amount, impJSON.Data[0].Rules, impJSON.Data[0].Date]
-        }
-    console.log("Imp Dets: ", details)
-    fetch("http://127.0.0.1:6969/import",
-        {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-                'Accept': 'application/json'
-            },
-            // Strigify the payload into JSON:
-            body: JSON.stringify(details)
-        }
-    ).then(response => response.json())
-        .then(data => {
-            console.log("data:", data)
-            const jd = JSON.parse(data)
-            console.log("jd: ", jd)
-            // window.location.href = "/addETF"
-        });
+    document.getElementById("jsonfileinput").click();
+
 }
 
 

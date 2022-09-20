@@ -47,11 +47,15 @@
 
     <div class="main-body">
         <div class="row">
-            <div class="col-lg-3 col-md-3">
-                <a class="waves-effect waves-light btn blue" style="width: 100%; margin-top: 8px"
+            <div class="col-lg-3 col-md-3" id="etfBtn">
+                <input type="file" id="jsonfileinput"/>
+                <a class="waves-effect waves-light btn blue" id="importBtn" onclick="importRules()"><i
+                        class="material-icons left">arrow_downward</i> Import </a>
+                <a class="waves-effect waves-light btn blue mb-2" style="width: 100%; margin-top: 8px"
                    onclick="location.href='/addRule'"><i class="material-icons left">add</i>NEW ETF</a>
+
                 <table class="highlight">
-                    <div class="collection" id="collection">
+                    <div id="collection">
 
                         {#                            <script>getETFS()</script>#}
 
@@ -69,7 +73,9 @@
                         </div>
 
                         {#                    <a class="collection-item"><i class="material-icons right blue-text"><button class="create-btn"   onclick="confirm()" >Confirm </button></i></a>#}
-                        <a class="waves-effect waves-light btn blue right" onclick="confirm()"> Confirm </a>
+                        <a class="waves-effect waves-light btn blue right mt-2" onclick="confirm()"> Confirm </a>
+                        <a class="waves-effect waves-light btn blue left mt-2" id="exportBtn" onclick="exportRules()"><i
+                        class="material-icons left">arrow_upward</i>Export </a>
 
 
                         {#                </div>#}
@@ -83,7 +89,6 @@
                     {#                        </div>#}
 
                 </table>
-
             </div>
 
             <div class="col-lg-9 col-md-9">
@@ -138,12 +143,6 @@
                             <div class="row">
                                 <div class="col-8"><span class="card-title activator grey-text text-darken-4"><i
                                         class="material-icons left">menu</i> All Rules </span></div>
-                                <div class="col-4"><input type="file" id="jsonfileinput"/><a
-                                        class="waves-effect waves-light btn blue right" id="importBtn"
-                                        onclick="importRules()"> Import </a> <a
-                                        class="waves-effect waves-light btn blue right me-2" onclick="exportRules()">
-                                    Export </a>
-                                </div>
                                 <div id="ruleslist"></div>
 
                             </div>
