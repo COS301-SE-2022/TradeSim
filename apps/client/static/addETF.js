@@ -4470,14 +4470,9 @@ function exportRules() {
 }
 
 function importRules() {
-    console.log("IMP JSON: ", impJSON);
-    var userID = getUserID();
-    console.log("Name: ", eName);
-    var cdate = "2022-01-01";
-    console.log("Sel Amt: ", selEtfAmt);
     const details =
         {
-            "Data": [userID, eName, selEtfAmt, impJSON, cdate]
+            "Data": [gloUserID, impJSON.Data[0].ETFName, impJSON.Data[0].Amount, impJSON.Data[0].Rules, impJSON.Data[0].Date]
         }
     console.log("Imp Dets: ", details)
     fetch("http://127.0.0.1:6969/import",
