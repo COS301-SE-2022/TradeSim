@@ -223,6 +223,8 @@ class ETF:
     def code105(self, country, percentage):
         stocksInExchange = apiCalls.companiesByExchange(country)
         stocksInBoth = []
+        if stocksInExchange == None:
+            return None
         for x in stocksInExchange:
             if x in self.listOfAllStocks:
                 stocksInBoth.append(x)
@@ -245,9 +247,10 @@ class ETF:
         companiesToReject = apiCalls.companiesByExchange(country)
 
         tempStocks = self.listOfAllStocks.copy()
-        for x in companiesToReject:
-            if x in tempStocks:
-                tempStocks.remove(x)
+        if companiesToReject != None:
+            for x in companiesToReject:
+                if x in tempStocks:
+                    tempStocks.remove(x)
 
         self.listOfAllStocks = tempStocks
 
@@ -257,6 +260,8 @@ class ETF:
         percent = percentage / 100
         moneyToInvest = self.amount * percent
         stockAndAmount = {}
+        if len(stocks) == 0:
+            return None
         valuesForSaidStocks = apiCalls.getShareMarketEarn(stocks, self.date)
         totalInvested = 0
         canAddMore = True
@@ -1020,6 +1025,43 @@ class ETF:
         toReturn["UserID"] = self.userID
         toReturn["ETFid"] = self.etfID
         toReturn["CashOverFlow"] = self.amount - self.totalInvested
+        toReturn["Stocks"] = self.stocksWithAmountOFShares
+        toReturn["Values"] = etfValueByday
+
+        return toReturn
+
+    def wowFactor(self, endDate):
+        etfValueByday = {}
+        toReturn = {}
+
+        allStocks = []
+        for stock in self.stocksWithAmountOFShares:
+            allStocks.append(stock)
+
+        cashOverflow = self.amount - self.totalInvested
+        percentLeft = (cashOverflow/self.amount)*100
+        self.calculateAmountoFstocks(allStocks,percentLeft)
+
+        start = self.date
+        endday = endDate
+        listOfStocks = []
+
+        for stock in self.stocksWithAmountOFShares:
+            listOfStocks.append(stock)
+        stockInfo = apiCalls.getSharePriceHistory(listOfStocks, start, endday)
+        for x in stockInfo:
+            data = stockInfo[x]
+            for d in data:
+                etfValueByday[d] = 0
+            break
+
+        for x in stockInfo:
+            data = stockInfo[x]
+            for d in data:
+                if d in etfValueByday:
+                    price = data[d] * self.stocksWithAmountOFShares[x]
+                    etfValueByday[d] = etfValueByday[d] + price
+
         toReturn["Stocks"] = self.stocksWithAmountOFShares
         toReturn["Values"] = etfValueByday
 

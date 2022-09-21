@@ -5,6 +5,7 @@ import info
 from dbpass import *
 import mysql.connector
 import json
+import AiFactor
 
 amount = 0
 app = Flask(__name__)
@@ -121,6 +122,19 @@ def news():
 
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
     return dataJsonify
+
+@app.route("/AI", methods=["POST"])
+def AI():
+    data = request.get_json()
+    date = data['date']
+    # Different categories = general, forex, crypto, merger
+    Aiting = AiFactor.AiFactor(date)
+    data = Aiting.generateRandomETF()
+
+    dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
+    return dataJsonify
+
+
 
 
 @app.route("/login", methods=["POST"])
