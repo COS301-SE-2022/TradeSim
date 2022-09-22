@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(elems);
 })
+var newsBool = false;
+var graphBool = false;
 
 function getETFS() {
     const loaderDiv = document.getElementById('loader');
@@ -73,6 +75,8 @@ function confirm() {
     var selectedValue = ddl.options[ddl.selectedIndex].id;
     const loaderDiv = document.getElementById('loader');
     loaderDiv.classList.add('show');
+    const hideTbl = document.getElementById('tblnoteshome');
+    hideTbl.classList.remove('show');
 
     //    info = document.getElementById("options" ) //.value
     //
@@ -224,10 +228,10 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
             }
             console.log(xA)
             console.log(yA)
+            graphBool = true;
+            removeLoader()
             const mainContent1 = document.getElementById('graph-content');
             mainContent1.classList.add('show');
-            const loaderDiv = document.getElementById('loader');
-            loaderDiv.classList.remove('show');
             var data = [{
                 x: xA,
                 y: yA,
@@ -243,7 +247,6 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
 
 
             Plotly.newPlot(String(chartnum), data, layout);
-
             // ****  document.getElementById("load" + chartnum).innerHTML = ""
             return
         }).catch((error) => {
@@ -255,6 +258,13 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
 
 }
 
+function removeLoader() {
+    console.log("NB: ", newsBool, "GB: ", graphBool)
+    if (newsBool && graphBool) {
+        const loaderDiv = document.getElementById('loader');
+        loaderDiv.classList.remove('show');
+    }
+}
 
 function getNews(value) {
     value = value || "";
@@ -307,6 +317,8 @@ function getNews(value) {
             document.getElementById("news-col").innerHTML = disp;
             const mainContent2 = document.getElementById('news-content');
             mainContent2.classList.add('show');
+            newsBool = true;
+            removeLoader();
         });
 }
 
@@ -388,6 +400,10 @@ function getGraph3(name, uID, etfid, rules, amount, date, chartnum) {
                 for (const works in stockArr) {
                     document.getElementById(key + data.CashOverFlow[key]).innerHTML += `<tr><td>${works}</td><td>${stockArr[works]}</td></tr> `;
                 }
+                const hideTbl = document.getElementById('tblnoteshome');
+                hideTbl.classList.add('show');
+                const loaderDiv = document.getElementById('loader');
+                loaderDiv.classList.remove('show');
 
                 if (i % 5 == 0) {
                     i = 1;
