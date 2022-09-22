@@ -68,3 +68,7 @@ h1 {
     color: white;
     padding-top: 20px;
 }
+
+#response{
+    width: 100%;
+}
