@@ -553,4 +553,4 @@ def Import():
 
 
 if __name__ == "__main__":
-    app.run("localhost", 6969)
+    app.run("ec2-54-87-29-139.compute-1.amazonaws.com", 6969)
