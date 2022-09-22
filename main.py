@@ -38,5 +38,5 @@ def tick():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run("ec2-18-208-221-145.compute-1.amazonaws.com", 80)
 

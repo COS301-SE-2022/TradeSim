@@ -14,7 +14,7 @@ function getETFS() {
         }
 
 
-    fetch("http://127.0.0.1:6969/getETFS",
+    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/getETFS",
         {
             method: 'POST',
             headers: {
@@ -104,7 +104,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
         }
 
     console.log(JSON.stringify(details2));
-    fetch("http://127.0.0.1:6969/createRules",
+    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/createRules",
         {
             method: 'POST',
             headers: {

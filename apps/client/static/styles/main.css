@@ -594,6 +594,11 @@ tr, td, table, tbody {
     display: none;
 }
 
+/*#tblnoteshome.tblComp {*/
+/*    height: 400px;*/
+/*    overflow-y: scroll;*/
+/*    display: block;*/
+/*}*/
 #tblnotes1.tblComp {
     height: 400px;
     overflow-y: scroll;
@@ -649,4 +654,11 @@ tr, td, table, tbody {
 .etfeditor {
     display: flex;
     justify-content: space-between;
+}
+
+.noETF{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
 }

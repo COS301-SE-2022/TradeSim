@@ -12,7 +12,7 @@ function searchTicker() {
         {
             "ticker": tick
         }
-    fetch("http://127.0.0.1:6969/tickerInfo",
+    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/tickerInfo",
         {
             method: 'POST',
             headers: {

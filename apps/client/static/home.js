@@ -4,7 +4,11 @@ document.addEventListener('DOMContentLoaded', function () {
         coverTrigger: false,
         closeOnClick: true
     })
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems);
 })
+var newsBool = false;
+var graphBool = false;
 
 function getETFS() {
     const loaderDiv = document.getElementById('loader');
@@ -16,7 +20,7 @@ function getETFS() {
             "Data": [userID]
         }
 
-    fetch("http://127.0.0.1:6969/getETFS",
+    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/getETFS",
         {
             method: 'POST',
             headers: {
@@ -32,7 +36,11 @@ function getETFS() {
             const jd = JSON.parse(data)
             if (jd.status == "failure") {
                 console.log(jd.error);
-                document.getElementById("etfs").innerHTML = jd.error
+                document.getElementById("graph-content").innerHTML = `<div class="noETF center"><div class="section"><h5 class="brand-logo">${(jd.error).toUpperCase()}</h5><a class="waves-effect waves-light btn blue" href="/addETF"><i class="material-icons left">add</i>Create New ETF</a></div></div>`;
+                const mainContent1 = document.getElementById('graph-content');
+                mainContent1.classList.add('show');
+                graphBool = true;
+                removeLoader();
             } else {
                 console.log(jd);
                 let numofetfs = jd.Data.length;
@@ -71,6 +79,8 @@ function confirm() {
     var selectedValue = ddl.options[ddl.selectedIndex].id;
     const loaderDiv = document.getElementById('loader');
     loaderDiv.classList.add('show');
+    const hideTbl = document.getElementById('tblnoteshome');
+    hideTbl.classList.remove('show');
 
     //    info = document.getElementById("options" ) //.value
     //
@@ -90,7 +100,7 @@ function confirm() {
             "Data": [userID]
         }
 
-    fetch("http://127.0.0.1:6969/getETFS",
+    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/getETFS",
         {
             method: 'POST',
             headers: {
@@ -146,7 +156,7 @@ function getETFS2() {
             "Data": [userID]
         }
 
-    fetch("http://127.0.0.1:6969/getETFS",
+    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/getETFS",
         {
             method: 'POST',
             headers: {
@@ -162,7 +172,9 @@ function getETFS2() {
             const jd = JSON.parse(data)
             if (jd.status == "failure") {
                 console.log(jd.error);
-                document.getElementById("etfs").innerHTML = jd.error
+                document.getElementById("etfs").innerHTML = `<div class="container">${jd.error}</div>`;
+                const mainContent1 = document.getElementById('graph-content');
+                mainContent1.classList.add('show');
             } else {
                 console.log(jd);
                 let numofetfs = jd.Data.length;
@@ -196,7 +208,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
         }
 
     console.log(JSON.stringify(details2));
-    fetch("http://127.0.0.1:6969/createRules",
+    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/createRules",
         {
             method: 'POST',
             headers: {
@@ -222,10 +234,10 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
             }
             console.log(xA)
             console.log(yA)
+            graphBool = true;
+            removeLoader()
             const mainContent1 = document.getElementById('graph-content');
             mainContent1.classList.add('show');
-            const loaderDiv = document.getElementById('loader');
-            loaderDiv.classList.remove('show');
             var data = [{
                 x: xA,
                 y: yA,
@@ -241,18 +253,24 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
 
 
             Plotly.newPlot(String(chartnum), data, layout);
-
             // ****  document.getElementById("load" + chartnum).innerHTML = ""
             return
         }).catch((error) => {
 
-        document.getElementById("load" + chartnum).innerHTML = name + " could not generate ETF<br>"
+        alert(name + " could not generate ETF")
         //alert( "ETF " + name + " does not generate any stocks!")
     });
 
 
 }
 
+function removeLoader() {
+    console.log("NB: ", newsBool, "GB: ", graphBool)
+    if (newsBool && graphBool) {
+        const loaderDiv = document.getElementById('loader');
+        loaderDiv.classList.remove('show');
+    }
+}
 
 function getNews(value) {
     value = value || "";
@@ -272,7 +290,7 @@ function getNews(value) {
         console.log("category", value)
     }
 
-    fetch("http://127.0.0.1:6969/news",
+    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/news",
         {
             method: 'POST',
             headers: {
@@ -305,6 +323,8 @@ function getNews(value) {
             document.getElementById("news-col").innerHTML = disp;
             const mainContent2 = document.getElementById('news-content');
             mainContent2.classList.add('show');
+            newsBool = true;
+            removeLoader();
         });
 }
 
@@ -328,7 +348,7 @@ function getGraph3(name, uID, etfid, rules, amount, date, chartnum) {
         }
 
     console.log(JSON.stringify(details2));
-    fetch("http://127.0.0.1:6969/createRules",
+    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/createRules",
         {
             method: 'POST',
             headers: {
@@ -370,75 +390,39 @@ function getGraph3(name, uID, etfid, rules, amount, date, chartnum) {
                 };
 
             Plotly.newPlot(String(chartnum), data2, layout);
-            // graphCount++;
-            // console.log("GraphCount: ", graphCount);
-            // if (graphCount == 2) {
-            //     const loaderDiv = document.getElementById('loader-compare');
-            //     loaderDiv.classList.remove('show');
-            //
-            //     const showTbl1 = document.getElementById('tblnotes');
-            //     showTbl1.classList.add('tblComp');
-
-            //     const showTbl2 = document.getElementById('tblnotes2');
-            //     showTbl2.classList.add('tblComp');
-            // }
-            document.getElementById("compnotes").innerHTML = `<span class="card-title">Cash Overflow: $${data.CashOverFlow[details2.date]}</span><br>`;
-
-            // const loaderDiv = document.getElementById('loader');
-            // loaderDiv.classList.remove('show');
-            // console.log("SHARE");
+            const showTbl = document.getElementById('tblnoteshome');
+            showTbl.classList.add('show');
 
             var i = 1;
             for (key in data.Stocks) {
+                var stockArr = data.Stocks[key];
                 var stocks = "";
-                for (x in data.Stocks) {
-                    let arr = data.Stocks[x];
-                    for (const key in arr) {
-                        // console.log(`${key}: ${arr[key]}`);
-                        stocks += `<tr><td>${key}</td><td>${arr[key]}</td></tr> `;
-                    }
+                var test = "";
+                var arr = new Array();
+                for (const x in data.Stocks) {
+                    arr = data.Stocks[x];
                 }
-                document.getElementById("compnotes").innerHTML += `<table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody>${stocks}</tbody></table>`;
+                document.getElementById("compnotes").innerHTML += `<li><div class="collapsible-header"><i class="material-icons">date_range</i>Cash Overflow on ${key}: $${(data.CashOverFlow[key]).toFixed(2)}</div><div class="collapsible-body"><table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody id="${key + data.CashOverFlow[key]}"></tbody></table></div></li>`;
+                for (const works in stockArr) {
+                    document.getElementById(key + data.CashOverFlow[key]).innerHTML += `<tr><td>${works}</td><td>${stockArr[works]}</td></tr> `;
+                }
+                const hideTbl = document.getElementById('tblnoteshome');
+                hideTbl.classList.add('show');
+                const loaderDiv = document.getElementById('loader');
+                loaderDiv.classList.remove('show');
 
                 if (i % 5 == 0) {
-                    document.getElementById("compnotes").innerHTML += '<br>'
                     i = 1;
                 } else {
                     i++
                 }
-
-
-                // for (key in data.Rules) {
-                //     var rules = "";
-                //     for (x in data.Rules) {
-                //         let arr = data.Rules[x];
-                //         for (const key in arr) {
-                //             // console.log(`${key}: ${arr[key]}`);
-                //             rules += `<tr><td>${key}</td><td>${arr[key]}</td></tr> `;
-                //         }
-                //     }
-                // }
-                document.getElementById("compnotes").innerHTML += `<span class="card-title">Amount Invested: $</th></tr></thead><tbody>${details2.amount}</span></table>`;
-
-                //  document.getElementById("notes" ).innerHTML += `<span class="card-title2">Rules: $${data.CashOverFlow[details2.Rules]}</span><br>`;
-
                 console.log(i)
-                const loadDisp = document.getElementById('tblnoteshome');
-                loadDisp.classList.add('show');
-
-                const remDiv = document.getElementById('loader');
-                remDiv.classList.remove('show');
-
             }
-
-
-            // document.getElementById("notes" + chartnum).innerHTML = ""
         }).catch((error) => {
         console.log("Error Notes: ", error);
-        document.getElementById("notes" + chartnum).innerHTML = name + " could not generate ETF<br>"
+        alert(name + " could not generate ETF ")
         // alert( "ETF " + name + " does not generate any stocks!")
     });
-
 
 }
 

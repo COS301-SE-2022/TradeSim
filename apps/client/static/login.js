@@ -10,7 +10,7 @@ function validateform() {
         "Data" : [name, password]
     }
 
-     fetch("http://127.0.0.1:6969/login",
+     fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/login",
     {
         method: 'POST',
         headers: {
@@ -25,12 +25,12 @@ function validateform() {
          const jd = JSON.parse(data)
          if(jd.status == "failure")
          {
-             document.getElementById("response").innerHTML = jd.error;
+             document.getElementById("response").innerHTML = document.getElementById("response").innerHTML = `<div class="alert alert-danger" role="alert">${jd.error}</div>`;
          }
          else
          {
              document.cookie = "UserIDAI= " + jd.id;
-             document.getElementById("response").innerHTML = '';
+             document.getElementById("response").innerHTML = document.getElementById("response").innerHTML = `<div class="alert alert-success" role="alert">You have successfully logged in.</div>`;
              window.location.href = "/home"
          }
 
