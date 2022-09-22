@@ -72,3 +72,9 @@ h1 {
 #response{
     width: 100%;
 }
+
+@media screen and (max-width: 600px) {
+  div.main {
+    width: 100%;
+  }
+}
