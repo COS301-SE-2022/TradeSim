@@ -36,7 +36,11 @@ function getETFS() {
             const jd = JSON.parse(data)
             if (jd.status == "failure") {
                 console.log(jd.error);
-                document.getElementById("etfs").innerHTML = jd.error
+                document.getElementById("graph-content").innerHTML = `<div class="noETF center"><div class="section"><h5 class="brand-logo">${(jd.error).toUpperCase()}</h5><a class="waves-effect waves-light btn blue" href="/addETF"><i class="material-icons left">add</i>Create New ETF</a></div></div>`;
+                const mainContent1 = document.getElementById('graph-content');
+                mainContent1.classList.add('show');
+                graphBool = true;
+                removeLoader();
             } else {
                 console.log(jd);
                 let numofetfs = jd.Data.length;
@@ -168,7 +172,9 @@ function getETFS2() {
             const jd = JSON.parse(data)
             if (jd.status == "failure") {
                 console.log(jd.error);
-                document.getElementById("etfs").innerHTML = jd.error
+                document.getElementById("etfs").innerHTML = `<div class="container">${jd.error}</div>`;
+                const mainContent1 = document.getElementById('graph-content');
+                mainContent1.classList.add('show');
             } else {
                 console.log(jd);
                 let numofetfs = jd.Data.length;

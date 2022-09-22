@@ -655,3 +655,10 @@ tr, td, table, tbody {
     display: flex;
     justify-content: space-between;
 }
+
+.noETF{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+}
