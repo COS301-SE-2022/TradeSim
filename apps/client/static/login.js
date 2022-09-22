@@ -25,12 +25,12 @@ function validateform() {
          const jd = JSON.parse(data)
          if(jd.status == "failure")
          {
-             document.getElementById("response").innerHTML = jd.error;
+             document.getElementById("response").innerHTML = document.getElementById("response").innerHTML = `<div class="alert alert-danger" role="alert">${jd.error}</div>`;
          }
          else
          {
              document.cookie = "UserIDAI= " + jd.id;
-             document.getElementById("response").innerHTML = '';
+             document.getElementById("response").innerHTML = document.getElementById("response").innerHTML = `<div class="alert alert-success" role="alert">You have successfully logged in.</div>`;
              window.location.href = "/home"
          }
 
