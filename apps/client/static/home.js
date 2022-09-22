@@ -257,7 +257,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
             return
         }).catch((error) => {
 
-        document.getElementById("load" + chartnum).innerHTML = name + " could not generate ETF<br>"
+        alert(name + " could not generate ETF")
         //alert( "ETF " + name + " does not generate any stocks!")
     });
 
