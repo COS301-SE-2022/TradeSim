@@ -420,7 +420,7 @@ function getGraph3(name, uID, etfid, rules, amount, date, chartnum) {
             }
         }).catch((error) => {
         console.log("Error Notes: ", error);
-        document.getElementById("compnotes").innerHTML = name + " could not generate ETF<br>"
+        alert(name + " could not generate ETF ")
         // alert( "ETF " + name + " does not generate any stocks!")
     });
 
