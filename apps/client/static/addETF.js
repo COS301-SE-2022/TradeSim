@@ -1419,7 +1419,7 @@ function confirm() {
     const loaderDiv = document.getElementById('etfeditor');
     loaderDiv.classList.add('etfeditor');
 
-    document.getElementById("etfeditor").innerHTML +=
+    document.getElementById("etfeditor").innerHTML =
         //         '<div class="card2" id="etfbody" style="width:108% ; position: relative; bottom: 70px; right: 12px">' +
         //             '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>EDIT NAME:</b></label>' +
         //             '<div class="custom-select" style="display: inline-block; position: relative; top:5px; left:25px;">' +
@@ -1431,40 +1431,41 @@ function confirm() {
         //                 '<input id="inputamount" type="text" placeholder="Amount" style=" width:100px; height:25px; font-size: 12px; ">' +
         '<a class="waves-effect waves-light btn blue" onclick="editamount()">Edit Amount</a>' + " " +
         '<a class="waves-effect waves-light btn blue" onclick="editname()">Edit Name</a>' + " " +
-        '<a class="waves-effect waves-light btn blue" onclick="clearRules()">Clear Rules</a>'
-    //                 '<button class="create-btn" id="btn1" style="width: 70px; display: inline-block; position: relative; left: 400px; bottom: 1px;" onclick="deleteETF()">delete</button>' +
+        '<a class="waves-effect waves-light btn blue" onclick="clearRules()">Clear Rules</a>' + " " +
+        '<a class="waves-effect waves-light btn blue right" onclick="deleteETF()"> Delete ETF</a>' 
+        //                 '<button class="create-btn" id="btn1" style="width: 70px; display: inline-block; position: relative; left: 400px; bottom: 1px;" onclick="deleteETF()">delete</button>' +
 
-    //     "</div>"
+        //     "</div>"
 
-    document.getElementById("ruleadder").innerHTML =
-        "<div class=\"amount-input-row\">\n" +
-        "                <div class=\"card2\" id=\"etfbody\" >\n" + //style="width:108% ; position: relative; bottom: 95px; right: 12px"
-        "                    <div class=\"custom-select\" >\n" + //style="width:200px; display: inline-block; position: relative; left: 12px; top: 8px;"
-        "\n" +
-        "                        <select>\n" +
-        "                          <option disabled selected hidden value=\"0\">Select rule:</option>\n" +
-        "\n" +
-        "                          <option value=\"1\" id=\"r1\">Reject specific companies by ticker.</option>\n" +
-        "                          <option value=\"2\" id=\"r2\">Reject specific sectors by name.</option>\n" +
-        "                          <option value=\"3\" id=\"r3\">Reject specific industries by name.</option>\n" +
-        "                          <option value=\"4\" id=\"r4\">Reject companies based in specific countries.</option>\n" +
-        "                          <option value=\"6\" id=\"r6\">Set the market cap min and max values.</option>\n" +
-        "                          <option value=\"7\" id=\"r7\">Set the earnings min and max value.</option>\n" +
-        "                          <option value=\"8\" id=\"r8\">Set a minimum and maximum price for shares.</option>\n" +
-        "                          <option value=\"10\" id=\"r10\">Request certain companies by ticker.</option>\n" +
-        "                          <option value=\"11\" id=\"r11\">Request a percentage in a specific sector.</option>\n" +
-        "                          <option value=\"12\" id=\"r12\">Request a percentage in a specific industry by name or ticker</option>\n" +
-        "                          <option value=\"13\" id=\"r13\">Request the companies with the highest market cap</option>\n" +
-        "                          <option value=\"14\" id=\"r14\">Invest in companies based in specific countries</option>\n" +
-        "                          <option value=\"15\" id=\"r15\">Request the companies with the highest revenue</option>\n" +
-        "                           <option  value=\"16\" id=\"r16\">Set a balance period</option>\n" +
-        "                          <option  value=\"18\" id=\"r18\">Set reconsider period</option>\n" +
-        "\n" +
-        "                        </select>\n" +
-        "                    </div>\n" +
-        "\n" +
-        "                    <div class=\"create-button-div-add row\">\n" +
-        "\n"
+        document.getElementById("ruleadder").innerHTML =
+            "<div class=\"amount-input-row\">\n" +
+            "                <div class=\"card2\" id=\"etfbody\" >\n" + //style="width:108% ; position: relative; bottom: 95px; right: 12px"
+            "                    <div class=\"custom-select\" >\n" + //style="width:200px; display: inline-block; position: relative; left: 12px; top: 8px;"
+            "\n" +
+            "                        <select>\n" +
+            "                          <option disabled selected hidden value=\"0\">Select rule:</option>\n" +
+            "\n" +
+            "                          <option value=\"1\" id=\"r1\">Reject specific companies by ticker.</option>\n" +
+            "                          <option value=\"2\" id=\"r2\">Reject specific sectors by name.</option>\n" +
+            "                          <option value=\"3\" id=\"r3\">Reject specific industries by name.</option>\n" +
+            "                          <option value=\"4\" id=\"r4\">Reject companies based in specific countries.</option>\n" +
+            "                          <option value=\"6\" id=\"r6\">Set the market cap min and max values.</option>\n" +
+            "                          <option value=\"7\" id=\"r7\">Set the earnings min and max value.</option>\n" +
+            "                          <option value=\"8\" id=\"r8\">Set a minimum and maximum price for shares.</option>\n" +
+            "                          <option value=\"10\" id=\"r10\">Request certain companies by ticker.</option>\n" +
+            "                          <option value=\"11\" id=\"r11\">Request a percentage in a specific sector.</option>\n" +
+            "                          <option value=\"12\" id=\"r12\">Request a percentage in a specific industry by name or ticker</option>\n" +
+            "                          <option value=\"13\" id=\"r13\">Request the companies with the highest market cap</option>\n" +
+            "                          <option value=\"14\" id=\"r14\">Invest in companies based in specific countries</option>\n" +
+            "                          <option value=\"15\" id=\"r15\">Request the companies with the highest revenue</option>\n" +
+            "                           <option  value=\"16\" id=\"r16\">Set a balance period</option>\n" +
+            "                          <option  value=\"18\" id=\"r18\">Set reconsider period</option>\n" +
+            "\n" +
+            "                        </select>\n" +
+            "                    </div>\n" +
+            "\n" +
+            "                    <div class=\"create-button-div-add row\">\n" +
+            "\n"
     "                    </div>\n" +
     "\n" +
     "\n" +
