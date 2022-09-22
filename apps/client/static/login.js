@@ -10,7 +10,7 @@ function validateform() {
         "Data" : [name, password]
     }
 
-     fetch("http://127.0.0.1:6969/login",
+     fetch("http://ec2-54-87-29-139.compute-1.amazonaws.com:6969/login",
     {
         method: 'POST',
         headers: {
