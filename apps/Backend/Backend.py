@@ -83,13 +83,13 @@ def createRules():
     amount = data['amount']
 
     etfNew = ETF.ETF(UserID, etfID, listOfRules, date, int(amount))
-    etfNew.createETF()
-    data = etfNew.getPriceOverTime()
-    # try:
-    #     etfNew.createETF()
-    #     data = etfNew.getPriceOverTime()
-    # except:
-    #     data = {"Error" : "Please try changing your rules as there is a contradiction causing problems"}
+    #etfNew.createETF()
+    #data = etfNew.getPriceOverTime()
+    try:
+        etfNew.createETF()
+        data = etfNew.getPriceOverTime()
+    except:
+        data = {"Error" : "Please try changing your rules as there is a contradiction causing problems"}
 
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
     return dataJsonify
@@ -127,7 +127,6 @@ def news():
 def AI():
     data = request.get_json()
     date = data['date']
-    # Different categories = general, forex, crypto, merger
     Aiting = AiFactor.AiFactor(date)
     data = Aiting.generateRandomETF()
 

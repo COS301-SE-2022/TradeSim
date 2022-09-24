@@ -418,6 +418,12 @@ class AiFactor:
                 print("Not equal therefore better list thus continue")
                 OGetfs = toCheck.copy()
 
+        theBestStock = []
+        for x in OGetfs:
+            theBestStock = OGetfs[x]
+
+        #Now we just need to grab the stocks from theBestStock
+
 
         # now we check toCheck and OGetfs and if they the same then stop
 
