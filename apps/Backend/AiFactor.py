@@ -16,16 +16,18 @@ class AiFactor:
         self.lstOfRules = ["000", "001", "002", "003", "011", "012", "013", "101", "102", "103", "104", "105", "106"]
         self.seedValue = 81
         self.percentage = 100
+        self.amountOfETfs = 6
+        self.amountOfRules = 10
 
     def generateRandomETF(self):
         random.seed(self.seedValue)
-        lstAmountOfRules = random.sample(range(1, 10), 1)
+        lstAmountOfRules = random.sample(range(1, self.amountOfRules), 1)
         amountOfRules = lstAmountOfRules[0]
         random.seed(amountOfRules)
 
         #For loop needs to be done as this might allow for repeats where the random function does not allow for repeats
         etfRules = []
-        for y in range(4): #This is how many etfs to create
+        for y in range(self.amountOfETfs): #This is how many etfs to create
             lstOfRulesToUse = []
             x = 0
             while x < amountOfRules:
@@ -139,24 +141,312 @@ class AiFactor:
             rSquare = self.fitnessFunction(Xvalues,Yvalues)
             rSqauredValues[etf] = rSquare
         ###########################
-        amountOfETFsToMutate = 2
+        amountOfETFsToMutate = 4
         ###########################
         sortedStocks = sorted(rSqauredValues.items(), key=lambda x: x[1], reverse=True)
         print(sortedStocks)
-        stocksToMutate = []
+        etfsWithRsquared = []
+        etfsWithRules = {}
         count = 0
         for x in sortedStocks:
             if count==amountOfETFsToMutate:
                 break
-            stocksToMutate.append(x)
+            etfsWithRsquared.append(x)
+            count = count +1
+        for x in etfsWithRsquared:
+            etfCode = x[0]
+            etfsWithRules[etfCode] = dictionaryOfETF[etfCode]
+        self.mutationAndCrossOver(etfsWithRsquared,etfsWithRules)
 
 
+    def mutationAndCrossOver(self,etfsWithRsquared,etfsWithRulesparameter):
+        #First step is to mutate the stocks by changing one rule. in each etf and then remaking etf and comparing
+        amountOfETFsToMutate = len(etfsWithRsquared)
+        newCode = self.amountOfETfs +1
+        OGetfs = {}
+        dictForR = {}
+        for x in etfsWithRsquared:
+            dictForR[x[0]] = x[1]
+
+        for p in dictForR:
+            tempJson = {"RValue" : dictForR[p]}
+            tempJson["Rules"] = etfsWithRulesparameter[p]["Rules"]
+            tempJson["Prices"] = etfsWithRulesparameter[p]["Prices"]
+            OGetfs[p] = tempJson
+
+        boolBestFunction = False
+
+        while boolBestFunction == False:
+            etfsWithRules = {}
+            for p in OGetfs:
+                etfsWithRules[p] = {"Rules" : OGetfs[p]["Rules"], "Prices" : OGetfs[p]["Prices"]}
+
+
+            mutatedETfs = {}
+            for etf in etfsWithRules:
+                rules = etfsWithRules[etf]['Rules']
+                #now we mutate the rules.
+                posToMutate = random.sample(range(0,len(rules)-1),1)
+
+                randomRule = rules[posToMutate[0]]
+                rule = randomRule[0]
+                mutatedRule = []
+                changed = False
+                while changed == False:
+                    if rule == "000":
+                        parameters = self.code000()
+                        toAdd = [rule, parameters]
+                        mutatedRule = toAdd
+                    elif rule == "001":
+                        parameters = self.code001()
+                        toAdd = [rule, parameters]
+                        mutatedRule = toAdd
+                    elif rule == "002":
+                        parameters = self.code002()
+                        toAdd = [rule, parameters]
+                        mutatedRule = toAdd
+                    elif rule == "003":
+                        parameters = self.code003()
+                        toAdd = [rule, parameters]
+                        mutatedRule = toAdd
+                    elif rule == "011":
+                        parameters = self.code011()
+                        toAdd = [rule, parameters]
+                        mutatedRule = toAdd
+                    elif rule == "012":
+                        parameters = self.code012()
+                        toAdd = [rule, parameters]
+                        mutatedRule = toAdd
+                    elif rule == "013":
+                        parameters = self.code013()
+                        toAdd = [rule, parameters]
+                        mutatedRule = toAdd
+                    elif rule == "101":
+                        percent = randomRule[1][1]
+                        self.percentage = self.percentage+percent
+                        parameters = self.code101()
+                        toAdd = [rule, parameters]
+                        mutatedRule = toAdd
+                    elif rule == "102":
+                        percent = randomRule[1][1]
+                        self.percentage = self.percentage + percent
+                        parameters = self.code102()
+                        toAdd = [rule, parameters]
+                        mutatedRule = toAdd
+                    elif rule == "103":
+                        percent = randomRule[1][1]
+                        self.percentage = self.percentage + percent
+                        parameters = self.code103()
+                        toAdd = [rule, parameters]
+                        mutatedRule = toAdd
+                    elif rule == "104":
+                        percent = randomRule[1][0]
+                        self.percentage = self.percentage + percent
+                        parameters = self.code104()
+                        toAdd = [rule, parameters]
+                        mutatedRule = toAdd
+                    elif rule == "105":
+                        percent = randomRule[1][1]
+                        self.percentage = self.percentage + percent
+                        parameters = self.code105()
+                        toAdd = [rule, parameters]
+                        mutatedRule = toAdd
+                    elif rule == "106":
+                        percent = randomRule[1][0]
+                        self.percentage = self.percentage + percent
+                        parameters = self.code106()
+                        toAdd = [rule, parameters]
+                        mutatedRule = toAdd
+
+                    if mutatedRule[1] == randomRule[1]:
+                        changed = False
+                        print("not Changed")
+                    else:
+                        print("Changed")
+                        changed = True
+
+                newRules = rules.copy()
+                newRules[posToMutate[0]] = mutatedRule
+
+                etfNew = ETF.ETF("0", "0", newRules, self.date, 1000000)
+                etfNew.createETF()
+                beginDate = datetime.strptime(self.date, '%Y-%m-%d')
+                endDate = datetime.strftime(beginDate + timedelta(365), '%Y-%m-%d')
+                data = etfNew.wowFactor(endDate)
+                tmpJson = {"Rules": newRules, "Prices": data["Values"]}
+                mutatedETfs[newCode] = tmpJson
+                newCode = newCode +1
+
+
+            for etf in mutatedETfs:
+                values = mutatedETfs[etf]
+                dctOfPrices = values["Prices"]
+                Yvalues = []
+                Xvalues = []
+                howManyDays = 0
+                for date in dctOfPrices:
+                    howManyDays = howManyDays + 1
+                    Yvalues.append(dctOfPrices[date])
+                    Xvalues.append(howManyDays)
+                rSquare = self.fitnessFunction(Xvalues, Yvalues)
+                tempLst = [etf,rSquare]
+                etfsWithRsquared.append(tempLst)
+            newDictOfetdsWithRsquared = {}
+            for x in etfsWithRsquared:
+                codeETF = x[0]
+                rValue = x[1]
+                newDictOfetdsWithRsquared[codeETF] = rValue
+            sortedStocks = sorted(newDictOfetdsWithRsquared.items(), key=lambda x: x[1], reverse=True)
+            for x in etfsWithRules:
+                mutatedETfs[x] = etfsWithRules[x].copy()
+            etfsRCrossover = {}
+            etfwithRulesCrossOver = {}
+            count = 0
+            arrayOfStocksToChange = []
+            print(sortedStocks)
+            for x in sortedStocks:
+                if count == amountOfETFsToMutate:
+                    break
+                etfsRCrossover[x[0]] = x[1]
+                arrayOfStocksToChange.append(x[0])
+                count = count + 1
+            for x in etfsRCrossover:
+               etfwithRulesCrossOver[x] = mutatedETfs[x]
+            print(etfsRCrossover)
+
+            #So now we need to split array of Stocks to Change into groups of 2
+            length = len(arrayOfStocksToChange)
+            whichETFsToChange = []
+            for y in range(length):
+                if (y % 2) == 0:
+                    first = arrayOfStocksToChange[y]
+                    second = arrayOfStocksToChange[y+1]
+                    temp = [first,second]
+                    whichETFsToChange.append(temp)
+
+            newCrossOverETF = {}
+            for eachCrossOver in whichETFsToChange:
+                first = eachCrossOver[0]
+                second = eachCrossOver[1]
+                firstETF = etfwithRulesCrossOver[first]
+                secondETF = etfwithRulesCrossOver[second]
+                firstRules = firstETF["Rules"]
+                secondRules = secondETF["Rules"]
+                amountOFRules = len(firstRules)
+                breakingPoint = int(amountOFRules/2)
+                firstETFRulesStart = firstRules[:breakingPoint].copy()
+                firstETFRulesEnd = firstRules[breakingPoint:].copy()
+                secondETFRulesStart = secondRules[:breakingPoint].copy()
+                secondETFRulesEnd = secondRules[breakingPoint:].copy()
+                rules1 = firstETFRulesStart.copy() + secondETFRulesEnd.copy()
+                rules2 = secondETFRulesStart.copy() + firstETFRulesEnd.copy()
+                crossOverRules = [rules1,rules2]
+                for i in crossOverRules:
+                    etfNew = ETF.ETF("0", "0", i, self.date, 1000000)
+                    etfNew.createETF()
+                    beginDate = datetime.strptime(self.date, '%Y-%m-%d')
+                    endDate = datetime.strftime(beginDate + timedelta(365), '%Y-%m-%d')
+                    data = etfNew.wowFactor(endDate)
+                    tmpJson = {"Rules": i, "Prices": data["Values"]}
+                    newCrossOverETF[newCode] = tmpJson
+                    newCode = newCode + 1
+            print(newCrossOverETF)
+            for etf in newCrossOverETF:
+                values = newCrossOverETF[etf]
+                dctOfPrices = values["Prices"]
+                Yvalues = []
+                Xvalues = []
+                howManyDays = 0
+                for date in dctOfPrices:
+                    howManyDays = howManyDays + 1
+                    Yvalues.append(dctOfPrices[date])
+                    Xvalues.append(howManyDays)
+                rSquare = self.fitnessFunction(Xvalues, Yvalues)
+                tempLst = [etf, rSquare]
+                etfsWithRsquared.append(tempLst)
+            print(etfsWithRsquared)
+
+            newDictOfetdsWithRsquared = {}
+            for x in etfsWithRsquared:
+                codeETF = x[0]
+                rValue = x[1]
+                newDictOfetdsWithRsquared[codeETF] = rValue
+            sortedStocks = sorted(newDictOfetdsWithRsquared.items(), key=lambda x: x[1], reverse=True)
+            print(sortedStocks)
+            count = 0
+            tempCodesWithRvalues = {}
+            for i in sortedStocks:
+                if count == amountOfETFsToMutate:
+                    break
+                tempCodesWithRvalues[i[0]] = i[1]
+                count = count + 1
+            for x in etfwithRulesCrossOver:
+                newCrossOverETF[x] = etfwithRulesCrossOver[x]
+            finalSet = {}
+            print("============================")
+            for p in tempCodesWithRvalues:
+                tempJson = {"RValue" : tempCodesWithRvalues[p]}
+                tempRules = newCrossOverETF[p]["Rules"]
+                tempPrices = newCrossOverETF[p]["Prices"]
+                tempJson["Rules"] = tempRules
+                tempJson["Prices"] = tempPrices
+                finalSet[p] = tempJson
+                print(finalSet)
+            print(OGetfs)
+            for y in OGetfs:
+                finalSet[y] = OGetfs[y].copy()
+            sortedETFS = sorted(finalSet.items(), key=lambda x: x[1]["RValue"], reverse=True)
+            toCheck = {}
+            count = 0
+            for n in sortedETFS:
+                if count == amountOfETFsToMutate:
+                    break
+                toCheck[n[0]] = finalSet[n[0]]
+                count = count + 1
+            ogList = []
+            newList = []
+            for y in toCheck:
+                newList.append(y)
+            for y in OGetfs:
+                ogList.append(y)
+            if ogList == newList:
+                #Stop as the best 4 etfs have been created
+                print("We have reached the best possible answers")
+                boolBestFunction = True
+            else:
+                #we must continue and go again
+                print("Not equal therefore better list thus continue")
+                OGetfs = toCheck.copy()
+
+
+        # now we check toCheck and OGetfs and if they the same then stop
+
+
+        #next we grab the best 4 again and see if it has done better than the original 4,
+        #we will do this by keeping the orginal 4 that are ranked and then we add the new 4 etfs
+        #and if the 4 orginal etfs are the highest after being ranked then end the program,
+        #if there is just 1 new etf in the top 4 then we must redo the entire algorithm
+
+
+
+
+
+
+
+        #So now I ranked the etfs and now we perform crossover using the best 2 and then next best
 
 
 
 
 
     def fitnessFunction(self,XValues,Yvalues):
+        count = 0
+        for i in Yvalues:
+            if count != 0:
+                fiftyPercent = 0.5*Yvalues[count-1]
+                if i <= fiftyPercent:
+                    Yvalues[count] = Yvalues[count-1]
+            count = count +1
         x = np.array(XValues)
         y = np.array(Yvalues)
 
@@ -166,12 +456,12 @@ class AiFactor:
         a, b = np.polyfit(x, y, 1)
 
         # add points to plot
-        plt.scatter(x, y, color='purple')
+        # plt.scatter(x, y, color='purple')
 
         # add line of best fit to plot
-        plt.plot(x, a * x + b, color='steelblue', linestyle='--', linewidth=2)
-        plt.text(20,500000 , 'y = ' + '{:.2f}'.format(b) + ' + {:.2f}'.format(a) + 'x', size=15)
-        plt.show()
+        # plt.plot(x, a * x + b, color='steelblue', linestyle='--', linewidth=2)
+        # plt.text(20,500000 , 'y = ' + '{:.2f}'.format(b) + ' + {:.2f}'.format(a) + 'x', size=15)
+        # plt.show()
         algorithm = "a*x + b"
         predictedValues = []
         for eachX in XValues:
