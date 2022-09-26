@@ -6,15 +6,15 @@ import csv
 import ETF
 from datetime import datetime,timedelta
 import numpy as np
-import matplotlib.pyplot as plt
+
 
 
 class AiFactor:
 
-    def __init__(self,date):
+    def __init__(self,date,seedValue):
         self.date = date
         self.lstOfRules = ["000", "001", "002", "003", "011", "012", "013", "101", "102", "103", "104", "105", "106"]
-        self.seedValue = 81
+        self.seedValue = seedValue
         self.percentage = 100
         self.amountOfETfs = 6
         self.amountOfRules = 10
