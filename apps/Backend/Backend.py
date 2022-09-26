@@ -154,11 +154,12 @@ def AI():
 
         Aiting = AiFactor.AiFactor(date, seedValue)
         data = Aiting.generateRandomETF()
+        rules = data["Rules"]
 
         dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
 
         sql = "INSERT INTO aipicapstone.AIEtfs( year, Rules) VALUES (%s, %s)"
-        val = (date, data['Rules'])
+        val = (date, str(rules))
         cursor = mydb.cursor(buffered=True)
         cursor.execute(sql, val)
         mydb.commit()
@@ -601,4 +602,4 @@ def aigraph(rules,date):
 
 
 if __name__ == "__main__":
-    app.run("ec2-18-208-221-145.compute-1.amazonaws.com", 6969)
+    app.run("localhost", 6969)
