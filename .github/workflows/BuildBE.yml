@@ -29,6 +29,7 @@ jobs:
       env:
           APIKEY: ${{ secrets.APIKEY }}
           FINNHUBAPI: ${{ secrets.FINNHUBAPI }}
+          DATABASE: ${{ secrets.DATABASE }}
         
         
     - run: pip install -r ./requirements.txt
