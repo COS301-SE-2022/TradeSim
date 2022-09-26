@@ -138,12 +138,21 @@ def AI():
 
     cursor = mydb.cursor(buffered=True)
 
-    cursor.execute("SELECT * FROM aipicapstone.AIEtfs WHERE year = " + '"'  + date  + '"'+ "  ;")
+    cursor.execute("SELECT * FROM aipicapstone.AIEtfs WHERE year = "+ '"' + date + '"'+  "  ;")
     response = cursor.fetchall();
 
     if response != []:
 
-        Rules = str(response[0][1])
+        stri = str(response[0][1])
+        stri = stri.replace("'", '"')
+        # print(stri)
+        r1 = '{"Rules":' + stri + '}'
+        # print(r1)
+        # print(type(r1))
+        r2 =json.loads(r1)
+        # print(r2['Rules'])
+        Rules = r2['Rules']
+
 
         data = aigraph(Rules,date)
         dataJsonify = jsonify(data)
@@ -154,11 +163,12 @@ def AI():
 
         Aiting = AiFactor.AiFactor(date, seedValue)
         data = Aiting.generateRandomETF()
+        rules = data["Rules"]
 
         dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
 
         sql = "INSERT INTO aipicapstone.AIEtfs( year, Rules) VALUES (%s, %s)"
-        val = (date, data['Rules'])
+        val = (date, str(rules))
         cursor = mydb.cursor(buffered=True)
         cursor.execute(sql, val)
         mydb.commit()
