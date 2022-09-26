@@ -30,7 +30,7 @@ function validateform() {
         }
 
     if (flag) {
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/register",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/register",
             {
                 method: 'POST',
                 headers: {
