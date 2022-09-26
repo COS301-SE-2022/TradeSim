@@ -96,6 +96,7 @@ function validatenaa2() {
     var name = document.getElementById("etfName").value;
     var amount = document.getElementById("etfAmount").value;
     var idnum = getCookie("UserIDAI")
+
     //document.getElementById("hideID").value = idnum;
     //  alert(idnum);
 
@@ -124,6 +125,8 @@ function validatenaa2() {
                 alert(jd.error)
             } else {
                 // document.getElementById("options").style.display = "none";
+                 document.getElementById("btn").innerHTML = ''
+                document.getElementById("btn").innerHTML += '  <a class="waves-effect waves-light btn blue right" onclick="addRule2()" >add</a> '
                 confirm2();
                 // window.location.href = "/addETF" //addRule
             }
@@ -179,17 +182,7 @@ function getETFS() {
                 impJSON = jd;
                 let numofetfs = jd.Data.length;
 
-                // document.getElementById("etfs").innerHTML += "<div id='table1'>"
 
-                //  for(var i = 0; i < numofetfs; i++)
-                // {
-                //     document.getElementById("collection").innerHTML += '<button <a className="collection-item" id="load" ' +
-                //         i +
-                //         '> '  +
-                //         jd.Data[i].ETFName +
-                //         ' '  +
-                //         ' </button><i className="material-icons right blue-text">delete</i></a><br>'
-                // }
 
                 for (var i = 0; i < numofetfs; i++) {
                     document.getElementById("options").innerHTML +=
@@ -1412,7 +1405,9 @@ function addRule2() {
 }
 
 function confirm() {
+    document.getElementById("btn").innerHTML = ''
 
+    document.getElementById("btn").innerHTML += '  <a class="waves-effect waves-light btn blue right" onclick="addRule()" >add</a> '
     console.log(document.getElementById("options").value)
     etfid = document.getElementById("options").value
 
@@ -1560,6 +1555,8 @@ function getRules() {
                 console.log(jd);
                 let numofetfs = jd.Data.length;
                 document.getElementById("ruleslist").innerHTML = '';
+
+
 
                 for (var i = 0; i < numofetfs; i++) {
                     if (jd.Data[i].ETFID == document.getElementById("options").value) {
@@ -2271,11 +2268,15 @@ function getRules() {
                 selEtfAmt = amt;
                 console.log(amt);
                 const loaderDiv = document.getElementById('exportBtn');
-                loaderDiv.classList.add('show');
+                // loaderDiv.classList.add('show');
                 document.getElementById("etfAmount").value = "$" + amt;
+                 document.getElementById("ruleslist").innerHTML += '<a class="waves-effect blue waves-light btn" onClick="exportRules()">Export Rules<i class="material-icons right">arrow_upward</i></a>';
+
+
                 //document.getElementById("last_name").remove();
 
-
+//Ai etf
+                //dropdown 2015-2021
             }
 
 
@@ -4501,5 +4502,4 @@ function importRules() {
     document.getElementById("jsonfileinput").click();
 
 }
-
 

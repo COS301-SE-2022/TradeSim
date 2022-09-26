@@ -20,7 +20,7 @@
     <link rel="shorcut icon" href="{{ url_for('static',filename='favicon/favicon.ico') }}">
     <script src="{{ url_for('static',filename='home.js') }}"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <title>TradeSim Home</title>
+    <title>TradeSim Generate ETF</title>
 </head>
 
 <body>
@@ -29,6 +29,8 @@
         <div class="nav-wrapper">
             <a class="logo" href="https://epiuselabs.com" target="_blank"><img src="static/EPI-USELabs_Logo_White.png"
                                                                                height="50"></a>
+{#             <a class="logo" href="https://epiuselabs.com" target="_blank"><img src="static/logo_tradesim.pdf"#}
+{#                                                                               height="50"></a>#}
             <a href="#" class="brand-logo center">TradeSim</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -41,7 +43,7 @@
                 <li class="tab"><a href="/addETF">Manage</a></li>
                 <li class="tab"><a href="/compare-date">Compare</a></li>
                 <li class="tab"><a href="/ticker">Tickers</a></li>
-                 <li class="tab"><a href="/AIEtf">AI ETF</a></li>
+                <li class="tab"><a href="/AIEtf">AI ETF</a></li>
             </ul>
         </div>
     </nav>
@@ -52,75 +54,36 @@
                 <div class="indeterminate"></div>
             </div>
         </div>
+ <div class="input-field col s12">
+        <select id ="options">
+                          <option value="" disabled selected hidden>Choose Year:</option>
+                             <option value="" id="y1">2015</option>
+                            <option value="" id="y1">2016</option>
+                            <option value="" id="y1">2017</option>
+                            <option value="" id="y1">2018</option>
+                            <option value="" id="y1">2019</option>
+                            <option value="" id="y1">2020</option>
+                            <option value="" id="y1">2021</option>
+
+                        </select>
+
+        <a class="waves-effect waves-light btn blue right" onclick=""> Confirm </a>
+ </div>
         <div id="graph-content" class="col-lg-8 col-md-12 col-sm-12 main-body">
             <div class="row">
                 <div class="create-header">
                     {#                        <h1>Home</h1>#}
                 </div>
             </div>
-            <div class="input-field col s12">
-                        <select id ="options">
-                          <option value="" disabled selected hidden>Choose ETF:</option>
-                            <script>getETFS2()</script>
-
-                        </select>
-                 </div>
-                     <a class="waves-effect waves-light btn blue right" onclick="confirm()"> More Info </a>
-
-            <div class="create-header">
-                {#                    <h2>Your ETF's</h2>#}
-            </div>
-            <div id="loading"></div>
-             <div id="loader-compare">
-                <div class="progress">
-                    <div class="indeterminate"></div>
-                </div>
-            </div>
-{#             <a id="notes" ></a>#}
-{#            <a id="display"></a>#}
-            <script>getETFS()</script>
-            <a id="etfs"> </a>
-
-             <table style="width:100%; ">
-                <tr>
-                    <td >
-                        <div id="display" ></div>
-
-                    </td>
-                    <td>
-                        <div id="tblnoteshome">
-                            <ul class="collapsible" data-collapsible="accordion" id="compnotes">
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-
-            </table>
-
-
 
         </div>
-        <div id="news-content" class="col-lg-4 col-md-12 col-sm-12">
-            <a class='dropdown-trigger btn blue col-12 mt-2' href='#' data-target='dropdown'>Category</a>
-            <!-- Dropdown Structure -->
-            <ul id='dropdown' class='dropdown-content'>
-                <li value="general" onclick="getNews('general')"><a href="#!">General</a></li>
-                <li class="divider" tabindex="-1"></li>
-                <li value="crypto" onclick="getNews('crypto')"><a href="#!">Crypto</a></li>
-                <li class="divider" tabindex="-1"></li>
-                <li value="forex" onclick="getNews('forex')"><a href="#!">Forex</a></li>
-                <li class="divider" tabindex="-1"></li>
-                <li value="merger" onclick="getNews('merger')"><a href="#!">Merger</a></li>
-            </ul>
-            <ul class="collection" id="news-col">
-                {#                <li class="collection-header"><h4>News</h4></li>#}
-
-            </ul>
-        </div>
+       
     </div>
     <div id="homeTab" class="col s12"></div>
     <div id="manageTab" class="col s12"></div>
     <div id="compareTab" class="col s12"></div>
+
+
 </div>
 </body>
 </html>

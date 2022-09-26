@@ -41,6 +41,7 @@
                 <li class="tab"><a href="/addETF">Manage</a></li>
                 <li class="tab"><a href="/compare-date">Compare</a></li>
                 <li class="tab"><a href="/ticker">Tickers</a></li>
+                <li class="tab"><a href="/AIEtf">AI ETF</a></li>
             </ul>
         </div>
     </nav>
@@ -58,27 +59,35 @@
                         {#                             <div class="amount-input-row">#}
 
 
-                        <div class="custom-select">
+{#                        <div class="custom-select">#}
+                        <a class="waves-effect blue waves-light btn"   onclick="location.href='/addRule'"><i class="material-icons left">add</i> Create ETF</a>
+
+                        <div class="card-stacked">
                             {#                           <div class="card2" id="etfbody" style="width:108% ; position: relative; bottom: 12pt; right: 1%">#}
+
+{#                           <span class="card-title activator grey-text text-darken-4"><i class="material-icons left">info</i> Create ETF </span>#}
 
                             <select class="mt-2" id="options">
                                 <option value="" disabled selected hidden>Choose ETF:</option>
                                 <script>getETFS()</script>
-
                             </select>
+
                         </div>
                         <div class="hideID"></div>
 
                         {#                    <a class="collection-item"><i class="material-icons right blue-text"><button class="create-btn"   onclick="confirm()" >Confirm </button></i></a>#}
+
                         <div class="fabManage">
-                            <a class="btn-floating waves-light blue tooltipped pulse" data-position="bottom"
-                               data-tooltip="Create New ETF" style="margin-top: 8px"
-                               onclick="location.href='/addRule'"><i class="material-icons left">add</i></a>
-                            <a
-                                    class="btn-floating waves-light btn blue right mt-2 tooltipped pulse"
-                                    data-position="bottom" data-tooltip="Confirm Selected ETF"
-                                    onclick="confirm()"> <i
-                                    class="material-icons left">check</i> </a>
+                            <a class="waves-effect blue waves-light btn" onclick="confirm()"><i class="material-icons right">check</i>Edit</a>
+
+{#                            <a class="btn-floating waves-light blue tooltipped pulse" data-position="bottom"#}
+{#                               data-tooltip="Create New ETF" style="margin-top: 8px"#}
+{#                               onclick="location.href='/addRule'"><i class="material-icons left">add</i></a>#}
+{#                            <a#}
+{#                                    <a class="waves-effect blue waves-light btn" onclick="confirm()"><i class="material-icons right">check</i>Edit</a>#}
+{#                                    data-position="bottom" data-tooltip="Confirm Selected ETF"#}
+{#                                    onclick="confirm()">Confirm</a>#}
+{#                            <i class="material-icons left"> check</i>#}
                         </div>
 
 
@@ -139,8 +148,9 @@
 
                             </select>
 
-
-                            <a class="waves-effect waves-light btn blue right" id="" onclick="addRule2()"> Add </a>
+                                <div id="btn">
+{#                            <a class="waves-effect waves-light btn blue right" id="" onclick="addRule2()"> Add </a>#}
+                                </div>
 
                             <div id="rule"></div>
                         </div>
@@ -160,7 +170,5 @@
 </body>
 
 </html>
-
-
 
 
