@@ -86,6 +86,8 @@ def getShareMarketEarn(t,date):
                 earnCalc = firstArray[earningsPos]
                 earningBefore = None
                 if Ev != None and earnCalc != None:
+                    if(earnCalc == 0):
+                        break
                     earningBefore = float(Ev)/float(earnCalc)
 
 
@@ -248,24 +250,24 @@ def getSharePriceHistory(t,date,endDate):
     allStocksDetails = {}
 
     for tick in arrayOfArrayOfTickers:
-        request_url = 'https://simfin.com/api/v2/companies/prices'
-        parameters = {"ticker": ",".join(tick), "start": startDay, "end": endDay, "api-key": api_key,
-                      "ratios": ""}
-        request = requests.get(request_url, parameters)
-        all_data = request.json()
+        if len(tick) != 0:
+            request_url = 'https://simfin.com/api/v2/companies/prices'
+            parameters = {"ticker": ",".join(tick), "start": startDay, "end": endDay, "api-key": api_key,
+                          "ratios": ""}
+            request = requests.get(request_url, parameters)
+            all_data = request.json()
 
-
-        for response_index, data in enumerate(all_data):
-            # make sure that data was found
-            if data['found'] and len(data['data']) > 0:
-                dateAndPrice = {}
-                ticker = {}
-                ticker = data['data'][0][1]
-                for d in data['data']:
-                    dateGiven = d[2]
-                    closingPrice = d[6]
-                    dateAndPrice[dateGiven] = closingPrice
-                allStocksDetails[ticker] = dateAndPrice
+            for response_index, data in enumerate(all_data):
+                # make sure that data was found
+                if data['found'] and len(data['data']) > 0:
+                    dateAndPrice = {}
+                    ticker = {}
+                    ticker = data['data'][0][1]
+                    for d in data['data']:
+                        dateGiven = d[2]
+                        closingPrice = d[6]
+                        dateAndPrice[dateGiven] = closingPrice
+                    allStocksDetails[ticker] = dateAndPrice
 
 
 
