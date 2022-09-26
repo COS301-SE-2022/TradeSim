@@ -10,7 +10,7 @@ function getwow()
 
 
 
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/AI",
+    fetch("http://localhost:6969/AI",
     {
         method: 'POST',
         headers: {
@@ -32,7 +32,7 @@ function getwow()
             year = date.slice(0,4);
 
             for (key in data.Values) {
-                if (data.Values[key] > prevy / 10)
+                if (data.Values[key] > prevy / 2)
                 {
                     xA.push(key)
                     yA.push(data.Values[key])
