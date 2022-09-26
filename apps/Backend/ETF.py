@@ -1067,6 +1067,19 @@ class ETF:
 
         return toReturn
 
+    def wowFactorOnlyStocks(self):
+        etfValueByday = {}
+        toReturn = {}
+
+        allStocks = []
+        for stock in self.stocksWithAmountOFShares:
+            allStocks.append(stock)
+
+        cashOverflow = self.amount - self.totalInvested
+        percentLeft = (cashOverflow / self.amount) * 100
+        self.calculateAmountoFstocks(allStocks, percentLeft)
+
+        return self.stocksWithAmountOFShares
 
     def getPriceOverTime(self):
         etfValueByday = {}
