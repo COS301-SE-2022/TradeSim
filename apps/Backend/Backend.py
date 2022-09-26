@@ -6,6 +6,8 @@ from dbpass import *
 import mysql.connector
 import json
 import AiFactor
+import datetime
+from datetime import datetime,timedelta
 
 amount = 0
 app = Flask(__name__)
@@ -94,7 +96,6 @@ def createRules():
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
     return dataJsonify
 
-
 @app.route("/tickerInfo", methods=["POST"])
 def tickerInfo():
     data = request.get_json()
@@ -111,7 +112,6 @@ def tickerInfo():
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
     return dataJsonify
 
-
 @app.route("/news", methods=["POST"])
 def news():
     data = request.get_json()
@@ -125,14 +125,46 @@ def news():
 
 @app.route("/AI", methods=["POST"])
 def AI():
+
     data = request.get_json()
     date = data['date']
-    Aiting = AiFactor.AiFactor(date)
-    data = Aiting.generateRandomETF()
+    seedValue = data['seedValue']
 
-    dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
-    return dataJsonify
+    mydb = mysql.connector.connect(
+        host="database-1.ctw2tablscgc.us-east-1.rds.amazonaws.com",
+        user="aipicapstone",
+        password=getpass()
+    )
 
+    cursor = mydb.cursor(buffered=True)
+
+    cursor.execute("SELECT * FROM aipicapstone.AIEtfs WHERE year = " + date + "  ;")
+    response = cursor.fetchall();
+
+    if response != []:
+
+        Rules = str(response[0][1])
+
+        data = aigraph(Rules,date)
+        dataJsonify = jsonify(data)
+        mydb.close()
+        return dataJsonify
+
+    else:  # no ETFS found
+
+        Aiting = AiFactor.AiFactor(date, seedValue)
+        data = Aiting.generateRandomETF()
+
+        dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
+
+        sql = "INSERT INTO aipicapstone.AIEtfs( year, Rules) VALUES (%s, %s)"
+        val = (date, data['Rules'])
+        cursor = mydb.cursor(buffered=True)
+        cursor.execute(sql, val)
+        mydb.commit()
+
+        mydb.close()
+        return dataJsonify
 
 
 
@@ -169,7 +201,6 @@ def login():
         res = jsonify(res)
         mydb.close()
         return res
-
 
 @app.route("/register", methods=["POST"])
 def register():
@@ -235,7 +266,6 @@ def register():
             mydb.close()
             return res
 
-
 @app.route("/getETFS", methods=["POST"])
 def getETFS():
     data = request.get_json()
@@ -283,7 +313,6 @@ def getETFS():
         res = jsonify(res)
         mydb.close()
         return res
-
 
 @app.route("/setRule", methods=["POST"])
 def setRule():
@@ -349,7 +378,6 @@ def setRule():
     mydb.close()
     return res
 
-
 @app.route("/changename", methods=["POST"])
 def changename():
     data = request.get_json()
@@ -374,7 +402,6 @@ def changename():
     res = jsonify(res)
     mydb.close()
     return res
-
 
 @app.route("/changeamount", methods=["POST"])
 def changeamount():
@@ -402,7 +429,6 @@ def changeamount():
     mydb.close()
     return res
 
-
 @app.route("/clearrules", methods=["POST"])
 def clearrules():
     data = request.get_json()
@@ -427,7 +453,6 @@ def clearrules():
     mydb.close()
     return res
 
-
 @app.route("/deleteetf", methods=["POST"])
 def deleteetf():
     data = request.get_json()
@@ -450,7 +475,6 @@ def deleteetf():
     res = jsonify(res)
     mydb.close()
     return res
-
 
 @app.route("/export", methods=["POST"])
 def export():
@@ -502,7 +526,6 @@ def export():
         res = jsonify(res)
         mydb.close()
         return res
-
 
 @app.route("/import", methods=["POST"])
 def Import():
@@ -563,6 +586,18 @@ def Import():
         res = jsonify(res)
         mydb.close()
         return res
+
+
+
+def aigraph(rules,date):
+    etfNew = ETF.ETF("0", "0", rules, date, 1000000)
+    etfNew.createETF()
+    beginDate = datetime.strptime(date, '%Y-%m-%d')
+    endDate = datetime.strftime(beginDate + timedelta(365), '%Y-%m-%d')
+    data = etfNew.wowFactor(endDate)
+    data['Rules'] = rules
+    return data
+
 
 
 if __name__ == "__main__":
