@@ -18,7 +18,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="shorcut icon" href="{{ url_for('static',filename='favicon/favicon.ico') }}">
-    <script src="{{ url_for('static',filename='home.js') }}"></script>
+    <script src="{{ url_for('static',filename='ai.js') }}"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <title>TradeSim Generate ETF</title>
 </head>
@@ -57,17 +57,17 @@
  <div class="input-field col s12">
         <select id ="options">
                           <option value="" disabled selected hidden>Choose Year:</option>
-                             <option value="" id="y1">2015</option>
-                            <option value="" id="y1">2016</option>
-                            <option value="" id="y1">2017</option>
-                            <option value="" id="y1">2018</option>
-                            <option value="" id="y1">2019</option>
-                            <option value="" id="y1">2020</option>
-                            <option value="" id="y1">2021</option>
+                             <option value="2015-01-01" id="2015-01-01">2015</option>
+                            <option value="2016-01-01" id="2016-01-01">2016</option>
+                            <option value="2017-01-01" id="2017-01-01">2017</option>
+                            <option value="2018-01-01" id="2018-01-01">2018</option>
+                            <option value="v019-01-01" id="2019-01-01">2019</option>
+                            <option value="2020-01-01" id="2020-01-01">2020</option>
+                            <option value="2021-01-01" id="2021-01-01">2021</option>
 
                         </select>
 
-        <a class="waves-effect waves-light btn blue right" onclick=""> Confirm </a>
+        <a class="waves-effect waves-light btn blue right" onclick="getwow()"> Confirm </a>
  </div>
         <div id="graph-content" class="col-lg-8 col-md-12 col-sm-12 main-body">
             <div class="row">
@@ -85,5 +85,10 @@
 
 
 </div>
+
+    <div id="chart" style="width:900px;height:400px;"></div>
+    <div id="stocklist"></div>
+    <div id="ruleslist"></div>
+
 </body>
 </html>
