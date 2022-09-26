@@ -1,5 +1,10 @@
+import os
+
 def getpass():
-    return("pass")
+    return(os.environ["DATABASE"])
 
 def getapi():
-    return ""
+    return(os.environ["APIKEY"])
+
+def getFinHubApi():
+    return(os.environ["FINNHUBAPI"])
