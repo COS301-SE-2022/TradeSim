@@ -27,7 +27,7 @@ window.onload = function () {
                     "Data": [gloUserID, impJSON.Data[0].ETFName, impJSON.Data[0].Amount, impJSON.Data[0].Rules, impJSON.Data[0].Date]
                 }
             console.log("Imp Dets: ", details)
-            fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/import",
+            fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/import",
                 {
                     method: 'POST',
                     headers: {
@@ -62,7 +62,7 @@ function validatenaa() {
             "Data": [idnum, name, amount]
         }
 
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/createName",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/createName",
         {
             method: 'POST',
             headers: {
@@ -105,7 +105,7 @@ function validatenaa2() {
             "Data": [idnum, name, amount]
         }
 
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/createName",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/createName",
         {
             method: 'POST',
             headers: {
@@ -160,7 +160,7 @@ function getETFS() {
             "Data": [userID]
         }
 
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/getETFS",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/getETFS",
         {
             method: 'POST',
             headers: {
@@ -1534,7 +1534,7 @@ function getRules() {
             "Data": [userID]
         }
 
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/getETFS",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/getETFS",
         {
             method: 'POST',
             headers: {
@@ -2295,7 +2295,7 @@ function getRules2() {
             "Data": [userID]
         }
 
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/getETFS",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/getETFS",
         {
             method: 'POST',
             headers: {
@@ -3036,7 +3036,7 @@ async function ConfirmRule(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3068,7 +3068,7 @@ async function ConfirmRule(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3100,7 +3100,7 @@ async function ConfirmRule(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3131,7 +3131,7 @@ async function ConfirmRule(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3178,7 +3178,7 @@ async function ConfirmRule(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3226,7 +3226,7 @@ async function ConfirmRule(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3274,7 +3274,7 @@ async function ConfirmRule(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3316,7 +3316,7 @@ async function ConfirmRule(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3358,7 +3358,7 @@ async function ConfirmRule(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3400,7 +3400,7 @@ async function ConfirmRule(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3449,7 +3449,7 @@ async function ConfirmRule(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3491,7 +3491,7 @@ async function ConfirmRule(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3533,7 +3533,7 @@ async function ConfirmRule(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3575,7 +3575,7 @@ async function ConfirmRule(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3617,7 +3617,7 @@ async function ConfirmRule(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3666,7 +3666,7 @@ async function ConfirmRule2(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3700,7 +3700,7 @@ async function ConfirmRule2(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3734,7 +3734,7 @@ async function ConfirmRule2(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3767,7 +3767,7 @@ async function ConfirmRule2(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3816,7 +3816,7 @@ async function ConfirmRule2(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3866,7 +3866,7 @@ async function ConfirmRule2(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3916,7 +3916,7 @@ async function ConfirmRule2(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3960,7 +3960,7 @@ async function ConfirmRule2(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -4004,7 +4004,7 @@ async function ConfirmRule2(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -4048,7 +4048,7 @@ async function ConfirmRule2(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -4099,7 +4099,7 @@ async function ConfirmRule2(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -4143,7 +4143,7 @@ async function ConfirmRule2(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -4187,7 +4187,7 @@ async function ConfirmRule2(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -4231,7 +4231,7 @@ async function ConfirmRule2(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -4274,7 +4274,7 @@ async function ConfirmRule2(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -4335,7 +4335,7 @@ function editname() {
             "Data": [eID, newName]
         }
 
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/changename",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/changename",
         {
             method: 'POST',
             headers: {
@@ -4371,7 +4371,7 @@ function editamount() {
             "Data": [eID, newAmount]
         }
 
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/changeamount",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/changeamount",
         {
             method: 'POST',
             headers: {
@@ -4401,7 +4401,7 @@ function clearRules() {
             "Data": [eID]
         }
 
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/clearrules",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/clearrules",
         {
             method: 'POST',
             headers: {
@@ -4432,7 +4432,7 @@ function deleteETF() {
             "Data": [eID]
         }
 
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/deleteetf",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/deleteetf",
         {
             method: 'POST',
             headers: {
@@ -4468,7 +4468,7 @@ function exportRules() {
             "Data": [gloUserID, eName]
         }
     console.log("Exp Dets: ", JSON.stringify(details))
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/export",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/export",
         {
             method: 'POST',
             headers: {
