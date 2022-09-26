@@ -138,7 +138,7 @@ def AI():
 
     cursor = mydb.cursor(buffered=True)
 
-    cursor.execute("SELECT * FROM aipicapstone.AIEtfs WHERE year = " + date + "  ;")
+    cursor.execute("SELECT * FROM aipicapstone.AIEtfs WHERE year = " +  str(date) + "  ;")
     response = cursor.fetchall();
 
     if response != []:
