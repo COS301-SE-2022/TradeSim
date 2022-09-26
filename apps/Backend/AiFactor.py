@@ -6,7 +6,7 @@ import csv
 import ETF
 from datetime import datetime,timedelta
 import numpy as np
-
+import matplotlib.pyplot as plt
 
 
 class AiFactor:
@@ -122,7 +122,8 @@ class AiFactor:
             print(data)
             tmpJson = {"Rules" : rules, "Prices" : data["Values"]}
             dictionaryOfETF[count] = tmpJson
-        self.startAIalgorithm(dictionaryOfETF)
+        toReturn = self.startAIalgorithm(dictionaryOfETF)
+        return toReturn
 
 
         #Now we have the original 10 stocks I think the idea is to create a recursive function that takes the 10 etfs
@@ -156,8 +157,8 @@ class AiFactor:
         for x in etfsWithRsquared:
             etfCode = x[0]
             etfsWithRules[etfCode] = dictionaryOfETF[etfCode]
-        self.mutationAndCrossOver(etfsWithRsquared,etfsWithRules)
-
+        toReturn = self.mutationAndCrossOver(etfsWithRsquared,etfsWithRules)
+        return toReturn
 
     def mutationAndCrossOver(self,etfsWithRsquared,etfsWithRulesparameter):
         #First step is to mutate the stocks by changing one rule. in each etf and then remaking etf and comparing
@@ -421,6 +422,14 @@ class AiFactor:
         theBestStock = []
         for x in OGetfs:
             theBestStock = OGetfs[x]
+
+        etfNew = ETF.ETF("0", "0", theBestStock["Rules"], self.date, 1000000)
+        etfNew.createETF()
+        data = etfNew.wowFactorOnlyStocks()
+        theBestStock["Stocks"] = data
+
+        return theBestStock
+
 
         #Now we just need to grab the stocks from theBestStock
 
