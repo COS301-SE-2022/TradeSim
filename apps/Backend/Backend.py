@@ -138,12 +138,21 @@ def AI():
 
     cursor = mydb.cursor(buffered=True)
 
-    cursor.execute("SELECT * FROM aipicapstone.AIEtfs WHERE year = " + date + "  ;")
+    cursor.execute("SELECT * FROM aipicapstone.AIEtfs WHERE year = "+ '"' + date + '"'+  "  ;")
     response = cursor.fetchall();
 
     if response != []:
 
-        Rules = str(response[0][1])
+        stri = str(response[0][1])
+        stri = stri.replace("'", '"')
+        # print(stri)
+        r1 = '{"Rules":' + stri + '}'
+        # print(r1)
+        # print(type(r1))
+        r2 =json.loads(r1)
+        # print(r2['Rules'])
+        Rules = r2['Rules']
+
 
         data = aigraph(Rules,date)
         dataJsonify = jsonify(data)
@@ -602,4 +611,4 @@ def aigraph(rules,date):
 
 
 if __name__ == "__main__":
-    app.run("localhost", 6969)
+    app.run("ec2-18-208-221-145.compute-1.amazonaws.com", 6969)
