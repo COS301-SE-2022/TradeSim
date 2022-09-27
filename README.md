@@ -1,4 +1,5 @@
-![T-2](https://user-images.githubusercontent.com/93087406/192642698-8c65871e-352b-4874-8491-537a93380faf.png)
+<img width="421" alt="Screenshot 2022-09-27 at 23 55 01" src="https://user-images.githubusercontent.com/93087406/192642886-acdec4be-65c3-45e7-a2d2-76001af23e2e.png">
+
 
 ----------------------------------------------------
 <h1> <b> TradeSim </b> </h1>
