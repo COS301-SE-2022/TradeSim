@@ -39,7 +39,6 @@ function validateform() {
 
 }
 
-
  function hash(p, n)
  {
     p = p + n
@@ -56,20 +55,5 @@ function validateform() {
     hash |= 0; // Convert to 32bit integer
     }
 
-    hash = sha(hash)
     return hash;
-}
-
-function sha(p)
-{
-  const utf8 = new TextEncoder().encode(p);
-  return crypto.subtle.digest('SHA-256', utf8).then((hashBuffer) =>
-  {
-    const hsrr = Array.from(new Uint8Array(hashBuffer));
-    const hhex = hsrr
-      .map((bytes) =>
-          bytes.toString(16).padStart(2, '0'))
-            .join('');
-    return hhex;
-  });
 }
