@@ -7,4 +7,4 @@ def getapi():
     return(os.environ.get("APIKEY"))
 
 def getFinHubApi():
-    return(os.environ.get("FINNHUB"))
+    return(os.environ.get("FINNHUBAPI"))
