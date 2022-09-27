@@ -85,10 +85,6 @@ https://github.com/COS301-SE-2022/TradeSim/wiki/TradeSim
 About: I am a BIT student who is a full stack developer and enjoy learning new frameworks. In my free time if I’m not sleeping I'm eating and if I'm not eating I'm playing sports.<br>
 LinkedIn profile link: https://www.linkedin.com/in/sean-nkosi-47b7901ba
 
-<b> Sibusiso Mngomezulu: </b> <br>
-About: Hi my name is Sbu, I am studing computer science at the  University of Pretoria, I really enjoy my degree and have a passion for computer science.<br>
-LinkedIn profile link: https://www.linkedin.com/in/sibusiso-mngomezulu-16358323a/
-
 <b> Rachel Hamilton: </b> <br>
 About: My name is Rachel Hamilton, I am a 3rd year BSC Computer Science student. I consider myself a person with good leadership skills. I have experience in coding in multiple languages, including, C++, Java, Python, Javascript etc. I have an interest in software development & web development. <br>
 LinkedIn profile link: www.linkedin.com/in/rachel-hamilton-a39382234
