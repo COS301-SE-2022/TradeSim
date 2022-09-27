@@ -16,7 +16,7 @@ class AiFactor:
         self.lstOfRules = ["000", "001", "002", "003", "011", "012", "013", "101", "102", "103", "104", "105", "106"]
         self.seedValue = seedValue
         self.percentage = 100
-        self.amountOfETfs = 6
+        self.amountOfETfs = 10
         self.amountOfRules = 10
 
     def generateRandomETF(self):
