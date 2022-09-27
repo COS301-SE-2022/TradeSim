@@ -86,7 +86,7 @@ About: I am a BIT student who is a full stack developer and enjoy learning new f
 LinkedIn profile link: https://www.linkedin.com/in/sean-nkosi-47b7901ba
 
 <b> Rachel Hamilton: </b> <br>
-About: My name is Rachel Hamilton, I am a 3rd year BSC Computer Science student. I consider myself a person with good leadership skills. I have experience in coding in multiple languages, including, C++, Java, Python, Javascript etc. I have an interest in software development & web development. <br>
+About: My name is Rachel Hamilton, I am a 3rd year BSC Computer Science student. I consider myself a person with good leadership skills. I have experience in coding in multiple languages. I have a huge interest in software development and I particularly enjoy working on the frontend. I am always eager to learn and consider myself as an independent thinker. <br>
 LinkedIn profile link: www.linkedin.com/in/rachel-hamilton-a39382234
 
 <b> Regan Shen: </b> <br>
