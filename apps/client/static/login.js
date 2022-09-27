@@ -4,7 +4,7 @@ function validateform() {
     var name = document.myform.name.value;
     var password = document.myform.password.value;
 
-    password = hash(password);
+    password = hash(password, name);
     const details =
     {
         "Data" : [name, password]
@@ -40,18 +40,34 @@ function validateform() {
 }
 
 
- function hash(p)
+ function hash(p, n)
  {
-  var hash = 0, i, c;
-  if (p.length === 0)
-  {
+    p = p + n
+
+    var hash = 0, i, c;
+    if (p.length === 0)
+    {
     return hash;
-  }
-  for (i = 0; i < p.length; i++)
-  {
+    }
+    for (i = 0; i < p.length; i++)
+    {
     c   = p.charCodeAt(i);
     hash  = ((hash << 5) - hash) + c;
     hash |= 0; // Convert to 32bit integer
-  }
-  return hash;
+    }
+    return hash;
+}
+
+function sha(p)
+{
+  const utf8 = new TextEncoder().encode(p);
+  return crypto.subtle.digest('SHA-256', utf8).then((hashBuffer) =>
+  {
+    const hsrr = Array.from(new Uint8Array(hashBuffer));
+    const hhex = hsrr
+      .map((bytes) =>
+          bytes.toString(16).padStart(2, '0'))
+            .join('');
+    return hhex;
+  });
 }
