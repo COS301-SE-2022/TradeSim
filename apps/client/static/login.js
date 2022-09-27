@@ -55,6 +55,8 @@ function validateform() {
     hash  = ((hash << 5) - hash) + c;
     hash |= 0; // Convert to 32bit integer
     }
+
+    hash = sha(hash)
     return hash;
 }
 
