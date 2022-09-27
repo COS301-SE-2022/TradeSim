@@ -16,18 +16,13 @@ Project Manager - Michael Viljoen u20513667
 Buisness Anaylist - Rachel Hamilton u20453478
 
 Frontend Team
-Sean Nkosi - U19107383
-Sibusiso Mngomezulu - U20441984
 Rachel Hamilton - u20453478
+Sean Nkosi - U19107383
 
 Backend Team
 Regan Shen - u20460067
 Michael Viljoen - u20513667
 
-
-=======
-Dev Ops
-Rachel Hamilton - u20453478
 
 -----------------------------------------------------
 
