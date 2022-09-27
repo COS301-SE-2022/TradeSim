@@ -66,7 +66,7 @@ function getwow()
             chart = document.getElementById("chart")
             Plotly.newPlot(chart, data2, layout);
 
-            document.getElementById("stocklist").innerHTML += `<li><div class="collapsible-header"><i class="material-icons">filter_drama</i>Stocks</div><div class="collapsible-body"><table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody id="stock-var"></tbody></table></div></li>`;
+            document.getElementById("stocklist").innerHTML = `<li><div class="collapsible-header"><i class="material-icons">filter_drama</i>Stocks</div><div class="collapsible-body"><table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody id="stock-var"></tbody></table></div></li>`;
             for (key in data.Stocks)
             {
                 document.getElementById("stock-var").innerHTML += `<tr><td>${key}</td><td>${data.Stocks[key]}</td></tr>`;
