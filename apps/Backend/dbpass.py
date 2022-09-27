@@ -4,7 +4,7 @@ def getpass():
     return(os.environ["DATABASE"])
 
 def getapi():
-    return(os.environ["APIKEY"])
+    return(os.environ.get("APIKEY"))
 
 def getFinHubApi():
-    return(os.environ["FINNHUBAPI"])
+    return(os.environ.get("FINNHUBAPI"))

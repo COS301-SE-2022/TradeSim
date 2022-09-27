@@ -1,75 +1,86 @@
-import json
 import unittest
 import apiCalls
-import requests
-import ETF
-from flask import Flask, request, jsonify
 
 
-class UnitTest(unittest.TestCase):
+
+class Tests(unittest.TestCase):
 
     def test_listAllCompanies(self):
-        self.assertEqual(len(apiCalls.listallcompanies()), 3161, "The length of the list should be 3161")
+        size = len(apiCalls.listallcompanies())
+        self.assertTrue(size > 0, "Test to see if list all companies will return all the companies ont he simfin API")
+
+    def test_getSharePrice(self):
+        testTicker = ["AAPL"]
+        data = apiCalls.getShareMarketEarn(testTicker, "2022-06-15")
+        price = data["AAPL"][0]
+        self.assertEqual(price,135.43,"Test to see if we can get the correct price of a certain stock on a certain day")
+
+    def test_getMarketCap(self):
+        testTicker = ["AAPL"]
+        data = apiCalls.getShareMarketEarn(testTicker, "2022-06-15")
+        marketCap = data["AAPL"][1]
+        self.assertEqual(marketCap,2219931181320,"Test to see if we can get the correct marketCap of a certain stock on a certain day")
+
+    def test_getEarnings(self):
+        testTicker = ["AAPL"]
+        data = apiCalls.getShareMarketEarn(testTicker, "2022-06-15")
+        earnings = data["AAPL"][2]
+        self.assertEqual(earnings, 130634028041.4325,"Test to see if we can get the correct earnings of a certain stock on a certain day")
+
+    def test_companiesByIndustry(self):
+        testCode = ["100"]
+        data = apiCalls.companiesByIndustry(testCode)
+        size = (len(data))
+        self.assertTrue(size > 0, "Test to see if we can get the correct amount of stocks in a certain sector/Industry")
+
+
+    def test_getCountry(self):
+        testCode = ["USA"]
+        data = apiCalls.getCountry(testCode)
+        testValue = data['USA']
+        self.assertEqual(testValue, 'US', "Test to see if we can get the correct country when inputting a code")
+
     def test_AddEndDate(self):
         startDate = "2016-06-06"
         endDate = apiCalls.getEndDay(startDate)
         self.assertEqual(endDate, "2016-06-10", "This function should return the date it was given but 4 days later")
 
-    def test_RemoveStockByTicker(self):
-        UserID = 12
-        etfID = 13
-        listOfRules = [["000", ["AAPL"]],["102", ["100",50,"20"]],["101", ["GOOG",20]],["013", ["25", "35"]]]
-        Date = "2016-06-06"
-        etfNew = ETF.ETF(UserID, etfID, listOfRules, Date, 1000000)
-        etfNew.createETF()
+    def test_companiesByExchange(self):
+        testCode = "US"
+        data = apiCalls.companiesByExchange(testCode)
+        size = len(data)
+        self.assertTrue(size > 0, "Test to see if we get the correct amount of stocks according to the stock exchange")
 
-        passedTest = True
-        for x in etfNew.stocksWithAmountOFShares:
-            if x == "AAPL":
-                passedTest = False
-        self.assertEqual(passedTest, True, "AAPL is in the list of stocks but should not be according to the rules set")
+    def test_companiesRevenue(self):
+        testYear = "2021"
+        data = apiCalls.companiesRevenue(testYear)
+        testValue = data["XRAY"]
+        self.assertEqual(testValue, 4251000000, "Test to see if we get the correct Revenue of t a certain company in a certain year")
 
-    def test_StockIsInETF(self):
-        UserID = 12
-        etfID = 13
-        listOfRules = [["000", ["AAPL"]], ["102", ["100", 50, "20"]], ["101", ["GOOG", 20]], ["013", ["25", "35"]]]
-        Date = "2016-06-06"
-        etfNew = ETF.ETF(UserID, etfID, listOfRules, Date, 1000000)
-        etfNew.createETF()
+    def test_getSharePriceHistory(self):
+        testTicker = ["AAPL"]
+        testStartDate = "2022-06-13"
+        testEndDate = "2022-06-15"
+        data = apiCalls.getSharePriceHistory(testTicker, testStartDate, testEndDate)
+        price = data[testTicker[0]][testStartDate]
+        self.assertEqual(price, 131.88, "Test to see if we get the correct prices of a stock over a duration of time")
 
-        print("Unit Testing")
-        print(etfNew.stocksWithAmountOFShares)
+    def test_getCompanyInformation(self):
+        testTicker = "AAPL"
+        data = apiCalls.getCompanyInformation(testTicker)
+        CompanyName = data["Company Name"]
+        self.assertEqual(CompanyName, "APPLE INC", "Test to see if we get the correct compnay information of a particular stock")
 
-        passedTest = False
-        for x in etfNew.stocksWithAmountOFShares:
-            if x == "GOOG":
-                passedTest = True
-        self.assertEqual(passedTest, True, "The rule states that GOOG needs to be in the stock")
+    def test_finhubInformation(self):
+        testTicker = "AAPL"
+        data = apiCalls.finhubInformation(testTicker)
+        IPO = data["IPO"]
+        self.assertEqual(IPO, "1980-12-12", "Test to see if finhub gets the correct company information of a particular stock")
 
-    def test_e2eConnection(self):
-        url = 'http://127.0.0.1:6969/createRules'
-        CreateRules = {
-            "UserID": 1,
-            "ETFid": 23,
-            "Rules": [
-
-            ],
-            "date": "2020-02-10",
-            "amount": 1000000
-        }
-
-        print("Sending request")
-        x = requests.post(url, json=CreateRules)
-
-
-        data = json.loads(x.text)
-        print("E2e Connection")
-        print(data)
-        ETFid = data["ETFid"]
-        if ETFid == 23:
-            passedTest = True
-        self.assertEqual(passedTest, True, "The ETDid should be 23")
-
-
+    def test_news(self):
+        testTicker = "forex"
+        data = apiCalls.getNews(testTicker)
+        size = len(data)
+        self.assertTrue(size > 0, "Test if the news function returns a value")
 if __name__ == '__main__':
     unittest.main()
