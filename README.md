@@ -1,9 +1,7 @@
 <img width="421" alt="Screenshot 2022-09-27 at 23 55 01" src="https://user-images.githubusercontent.com/93087406/192642886-acdec4be-65c3-45e7-a2d2-76001af23e2e.png">
 
 
-----------------------------------------------------
-<h1> <b> TradeSim </b> </h1>
-<h2> <b> AiPi </b> </h2>
+<h1> <b> AiPi </b> </h1>
 
 <h3> <b> Project Description </b> </h3>
 <p> Our role is to build a TradeSim system that will be responsible for containing all information for a user to customize their own ETF's and set their own rules. The user will be able to track how well their ETF is doing, and use this to decide where they want to invest their real money in the future. The goal is to create a system that will consist of a user's customized account, to help the user construct a portfolio of stocks, and define rules on how they should be traded to mimic an index tracking ETF by creating their own mini-ETF.
