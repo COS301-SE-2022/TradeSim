@@ -32,4 +32,4 @@ jobs:
         
         
     - run: pip install -r ./requirements.txt
-    - run: python apps/Backend/unitTesting.py
+    - run: python apps/Backend/IntegrationTesting.py
