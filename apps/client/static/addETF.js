@@ -7,10 +7,24 @@ var selEtfAmt = 0;
 var eName = "";
 var gloUserID = getUserID();
 
+function checkCookie(name='UserIDAI') {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    if (!match) {
+        window.location.href = "/login";
+    }
+}
+
+window.onpaint = checkCookie();
+
 document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('.tooltipped');
     var instances = M.Tooltip.init(elems);
 });
+
+function logout() {
+    document.cookie = "UserIDAI=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    window.location.href = "/login"
+}
 
 window.onload = function () {
     document.getElementById("jsonfileinput").addEventListener("change", function () {
@@ -1350,8 +1364,10 @@ function addRule2() {
         rule.innerHTML = '<b >' + document.getElementById('r16').textContent + '</b>' + //style="color: black; position: relative; bottom: 180px; right: 10px;"
             '<div class="amount-input-row">' +
             '<div class="card2" id="etfbody" >' + //style="width:1125px ; position: relative; bottom: 110px; right: 12px"
+            // '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Rule:</b></label>' +
             '<div class="custom-select" >' + //style="display: inline-block; position: relative; top:5px; left:25px;"
             '<input id="inputw" type="text" placeholder="Balance period in weeks" >' + //style=" width:350px; height:25px; font-size: 12px; "
+            // '<button class="create-btn" id="btn16"  onclick="ConfirmRule(200)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 550px; bottom: 1px;"
             '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(200)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
@@ -1364,8 +1380,11 @@ function addRule2() {
         rule.innerHTML = '<b >' + document.getElementById('r18').textContent + '</b>' + //style="color: black; position: relative; bottom: 130px; right: 10px;"
             '<div class="amount-input-row">' +
             '<div class="card2" id="etfbody">' + // style="width:1125px ; position: relative; bottom: 70px; right: 12px"
+            // '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Rule:</b></label>' +
             '<div class="custom-select" >' + //style="display: inline-block; position: relative; top:5px; left:25px;"
+            // '<input type="text" placeholder="Number of weeks until reconsideration" >' + //style=" width:350px; height:25px; font-size: 12px; "
             '<input id="inputw" type="text" placeholder="Number of weeks until reconsideration" >' +
+            // '<button class="create-btn" id="btn18"  onclick="ConfirmRule("202")">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 550px; bottom: 1px;"
             '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(202)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
@@ -1385,17 +1404,27 @@ function confirm() {
     loaderDiv.classList.add('etfeditor');
 
     document.getElementById("etfeditor").innerHTML =
-      
+        //         '<div class="card2" id="etfbody" style="width:108% ; position: relative; bottom: 70px; right: 12px">' +
+        //             '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>EDIT NAME:</b></label>' +
+        //             '<div class="custom-select" style="display: inline-block; position: relative; top:5px; left:25px;">' +
+        //                 '<input id="inputname" type="text" placeholder="Name" style=" width:100px; height:25px; font-size: 12px; ">' +
+        //                 '<button class="create-btn" id="btn1" style="width: 50px; display: inline-block; position: relative; left: 6px; bottom: 1px;" onclick="editname()">edit</button>' +
+        //             '</div>' +
+        //             '<label for="etf" style=" color: white; position: relative; top: 8px; left: 35px;" id="label2"><b>EDIT AMOUNT:</b></label>' +
+        //             '<div class="custom-select" style="display: inline-block; position: relative; top:5px; left:40px;">' +
+        //                 '<input id="inputamount" type="text" placeholder="Amount" style=" width:100px; height:25px; font-size: 12px; ">' +
         '<a class="waves-effect waves-light btn blue" onclick="editamount()">Edit Amount</a>' + " " +
         '<a class="waves-effect waves-light btn blue" onclick="editname()">Edit Name</a>' + " " +
         '<a class="waves-effect waves-light btn blue" onclick="clearRules()">Clear Rules</a>' + " " +
         '<a class="waves-effect waves-light btn blue right" onclick="deleteETF()"> Delete ETF</a>' 
+        //                 '<button class="create-btn" id="btn1" style="width: 70px; display: inline-block; position: relative; left: 400px; bottom: 1px;" onclick="deleteETF()">delete</button>' +
 
+        //     "</div>"
 
         document.getElementById("ruleadder").innerHTML =
             "<div class=\"amount-input-row\">\n" +
-            "                <div class=\"card2\" id=\"etfbody\" >\n" + 
-            "                    <div class=\"custom-select\" >\n" + 
+            "                <div class=\"card2\" id=\"etfbody\" >\n" + //style="width:108% ; position: relative; bottom: 95px; right: 12px"
+            "                    <div class=\"custom-select\" >\n" + //style="width:200px; display: inline-block; position: relative; left: 12px; top: 8px;"
             "\n" +
             "                        <select>\n" +
             "                          <option disabled selected hidden value=\"0\">Select rule:</option>\n" +
@@ -1437,7 +1466,8 @@ function confirm() {
 function confirm2() {
 
 
-
+    // console.log(document.getElementById("options").value)
+    // etfid = document.getElementById("options").value
 
     getETFS();
     document.getElementById("ruleadder").innerHTML =
@@ -1475,7 +1505,7 @@ function confirm2() {
     "                </div>\n" +
     "            </div>"
 
-
+    // validatenaa()
     addRule2()
 
 
@@ -1509,7 +1539,7 @@ function getRules() {
             const jd = JSON.parse(data)
             if (jd.status == "failure") {
                 console.log(jd.error);
-       
+                // document.getElementById("etfbody").innerHTML = jd.error
             } else {
                 console.log(jd);
                 let numofetfs = jd.Data.length;
@@ -2231,7 +2261,11 @@ function getRules() {
                 document.getElementById("etfAmount").value = "$" + amt;
                  document.getElementById("ruleslist").innerHTML += '<a class="waves-effect blue waves-light btn" onClick="exportRules()">Export ETF<i class="material-icons right">arrow_upward</i></a>';
 
-                 
+
+                //document.getElementById("last_name").remove();
+
+//Ai etf
+                //dropdown 2015-2021
             }
 
 
@@ -3609,11 +3643,11 @@ async function ConfirmRule2(rulecode) {
         }
 
         rulecode = "000"
-  
+        // var eID = document.getElementById("options").value;
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
 
-
+        //  var eID = document.getElementById("etfName").value
         var param1 = document.getElementById("input1").value
         var param2 = "";
         var param3 = "";
@@ -3646,7 +3680,7 @@ async function ConfirmRule2(rulecode) {
     } else if (rulecode == 1) {
 
         rulecode = "001"
-
+        // var eID = document.getElementById("options").value;
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("secopt").value
@@ -3680,7 +3714,7 @@ async function ConfirmRule2(rulecode) {
     } else if (rulecode == 2) {
 
         rulecode = "002"
-    
+        // var eID = document.getElementById("options").value;
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("indopt").value
@@ -3713,7 +3747,7 @@ async function ConfirmRule2(rulecode) {
     } else if (rulecode == 3) {
 
         rulecode = "003"
-       
+        // var eID = document.getElementById("options").value;
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("cbropt").value
@@ -3761,7 +3795,7 @@ async function ConfirmRule2(rulecode) {
 
 
         rulecode = "011"
-     
+        // var eID = document.getElementById("options").value;
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("inputmin").value;
@@ -3811,7 +3845,7 @@ async function ConfirmRule2(rulecode) {
 
 
         rulecode = "012"
-       
+        // var eID = document.getElementById("options").value;
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("inputemin").value;
@@ -3950,7 +3984,7 @@ async function ConfirmRule2(rulecode) {
         }
 
         rulecode = "102"
-    
+        //var eID = document.getElementById("options").value;
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("secopt2").value
@@ -3994,7 +4028,7 @@ async function ConfirmRule2(rulecode) {
         }
 
         rulecode = "103"
-   
+        // var eID = document.getElementById("options").value;
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("indopt2").value

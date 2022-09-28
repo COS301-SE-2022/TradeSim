@@ -1,9 +1,23 @@
 var graphCount = 0;
 
+function checkCookie(name='UserIDAI') {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    if (!match) {
+        window.location.href = "/login";
+    }
+}
+
+window.onpaint = checkCookie();
+
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(elems);
   });
+
+function logout() {
+    document.cookie = "UserIDAI=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    window.location.href = "/login"
+}
 
 function getETFS() {
     var userID = getUserID()

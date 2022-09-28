@@ -662,3 +662,27 @@ tr, td, table, tbody {
     align-items: center;
     height: 85vh;
 }
+
+#ruleslists{
+    display: none;
+}
+
+#ruleslists.show{
+    display: block;
+}
+
+#stocklist{
+    display: none;
+}
+
+#stocklist.show{
+    display: block;
+}
+
+#loaderAI {
+    display: none;
+}
+
+#loaderAI.show {
+    display: block;
+}

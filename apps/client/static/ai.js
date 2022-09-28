@@ -3,12 +3,26 @@ document.addEventListener('DOMContentLoaded', function() {
     var instances = M.Collapsible.init(elems);
   });
 
+function checkCookie(name='UserIDAI') {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    if (!match) {
+        window.location.href = "/login";
+    }
+}
+
+window.onpaint = checkCookie();
+
+function logout() {
+    document.cookie = "UserIDAI=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    window.location.href = "/login"
+}
+
 function getwow()
 {
         var elems = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(elems);
-    const mainContent1 = document.getElementById('loader');
-    mainContent1.classList.add('show');
+    const mainLoad = document.getElementById('loaderAI');
+    mainLoad.classList.add('show');
     var date = document.getElementById("options").value
 
     const details =
@@ -66,7 +80,7 @@ function getwow()
             chart = document.getElementById("chart")
             Plotly.newPlot(chart, data2, layout);
 
-            document.getElementById("stocklist").innerHTML = `<li><div class="collapsible-header"><i class="material-icons">filter_drama</i>Stocks</div><div class="collapsible-body"><table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody id="stock-var"></tbody></table></div></li>`;
+            document.getElementById("stocklist").innerHTML = `<li><div class="collapsible-header"><i class="material-icons">show_chart</i>Stocks</div><div class="collapsible-body"><table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody id="stock-var"></tbody></table></div></li>`;
             for (key in data.Stocks)
             {
                 document.getElementById("stock-var").innerHTML += `<tr><td>${key}</td><td>${data.Stocks[key]}</td></tr>`;
@@ -74,8 +88,8 @@ function getwow()
 
             var amt = 0;
 
-            document.getElementById("ruleslists").innerHTML = `<li><div class="collapsible-header"><i class="material-icons">filter_drama</i>Rules</div><div class="collapsible-body"><table class="striped"><thead><tr><th>Rule</th></tr></thead><tbody id="ruleslist"></tbody></table></div></li>`;
-            const mainContent1 = document.getElementById('loader');
+            document.getElementById("ruleslists").innerHTML = `<li><div class="collapsible-header"><i class="material-icons">format_list_numbered</i>Rules</div><div class="collapsible-body"><table class="striped"><thead><tr><th>Rule</th></tr></thead><tbody id="ruleslist"></tbody></table></div></li>`;
+            const mainContent1 = document.getElementById('loaderAI');
             mainContent1.classList.remove('show');
 
             const mainContent2 = document.getElementById('ruleslists');

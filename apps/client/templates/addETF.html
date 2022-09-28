@@ -32,7 +32,7 @@
             <a href="#" class="brand-logo center" ><img src="static/aipi_logo.png"  width="40%" height="auto" style="position: relative; " ></a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="/login"><i class="material-icons">power_settings_new</i></a></li>
+                <li><a onclick="logout()"><i class="material-icons">power_settings_new</i></a></li>
             </ul>
         </div>
         <div class="nav-content">
@@ -53,11 +53,15 @@
 
                 <table class="highlight">
                     <div id="collection">
-                        
+
+                        {#                            <script>getETFS()</script>#}
+
+                        {#                             <div class="amount-input-row">#}
 
                         <a class="waves-effect blue waves-light btn"   onclick="location.href='/addRule'">Create ETF<i class="material-icons left">add</i> </a>
 
                         <div class="custom-select mt-2">
+                            {#     <div class="card2" id="etfbody" style="width:108% ; position: relative; bottom: 12pt; right: 1%">#}
 
                             <select id="options">
                                 <option value="" disabled selected hidden>Choose ETF:</option>
@@ -76,13 +80,26 @@
                             <a class="waves-effect blue waves-light btn" onclick="importRules()">Import ETF<i class="material-icons right">arrow_downward</i></a>
                             <a class="waves-effect blue waves-light btn" onclick="confirm()"><i class="material-icons right">check</i>Edit</a>
 
+{#                            <a class="btn-floating waves-light btn blue left mt-2 tooltipped pulse" data-position="bottom"#}
+{#                               data-tooltip="Export ETF" id="exportBtn" onclick="exportRules()"><i#}
+{#                                    class="material-icons left">arrow_upward</i>Export </a>#}
+{#                            <input type="file" id="jsonfileinput"/>#}
+{#                            <a class="btn-floating waves-light blue mb-2 tooltipped pulse" data-position="bottom"#}
+{#                               data-tooltip="Import ETF" id="importBtn" onclick="importRules()"><i#}
+{#                                    class="material-icons left">arrow_downward</i> Import </a>#}
+{#                            <a class="btn-floating waves-light blue mb-2 tooltipped pulse" data-position="bottom"#}
+{#                               data-tooltip="Create New ETF" style="margin-top: 8px"#}
+{#                                onclick="location.href='/addRule'"><i class="material-icons left">add</i></a>#}
                         </div>
 
 
-                   
+                        {#                </div>#}
 
 
-                      
+                        {#                            <a class="collection-item">ETF 1<i class="material-icons right blue-text">delete</i></a>#}
+                        {#                            <a class="collection-item">ETF 2<i class="material-icons right blue-text">delete</i></a>#}
+                        {#                            <a class="collection-item">ETF 3<i class="material-icons right blue-text">delete</i></a>#}
+                        {#                            <script>getETFS()</script>#}
                     </div>
                     {#                        </div>#}
 
@@ -99,22 +116,26 @@
 
                         <div class="card-action">
                             <div class="input-field col s6">
-                            
+                                {#  id="inputname" <i class="material-icons left">show_chart</i> #}
                                 <div id="hello"></div>
                                 <input id="etfName" placeholder="ETF Name" class="input" type="text" class="validate">
-                              
+                                {#                          <label id="first_name" for="first_name" >ETF Name</label>#}
                             </div>
                             <div class="input-field col s6">
                                 <input id="etfAmount" placeholder="Amount ($)" class="input" type="text"
                                        class="validate">
-                         
+                                {#                            required class input #}
+
+                                {#<i class="material-icons left">attach_money</i> #}
+                                {#                            <label for="last_name" id = "last_name">Amount ($)</label>#}
                             </div>
 
                             <div class="col-12" id="etfeditor">
                                 <a class="waves-effect waves-light btn blue right" onclick="deleteETF()"> Delete
                                 ETF</a>
                             </div>
-                          
+                            {#                            <a class="waves-effect waves-light btn blue right"  onclick="validatenaa()"> Save </a>#}
+                            {#onclick="editname()"#}
 
 
 
@@ -132,7 +153,7 @@
                             </select>
 
                             <div id="btn">
-{#                           
+{#                            <a class="waves-effect waves-light btn blue right" id="" onclick="addRule()"> Add </a>#}
                              </div>
 
                             <div id="rule"></div>
@@ -155,4 +176,5 @@
 </body>
 
 </html>
+
 
