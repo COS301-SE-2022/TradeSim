@@ -1,6 +1,11 @@
 var counter = 0;
 var string = "hello";
 
+function logout() {
+    document.cookie = "UserIDAI=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    window.location.href = "/login"
+}
+
 function addRule() {
 
 
