@@ -39,7 +39,7 @@ Demo 1:
 
 -----------------------------------------------------
 
-<h3> Wiki Project Board Link: </h3>
+<h3> Project Managment: </h3>
 
 <h4> BackEnd: </h4>
 https://github.com/COS301-SE-2022/TradeSim/projects/3
