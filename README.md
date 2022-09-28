@@ -59,6 +59,27 @@ https://github.com/COS301-SE-2022/TradeSim/projects/2
 
 [CodingConventions.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9668882/CodingConventions.pdf)
 
+<h4>Technical Installation Manual: </h4>
+
+[technical installation manual.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9668911/technical.installation.manual.pdf)
+
+<h4>SRS: </h4>
+
+[SRS_AiPi-4.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9668915/SRS_AiPi-4.pdf)
+
+<h4>Deployment Diagram </h4>
+
+![DeploymentDiagram](https://user-images.githubusercontent.com/93087406/192887957-e89f29c5-be7e-455e-a7cf-21da7744debb.png)
+
+<h4>Aligned Architectural design to the completed system</h4>
+
+[Architectural.Structural.Design.Requirements.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9668921/Architectural.Structural.Design.Requirements.pdf)
+
+<h4>User Manual</h4>
+
+
+
+
 
 -----------------------------------------------------
 <h3> Scrumboard: </h3>
