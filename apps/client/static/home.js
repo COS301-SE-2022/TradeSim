@@ -246,8 +246,8 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
 
             var layout =
                 {
-                    xaxis: {title: "date"},
-                    yaxis: {title: "price in dollars"},
+                    xaxis: {title: "Date"},
+                    yaxis: {title: "Price in Dollars [$]"},
                     title: `${name}` // href="/ETFinfo"
                 };
 
@@ -384,8 +384,8 @@ function getGraph3(name, uID, etfid, rules, amount, date, chartnum) {
 
             var layout =
                 {
-                    xaxis: {title: "date"},
-                    yaxis: {title: "price in dollars"},
+                    xaxis: {title: "Date"},
+                    yaxis: {title: "Price in Dollars [$]"},
                     title: name
                 };
 
@@ -441,4 +441,5 @@ function getUserID() {
     }
     return "";
 }
+
 
