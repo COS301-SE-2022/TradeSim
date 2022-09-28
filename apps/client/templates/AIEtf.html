@@ -5,17 +5,22 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--Bootstrap Link-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <link rel="shorcut icon" href="{{ url_for('static',filename='favicon/favicon.ico') }}">
+    <!--Bootstrap Icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"/>
+    <!-- Compiled and minified JavaScript -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/main.css') }}">
     <!-- Compiled and minified CSS -->
+    <link rel="shorcut icon" href="{{ url_for('static',filename='favicon/favicon.ico') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="{{ url_for('static',filename='ai.js') }}"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <title>TradeSim Generate ETF</title>
+    <script src="{{ url_for('static',filename='addETF.js') }}"></script>
+    {#     <script src="{{ url_for('static',filename='rules.js') }}"></script>#}
+    <title>TradeSim Add ETF</title>
 </head>
 
 <body>
@@ -24,7 +29,7 @@
         <div class="nav-wrapper">
             <a class="logo" href="https://epiuselabs.com" target="_blank"><img src="static/EPI-USELabs_Logo_White.png"
                                                                                height="50"></a>
-             <a href="#" class="brand-logo center" ><img src="static/aipi_logo.png"  width="40%" height="auto" style="position: relative; " ></a>
+            <a href="#" class="brand-logo center">TradeSim</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="/login"><i class="material-icons">power_settings_new</i></a></li>
@@ -36,46 +41,138 @@
                 <li class="tab"><a href="/addETF">Manage</a></li>
                 <li class="tab"><a href="/compare-date">Compare</a></li>
                 <li class="tab"><a href="/ticker">Tickers</a></li>
-                <li class="tab"><a href="/AIEtf">AI ETF</a></li>
+                 <li class="tab"><a href="/AIEtf">AI ETF</a></li>
             </ul>
         </div>
     </nav>
-    <div id="loader">
-        <div class="progress">
-            <div class="indeterminate"></div>
-        </div>
-    </div>
-    <div class="row main-div container">
-        <div class="input-field">
-            <select id="options">
-                <option value="" disabled selected hidden>Choose Year:</option>
-                <option value="2015-01-01" id="2015-01-01">2015</option>
-                <option value="2016-01-01" id="2016-01-01">2016</option>
-                <option value="2017-01-01" id="2017-01-01">2017</option>
-                <option value="2018-01-01" id="2018-01-01">2018</option>
-                <option value="2019-01-01" id="2019-01-01">2019</option>
-                <option value="2020-01-01" id="2020-01-01">2020</option>
-                <option value="2021-01-01" id="2021-01-01">2021</option>
 
-            </select>
+    <div class="main-body">
+        <div class="row">
+            <div class="col-lg-3 col-md-3" id="etfBtn">
 
-            <a class="waves-effect waves-light btn blue right mt-4" onclick="getwow()"> Confirm </a>
-        </div>
-        <div id="graph-content" class="col-lg-8 col-md-12 col-sm-12 main-body">
-            <div class="row">
-                <div class="create-header">
 
+                <table class="highlight">
+                    <div id="collection">
+
+                        {#                            <script>getETFS()</script>#}
+
+                        {#                             <div class="amount-input-row">#}
+
+                        <a class="waves-effect blue waves-light btn"   onclick="location.href='/addRule'">Create ETF<i class="material-icons left">add</i> </a>
+
+                        <div class="custom-select mt-2">
+                            {#     <div class="card2" id="etfbody" style="width:108% ; position: relative; bottom: 12pt; right: 1%">#}
+
+                            <select id="options">
+                                <option value="" disabled selected hidden>Choose ETF:</option>
+                                <script>getETFS()</script>
+
+                            </select>
+                        </div>
+
+                        {#                    <a class="collection-item"><i class="material-icons right blue-text"><button class="create-btn"   onclick="confirm()" >Confirm </button></i></a>#}
+                        <div class="fabManage" id="fabManage">
+{#                            <a class="btn-floating waves-light btn blue right mt-2 tooltipped pulse"#}
+{#                                                  data-position="bottom" data-tooltip="Confirm Selected ETF"#}
+{#                            onclick="confirm()"> <i#}
+{#                                class="material-icons left">check</i> </a>#}
+
+                            <a class="waves-effect blue waves-light btn" onclick="importRules()">Import Rules<i class="material-icons right">arrow_downward</i></a>
+                            <a class="waves-effect blue waves-light btn" onclick="confirm()"><i class="material-icons right">check</i>Edit</a>
+
+{#                            <a class="btn-floating waves-light btn blue left mt-2 tooltipped pulse" data-position="bottom"#}
+{#                               data-tooltip="Export ETF" id="exportBtn" onclick="exportRules()"><i#}
+{#                                    class="material-icons left">arrow_upward</i>Export </a>#}
+{#                            <input type="file" id="jsonfileinput"/>#}
+{#                            <a class="btn-floating waves-light blue mb-2 tooltipped pulse" data-position="bottom"#}
+{#                               data-tooltip="Import ETF" id="importBtn" onclick="importRules()"><i#}
+{#                                    class="material-icons left">arrow_downward</i> Import </a>#}
+{#                            <a class="btn-floating waves-light blue mb-2 tooltipped pulse" data-position="bottom"#}
+{#                               data-tooltip="Create New ETF" style="margin-top: 8px"#}
+{#                                onclick="location.href='/addRule'"><i class="material-icons left">add</i></a>#}
+                        </div>
+
+
+                        {#                </div>#}
+
+
+                        {#                            <a class="collection-item">ETF 1<i class="material-icons right blue-text">delete</i></a>#}
+                        {#                            <a class="collection-item">ETF 2<i class="material-icons right blue-text">delete</i></a>#}
+                        {#                            <a class="collection-item">ETF 3<i class="material-icons right blue-text">delete</i></a>#}
+                        {#                            <script>getETFS()</script>#}
+                    </div>
+                    {#                        </div>#}
+
+                </table>
+            </div>
+
+            <div class="col-lg-9 col-md-9">
+                <div class="card horizontal">
+
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <span class="card-title activator grey-text text-darken-4"><i class="material-icons left">info</i> Details </span>
+                        </div>
+
+                        <div class="card-action">
+                            <div class="input-field col s6">
+                                {#  id="inputname" <i class="material-icons left">show_chart</i> #}
+                                <div id="hello"></div>
+                                <input id="etfName" placeholder="ETF Name" class="input" type="text" class="validate">
+                                {#                          <label id="first_name" for="first_name" >ETF Name</label>#}
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="etfAmount" placeholder="Amount ($)" class="input" type="text"
+                                       class="validate">
+                                {#                            required class input #}
+
+                                {#<i class="material-icons left">attach_money</i> #}
+                                {#                            <label for="last_name" id = "last_name">Amount ($)</label>#}
+                            </div>
+
+                            <div class="col-12" id="etfeditor">
+                                <a class="waves-effect waves-light btn blue right" onclick="deleteETF()"> Delete
+                                ETF</a>
+                            </div>
+                            {#                            <a class="waves-effect waves-light btn blue right"  onclick="validatenaa()"> Save </a>#}
+                            {#onclick="editname()"#}
+
+
+
+                        </div>
+
+                        <div class="card-content">
+                            <span class="card-title activator grey-text text-darken-4"><i class="material-icons left">add</i> Add Rule </span>
+
+                        </div>
+
+                        <div class="card-action">
+                            <div id="ruleadder"></div>
+
+
+                            </select>
+
+                            <div id="btn">
+{#                            <a class="waves-effect waves-light btn blue right" id="" onclick="addRule()"> Add </a>#}
+                             </div>
+
+                            <div id="rule"></div>
+                        </div>
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="col-8"><span class="card-title activator grey-text text-darken-4"><i
+                                        class="material-icons left">menu</i> All Rules </span></div>
+                                <div id="ruleslist"></div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
         </div>
-        <div id="chart" style="width:900px;height:400px;"></div>
-
-        <ul class="collapsible" data-collapsoble="accordion" id="stocklist">
-        </ul>
-        <ul class="collapsible" data-collapsoble="accordion" id="ruleslists">
-        </ul>
     </div>
 </div>
 </body>
+
 </html>
