@@ -27,7 +27,7 @@ window.onload = function () {
                     "Data": [gloUserID, impJSON.Data[0].ETFName, impJSON.Data[0].Amount, impJSON.Data[0].Rules, impJSON.Data[0].Date]
                 }
             console.log("Imp Dets: ", details)
-            fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/import",
+            fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/import",
                 {
                     method: 'POST',
                     headers: {
@@ -42,7 +42,7 @@ window.onload = function () {
                     console.log("data:", data)
                     const jd = JSON.parse(data)
                     console.log("jd: ", jd)
-                    // window.location.href = "/addETF"
+
                 });
         };
         fileread.readAsText(file_to_read);
@@ -62,7 +62,7 @@ function validatenaa() {
             "Data": [idnum, name, amount]
         }
 
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/createName",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/createName",
         {
             method: 'POST',
             headers: {
@@ -82,7 +82,7 @@ function validatenaa() {
                 // alert(jd.error)
             } else {
                 confirm();
-                // window.location.href = "/addETF" //addRule
+
             }
 
 
@@ -97,42 +97,47 @@ function validatenaa2() {
     var amount = document.getElementById("etfAmount").value;
     var idnum = getCookie("UserIDAI")
 
-    //document.getElementById("hideID").value = idnum;
-    //  alert(idnum);
+     if((document.getElementById("etfName").value == '') || (document.getElementById("etfAmount").value == ''))
+     {
+          alert("Please enter a valid ETF name and amount.")
+         return;
+     }
 
-    const details =
-        {
-            "Data": [idnum, name, amount]
-        }
+         const details =
+             {
+                 "Data": [idnum, name, amount]
+             }
 
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/createName",
-        {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-                'Accept': 'application/json'
-            },
-            // Strigify the payload into JSON:
-            body: JSON.stringify(details)
-        }
-    ).then(response => response.json())
-        .then(data => {
-            console.log(data)
-            const jd = JSON.parse(data)
-            if (jd.status == "failure") {
-                console.log(jd.error);
-                // confirm2();
-                alert(jd.error)
-            } else {
-                // document.getElementById("options").style.display = "none";
-                 document.getElementById("btn").innerHTML = ''
-                document.getElementById("btn").innerHTML += '  <a class="waves-effect waves-light btn blue right" onclick="addRule2()" >add</a> '
-                confirm2();
-                // window.location.href = "/addETF" //addRule
-            }
+         fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/createName",
+             {
+                 method: 'POST',
+                 headers: {
+                     'Content-type': 'application/json',
+                     'Accept': 'application/json'
+                 },
+                 // Strigify the payload into JSON:
+                 body: JSON.stringify(details)
+             }
+         ).then(response => response.json())
+             .then(data => {
+                 console.log(data)
+                 const jd = JSON.parse(data)
+                 if (jd.status == "failure") {
+                     console.log(jd.error);
+                     // confirm2();
+                     alert(jd.error)
+                 } else {
+                     // document.getElementById("options").style.display = "none";
+                         document.getElementById("btn").innerHTML = ''
+                         document.getElementById("btn").innerHTML += '  <a class="waves-effect waves-light btn blue right" onclick="addRule2()" >add</a> '
+                         confirm2();
 
 
-        });
+                 }
+
+
+             });
+
 
 }
 
@@ -160,7 +165,7 @@ function getETFS() {
             "Data": [userID]
         }
 
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/getETFS",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/getETFS",
         {
             method: 'POST',
             headers: {
@@ -213,8 +218,6 @@ function getUserID() {
 }
 
 
-///////////////////////////////////
-
 
 function addRule() {
 
@@ -230,7 +233,7 @@ function addRule() {
             // '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Rule:</b></label>' +
             '<div class="custom-select">' + // style="display: inline-block; position: relative; top:5px; left:25px;"
             '<input id="input1" type="text" placeholder="ticker name of company" >' + //style=" width:250px; height:25px; font-size: 12px; "
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(0)" >add</a>' +  //style="width: 50px; display: inline-block; position: relative; left: 660px; bottom: 1px;"
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(0)" >Confirm Rule</a>' +  //style="width: 50px; display: inline-block; position: relative; left: 660px; bottom: 1px;"
             '</div>' +
             '</div>'
     }
@@ -258,7 +261,7 @@ function addRule() {
             '<option value="111" id="s12">Other</option>' +
             '</select>' +
             '</div>' +
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(1)" >add</a>' + // style="width: 50px; display: inline-block; position: relative; left: 730px; top: 3px;"
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(1)" >Confirm Rule</a>' + // style="width: 50px; display: inline-block; position: relative; left: 730px; top: 3px;"
             '</div>' +
             '</div>'
     }
@@ -349,7 +352,7 @@ function addRule() {
             '</select>' +
             '</div>' +
             // '<button class="create-btn" id="btn3" onclick="ConfirmRule(2)">+</button>' + // style="width: 50px; display: inline-block; position: relative; left: 730px; top: 3px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(2)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(2)" >Confirm Rule</a>' +
             '</div>' +
             '</div>'
     }
@@ -438,7 +441,7 @@ function addRule() {
             '</select>' +
             '</div>' +
             // '<button class="create-btn" id="btn4"  onclick="ConfirmRule(3)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 730px; top: 3px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(3)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(3)" >Confirm Rule</a>' +
             '</div>' +
             '</div>'
     }
@@ -453,7 +456,7 @@ function addRule() {
             '<input id="inputmin" type="text" placeholder="Market cap min" >' + //style=" width:350px; height:25px; font-size: 12px; "
             '<input id="inputmax"type="text" placeholder="Market cap max" >' + //style=" width:350px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn6"  onclick="ConfirmRule(11)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 205px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(11)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(11)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
@@ -470,7 +473,7 @@ function addRule() {
             '<input id="inputemin" type="text" placeholder="Earnings min" >' + //style=" width:350px; height:25px; font-size: 12px; "
             '<input id="inputemax" type="text" placeholder="Earnings max" >' + //style=" width:350px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn7"  onclick="ConfirmRule(12)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 205px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(12)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(12)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
@@ -487,7 +490,7 @@ function addRule() {
             '<input id="inputsmin" type="text" placeholder="Min price for shares" >' +  //style=" width:350px; height:25px; font-size: 12px; "
             '<input id="inputsmax" type="text" placeholder="Max prices for shares" >' + //style=" width:350px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn8"  onclick="ConfirmRule(13)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 205px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(13)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(13)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
@@ -504,7 +507,7 @@ function addRule() {
             '<input id="inputName" type="text" placeholder="Ticker name" >' + //style=" width:350px; height:25px; font-size: 12px; "
             '<input id="inputperc" type="text" placeholder="Percentage amount" >' + //style=" width:350px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn10"  onclick="ConfirmRule(101)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 205px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(101)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(101)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
@@ -536,7 +539,7 @@ function addRule() {
             '<input id="inputp2" type="text" placeholder="Percentage amount" >' + //style=" width:350px; height:25px; font-size: 12px; "
             '<input id="inputamount2" type="text" placeholder="Amount of companies" >' + //style=" width:350px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn11"  onclick="ConfirmRule(102)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 35px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(102)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(102)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
@@ -630,7 +633,7 @@ function addRule() {
             '<input id="inputp3" type="text" placeholder="Percentage amount" >' + //style=" width:350px; height:25px; font-size: 12px; "
             '<input id="inputa3" type="text" placeholder="Amount of companies" >' + //style=" width:350px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn12"  onclick="ConfirmRule(103)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 5px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(103)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(103)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
@@ -647,7 +650,7 @@ function addRule() {
             '<input id="inputp4" type="text" placeholder="Percentage" >' + //style=" width:350px; height:25px; font-size: 12px; "
             '<input id="inputa4" type="text" placeholder="Amount of companies" >' + //style=" width:350px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn13"  onclick="ConfirmRule(104)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 265px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(104)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(104)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
@@ -739,7 +742,7 @@ function addRule() {
             '<input id="inputp5" type="text" placeholder="Percentage amount" >' + //style=" width:130px; height:25px; font-size: 12px; "
             '<input id="inputa5" type="text" placeholder="Amount of companies" >' + //style=" width:150px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn14"  onclick="ConfirmRule(105)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 55px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(105)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(105)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
@@ -755,7 +758,7 @@ function addRule() {
             '<input id="inputp6" type="text" placeholder="Percentage">' + // style=" width:350px; height:25px; font-size: 12px; "
             '<input id="inputa6" type="text" placeholder="Amount of companies">' + // style=" width:350px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn15"  onclick="ConfirmRule(106)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 255px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(106)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(106)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
@@ -770,26 +773,12 @@ function addRule() {
             '<div class="custom-select" >' + //style="display: inline-block; position: relative; top:5px; left:25px;"
             '<input id="inputw" type="text" placeholder="Balance period in weeks" >' + //style=" width:350px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn16"  onclick="ConfirmRule(200)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 550px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(200)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(200)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
     }
-    //
-    // if (document.getElementById('r17').selected == true) {
-    //     counter++;
-    //     rule.innerHTML = '<b >' + document.getElementById('r17').textContent + '</b>' + //style="color: black; position: relative; bottom: 180px; right: 10px;"
-    //         '<div class="amount-input-row">' +
-    //         '<div class="card2" id="etfbody" >' + //style="width:1125px ; position: relative; bottom: 110px; right: 12px"
-    //       //  '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Rule:</b></label>' +
-    //         '<div class="custom-select" >' + //style="display: inline-block; position: relative; top:5px; left:25px;"
-    //         '<input type="text" placeholder="Percentage drops" >' + //style=" width:350px; height:25px; font-size: 12px; "
-    //         // '<button class="create-btn" id="btn17"  onclick="ConfirmRule("201")">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 550px; bottom: 1px;"
-    //          '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(201)" >add</a>'+
-    //         '</div>' +
-    //         '</div>' +
-    //         '</div>'
-    // }
+
 
     if (document.getElementById('r18').selected == true) {
         counter++;
@@ -801,7 +790,7 @@ function addRule() {
             //  '<input type="text" placeholder="Number of weeks until reconsideration" >' + //style=" width:350px; height:25px; font-size: 12px; "
             '<input id="inputw" type="text" placeholder="Number of weeks until reconsideration" >' +
             // '<button class="create-btn" id="btn18"  onclick="ConfirmRule("202")">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 550px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(202)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule(202)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
@@ -824,7 +813,7 @@ function addRule2() {
             // '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Rule:</b></label>' +
             '<div class="custom-select">' + // style="display: inline-block; position: relative; top:5px; left:25px;"
             '<input id="input1" type="text" placeholder="ticker name of company" >' + //style=" width:250px; height:25px; font-size: 12px; "
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(0)" >add</a>' +  //style="width: 50px; display: inline-block; position: relative; left: 660px; bottom: 1px;"
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(0)" >Confirm Rule</a>' +  //style="width: 50px; display: inline-block; position: relative; left: 660px; bottom: 1px;"
             '</div>' +
             '</div>' +
             '</div>'
@@ -853,7 +842,7 @@ function addRule2() {
             '<option value="111" id="s12">Other</option>' +
             '</select>' +
             '</div>' +
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(1)" >add</a>' + // style="width: 50px; display: inline-block; position: relative; left: 730px; top: 3px;"
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(1)" >Confirm Rule</a>' + // style="width: 50px; display: inline-block; position: relative; left: 730px; top: 3px;"
             '</div>' +
             '</div>'
     }
@@ -944,7 +933,7 @@ function addRule2() {
             '</select>' +
             '</div>' +
             // '<button class="create-btn" id="btn3" onclick="ConfirmRule(2)">+</button>' + // style="width: 50px; display: inline-block; position: relative; left: 730px; top: 3px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(2)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(2)" >Confirm Rule</a>' +
             '</div>' +
             '</div>'
     }
@@ -1033,7 +1022,7 @@ function addRule2() {
             '</select>' +
             '</div>' +
             // '<button class="create-btn" id="btn4"  onclick="ConfirmRule(3)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 730px; top: 3px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(3)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(3)" >Confirm Rule</a>' +
             '</div>' +
             '</div>'
     }
@@ -1048,7 +1037,7 @@ function addRule2() {
             '<input id="inputmin" type="text" placeholder="Market cap min" >' + //style=" width:350px; height:25px; font-size: 12px; "
             '<input id="inputmax"type="text" placeholder="Market cap max" >' + //style=" width:350px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn6"  onclick="ConfirmRule(11)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 205px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(11)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(11)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
@@ -1065,7 +1054,7 @@ function addRule2() {
             '<input id="inputemin" type="text" placeholder="Earnings min" >' + //style=" width:350px; height:25px; font-size: 12px; "
             '<input id="inputemax" type="text" placeholder="Earnings max" >' + //style=" width:350px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn7"  onclick="ConfirmRule(12)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 205px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(12)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(12)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
@@ -1082,7 +1071,7 @@ function addRule2() {
             '<input id="inputsmin" type="text" placeholder="Min price for shares" >' +  //style=" width:350px; height:25px; font-size: 12px; "
             '<input id="inputsmax" type="text" placeholder="Max prices for shares" >' + //style=" width:350px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn8"  onclick="ConfirmRule(13)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 205px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(13)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(13)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
@@ -1099,7 +1088,7 @@ function addRule2() {
             '<input id="inputName" type="text" placeholder="Ticker name" >' + //style=" width:350px; height:25px; font-size: 12px; "
             '<input id="inputperc" type="text" placeholder="Percentage amount" >' + //style=" width:350px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn10"  onclick="ConfirmRule(101)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 205px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(101)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(101)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
@@ -1131,7 +1120,7 @@ function addRule2() {
             '<input id="inputp2" type="text" placeholder="Percentage amount" >' + //style=" width:350px; height:25px; font-size: 12px; "
             '<input id="inputamount2" type="text" placeholder="Amount of companies" >' + //style=" width:350px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn11"  onclick="ConfirmRule(102)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 35px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(102)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(102)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
@@ -1225,7 +1214,7 @@ function addRule2() {
             '<input id="inputp3" type="text" placeholder="Percentage amount" >' + //style=" width:350px; height:25px; font-size: 12px; "
             '<input id="inputa3" type="text" placeholder="Amount of companies" >' + //style=" width:350px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn12"  onclick="ConfirmRule(103)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 5px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(103)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(103)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
@@ -1242,7 +1231,7 @@ function addRule2() {
             '<input id="inputp4" type="text" placeholder="Percentage" >' + //style=" width:350px; height:25px; font-size: 12px; "
             '<input id="inputa4" type="text" placeholder="Amount of companies" >' + //style=" width:350px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn13"  onclick="ConfirmRule(104)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 265px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(104)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(104)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
@@ -1334,7 +1323,7 @@ function addRule2() {
             '<input id="inputp5" type="text" placeholder="Percentage amount" >' + //style=" width:130px; height:25px; font-size: 12px; "
             '<input id="inputa5" type="text" placeholder="Amount of companies" >' + //style=" width:150px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn14"  onclick="ConfirmRule(105)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 55px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(105)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(105)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
@@ -1350,7 +1339,7 @@ function addRule2() {
             '<input id="inputp6" type="text" placeholder="Percentage">' + // style=" width:350px; height:25px; font-size: 12px; "
             '<input id="inputa6" type="text" placeholder="Amount of companies">' + // style=" width:350px; height:25px; font-size: 12px; "
             // '<button class="create-btn" id="btn15"  onclick="ConfirmRule(106)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 255px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(106)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(106)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
@@ -1361,42 +1350,23 @@ function addRule2() {
         rule.innerHTML = '<b >' + document.getElementById('r16').textContent + '</b>' + //style="color: black; position: relative; bottom: 180px; right: 10px;"
             '<div class="amount-input-row">' +
             '<div class="card2" id="etfbody" >' + //style="width:1125px ; position: relative; bottom: 110px; right: 12px"
-            // '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Rule:</b></label>' +
             '<div class="custom-select" >' + //style="display: inline-block; position: relative; top:5px; left:25px;"
             '<input id="inputw" type="text" placeholder="Balance period in weeks" >' + //style=" width:350px; height:25px; font-size: 12px; "
-            // '<button class="create-btn" id="btn16"  onclick="ConfirmRule(200)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 550px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(200)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(200)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
     }
-    //
-    // if (document.getElementById('r17').selected == true) {
-    //     counter++;
-    //     rule.innerHTML = '<b >' + document.getElementById('r17').textContent + '</b>' + //style="color: black; position: relative; bottom: 180px; right: 10px;"
-    //         '<div class="amount-input-row">' +
-    //         '<div class="card2" id="etfbody" >' + //style="width:1125px ; position: relative; bottom: 110px; right: 12px"
-    //       //  '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Rule:</b></label>' +
-    //         '<div class="custom-select" >' + //style="display: inline-block; position: relative; top:5px; left:25px;"
-    //         '<input type="text" placeholder="Percentage drops" >' + //style=" width:350px; height:25px; font-size: 12px; "
-    //         // '<button class="create-btn" id="btn17"  onclick="ConfirmRule("201")">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 550px; bottom: 1px;"
-    //          '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(201)" >add</a>'+
-    //         '</div>' +
-    //         '</div>' +
-    //         '</div>'
-    // }
+
 
     if (document.getElementById('r18').selected == true) {
         counter++;
         rule.innerHTML = '<b >' + document.getElementById('r18').textContent + '</b>' + //style="color: black; position: relative; bottom: 130px; right: 10px;"
             '<div class="amount-input-row">' +
             '<div class="card2" id="etfbody">' + // style="width:1125px ; position: relative; bottom: 70px; right: 12px"
-            // '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Rule:</b></label>' +
             '<div class="custom-select" >' + //style="display: inline-block; position: relative; top:5px; left:25px;"
-            // '<input type="text" placeholder="Number of weeks until reconsideration" >' + //style=" width:350px; height:25px; font-size: 12px; "
             '<input id="inputw" type="text" placeholder="Number of weeks until reconsideration" >' +
-            // '<button class="create-btn" id="btn18"  onclick="ConfirmRule("202")">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 550px; bottom: 1px;"
-            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(202)" >add</a>' +
+            '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(202)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
             '</div>'
@@ -1415,27 +1385,17 @@ function confirm() {
     loaderDiv.classList.add('etfeditor');
 
     document.getElementById("etfeditor").innerHTML =
-        //         '<div class="card2" id="etfbody" style="width:108% ; position: relative; bottom: 70px; right: 12px">' +
-        //             '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>EDIT NAME:</b></label>' +
-        //             '<div class="custom-select" style="display: inline-block; position: relative; top:5px; left:25px;">' +
-        //                 '<input id="inputname" type="text" placeholder="Name" style=" width:100px; height:25px; font-size: 12px; ">' +
-        //                 '<button class="create-btn" id="btn1" style="width: 50px; display: inline-block; position: relative; left: 6px; bottom: 1px;" onclick="editname()">edit</button>' +
-        //             '</div>' +
-        //             '<label for="etf" style=" color: white; position: relative; top: 8px; left: 35px;" id="label2"><b>EDIT AMOUNT:</b></label>' +
-        //             '<div class="custom-select" style="display: inline-block; position: relative; top:5px; left:40px;">' +
-        //                 '<input id="inputamount" type="text" placeholder="Amount" style=" width:100px; height:25px; font-size: 12px; ">' +
+      
         '<a class="waves-effect waves-light btn blue" onclick="editamount()">Edit Amount</a>' + " " +
         '<a class="waves-effect waves-light btn blue" onclick="editname()">Edit Name</a>' + " " +
         '<a class="waves-effect waves-light btn blue" onclick="clearRules()">Clear Rules</a>' + " " +
         '<a class="waves-effect waves-light btn blue right" onclick="deleteETF()"> Delete ETF</a>' 
-        //                 '<button class="create-btn" id="btn1" style="width: 70px; display: inline-block; position: relative; left: 400px; bottom: 1px;" onclick="deleteETF()">delete</button>' +
 
-        //     "</div>"
 
         document.getElementById("ruleadder").innerHTML =
             "<div class=\"amount-input-row\">\n" +
-            "                <div class=\"card2\" id=\"etfbody\" >\n" + //style="width:108% ; position: relative; bottom: 95px; right: 12px"
-            "                    <div class=\"custom-select\" >\n" + //style="width:200px; display: inline-block; position: relative; left: 12px; top: 8px;"
+            "                <div class=\"card2\" id=\"etfbody\" >\n" + 
+            "                    <div class=\"custom-select\" >\n" + 
             "\n" +
             "                        <select>\n" +
             "                          <option disabled selected hidden value=\"0\">Select rule:</option>\n" +
@@ -1477,8 +1437,7 @@ function confirm() {
 function confirm2() {
 
 
-    // console.log(document.getElementById("options").value)
-    // etfid = document.getElementById("options").value
+
 
     getETFS();
     document.getElementById("ruleadder").innerHTML =
@@ -1516,7 +1475,7 @@ function confirm2() {
     "                </div>\n" +
     "            </div>"
 
-    // validatenaa()
+
     addRule2()
 
 
@@ -1534,7 +1493,7 @@ function getRules() {
             "Data": [userID]
         }
 
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/getETFS",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/getETFS",
         {
             method: 'POST',
             headers: {
@@ -1550,7 +1509,7 @@ function getRules() {
             const jd = JSON.parse(data)
             if (jd.status == "failure") {
                 console.log(jd.error);
-                // document.getElementById("etfbody").innerHTML = jd.error
+       
             } else {
                 console.log(jd);
                 let numofetfs = jd.Data.length;
@@ -2270,18 +2229,16 @@ function getRules() {
                 const loaderDiv = document.getElementById('exportBtn');
                 // loaderDiv.classList.add('show');
                 document.getElementById("etfAmount").value = "$" + amt;
-                 document.getElementById("ruleslist").innerHTML += '<a class="waves-effect blue waves-light btn" onClick="exportRules()">Export Rules<i class="material-icons right">arrow_upward</i></a>';
+                 document.getElementById("ruleslist").innerHTML += '<a class="waves-effect blue waves-light btn" onClick="exportRules()">Export ETF<i class="material-icons right">arrow_upward</i></a>';
 
-
-                //document.getElementById("last_name").remove();
-
-//Ai etf
-                //dropdown 2015-2021
+                 
             }
 
 
         });
 }
+
+
 
 function getRules2() {
     var amt = 0;
@@ -2295,7 +2252,7 @@ function getRules2() {
             "Data": [userID]
         }
 
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/getETFS",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/getETFS",
         {
             method: 'POST',
             headers: {
@@ -3036,7 +2993,7 @@ async function ConfirmRule(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3068,7 +3025,7 @@ async function ConfirmRule(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3100,7 +3057,7 @@ async function ConfirmRule(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3131,7 +3088,7 @@ async function ConfirmRule(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3178,7 +3135,7 @@ async function ConfirmRule(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3226,7 +3183,7 @@ async function ConfirmRule(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3274,7 +3231,7 @@ async function ConfirmRule(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3316,7 +3273,7 @@ async function ConfirmRule(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3358,7 +3315,7 @@ async function ConfirmRule(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3400,7 +3357,7 @@ async function ConfirmRule(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3449,7 +3406,7 @@ async function ConfirmRule(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3491,7 +3448,7 @@ async function ConfirmRule(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3533,7 +3490,7 @@ async function ConfirmRule(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3575,7 +3532,7 @@ async function ConfirmRule(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3617,7 +3574,7 @@ async function ConfirmRule(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3652,11 +3609,11 @@ async function ConfirmRule2(rulecode) {
         }
 
         rulecode = "000"
-        // var eID = document.getElementById("options").value;
+  
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
 
-        //  var eID = document.getElementById("etfName").value
+
         var param1 = document.getElementById("input1").value
         var param2 = "";
         var param3 = "";
@@ -3666,7 +3623,7 @@ async function ConfirmRule2(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3689,7 +3646,7 @@ async function ConfirmRule2(rulecode) {
     } else if (rulecode == 1) {
 
         rulecode = "001"
-        // var eID = document.getElementById("options").value;
+
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("secopt").value
@@ -3700,7 +3657,7 @@ async function ConfirmRule2(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3723,7 +3680,7 @@ async function ConfirmRule2(rulecode) {
     } else if (rulecode == 2) {
 
         rulecode = "002"
-        // var eID = document.getElementById("options").value;
+    
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("indopt").value
@@ -3734,7 +3691,7 @@ async function ConfirmRule2(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3756,7 +3713,7 @@ async function ConfirmRule2(rulecode) {
     } else if (rulecode == 3) {
 
         rulecode = "003"
-        // var eID = document.getElementById("options").value;
+       
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("cbropt").value
@@ -3767,7 +3724,7 @@ async function ConfirmRule2(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3804,7 +3761,7 @@ async function ConfirmRule2(rulecode) {
 
 
         rulecode = "011"
-        // var eID = document.getElementById("options").value;
+     
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("inputmin").value;
@@ -3816,7 +3773,7 @@ async function ConfirmRule2(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -3854,7 +3811,7 @@ async function ConfirmRule2(rulecode) {
 
 
         rulecode = "012"
-        // var eID = document.getElementById("options").value;
+       
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("inputemin").value;
@@ -3866,7 +3823,7 @@ async function ConfirmRule2(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3916,7 +3873,7 @@ async function ConfirmRule2(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3960,7 +3917,7 @@ async function ConfirmRule2(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -3993,7 +3950,7 @@ async function ConfirmRule2(rulecode) {
         }
 
         rulecode = "102"
-        //var eID = document.getElementById("options").value;
+    
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("secopt2").value
@@ -4004,7 +3961,7 @@ async function ConfirmRule2(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -4037,7 +3994,7 @@ async function ConfirmRule2(rulecode) {
         }
 
         rulecode = "103"
-        // var eID = document.getElementById("options").value;
+   
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("indopt2").value
@@ -4048,7 +4005,7 @@ async function ConfirmRule2(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -4099,7 +4056,7 @@ async function ConfirmRule2(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -4143,7 +4100,7 @@ async function ConfirmRule2(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -4187,7 +4144,7 @@ async function ConfirmRule2(rulecode) {
             {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers:
@@ -4231,7 +4188,7 @@ async function ConfirmRule2(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -4274,7 +4231,7 @@ async function ConfirmRule2(rulecode) {
                 "Data": [eID, param1, param2, param3, rulecode]
             }
 
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/setRule",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/setRule",
             {
                 method: 'POST',
                 headers: {
@@ -4335,7 +4292,7 @@ function editname() {
             "Data": [eID, newName]
         }
 
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/changename",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/changename",
         {
             method: 'POST',
             headers: {
@@ -4371,7 +4328,7 @@ function editamount() {
             "Data": [eID, newAmount]
         }
 
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/changeamount",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/changeamount",
         {
             method: 'POST',
             headers: {
@@ -4401,7 +4358,7 @@ function clearRules() {
             "Data": [eID]
         }
 
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/clearrules",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/clearrules",
         {
             method: 'POST',
             headers: {
@@ -4432,7 +4389,7 @@ function deleteETF() {
             "Data": [eID]
         }
 
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/deleteetf",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/deleteetf",
         {
             method: 'POST',
             headers: {
@@ -4468,7 +4425,7 @@ function exportRules() {
             "Data": [gloUserID, eName]
         }
     console.log("Exp Dets: ", JSON.stringify(details))
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/export",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/export",
         {
             method: 'POST',
             headers: {

@@ -29,7 +29,7 @@
         <div class="nav-wrapper">
             <a class="logo" href="https://epiuselabs.com" target="_blank"><img src="static/EPI-USELabs_Logo_White.png"
                                                                                height="50"></a>
-            <a href="#" class="brand-logo center">TradeSim</a>
+            <a href="#" class="brand-logo center" ><img src="static/aipi_logo.png"  width="40%" height="auto" style="position: relative; " ></a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="/login"><i class="material-icons">power_settings_new</i></a></li>
@@ -49,23 +49,15 @@
     <div class="main-body">
         <div class="row">
             <div class="col-lg-3 col-md-3">
-                {#                <a class="waves-effect waves-light btn blue mb-2" style="width: 100%; margin-top: 8px"#}
-                {#                   onclick="location.href='/addRule'"><i class="material-icons left">add</i>NEW ETF</a>#}
                 <table class="highlight">
                     <div id="collection">
+                        
 
-                        {#                            <script>getETFS()</script>#}
-
-                        {#                             <div class="amount-input-row">#}
-
-
-{#                        <div class="custom-select">#}
+                        
                         <a class="waves-effect blue waves-light btn"   onclick="location.href='/addRule'"><i class="material-icons left">add</i> Create ETF</a>
 
                         <div class="card-stacked">
-                            {#                           <div class="card2" id="etfbody" style="width:108% ; position: relative; bottom: 12pt; right: 1%">#}
 
-{#                           <span class="card-title activator grey-text text-darken-4"><i class="material-icons left">info</i> Create ETF </span>#}
 
                             <select class="mt-2" id="options">
                                 <option value="" disabled selected hidden>Choose ETF:</option>
@@ -80,24 +72,10 @@
                         <div class="fabManage">
                             <a class="waves-effect blue waves-light btn" onclick="confirm()"><i class="material-icons right">check</i>Edit</a>
 
-{#                            <a class="btn-floating waves-light blue tooltipped pulse" data-position="bottom"#}
-{#                               data-tooltip="Create New ETF" style="margin-top: 8px"#}
-{#                               onclick="location.href='/addRule'"><i class="material-icons left">add</i></a>#}
-{#                            <a#}
-{#                                    <a class="waves-effect blue waves-light btn" onclick="confirm()"><i class="material-icons right">check</i>Edit</a>#}
-{#                                    data-position="bottom" data-tooltip="Confirm Selected ETF"#}
-{#                                    onclick="confirm()">Confirm</a>#}
-{#                            <i class="material-icons left"> check</i>#}
+
                         </div>
 
 
-                        {#                </div>#}
-
-
-                        {#                            <a class="collection-item">ETF 1<i class="material-icons right blue-text">delete</i></a>#}
-                        {#                            <a class="collection-item">ETF 2<i class="material-icons right blue-text">delete</i></a>#}
-                        {#                            <a class="collection-item">ETF 3<i class="material-icons right blue-text">delete</i></a>#}
-                        {#                            <script>getETFS()</script>#}
                     </div>
                     {#                        </div>#}
 
@@ -120,13 +98,12 @@
                                                                                                           class="input"
                                                                                                           type="text"
                                                                                                           class="validate">
-                                {#                          <label for="first_name" >ETF Name</label>#}
+                               
                             </div>
                             <div class="input-field col s6">
                                 <input id="etfAmount" placeholder="Amount($)" required class="input" type="text"
                                        class="validate">
-                                {#<i class="material-icons left">attach_money</i> #}
-                                {#                            <label for="last_name">Amount ($)</label>#}
+                          
                             </div>
                             <div class="col-12" id="etfeditor">
                                 <a class="waves-effect waves-light btn blue right" onclick="deleteETF()"> Delete

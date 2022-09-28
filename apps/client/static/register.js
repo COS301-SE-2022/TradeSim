@@ -23,14 +23,14 @@ function validateform() {
     }
 
 
-    password = hash(password);
+    password = hash(password, name);
     const details =
         {
             "Data": [name, email, password]
         }
 
     if (flag) {
-        fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/register",
+        fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/register",
             {
                 method: 'POST',
                 headers: {
@@ -53,15 +53,21 @@ function validateform() {
 }
 
 
-function hash(p) {
+ function hash(p, n)
+ {
+    p = p + n
+
     var hash = 0, i, c;
-    if (p.length === 0) {
-        return hash;
+    if (p.length === 0)
+    {
+    return hash;
     }
-    for (i = 0; i < p.length; i++) {
-        c = p.charCodeAt(i);
-        hash = ((hash << 5) - hash) + c;
-        hash |= 0; // Convert to 32bit integer
+    for (i = 0; i < p.length; i++)
+    {
+    c   = p.charCodeAt(i);
+    hash  = ((hash << 5) - hash) + c;
+    hash |= 0; // Convert to 32bit integer
     }
+
     return hash;
 }

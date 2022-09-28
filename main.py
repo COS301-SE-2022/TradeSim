@@ -41,5 +41,5 @@ def generate():
     return render_template("AIEtf.html")
 
 if __name__ == "__main__":
-    app.run("ec2-18-208-221-145.compute-1.amazonaws.com", 80)
+    app.run("ec2-54-82-241-49.compute-1.amazonaws.com", 8080)
 

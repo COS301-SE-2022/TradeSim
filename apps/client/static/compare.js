@@ -14,7 +14,7 @@ function getETFS() {
         }
 
 
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/getETFS",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/getETFS",
         {
             method: 'POST',
             headers: {
@@ -104,7 +104,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
         }
 
     console.log(JSON.stringify(details2));
-    fetch("http://ec2-18-208-221-145.compute-1.amazonaws.com:6969/createRules",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/createRules",
         {
             method: 'POST',
             headers: {
@@ -122,7 +122,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
 
             var prevy = 0
             for (key in data.Values) {
-                if (data.Values[key] > prevy / 10) {
+                if (data.Values[key] > prevy / 1.5) {
                     xA.push(key)
                     yA.push(data.Values[key])
                     prevy = data.Values[key]
@@ -140,8 +140,8 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
 
             var layout =
                 {
-                    xaxis: {title: "date"},
-                    yaxis: {title: "price in dollars"},
+                    xaxis: {title: "Date"},
+                    yaxis: {title: "Price in Dollars [$]"},
                     title: name
                 };
 
@@ -159,10 +159,6 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
                 showTbl2.classList.add('tblComp');
             }
 
-
-            // const loaderDiv = document.getElementById('loader');
-            // loaderDiv.classList.remove('show');
-            // console.log("SHARE");
 
             var i = 1;
             for (key in data.Stocks) {

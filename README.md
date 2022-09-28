@@ -1,8 +1,8 @@
+<img width="421" alt="Screenshot 2022-09-27 at 23 55 01" src="https://user-images.githubusercontent.com/93087406/192642886-acdec4be-65c3-45e7-a2d2-76001af23e2e.png">
 
-----------------------------------------------------
 
 <h1> <b> AiPi </b> </h1>
-<h2> <b> TradeSim </b> </h2>
+
 <h3> <b> Project Description </b> </h3>
 <p> Our role is to build a TradeSim system that will be responsible for containing all information for a user to customize their own ETF's and set their own rules. The user will be able to track how well their ETF is doing, and use this to decide where they want to invest their real money in the future. The goal is to create a system that will consist of a user's customized account, to help the user construct a portfolio of stocks, and define rules on how they should be traded to mimic an index tracking ETF by creating their own mini-ETF.
 The result will show the user how much capital they'll need to invest in the various stocks to make their own “mini-ETF” competitive against the established ETF on the market.
@@ -16,18 +16,13 @@ Project Manager - Michael Viljoen u20513667
 Buisness Anaylist - Rachel Hamilton u20453478
 
 Frontend Team
-Sean Nkosi - U19107383
-Sibusiso Mngomezulu - U20441984
 Rachel Hamilton - u20453478
+Sean Nkosi - U19107383
 
 Backend Team
 Regan Shen - u20460067
 Michael Viljoen - u20513667
 
-
-=======
-Dev Ops
-Rachel Hamilton - u20453478
 
 -----------------------------------------------------
 
@@ -90,12 +85,8 @@ https://github.com/COS301-SE-2022/TradeSim/wiki/TradeSim
 About: I am a BIT student who is a full stack developer and enjoy learning new frameworks. In my free time if I’m not sleeping I'm eating and if I'm not eating I'm playing sports.<br>
 LinkedIn profile link: https://www.linkedin.com/in/sean-nkosi-47b7901ba
 
-<b> Sibusiso Mngomezulu: </b> <br>
-About: Hi my name is Sbu, I am studing computer science at the  University of Pretoria, I really enjoy my degree and have a passion for computer science.<br>
-LinkedIn profile link: https://www.linkedin.com/in/sibusiso-mngomezulu-16358323a/
-
 <b> Rachel Hamilton: </b> <br>
-About: My name is Rachel Hamilton, I am a 3rd year BSC Computer Science student. I consider myself a person with good leadership skills. I have experience in coding in multiple languages, including, C++, Java, Python, Javascript etc. I have an interest in software development & web development. <br>
+About: My name is Rachel Hamilton, I am a 3rd year BSC Computer Science student. I consider myself a person with good leadership skills. I have experience in coding in multiple languages. I have a huge interest in software development and I particularly enjoy working on the frontend. I am always eager to learn and consider myself as an independent thinker. <br>
 LinkedIn profile link: www.linkedin.com/in/rachel-hamilton-a39382234
 
 <b> Regan Shen: </b> <br>
