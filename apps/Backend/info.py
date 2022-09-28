@@ -3,7 +3,7 @@ from datetime import datetime,timedelta
 import csv
 
 
-def stockInformation(ticker):
+def stockInformation(ticker,file):
     simFinInfo = apiCalls.getCompanyInformation(ticker)
     if simFinInfo == None:
         allStocks = apiCalls.listallcompanies()
@@ -25,7 +25,7 @@ def stockInformation(ticker):
     #Now we need to connect to that excel document to get the industry
     temp = simFinInfo["IndustryID"]
     industryID = str(temp)
-    file = open('databases\industries.csv')
+    file = open(file)
     type(file)
     csvreader = csv.reader(file)
     rows = []
