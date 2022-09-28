@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(elems);
 })
+
+function logout() {
+    document.cookie = "UserIDAI=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    window.location.href = "/login"
+}
+
 var newsBool = false;
 var graphBool = false;
 
