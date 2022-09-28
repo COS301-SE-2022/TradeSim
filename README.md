@@ -41,7 +41,14 @@ Demo 1:
 
 <h3> Wiki Project Board Link: </h3>
 
-https://github.com/COS301-SE-2022/TradeSim/wiki/TradeSim
+<h4> BackEnd: </h4>
+https://github.com/COS301-SE-2022/TradeSim/projects/3
+
+<h4> FrontEnd: </h4>
+https://github.com/COS301-SE-2022/TradeSim/projects/2
+
+-----------------------------------------------------
+<h3> Scrumboard: </h3>
 
 ![scrumboard demo 3](https://user-images.githubusercontent.com/92848541/181635724-da7c5d73-b0e9-424d-8539-655ae58b83a8.JPG)
 
