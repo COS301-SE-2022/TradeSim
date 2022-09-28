@@ -40,7 +40,7 @@ function getwow()
             year = date.slice(0, 4);
 
             for (key in data.Values) {
-                if (data.Values[key] > prevy / 2) {
+                if (data.Values[key] > prevy / 1.5) {
                     xA.push(key)
                     yA.push(data.Values[key])
                     prevy = data.Values[key]
