@@ -225,7 +225,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
 
             var prevy = 0
             for (key in data.Values) {
-                if (data.Values[key] > prevy / 10) {
+                if (data.Values[key] > prevy / 1.5) {
                     xA.push(key)
                     yA.push(data.Values[key])
                     prevy = data.Values[key]
