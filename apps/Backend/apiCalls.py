@@ -2,6 +2,7 @@ import requests
 from dbpass import *
 from datetime import datetime
 
+
 api_key =  getapi()
 
 def listallcompanies():
@@ -9,8 +10,11 @@ def listallcompanies():
 
     parameters = {"api-key": api_key}
 
-    request = requests.get(request_url, parameters)
-    data = request.json()
+    responseListAllCompanies = requests.get(request_url, parameters)
+    if responseListAllCompanies == None:
+        return None
+
+    data = responseListAllCompanies.json()
     listComp = []
     if "error" in data:
         return None
@@ -283,8 +287,13 @@ def getCompanyInformation(t):
 
     request_url = 'https://simfin.com/api/v2/companies/general'
     parameters = {"ticker": t,"api-key": api_key}
-    request = requests.get(request_url, parameters)
-    all_data = request.json()
+    responseCompanyInformation = requests.get(request_url, parameters)
+
+    if responseCompanyInformation is None:
+        return None
+
+    all_data = responseCompanyInformation.json()
+
 
 
     for response_index, data in enumerate(all_data):

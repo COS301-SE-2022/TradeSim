@@ -16,12 +16,12 @@ class AiFactor:
         self.lstOfRules = ["000", "001", "002", "003", "011", "012", "013", "101", "102", "103", "104", "105", "106"]
         self.seedValue = seedValue
         self.percentage = 100
-        self.amountOfETfs = 6
+        self.amountOfETfs = 10
         self.amountOfRules = 10
 
     def generateRandomETF(self):
         random.seed(self.seedValue)
-        lstAmountOfRules = random.sample(range(1, self.amountOfRules), 1)
+        lstAmountOfRules = random.sample(range(2, self.amountOfRules), 1)
         amountOfRules = lstAmountOfRules[0]
         random.seed(amountOfRules)
 
@@ -120,7 +120,7 @@ class AiFactor:
             endDate = datetime.strftime(beginDate + timedelta(365), '%Y-%m-%d')
             data = etfNew.wowFactor(endDate)
             print(data)
-            tmpJson = {"Rules" : rules, "Prices" : data["Values"]}
+            tmpJson = {"Rules" : rules, "Values" : data["Values"]}
             dictionaryOfETF[count] = tmpJson
         toReturn = self.startAIalgorithm(dictionaryOfETF)
         return toReturn
@@ -131,7 +131,7 @@ class AiFactor:
         rSqauredValues = {}
         for etf in dictionaryOfETF:
             values = dictionaryOfETF[etf]
-            dctOfPrices = values["Prices"]
+            dctOfPrices = values["Values"]
             Yvalues = []
             Xvalues = []
             howManyDays = 0
@@ -172,7 +172,7 @@ class AiFactor:
         for p in dictForR:
             tempJson = {"RValue" : dictForR[p]}
             tempJson["Rules"] = etfsWithRulesparameter[p]["Rules"]
-            tempJson["Prices"] = etfsWithRulesparameter[p]["Prices"]
+            tempJson["Values"] = etfsWithRulesparameter[p]["Values"]
             OGetfs[p] = tempJson
 
         boolBestFunction = False
@@ -180,7 +180,7 @@ class AiFactor:
         while boolBestFunction == False:
             etfsWithRules = {}
             for p in OGetfs:
-                etfsWithRules[p] = {"Rules" : OGetfs[p]["Rules"], "Prices" : OGetfs[p]["Prices"]}
+                etfsWithRules[p] = {"Rules" : OGetfs[p]["Rules"], "Values" : OGetfs[p]["Values"]}
 
 
             mutatedETfs = {}
@@ -274,14 +274,14 @@ class AiFactor:
                 beginDate = datetime.strptime(self.date, '%Y-%m-%d')
                 endDate = datetime.strftime(beginDate + timedelta(365), '%Y-%m-%d')
                 data = etfNew.wowFactor(endDate)
-                tmpJson = {"Rules": newRules, "Prices": data["Values"]}
+                tmpJson = {"Rules": newRules, "Values": data["Values"]}
                 mutatedETfs[newCode] = tmpJson
                 newCode = newCode +1
 
 
             for etf in mutatedETfs:
                 values = mutatedETfs[etf]
-                dctOfPrices = values["Prices"]
+                dctOfPrices = values["Values"]
                 Yvalues = []
                 Xvalues = []
                 howManyDays = 0
@@ -348,13 +348,13 @@ class AiFactor:
                     beginDate = datetime.strptime(self.date, '%Y-%m-%d')
                     endDate = datetime.strftime(beginDate + timedelta(365), '%Y-%m-%d')
                     data = etfNew.wowFactor(endDate)
-                    tmpJson = {"Rules": i, "Prices": data["Values"]}
+                    tmpJson = {"Rules": i, "Values": data["Values"]}
                     newCrossOverETF[newCode] = tmpJson
                     newCode = newCode + 1
             print(newCrossOverETF)
             for etf in newCrossOverETF:
                 values = newCrossOverETF[etf]
-                dctOfPrices = values["Prices"]
+                dctOfPrices = values["Values"]
                 Yvalues = []
                 Xvalues = []
                 howManyDays = 0
@@ -388,9 +388,9 @@ class AiFactor:
             for p in tempCodesWithRvalues:
                 tempJson = {"RValue" : tempCodesWithRvalues[p]}
                 tempRules = newCrossOverETF[p]["Rules"]
-                tempPrices = newCrossOverETF[p]["Prices"]
+                tempPrices = newCrossOverETF[p]["Values"]
                 tempJson["Rules"] = tempRules
-                tempJson["Prices"] = tempPrices
+                tempJson["Values"] = tempPrices
                 finalSet[p] = tempJson
                 print(finalSet)
             print(OGetfs)

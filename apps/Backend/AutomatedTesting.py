@@ -1,34 +1,24 @@
-import requests
-import ETF
-import unitTesting
+import unittest
+import apiCalls
+import AiFactor
+from unittest import mock
+import mock
 
-def testAutomated():
-    CreateRules = {
-        "UserID": 1,
-        "ETFid": 11,
-        "Rules": [
-            ["104", ["10", "5"]],
-            ["106", ["40", "10"]],
-            ["102", ["101", "10", "20"]],
-            ["101", ["AAPL", "40"]],
-            ["202", ["8"]]
-        ],
-        "date": "2020-02-10",
-        "amount": 1000000
-    }
 
-    data = CreateRules
-    UserID = data['UserID']
-    etfID = data['ETFid']
-    listOfRules = data['Rules']
-    date = data['date']
-    amount = data['amount']
+class AIfactor(unittest.TestCase):
 
-    etfNew = ETF.ETF(UserID, etfID, listOfRules, date, int(amount))
-    if etfNew.createETF() == None:
-        data = {"error": "response 200"}
+    def __init__(self):
+        date = ("2021-01-01")
+        seedValue = ("81")
+        self.ai = AiFactor.AiFactor(date, seedValue)
+
+    def testCode000(self):
+
+        data = self.ai.code000()[0]
+        knownValues = apiCalls.listallcompanies()
+        assert data in knownValues, "Test to see if method generates random stock from database"
 
 
 
 if __name__ == "__main__":
-   testAutomated()
+    unittest.main()
