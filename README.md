@@ -48,6 +48,15 @@ https://github.com/COS301-SE-2022/TradeSim/projects/3
 https://github.com/COS301-SE-2022/TradeSim/projects/2
 
 -----------------------------------------------------
+<h2> Demo 4: </h2>
+
+
+<h4> Testing Policy: </h4>
+[Testing policy.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9668761/Testing.policy.pdf)
+<h4> Coding Conventions: </h4>
+[CodingConventions.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9212979/CodingConventions.pdf)
+
+-----------------------------------------------------
 <h3> Scrumboard: </h3>
 
 ![scrumboard demo 3](https://user-images.githubusercontent.com/92848541/181635724-da7c5d73-b0e9-424d-8539-655ae58b83a8.JPG)
