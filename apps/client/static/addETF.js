@@ -7,6 +7,15 @@ var selEtfAmt = 0;
 var eName = "";
 var gloUserID = getUserID();
 
+function checkCookie(name='UserIDAI') {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    if (!match) {
+        window.location.href = "/login";
+    }
+}
+
+window.onpaint = checkCookie();
+
 document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('.tooltipped');
     var instances = M.Tooltip.init(elems);
