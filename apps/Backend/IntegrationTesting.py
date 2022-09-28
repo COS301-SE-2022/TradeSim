@@ -316,15 +316,15 @@ class Tests(unittest.TestCase):
         self.assertIsNot(response == None, "Test to see if not None for create ETF with rule202")
         self.assert_(len(response)>=knwon_response,"Test if createETF returns the correct output when adding the reconsidering rule")
 
-    def test_AiFactor(self):
-        mock_Date = "2022-09-15"
-        mock_seedValue = 31
-        mock_file = 'apps/Backend/databases/industries.csv'
-        AiTing = AiFactor.AiFactor(mock_Date,mock_seedValue,mock_file)
-        response = AiTing.generateRandomETF()
-        knwon_response = 0
-        self.assertIsNot(response == None, "Test to see if not None for generating AiETF")
-        self.assert_(len(response) >= knwon_response,"Test if AiFactor will generate a ETF without any errors")
+#     def test_AiFactor(self):
+#         mock_Date = "2022-09-15"
+#         mock_seedValue = 31
+#         mock_file = 'apps/Backend/databases/industries.csv'
+#         AiTing = AiFactor.AiFactor(mock_Date,mock_seedValue,mock_file)
+#         response = AiTing.generateRandomETF()
+#         knwon_response = 0
+#         self.assertIsNot(response == None, "Test to see if not None for generating AiETF")
+#         self.assert_(len(response) >= knwon_response,"Test if AiFactor will generate a ETF without any errors")
 
 
 if __name__ == '__main__':
