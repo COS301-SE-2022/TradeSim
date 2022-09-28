@@ -32,4 +32,4 @@ jobs:
         
         
     - run: pip install -r ./requirements.txt
-    - run: python apps/Backend/IntegrationTesting.py
+    - run: python -m nose --verbosity=2 apps/Backend/unitTesting.py
