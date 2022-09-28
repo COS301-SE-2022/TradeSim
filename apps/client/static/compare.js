@@ -190,7 +190,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
                     // document.getElementById(x).innerHTML += `<tr><td>${x}</td><td>${arr[x]}</td></tr> `;
                     // }
                 }
-                document.getElementById("notes" + chartnum).innerHTML += `<li><div class="collapsible-header"><i class="material-icons">date_range</i>Cash Overflow on ${key}: $${(data.CashOverFlow[key]).toFixed(2)}</div><div class="collapsible-body"><table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody id="${key+data.CashOverFlow[key]}"></tbody></table></div></li>`;
+                document.getElementById("notes" + chartnum).innerHTML = `<li><div class="collapsible-header"><i class="material-icons">date_range</i>Cash Overflow on ${key}: $${(data.CashOverFlow[key]).toFixed(2)}</div><div class="collapsible-body"><table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody id="${key+data.CashOverFlow[key]}"></tbody></table></div></li>`;
                 for (const works in stockArr){
                     document.getElementById(key+data.CashOverFlow[key]).innerHTML += `<tr><td>${works}</td><td>${stockArr[works]}</td></tr> `;
                 }
