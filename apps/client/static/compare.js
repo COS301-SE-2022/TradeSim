@@ -218,6 +218,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
 }
 
 function changedate() {
+    graphCount = 0;
     const loaderDiv = document.getElementById('loader-compare');
     loaderDiv.classList.add('show');
     // const graphDiv = document.getElementById('graph-table');
