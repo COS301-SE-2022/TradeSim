@@ -53,7 +53,7 @@ https://github.com/COS301-SE-2022/TradeSim/projects/2
 
 <h4> Testing Policy: </h4>
 
-[Testing policy.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9668881/Testing.policy.pdf)
+[Testing policy.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9669232/Testing.policy.pdf)
 
 <h4> Coding Conventions: </h4>
 
@@ -112,7 +112,7 @@ https://github.com/COS301-SE-2022/TradeSim/projects/2
 
 <h3> Testing Policy: </h3>
 
-[Testing policy.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9668761/Testing.policy.pdf)
+[Testing policy.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9669233/Testing.policy.pdf)
 
 
 -----------------------------------------------------
