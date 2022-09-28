@@ -100,8 +100,8 @@ def createRules():
 def tickerInfo():
     data = request.get_json()
     ticker = data['ticker']
-
-    data = info.stockInformation(ticker)
+    fileLocation = 'databases\industries.csv'
+    data = info.stockInformation(ticker,fileLocation)
     # etfNew = ETF.ETF(UserID,etfID,listOfRules,date,int(amount))
     # if etfNew.createETF() == None:
     #     data = {"error" : "response 200"}
@@ -160,8 +160,8 @@ def AI():
         return dataJsonify
 
     else:  # no ETFS found
-
-        Aiting = AiFactor.AiFactor(date, seedValue)
+        fileLocation = 'databases\industries.csv'
+        Aiting = AiFactor.AiFactor(date, seedValue, fileLocation)
         data = Aiting.generateRandomETF()
         rules = data["Rules"]
 

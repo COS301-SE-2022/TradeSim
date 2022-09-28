@@ -3,7 +3,7 @@ from datetime import datetime,timedelta
 import csv
 
 
-def stockInformation(ticker):
+def stockInformation(ticker,file):
     simFinInfo = apiCalls.getCompanyInformation(ticker)
     if simFinInfo == None:
         allStocks = apiCalls.listallcompanies()
@@ -14,9 +14,7 @@ def stockInformation(ticker):
         for stock in allStocks:
             temp = stock[:2]
             if beginOfTicker == temp:
-                print(stock)
                 arrayOfPossible.append(stock)
-        print(arrayOfPossible)
         js = {"Found" : "False", "PossibleStock" : arrayOfPossible}
         return js
     sym = ticker
@@ -27,7 +25,7 @@ def stockInformation(ticker):
     #Now we need to connect to that excel document to get the industry
     temp = simFinInfo["IndustryID"]
     industryID = str(temp)
-    file = open('databases\industries.csv')
+    file = open(file)
     type(file)
     csvreader = csv.reader(file)
     rows = []
@@ -64,13 +62,14 @@ def stockInformation(ticker):
     finalJson["Summary"] = simFinInfo["Summary"]
     finalJson["PriceHistory"] = priceOverTime
 
-    print(finalJson)
     return finalJson
 
 def newsInformation(category):
     if category == "":
         category = "general"
     data = apiCalls.getNews(category)
+    if data == None:
+        return {"Error" : "No news found"}
     for x in data:
         date = x['date']
         stringDate = datetime.utcfromtimestamp(int(date)).strftime('%Y-%m-%d')

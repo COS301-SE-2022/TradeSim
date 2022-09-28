@@ -6,22 +6,23 @@ import csv
 import ETF
 from datetime import datetime,timedelta
 import numpy as np
-import matplotlib.pyplot as plt
+
 
 
 class AiFactor:
 
-    def __init__(self,date,seedValue):
+    def __init__(self,date,seedValue,file):
         self.date = date
         self.lstOfRules = ["000", "001", "002", "003", "011", "012", "013", "101", "102", "103", "104", "105", "106"]
         self.seedValue = seedValue
         self.percentage = 100
         self.amountOfETfs = 10
         self.amountOfRules = 10
+        self.file = file
 
     def generateRandomETF(self):
         random.seed(self.seedValue)
-        lstAmountOfRules = random.sample(range(1, self.amountOfRules), 1)
+        lstAmountOfRules = random.sample(range(2, self.amountOfRules), 1)
         amountOfRules = lstAmountOfRules[0]
         random.seed(amountOfRules)
 
@@ -516,7 +517,7 @@ class AiFactor:
         return tick
     def code001(self):
         # need to randomise sector
-        file = open('databases\industries.csv')
+        file = open(self.file)
         type(file)
         csvreader = csv.reader(file)
         rows = []
@@ -535,7 +536,7 @@ class AiFactor:
         return toReturn
     def code002(self):
         # need to randomise industries
-        file = open('databases\industries.csv')
+        file = open(self.file)
         type(file)
         csvreader = csv.reader(file)
         rows = []
@@ -584,7 +585,6 @@ class AiFactor:
             minMarketCap = m[0]
         #######################
         dct = [minMarketCap, maxMarketCap]
-
         return dct
 
     def code012(self):
@@ -690,7 +690,7 @@ class AiFactor:
         t = self.percentage - percentage
         self.percentage = t
 
-        file = open('databases\industries.csv')
+        file = open(self.file)
         type(file)
         csvreader = csv.reader(file)
         rows = []
@@ -732,7 +732,7 @@ class AiFactor:
         t = self.percentage - percentage
         self.percentage = t
 
-        file = open('databases\industries.csv')
+        file = open(self.file)
         type(file)
         csvreader = csv.reader(file)
         rows = []
