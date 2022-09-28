@@ -1,6 +1,15 @@
 var graphName;
 var obj;
 
+function checkCookie(name='UserIDAI') {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    if (!match) {
+        window.location.href = "/login";
+    }
+}
+
+window.onpaint = checkCookie();
+
 function logout() {
     document.cookie = "UserIDAI=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     window.location.href = "/login"
