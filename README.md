@@ -69,6 +69,13 @@ https://github.com/COS301-SE-2022/TradeSim/wiki/TradeSim
 
 -----------------------------------------------------
 
+<h3> Testing Policy: </h3>
+
+[Testing policy.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9668761/Testing.policy.pdf)
+
+
+-----------------------------------------------------
+
 <h3>Technology Requirements</h3>
 <p>Backend - Python</p>
 <p>Frontend - HTML, CSS, JavaScript, Python </p>
