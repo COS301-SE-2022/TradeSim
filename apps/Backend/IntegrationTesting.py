@@ -102,7 +102,7 @@ class Tests(unittest.TestCase):
 
     def test_StockInformation(self):
         testTicker = "AAPL"
-        fileLocation = 'databases\industries.csv'
+        fileLocation = 'apps/Backend/databases/industries.csv'
         response = info.stockInformation(testTicker,fileLocation)
         knownAnswer = 'True'
         self.assertIsNot(response == None, "Test to see if not None for stock")
@@ -319,7 +319,7 @@ class Tests(unittest.TestCase):
     def test_AiFactor(self):
         mock_Date = "2022-09-15"
         mock_seedValue = 31
-        mock_file = 'databases\industries.csv'
+        mock_file = 'apps/Backend/databases/industries.csv'
         AiTing = AiFactor.AiFactor(mock_Date,mock_seedValue,mock_file)
         response = AiTing.generateRandomETF()
         knwon_response = 0
