@@ -140,8 +140,8 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
 
             var layout =
                 {
-                    xaxis: {title: "date"},
-                    yaxis: {title: "price in dollars"},
+                    xaxis: {title: "Date"},
+                    yaxis: {title: "Price in Dollars [$]"},
                     title: name
                 };
 
@@ -159,10 +159,6 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
                 showTbl2.classList.add('tblComp');
             }
 
-
-            // const loaderDiv = document.getElementById('loader');
-            // loaderDiv.classList.remove('show');
-            // console.log("SHARE");
 
             var i = 1;
             for (key in data.Stocks) {
