@@ -6,7 +6,7 @@ import csv
 import ETF
 from datetime import datetime,timedelta
 import numpy as np
-import matplotlib.pyplot as plt
+
 
 
 class AiFactor:
