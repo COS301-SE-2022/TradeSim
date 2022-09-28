@@ -89,7 +89,7 @@ function getwow()
             var amt = 0;
 
             document.getElementById("ruleslists").innerHTML = `<li><div class="collapsible-header"><i class="material-icons">format_list_numbered</i>Rules</div><div class="collapsible-body"><table class="striped"><thead><tr><th>Rule</th></tr></thead><tbody id="ruleslist"></tbody></table></div></li>`;
-            const mainContent1 = document.getElementById('loader');
+            const mainContent1 = document.getElementById('loaderAI');
             mainContent1.classList.remove('show');
 
             const mainContent2 = document.getElementById('ruleslists');
