@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', function () {
     var instances = M.Tooltip.init(elems);
 });
 
+function logout() {
+    document.cookie = "UserIDAI=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    window.location.href = "/login"
+}
+
 window.onload = function () {
     document.getElementById("jsonfileinput").addEventListener("change", function () {
         var file_to_read = document.getElementById("jsonfileinput").files[0];
