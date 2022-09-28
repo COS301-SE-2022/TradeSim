@@ -1,6 +1,11 @@
 var graphName;
 var obj;
 
+function logout() {
+    document.cookie = "UserIDAI=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    window.location.href = "/login"
+}
+
 function searchTicker() {
     const loaderDiv = document.getElementById('loader');
     loaderDiv.classList.add('show');
