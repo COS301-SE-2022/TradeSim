@@ -1,5 +1,6 @@
 import unittest
 import apiCalls
+import info
 
 
 
@@ -96,5 +97,12 @@ class Tests(unittest.TestCase):
         size = len(data)
         self.assertIsNotNone(data)
         self.assertTrue(size > 0, "Test if the news function returns a value")
+
+    # def test_StockInformation(self):
+    #     testTicker = "AAPL"
+    #     response = info.stockInformation(testTicker)
+    #     knownAnswer = {"Found" : "True", "Ticker" : "AAPL"}
+    #     self.assertEqual(response,knownAnswer,"Test if stock information is correct")
+
 if __name__ == '__main__':
     unittest.main()

@@ -584,7 +584,6 @@ class AiFactor:
             minMarketCap = m[0]
         #######################
         dct = [minMarketCap, maxMarketCap]
-
         return dct
 
     def code012(self):

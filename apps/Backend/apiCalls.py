@@ -98,7 +98,6 @@ def getShareMarketEarn(t,date):
                 parameters = [sharePrice,marketCap,earningBefore]
                 allStocksDetails[nameOFstock] = parameters
 
-
     return allStocksDetails
 
 def companiesByIndustry(value):

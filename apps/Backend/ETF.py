@@ -145,7 +145,6 @@ class ETF:
 
         for name in tempStocks:
             finalStocks.append(name)
-
         self.listOfAllStocks = finalStocks
 
     def code104(self, percentage, amountOfCompanies):
@@ -193,11 +192,11 @@ class ETF:
 
     def code001_002(self, idValue):
         stocksToReject = apiCalls.companiesByIndustry(idValue)
+
         tempStocks = self.listOfAllStocks.copy()
         for x in stocksToReject:
             if x in tempStocks:
                 tempStocks.remove(x)
-
         self.listOfAllStocks = tempStocks
 
     def code102_103(self,idValue, percentage):
@@ -245,7 +244,6 @@ class ETF:
 
     def code003(self,country):
         companiesToReject = apiCalls.companiesByExchange(country)
-
         tempStocks = self.listOfAllStocks.copy()
         if companiesToReject != None:
             for x in companiesToReject:
@@ -362,8 +360,6 @@ class ETF:
 
         self.stocksWithAmountOFShares = removeSingStocks
         self.totalInvested = totalInvested1
-
-
 
 
 
@@ -1156,3 +1152,5 @@ class ETF:
         for x in stocksInExchange:
             if x in self.listOfAllStocks:
                 stocksInBoth.append(x)
+
+        return stocksInBoth
