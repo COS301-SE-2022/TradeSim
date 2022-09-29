@@ -76,6 +76,8 @@ https://github.com/COS301-SE-2022/TradeSim/projects/2
 [Architectural.Structural.Design.Requirements.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9668921/Architectural.Structural.Design.Requirements.pdf)
 
 <h4>User Manual</h4>
+[User Manual.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9678938/User.Manual.pdf)
+
 
 
 
