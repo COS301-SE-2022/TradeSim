@@ -96,6 +96,43 @@ def createRules():
     dataJsonify = jsonify(data)  # This is used to return the Json back to the front end. so return the final value
     return dataJsonify
 
+@app.route("/compare", methods=["POST"])
+def compare():
+    data = request.get_json()
+    date = data["date"]
+    amount = data["amount"]
+    ETF1 = data["ETF 1"]
+    ETF2 = data["ETF 2"]
+
+    UserID1 = ETF1['UserID']
+    etfID1 = ETF1['ETFid']
+    listOfRules1 = ETF1['Rules']
+
+
+    etfNew1 = ETF.ETF(UserID1, etfID1, listOfRules1, date, int(amount))
+
+
+    UserID2 = ETF2['UserID']
+    etfID2 = ETF2['ETFid']
+    listOfRules2 = ETF2['Rules']
+
+
+    etfNew2 = ETF.ETF(UserID2, etfID2, listOfRules2, date, int(amount))
+    data1 = {}
+    data2 = {}
+    try:
+        etfNew1.createETF()
+        data1 = etfNew1.getPriceOverTime()
+        etfNew2.createETF()
+        data2 = etfNew2.getPriceOverTime()
+    except:
+        data1 = {"Error" : "Please try changing your rules as there is a contradiction causing problems"}
+    toReturn = {"ETF 1" : data1, "ETF 2" : data2}
+    dataJsonify = jsonify(toReturn)  # This is used to return the Json back to the front end. so return the final value
+    return dataJsonify
+
+
+
 @app.route("/tickerInfo", methods=["POST"])
 def tickerInfo():
     data = request.get_json()
