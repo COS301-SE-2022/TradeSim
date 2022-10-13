@@ -81,44 +81,55 @@ function getUserID() {
     return "";
 }
 
-async function confirm(chartnum) {
+async function confirm(chartnum1, chartnum2) {
 
-    info = JSON.parse(document.getElementById("etf" + chartnum).value)
+    info1 = JSON.parse(document.getElementById("etf" + chartnum1).value)
+    info2 = JSON.parse(document.getElementById("etf" + chartnum2).value)
 
     date = document.getElementById("selectdate").value;
 
-    console.log(info)
+    console.log(info1)
     console.log(date)
 
     if (date == '') {
         date = "2022-01-01"
     }
     //document.getElementById("notes" + chartnum).innerHTML = "LOADING... <br>"
-    getGraph(info.ETFName, getUserID(), info.ETFID, info.Rules, info.Amount, date, chartnum)
+    getGraph(info1.ETFName, getUserID(), info1.ETFID, info1.Rules, info1.Amount, date, chartnum1, info2.ETFName, info2.ETFID, info2.Rules, info2.Amount, chartnum2)
 
 
 }
 
-function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
+function getGraph(name1, uID, etfid1, rules1, amount1, date, chartnum1, name2, etfid2, rules2, amount2, chartnum2) {
 
     // document.getElementById("notes" + chartnum).innerHTML = name + " Loading<br>"
 
     var xA = [];
     var yA = [];
 
+    var xxA = [];
+    var yyA = [];
+
     const details2 =
         {
-
-            "UserID": uID,
-            "ETFid": etfid,
-            "Rules": rules,
+            "ETF 1":{
+                "UserID": uID,
+                "ETFid": etfid1,
+                "Rules": rules1,
+            },
+            "ETF 2":{
+                "UserID": uID,
+                "ETFid": etfid2,
+                "Rules": rules2,
+            },
             "date": date,
-            "amount": amount
+            "amount": amount1
 
         }
 
     console.log(JSON.stringify(details2));
-    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/createRules",
+    // ec2-54-82-241-49.compute-1.amazonaws.com:6969
+    fetch("http://localhost:6969/compare",
         {
             method: 'POST',
             headers: {
@@ -131,38 +142,62 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
     ).then(response => response.json())
         .then(data => {
 
-            console.log(data)
+            console.log("Values: ",data['ETF 1'].Values)
+            console.log("ETF 1: ", data['ETF 1'])
 
 
             var prevy = 0
-            for (key in data.Values) {
-                if (data.Values[key] > prevy / 1.5) {
+            for (key in data['ETF 1'].Values) {
+                if (data['ETF 1'].Values[key] > prevy / 1.5) {
                     xA.push(key)
-                    yA.push(data.Values[key])
-                    prevy = data.Values[key]
+                    yA.push(data['ETF 1'].Values[key])
+                    prevy = data['ETF 1'].Values[key]
                 }
 
             }
-            console.log(xA)
-            console.log(yA)
 
-            var data2 = [{
+            var prevvy = 0
+            for (key in data['ETF 2'].Values) {
+                if (data['ETF 2'].Values[key] > prevvy / 1.5) {
+                    xxA.push(key)
+                    yyA.push(data['ETF 2'].Values[key])
+                    prevvy = data['ETF 2'].Values[key]
+                }
+
+            }
+            console.log("XA: ",xA)
+            console.log("YA: ",yA)
+
+            console.log("XXA: ",xxA)
+            console.log("YYA: ", yyA)
+
+            var data2 = {
                 x: xA,
                 y: yA,
-                mode: "lines"
-            }];
+                mode: "lines",
+                name: name1,
+            };
+
+            var data3 = {
+                x: xxA,
+                y: yyA,
+                mode: "lines",
+                name: name2,
+            };
+
+            var finalData = [data2, data3];
 
             var layout =
                 {
                     xaxis: {title: "Date"},
                     yaxis: {title: "Price in Dollars [$]"},
-                    title: name
+                    title: `${name1} and ${name2}`
                 };
 
-            Plotly.newPlot("chart" + String(chartnum), data2, layout);
+            Plotly.newPlot("chart" + String(chartnum1), finalData, layout);
             graphCount++;
             console.log("GraphCount: ", graphCount);
-            if (graphCount == 2) {
+            if (graphCount == 1) {
                 const loaderDiv = document.getElementById('loader-compare');
                 loaderDiv.classList.remove('show');
 
@@ -175,14 +210,14 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
 
 
             var i = 1;
-            for (key in data.Stocks) {
-                var stockArr = data.Stocks[key];
+            for (key in data['ETF 1'].Stocks) {
+                var stockArr = data['ETF 1'].Stocks[key];
                 // console.log("SArr: ", stockArr);
                 var stocks = "";
                 var test = "";
                 var arr = new Array();
-                for (const x in data.Stocks) {
-                    arr = data.Stocks[x];
+                for (const x in data['ETF 1'].Stocks) {
+                    arr = data['ETF 1'].Stocks[x];
                     // for (const key in arr) {
                     // console.log(`${key}: ${arr[key]}`);
                     // console.log("x: ",x,"arr:",arr,"data:",data);
@@ -190,9 +225,9 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
                     // document.getElementById(x).innerHTML += `<tr><td>${x}</td><td>${arr[x]}</td></tr> `;
                     // }
                 }
-                document.getElementById("notes" + chartnum).innerHTML = `<li><div class="collapsible-header"><i class="material-icons">date_range</i>Cash Overflow on ${key}: $${(data.CashOverFlow[key]).toFixed(2)}</div><div class="collapsible-body"><table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody id="${key+data.CashOverFlow[key]}"></tbody></table></div></li>`;
+                document.getElementById("notes" + chartnum1).innerHTML = `<li><div class="collapsible-header"><i class="material-icons">date_range</i>${name1} - Cash Overflow on ${key}: $${(data['ETF 1'].CashOverFlow[key]).toFixed(2)}</div><div class="collapsible-body"><table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody id="${key+data['ETF 1'].CashOverFlow[key]}"></tbody></table></div></li>`;
                 for (const works in stockArr){
-                    document.getElementById(key+data.CashOverFlow[key]).innerHTML += `<tr><td>${works}</td><td>${stockArr[works]}</td></tr> `;
+                    document.getElementById(key+data['ETF 1'].CashOverFlow[key]).innerHTML += `<tr><td>${works}</td><td>${stockArr[works]}</td></tr> `;
                 }
 
                 if (i % 5 == 0) {
@@ -206,11 +241,40 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
 
             }
 
+               for (key in data['ETF 2'].Stocks) {
+                var stockArr2 = data['ETF 2'].Stocks[key];
+                // console.log("SArr: ", stockArr);
+                var stocks = "";
+                var test = "";
+                var arr = new Array();
+                for (const x in data['ETF 2'].Stocks) {
+                    arr = data['ETF 2'].Stocks[x];
+                    // for (const key in arr) {
+                    // console.log(`${key}: ${arr[key]}`);
+                    // console.log("x: ",x,"arr:",arr,"data:",data);
+                    console.log("KEY v2: ", x);
+                    // document.getElementById(x).innerHTML += `<tr><td>${x}</td><td>${arr[x]}</td></tr> `;
+                    // }
+                }
+                document.getElementById("notes" + chartnum2).innerHTML = `<li><div class="collapsible-header"><i class="material-icons">date_range</i>${name2} - Cash Overflow on ${key}: $${(data['ETF 2'].CashOverFlow[key]).toFixed(2)}</div><div class="collapsible-body"><table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody id="${key+data['ETF 2'].CashOverFlow[key]}"></tbody></table></div></li>`;
+                for (const works in stockArr2){
+                    document.getElementById(key+data['ETF 2'].CashOverFlow[key]).innerHTML += `<tr><td>${works}</td><td>${stockArr2[works]}</td></tr> `;
+                }
 
+                if (i % 5 == 0) {
+                    // document.getElementById("notes" + chartnum).innerHTML += '<br>'
+                    i = 1;
+                } else {
+                    i++
+                }
+                console.log(i)
+
+
+            }
             // document.getElementById("notes" + chartnum).innerHTML = ""
         }).catch((error) => {
         console.log("Error Notes: ", error);
-        document.getElementById("notes" + chartnum).innerHTML = name + " could not generate ETF<br>"
+        document.getElementById("notes" + chartnum1).innerHTML = name + " could not generate ETF<br>"
         // alert( "ETF " + name + " does not generate any stocks!")
     });
 
@@ -224,7 +288,5 @@ function changedate() {
     // const graphDiv = document.getElementById('graph-table');
     // graphDiv.classList.add('show');
     console.log("SHARE: ", loaderDiv);
-    confirm(1)
-    confirm(2)
+    confirm(1, 2);
 }
-
