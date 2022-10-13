@@ -202,7 +202,8 @@ function getETFS() {
                 let numofetfs = jd.Data.length;
 
 
-
+            document.getElementById("options").innerHTML = ""
+                
                 for (var i = 0; i < numofetfs; i++) {
                     document.getElementById("options").innerHTML +=
                         "<option value=" + '"' + jd.Data[i].ETFID + '"' + " id=" + '"' + jd.Data[i].ETFName + '"' + ">" + jd.Data[i].ETFName + "</option>"
