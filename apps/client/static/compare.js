@@ -129,7 +129,7 @@ function getGraph(name1, uID, etfid1, rules1, amount1, date, chartnum1, name2, e
 
     console.log(JSON.stringify(details2));
     // ec2-54-82-241-49.compute-1.amazonaws.com:6969
-    fetch("http://localhost:6969/compare",
+    fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com/compare",
         {
             method: 'POST',
             headers: {
