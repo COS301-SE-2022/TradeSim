@@ -206,9 +206,9 @@ function getETFS2() {
         });
 }
 
-function getGraph(name, uID, etfid, rules, amount, date, chartnum) 
+function getGraph(name, uID, etfid, rules, amount, date, chartnum)
 {
-    
+
     var xA = [];
     var yA = [];
 
@@ -250,7 +250,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum)
             }
             console.log(xA)
             console.log(yA)
-        
+
             if(xA.length == 0)
             {
                 alert(name + " could not generate ETF")
@@ -354,6 +354,7 @@ function getNews(value) {
 function getGraph3(name, uID, etfid, rules, amount, date, chartnum) {
 
     // document.getElementById("notes" + chartnum).innerHTML = name + " Loading<br>"
+    document.getElementById("compnotes").innerHTML ='';
 
     var xA = [];
     var yA = [];
@@ -397,7 +398,7 @@ function getGraph3(name, uID, etfid, rules, amount, date, chartnum) {
             }
             console.log(xA)
             console.log(yA)
-        
+
             if(xA.length == 0)
             {
                 alert(name + " could not generate ETF")
@@ -430,7 +431,7 @@ function getGraph3(name, uID, etfid, rules, amount, date, chartnum) {
                 for (const x in data.Stocks) {
                     arr = data.Stocks[x];
                 }
-                document.getElementById("compnotes").innerHTML = `<li><div class="collapsible-header"><i class="material-icons">date_range</i>Cash Overflow on ${key}: $${(data.CashOverFlow[key]).toFixed(2)}</div><div class="collapsible-body"><table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody id="${key + data.CashOverFlow[key]}"></tbody></table></div></li>`;
+                document.getElementById("compnotes").innerHTML += `<li><div class="collapsible-header"><i class="material-icons">date_range</i>Cash Overflow on ${key}: $${(data.CashOverFlow[key]).toFixed(2)}</div><div class="collapsible-body"><table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody id="${key + data.CashOverFlow[key]}"></tbody></table></div></li>`;
                 for (const works in stockArr) {
                     document.getElementById(key + data.CashOverFlow[key]).innerHTML += `<tr><td>${works}</td><td>${stockArr[works]}</td></tr> `;
                 }
