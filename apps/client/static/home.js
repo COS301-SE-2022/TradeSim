@@ -206,8 +206,9 @@ function getETFS2() {
         });
 }
 
-function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
-
+function getGraph(name, uID, etfid, rules, amount, date, chartnum) 
+{
+    
     var xA = [];
     var yA = [];
 
@@ -249,6 +250,12 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum) {
             }
             console.log(xA)
             console.log(yA)
+        
+            if(xA.length == 0)
+            {
+                alert(name + " could not generate ETF")
+                return
+            }
             graphBool = true;
             removeLoader()
             const mainContent1 = document.getElementById('graph-content');
@@ -390,6 +397,12 @@ function getGraph3(name, uID, etfid, rules, amount, date, chartnum) {
             }
             console.log(xA)
             console.log(yA)
+        
+            if(xA.length == 0)
+            {
+                alert(name + " could not generate ETF")
+                return
+            }
 
             var data2 = [{
                 x: xA,
