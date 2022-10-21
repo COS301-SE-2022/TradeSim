@@ -56,6 +56,7 @@ window.onload = function () {
                     console.log("data:", data)
                     const jd = JSON.parse(data)
                     console.log("jd: ", jd)
+                    alert(jd.error)
 
                 });
         };
