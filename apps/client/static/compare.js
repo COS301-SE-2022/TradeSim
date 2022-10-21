@@ -83,6 +83,9 @@ function getUserID() {
 
 async function confirm(chartnum1, chartnum2) {
 
+    document.getElementById("notes" + chartnum1).innerHTML = '';
+    document.getElementById("notes" + chartnum2).innerHTML = '';
+
     info1 = JSON.parse(document.getElementById("etf" + chartnum1).value)
     info2 = JSON.parse(document.getElementById("etf" + chartnum2).value)
 
@@ -225,7 +228,7 @@ function getGraph(name1, uID, etfid1, rules1, amount1, date, chartnum1, name2, e
                     // document.getElementById(x).innerHTML += `<tr><td>${x}</td><td>${arr[x]}</td></tr> `;
                     // }
                 }
-                document.getElementById("notes" + chartnum1).innerHTML = `<li><div class="collapsible-header"><i class="material-icons">date_range</i>${name1} - Cash Overflow on ${key}: $${(data['ETF 1'].CashOverFlow[key]).toFixed(2)}</div><div class="collapsible-body"><table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody id="${key+data['ETF 1'].CashOverFlow[key]}"></tbody></table></div></li>`;
+                document.getElementById("notes" + chartnum1).innerHTML += `<li><div class="collapsible-header"><i class="material-icons">date_range</i>${name1} - Cash Overflow on ${key}: $${(data['ETF 1'].CashOverFlow[key]).toFixed(2)}</div><div class="collapsible-body"><table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody id="${key+data['ETF 1'].CashOverFlow[key]}"></tbody></table></div></li>`;
                 for (const works in stockArr){
                     document.getElementById(key+data['ETF 1'].CashOverFlow[key]).innerHTML += `<tr><td>${works}</td><td>${stockArr[works]}</td></tr> `;
                 }
@@ -256,7 +259,7 @@ function getGraph(name1, uID, etfid1, rules1, amount1, date, chartnum1, name2, e
                     // document.getElementById(x).innerHTML += `<tr><td>${x}</td><td>${arr[x]}</td></tr> `;
                     // }
                 }
-                document.getElementById("notes" + chartnum2).innerHTML = `<li><div class="collapsible-header"><i class="material-icons">date_range</i>${name2} - Cash Overflow on ${key}: $${(data['ETF 2'].CashOverFlow[key]).toFixed(2)}</div><div class="collapsible-body"><table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody id="${key+data['ETF 2'].CashOverFlow[key]}"></tbody></table></div></li>`;
+                document.getElementById("notes" + chartnum2).innerHTML += `<li><div class="collapsible-header"><i class="material-icons">date_range</i>${name2} - Cash Overflow on ${key}: $${(data['ETF 2'].CashOverFlow[key]).toFixed(2)}</div><div class="collapsible-body"><table class="striped"><thead><tr><th>Ticker</th><th>Amount</th></tr></thead><tbody id="${key+data['ETF 2'].CashOverFlow[key]}"></tbody></table></div></li>`;
                 for (const works in stockArr2){
                     document.getElementById(key+data['ETF 2'].CashOverFlow[key]).innerHTML += `<tr><td>${works}</td><td>${stockArr2[works]}</td></tr> `;
                 }
