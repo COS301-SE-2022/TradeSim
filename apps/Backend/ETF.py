@@ -1114,8 +1114,7 @@ class ETF:
                 for x in stockInfo:
                     data = stockInfo[x]
                     for d in data:
-                        etfValueByday[d] = 0
-                    break
+                        etfValueByday[d] = 0                    
 
                 for x in stockInfo:
                     data = stockInfo[x]
