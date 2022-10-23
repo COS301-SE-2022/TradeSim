@@ -18,5 +18,9 @@ https://drive.google.com/file/d/1f4tcn5M33emtQ8MtuA3X-4Pio2NqYJgP/view?usp=shari
 <p>Please use the website link below:</p>
 <p>http://ec2-54-82-241-49.compute-1.amazonaws.com:8080</p>
 
+<h3>Summary of project</h3>
+
+<h3>Tutorial</h3>
+https://github.com/COS301-SE-2022/TradeSim/files/9678938/User.Manual.pdf
 
 
