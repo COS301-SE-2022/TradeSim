@@ -14,5 +14,9 @@ https://github.com/COS301-SE-2022/TradeSim/wiki/Documentation
 <h3>Project Day Demo</h3>
 https://drive.google.com/file/d/1f4tcn5M33emtQ8MtuA3X-4Pio2NqYJgP/view?usp=sharing
 
+<h3>How to use Project</h3>
+<p>Please use the website link below:</p>
+<p>http://ec2-54-82-241-49.compute-1.amazonaws.com:8080</p>
+
 
 
