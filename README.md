@@ -161,6 +161,9 @@ https://drive.google.com/file/d/1DFqvln2hRjkHIWyFr79-aT3l1FamqXQr/view?usp=shari
 <h3>Demo 4 video</h3>
 https://drive.google.com/file/d/1edf1PtzHs19calGfwro--xB_zwp-Vngz/view?usp=sharing
 
+<h3>Project Day Demo</h3>
+https://drive.google.com/file/d/1f4tcn5M33emtQ8MtuA3X-4Pio2NqYJgP/view?usp=sharing
+
 <a href="https://github.com/COS301-SE-2022/TradeSim/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/COS301-SE-2022/TradeSim"></a>
 
 <a href="https://requires.io/github/MichaelViljoen/TradeSim/requirements/?branch=main"><img src="https://requires.io/github/MichaelViljoen/TradeSim/requirements.svg?branch=main" alt="Requirements Status" /></a>
