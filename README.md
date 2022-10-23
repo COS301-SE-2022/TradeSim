@@ -1,124 +1,34 @@
-<img width="421" alt="Screenshot 2022-09-27 at 23 55 01" src="https://user-images.githubusercontent.com/93087406/192642886-acdec4be-65c3-45e7-a2d2-76001af23e2e.png">
-
-
 <h1> <b> AiPi </b> </h1>
-
 <h3> <b> Project Description </b> </h3>
 <p> Our role is to build a TradeSim system that will be responsible for containing all information for a user to customize their own ETF's and set their own rules. The user will be able to track how well their ETF is doing, and use this to decide where they want to invest their real money in the future. The goal is to create a system that will consist of a user's customized account, to help the user construct a portfolio of stocks, and define rules on how they should be traded to mimic an index tracking ETF by creating their own mini-ETF.
 The result will show the user how much capital they'll need to invest in the various stocks to make their own “mini-ETF” competitive against the established ETF on the market.
 The user is able to download these rules to a file, so they can use them for future reference when investing with their real money.  </p>
-
 ----------------------------------------------------
-
 Members
--------
-Project Manager - Michael Viljoen u20513667
-Buisness Anaylist - Rachel Hamilton u20453478
-
-Frontend Team
-Rachel Hamilton - u20453478
+-----------------------------------------------------
+Michael Viljoen u20513667
+Rachel Hamilton u20453478
 Sean Nkosi - U19107383
-
-Backend Team
 Regan Shen - u20460067
-Michael Viljoen - u20513667
-
-
 -----------------------------------------------------
-
-<h3> SRS document link: </h3>
-
-Demo 3:
-[SRS_AiPi-3.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9214147/SRS_AiPi-3.pdf)
-
-Demo 2:
-[SRS_AiPi-2.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8863733/SRS_AiPi-2.pdf)
-
-Demo 1:
-[SRS_AiPi.pdf](https://github.com/COS301-SE-2022/TradeSim/files/8877618/SRS_AiPi.pdf)
-
------------------------------------------------------
-
-<h3> Project Managment: </h3>
-
-<h4> BackEnd: </h4>
-https://github.com/COS301-SE-2022/TradeSim/projects/3
-
-<h4> FrontEnd: </h4>
-https://github.com/COS301-SE-2022/TradeSim/projects/2
-
------------------------------------------------------
-<h2> Demo 4: </h2>
-
-
-<h4> Testing Policy: </h4>
-
-[Testing policy.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9669232/Testing.policy.pdf)
-
-<h4> Coding Conventions: </h4>
-
-[CodingConventions.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9668882/CodingConventions.pdf)
-
-<h4>Technical Installation Manual: </h4>
-
-[technical installation manual.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9668911/technical.installation.manual.pdf)
-
+<h3>Quick Links</h3>
 <h4>SRS: </h4>
-
 [SRS_AiPi-4.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9668915/SRS_AiPi-4.pdf)
-
-<h4>Deployment Diagram </h4>
-
-![DeploymentDiagram](https://user-images.githubusercontent.com/93087406/192887957-e89f29c5-be7e-455e-a7cf-21da7744debb.png)
-
-<h4>Aligned Architectural design to the completed system</h4>
-
-[Architectural.Structural.Design.Requirements.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9668921/Architectural.Structural.Design.Requirements.pdf)
-
+<h4> Coding Conventions: </h4>
+[CodingConventions.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9668882/CodingConventions.pdf)
+<h4> Testing Policy: </h4>
+[Testing policy.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9669232/Testing.policy.pdf)
+<h4> Project Managment: </h4>
+https://github.com/COS301-SE-2022/TradeSim/projects?type=classic
 <h4>User Manual</h4>
 [User Manual.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9678938/User.Manual.pdf)
-
-
-
-
-
-
+<h4>Technical Installation Manual: </h4>
+[technical installation manual.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9668911/technical.installation.manual.pdf)
+<h4>Deployment Diagram </h4>
+![DeploymentDiagram](https://user-images.githubusercontent.com/93087406/192887957-e89f29c5-be7e-455e-a7cf-21da7744debb.png)
+<h4>Aligned Architectural design to the completed system</h4>
+[Architectural.Structural.Design.Requirements.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9668921/Architectural.Structural.Design.Requirements.pdf)
 -----------------------------------------------------
-<h3> Scrumboard: </h3>
-
-![scrumboard demo 3](https://user-images.githubusercontent.com/92848541/181635724-da7c5d73-b0e9-424d-8539-655ae58b83a8.JPG)
-
------------------------------------------------------
-
-<h3> Coding Conventions: </h3>
-
-[CodingConventions.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9212979/CodingConventions.pdf)
-
------------------------------------------------------
-
-
-<h3> Technical installation manual: </h3>
-
-[technical installation manual.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9213420/technical.installation.manual.pdf)
-
-
------------------------------------------------------
-
-
-<h3> User Manual: </h3>
-
-[User Manual AiPi.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9213423/User.Manual.AiPi.pdf)
-
-
------------------------------------------------------
-
-<h3> Testing Policy: </h3>
-
-[Testing policy.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9669233/Testing.policy.pdf)
-
-
------------------------------------------------------
-
 <h3>Technology Requirements</h3>
 <p>Backend - Python</p>
 <p>Frontend - HTML, CSS, JavaScript, Python </p>
@@ -126,8 +36,6 @@ https://github.com/COS301-SE-2022/TradeSim/projects/2
 <p>Database - AWS </p>
 
 -----------------------------------------------------
-
-
 
 <h3> Short profile description of each team member. </h3>
 
@@ -147,29 +55,10 @@ LinkedIn profile link: https://www.linkedin.com/in/regan-shen-b8a73b23a/
 About: I am a year student at UP studying Bsc Computer Science, over the years I have had the opportunity to learnt multiple languages including C++, Java, Python, JavaScript, PHP and more.<br>
 LinkedIn profile link:  https://www.linkedin.com/in/michael-viljoen-bb873923a
 
-
 -----------------------------------------------------
-<h3>Demo 1 video</h3>
-https://youtu.be/93PcgcoHgbU
-
-<h3>Demo 2 video</h3>
-https://drive.google.com/file/d/1EASvBRaTXEXfRLsbcI6tsiiK8YLsFm_e/view?usp=sharing
-
-<h3>Demo 3 video</h3>
-https://drive.google.com/file/d/1DFqvln2hRjkHIWyFr79-aT3l1FamqXQr/view?usp=sharing
-
-<h3>Demo 4 video</h3>
-https://drive.google.com/file/d/1edf1PtzHs19calGfwro--xB_zwp-Vngz/view?usp=sharing
 
 <h3>Project Day Demo</h3>
 https://drive.google.com/file/d/1f4tcn5M33emtQ8MtuA3X-4Pio2NqYJgP/view?usp=sharing
-
-<a href="https://github.com/COS301-SE-2022/TradeSim/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/COS301-SE-2022/TradeSim"></a>
-
-<a href="https://requires.io/github/MichaelViljoen/TradeSim/requirements/?branch=main"><img src="https://requires.io/github/MichaelViljoen/TradeSim/requirements.svg?branch=main" alt="Requirements Status" /></a>
-
-<img alt="PingPong status" src="https://img.shields.io/pingpong/status/sp_257456a7d8c142d4a6b69880301241a6">
-=======
 
 
 -----------------------------------------------------
