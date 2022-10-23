@@ -20,6 +20,7 @@ The user is able to download these rules to a file, so they can use them for fut
 
 * [Tutorial](https://github.com/COS301-SE-2022/TradeSim/files/9678938/User.Manual.pdf)
 
+* [SlideShow](https://github.com/COS301-SE-2022/TradeSim/files/9847171/Slideshow.pptx)
 
 
 <h2 align = "center">Get Started</h2>
