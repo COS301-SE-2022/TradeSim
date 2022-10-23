@@ -18,17 +18,19 @@ The user is able to download these rules to a file, so they can use them for fut
 
 * [Project Day Demo](https://drive.google.com/file/d/1f4tcn5M33emtQ8MtuA3X-4Pio2NqYJgP/view?usp=sharing)
 
+* [Tutorial](https://github.com/COS301-SE-2022/TradeSim/files/9678938/User.Manual.pdf)
 
 
 
+<h2 align = "center">Get Started</h2>
 
-<h3>How to use Project</h3>
-<p>Please use the website link below:</p>
+-----------------------------------------------------
+
+<p>Click on the link below, Create an account and start making money:</p>
 <p>http://ec2-54-82-241-49.compute-1.amazonaws.com:8080</p>
 
-<h3>Summary of project</h3>
 
-<h3>Tutorial</h3>
-https://github.com/COS301-SE-2022/TradeSim/files/9678938/User.Manual.pdf
+
+
 
 
