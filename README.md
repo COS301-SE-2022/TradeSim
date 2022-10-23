@@ -12,7 +12,7 @@ Regan Shen - u20460067
 </p>
 
 <h3>Documentation</h3>
-[Documents.pdf](https://github.com/COS301-SE-2022/TradeSim/files/9846993/Documents.pdf)
+https://github.com/COS301-SE-2022/TradeSim/wiki/Documentation
 
 <h3>Project Day Demo</h3>
 https://drive.google.com/file/d/1f4tcn5M33emtQ8MtuA3X-4Pio2NqYJgP/view?usp=sharing
