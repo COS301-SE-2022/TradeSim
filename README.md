@@ -14,7 +14,7 @@ The user is able to download these rules to a file, so they can use them for fut
 
 * [Documentation](https://github.com/COS301-SE-2022/TradeSim/wiki/Documentation)
 
-* [Members](https://github.com/COS301-SE-2022/TradeSim/wiki/The-AiPi-Team)
+* [The AiPi Team](https://github.com/COS301-SE-2022/TradeSim/wiki/The-AiPi-Team)
 
 * [Project Day Demo](https://drive.google.com/file/d/1f4tcn5M33emtQ8MtuA3X-4Pio2NqYJgP/view?usp=sharing)
 
