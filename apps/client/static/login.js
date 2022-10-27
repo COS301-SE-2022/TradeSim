@@ -21,7 +21,7 @@ function validateform() {
     body:JSON.stringify(details)}
      ).then(response=> response.json())
          .then(data =>{
-         console.log(data)
+      
          const jd = JSON.parse(data)
          if(jd.status == "failure")
          {

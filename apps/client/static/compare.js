@@ -40,12 +40,12 @@ function getETFS() {
         }
     ).then(response => response.json())
         .then(data => {
-            console.log(data)
+
             // const mainCompare = document.getElementById('main-compare');
             // mainCompare.classList.add('show');
             const jd = JSON.parse(data)
             if (jd.status == "failure") {
-                console.log(jd.error);
+
                 //document.getElementById("etfbody").innerHTML = jd.error
             } else {
                 let numofetfs = jd.Data.length;
@@ -91,8 +91,7 @@ async function confirm(chartnum1, chartnum2) {
 
     date = document.getElementById("selectdate").value;
 
-    console.log(info1)
-    console.log(date)
+
 
     if (date == '') {
         date = "2022-01-01"
@@ -130,7 +129,7 @@ function getGraph(name1, uID, etfid1, rules1, amount1, date, chartnum1, name2, e
 
         }
 
-    console.log(JSON.stringify(details2));
+
     // ec2-54-82-241-49.compute-1.amazonaws.com:6969
     fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/compare",
         {
@@ -145,8 +144,7 @@ function getGraph(name1, uID, etfid1, rules1, amount1, date, chartnum1, name2, e
     ).then(response => response.json())
         .then(data => {
 
-            console.log("Values: ",data['ETF 1'].Values)
-            console.log("ETF 1: ", data['ETF 1'])
+
 
 
             var prevy = 0
@@ -168,11 +166,7 @@ function getGraph(name1, uID, etfid1, rules1, amount1, date, chartnum1, name2, e
                 }
 
             }
-            console.log("XA: ",xA)
-            console.log("YA: ",yA)
 
-            console.log("XXA: ",xxA)
-            console.log("YYA: ", yyA)
 
             var data2 = {
                 x: xA,
@@ -199,7 +193,7 @@ function getGraph(name1, uID, etfid1, rules1, amount1, date, chartnum1, name2, e
 
             Plotly.newPlot("chart" + String(chartnum1), finalData, layout);
             graphCount++;
-            console.log("GraphCount: ", graphCount);
+
             if (graphCount == 1) {
                 const loaderDiv = document.getElementById('loader-compare');
                 loaderDiv.classList.remove('show');
@@ -224,7 +218,7 @@ function getGraph(name1, uID, etfid1, rules1, amount1, date, chartnum1, name2, e
                     // for (const key in arr) {
                     // console.log(`${key}: ${arr[key]}`);
                     // console.log("x: ",x,"arr:",arr,"data:",data);
-                    console.log("KEY v2: ", x);
+
                     // document.getElementById(x).innerHTML += `<tr><td>${x}</td><td>${arr[x]}</td></tr> `;
                     // }
                 }
@@ -239,7 +233,7 @@ function getGraph(name1, uID, etfid1, rules1, amount1, date, chartnum1, name2, e
                 } else {
                     i++
                 }
-                console.log(i)
+
 
 
             }
@@ -255,7 +249,7 @@ function getGraph(name1, uID, etfid1, rules1, amount1, date, chartnum1, name2, e
                     // for (const key in arr) {
                     // console.log(`${key}: ${arr[key]}`);
                     // console.log("x: ",x,"arr:",arr,"data:",data);
-                    console.log("KEY v2: ", x);
+
                     // document.getElementById(x).innerHTML += `<tr><td>${x}</td><td>${arr[x]}</td></tr> `;
                     // }
                 }
@@ -270,13 +264,13 @@ function getGraph(name1, uID, etfid1, rules1, amount1, date, chartnum1, name2, e
                 } else {
                     i++
                 }
-                console.log(i)
+
 
 
             }
             // document.getElementById("notes" + chartnum).innerHTML = ""
         }).catch((error) => {
-        console.log("Error Notes: ", error);
+
         document.getElementById("notes" + chartnum1).innerHTML = name + " could not generate ETF<br>"
         // alert( "ETF " + name + " does not generate any stocks!")
     });
@@ -290,6 +284,6 @@ function changedate() {
     loaderDiv.classList.add('show');
     // const graphDiv = document.getElementById('graph-table');
     // graphDiv.classList.add('show');
-    console.log("SHARE: ", loaderDiv);
+
     confirm(1, 2);
 }

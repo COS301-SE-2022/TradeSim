@@ -42,7 +42,7 @@ function validateform() {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
                 if (jd.error == "successfully signed up")
                     document.getElementById("response").innerHTML = `<div class="alert alert-success" role="alert">${jd.error}</div>`;

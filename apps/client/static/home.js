@@ -47,17 +47,17 @@ function getETFS() {
         }
     ).then(response => response.json())
         .then(data => {
-            console.log(data)
+
             const jd = JSON.parse(data)
             if (jd.status == "failure") {
-                console.log(jd.error);
+
                 document.getElementById("graph-content").innerHTML = `<div class="noETF center"><div class="section"><h5 class="brand-logo">${(jd.error).toUpperCase()}</h5><a class="waves-effect waves-light btn blue" href="/addETF"><i class="material-icons left">add</i>Create New ETF</a></div></div>`;
                 const mainContent1 = document.getElementById('graph-content');
                 mainContent1.classList.add('show');
                 graphBool = true;
                 removeLoader();
             } else {
-                console.log(jd);
+
                 let numofetfs = jd.Data.length;
 
                 document.getElementById("etfs").innerHTML += "<table id='table1'>"
@@ -97,17 +97,7 @@ function confirm() {
     const hideTbl = document.getElementById('tblnoteshome');
     hideTbl.classList.remove('show');
 
-    //    info = document.getElementById("options" ) //.value
-    //
-    // // date = document.getElementById("selectdate").value;
-    //
-    //  console.log(info)
-    // // console.log(date)
-    //
-    //
-    //  //document.getElementById("notes" + chartnum).innerHTML = "LOADING... <br>"
-    //  getGraph2(info.ETFName, getUserID(), info.ETFID, info.Rules, info.Amount, info.date)
-    //
+
 
     var userID = getUserID();
     const details =
@@ -127,13 +117,13 @@ function confirm() {
         }
     ).then(response => response.json())
         .then(data => {
-            console.log(data)
+
             const jd = JSON.parse(data)
             if (jd.status == "failure") {
-                console.log(jd.error);
+
                 document.getElementById("display").innerHTML = jd.error
             } else {
-                console.log(jd);
+
                 let numofetfs = jd.Data.length;
 
                 document.getElementById("display").innerHTML += "<table id='table1'>" //etfs
@@ -183,15 +173,15 @@ function getETFS2() {
         }
     ).then(response => response.json())
         .then(data => {
-            console.log(data)
+
             const jd = JSON.parse(data)
             if (jd.status == "failure") {
-                console.log(jd.error);
+
                 document.getElementById("etfs").innerHTML = `<div class="container">${jd.error}</div>`;
                 const mainContent1 = document.getElementById('graph-content');
                 mainContent1.classList.add('show');
             } else {
-                console.log(jd);
+
                 let numofetfs = jd.Data.length;
 
                 for (var i = 0; i < numofetfs; i++) {
@@ -223,7 +213,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum)
 
         }
 
-    console.log(JSON.stringify(details2));
+
     fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/createRules",
         {
             method: 'POST',
@@ -237,7 +227,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum)
     ).then(response => response.json())
         .then(data => {
 
-            console.log(data)
+
 
             var prevy = 0
             for (key in data.Values) {
@@ -248,8 +238,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum)
                 }
 
             }
-            console.log(xA)
-            console.log(yA)
+
 
             if(xA.length == 0)
             {
@@ -287,7 +276,7 @@ function getGraph(name, uID, etfid, rules, amount, date, chartnum)
 }
 
 function removeLoader() {
-    console.log("NB: ", newsBool, "GB: ", graphBool)
+
     if (newsBool && graphBool) {
         const loaderDiv = document.getElementById('loader');
         loaderDiv.classList.remove('show');
@@ -297,19 +286,19 @@ function removeLoader() {
 function getNews(value) {
     value = value || "";
 
-    console.log("cat", value)
+
     if (value != "") {
         details =
             {
                 "category": `${value}`
             }
-        console.log("category", value)
+
     } else {
         details =
             {
                 "category": "crypto"
             }
-        console.log("category", value)
+
     }
 
     fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/news",
@@ -324,7 +313,7 @@ function getNews(value) {
         }
     ).then(response => response.json())
         .then(data => {
-            console.log("data", data)
+
             //date: "2022-09-06"
             // headline
             // "Energy Trade Risks Collapsing Over Margin Calls of $1.5 Trillion"
@@ -338,7 +327,7 @@ function getNews(value) {
             // "https://www.bloomberg.com/news/articles/2022-09-06/energy-t
             var disp = ``;
             for (let i = 0; i < 10; i++) {
-                console.log("THE DATA: " + data[i].headline);
+
                 disp += `<li class="collection-item avatar"><div class="col-11"><img src=${data[i].image} class="circle"><span class="title">${data[i].headline}</span><p>${data[i].summary}</p></div><div class="col-1"><a href="${data[i].url}" class="secondary-content" target="_blank"><i class="material-icons">open_in_new</i></a></div></li>`;
             }
 
@@ -370,7 +359,7 @@ function getGraph3(name, uID, etfid, rules, amount, date, chartnum) {
 
         }
 
-    console.log(JSON.stringify(details2));
+
     fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/createRules",
         {
             method: 'POST',
@@ -384,7 +373,6 @@ function getGraph3(name, uID, etfid, rules, amount, date, chartnum) {
     ).then(response => response.json())
         .then(data => {
 
-            console.log(data)
 
 
             var prevy = 0
@@ -396,8 +384,7 @@ function getGraph3(name, uID, etfid, rules, amount, date, chartnum) {
                 }
 
             }
-            console.log(xA)
-            console.log(yA)
+
 
             if(xA.length == 0)
             {
@@ -445,10 +432,10 @@ function getGraph3(name, uID, etfid, rules, amount, date, chartnum) {
                 } else {
                     i++
                 }
-                console.log(i)
+
             }
         }).catch((error) => {
-        console.log("Error Notes: ", error);
+
         //alert(name + " could not generate ETF ")
         // alert( "ETF " + name + " does not generate any stocks!")
     });
@@ -470,5 +457,6 @@ function getUserID() {
     }
     return "";
 }
+
 
 
