@@ -33,14 +33,14 @@ window.onload = function () {
         fileread.onload = function (e) {
             var content = e.target.result;
             const objImport = JSON.parse(content);
-            console.log(objImport);
+
             impJSON = objImport;
-            console.log("IMP: ", impJSON);
+
             const details =
                 {
                     "Data": [gloUserID, impJSON.Data[0].ETFName, impJSON.Data[0].Amount, impJSON.Data[0].Rules, impJSON.Data[0].Date]
                 }
-            console.log("Imp Dets: ", details)
+
             fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/import",
                 {
                     method: 'POST',
@@ -53,9 +53,9 @@ window.onload = function () {
                 }
             ).then(response => response.json())
                 .then(data => {
-                    console.log("data:", data)
+
                     const jd = JSON.parse(data)
-                    console.log("jd: ", jd)
+
                     alert(jd.error)
 
                 });
@@ -89,10 +89,10 @@ function validatenaa() {
         }
     ).then(response => response.json())
         .then(data => {
-            console.log(data)
+
             const jd = JSON.parse(data)
             if (jd.status == "failure") {
-                console.log(jd.error);
+
                 confirm();
                 // alert(jd.error)
             } else {
@@ -135,10 +135,10 @@ function validatenaa2() {
              }
          ).then(response => response.json())
              .then(data => {
-                 console.log(data)
+
                  const jd = JSON.parse(data)
                  if (jd.status == "failure") {
-                     console.log(jd.error);
+
                      // confirm2();
                      alert(jd.error)
                  } else {
@@ -192,13 +192,13 @@ function getETFS() {
         }
     ).then(response => response.json())
         .then(data => {
-            console.log(data)
+
             const jd = JSON.parse(data)
             if (jd.status == "failure") {
-                console.log(jd.error);
+
                 document.getElementById("etfs").innerHTML = jd.error
             } else {
-                console.log(jd);
+
                 impJSON = jd;
                 let numofetfs = jd.Data.length;
 
@@ -1366,10 +1366,8 @@ function addRule2() {
         rule.innerHTML = '<b >' + document.getElementById('r16').textContent + '</b>' + //style="color: black; position: relative; bottom: 180px; right: 10px;"
             '<div class="amount-input-row">' +
             '<div class="card2" id="etfbody" >' + //style="width:1125px ; position: relative; bottom: 110px; right: 12px"
-            // '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Rule:</b></label>' +
             '<div class="custom-select" >' + //style="display: inline-block; position: relative; top:5px; left:25px;"
             '<input id="inputw" type="text" placeholder="Balance period in weeks" >' + //style=" width:350px; height:25px; font-size: 12px; "
-            // '<button class="create-btn" id="btn16"  onclick="ConfirmRule(200)">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 550px; bottom: 1px;"
             '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(200)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
@@ -1382,11 +1380,8 @@ function addRule2() {
         rule.innerHTML = '<b >' + document.getElementById('r18').textContent + '</b>' + //style="color: black; position: relative; bottom: 130px; right: 10px;"
             '<div class="amount-input-row">' +
             '<div class="card2" id="etfbody">' + // style="width:1125px ; position: relative; bottom: 70px; right: 12px"
-            // '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>Rule:</b></label>' +
             '<div class="custom-select" >' + //style="display: inline-block; position: relative; top:5px; left:25px;"
-            // '<input type="text" placeholder="Number of weeks until reconsideration" >' + //style=" width:350px; height:25px; font-size: 12px; "
             '<input id="inputw" type="text" placeholder="Number of weeks until reconsideration" >' +
-            // '<button class="create-btn" id="btn18"  onclick="ConfirmRule("202")">+</button>' + //style="width: 50px; display: inline-block; position: relative; left: 550px; bottom: 1px;"
             '<a class="waves-effect waves-light btn blue right" onclick="ConfirmRule2(202)" >Confirm Rule</a>' +
             '</div>' +
             '</div>' +
@@ -1399,34 +1394,24 @@ function confirm() {
     document.getElementById("btn").innerHTML = ''
 
     document.getElementById("btn").innerHTML += '  <a class="waves-effect waves-light btn blue right" onclick="addRule()" >add</a> '
-    console.log(document.getElementById("options").value)
+
     etfid = document.getElementById("options").value
 
     const loaderDiv = document.getElementById('etfeditor');
     loaderDiv.classList.add('etfeditor');
 
     document.getElementById("etfeditor").innerHTML =
-        //         '<div class="card2" id="etfbody" style="width:108% ; position: relative; bottom: 70px; right: 12px">' +
-        //             '<label for="etf" style=" color: white; position: relative; top: 8px; left: 10px;" id="label2"><b>EDIT NAME:</b></label>' +
-        //             '<div class="custom-select" style="display: inline-block; position: relative; top:5px; left:25px;">' +
-        //                 '<input id="inputname" type="text" placeholder="Name" style=" width:100px; height:25px; font-size: 12px; ">' +
-        //                 '<button class="create-btn" id="btn1" style="width: 50px; display: inline-block; position: relative; left: 6px; bottom: 1px;" onclick="editname()">edit</button>' +
-        //             '</div>' +
-        //             '<label for="etf" style=" color: white; position: relative; top: 8px; left: 35px;" id="label2"><b>EDIT AMOUNT:</b></label>' +
-        //             '<div class="custom-select" style="display: inline-block; position: relative; top:5px; left:40px;">' +
-        //                 '<input id="inputamount" type="text" placeholder="Amount" style=" width:100px; height:25px; font-size: 12px; ">' +
+
         '<a class="waves-effect waves-light btn blue" onclick="editamount()">Edit Amount</a>' + " " +
         '<a class="waves-effect waves-light btn blue" onclick="editname()">Edit Name</a>' + " " +
         '<a class="waves-effect waves-light btn blue" onclick="clearRules()">Clear Rules</a>' + " " +
         '<a class="waves-effect waves-light btn blue right" onclick="deleteETF()"> Delete ETF</a>' 
-        //                 '<button class="create-btn" id="btn1" style="width: 70px; display: inline-block; position: relative; left: 400px; bottom: 1px;" onclick="deleteETF()">delete</button>' +
 
-        //     "</div>"
 
         document.getElementById("ruleadder").innerHTML =
             "<div class=\"amount-input-row\">\n" +
-            "                <div class=\"card2\" id=\"etfbody\" >\n" + //style="width:108% ; position: relative; bottom: 95px; right: 12px"
-            "                    <div class=\"custom-select\" >\n" + //style="width:200px; display: inline-block; position: relative; left: 12px; top: 8px;"
+            "                <div class=\"card2\" id=\"etfbody\" >\n" +
+            "                    <div class=\"custom-select\" >\n" +
             "\n" +
             "                        <select>\n" +
             "                          <option disabled selected hidden value=\"0\">Select rule:</option>\n" +
@@ -1468,8 +1453,7 @@ function confirm() {
 function confirm2() {
 
 
-    // console.log(document.getElementById("options").value)
-    // etfid = document.getElementById("options").value
+
 
     getETFS();
     document.getElementById("ruleadder").innerHTML =
@@ -1507,7 +1491,7 @@ function confirm2() {
     "                </div>\n" +
     "            </div>"
 
-    // validatenaa()
+
     addRule2()
 
 
@@ -1537,13 +1521,13 @@ function getRules() {
         }
     ).then(response => response.json())
         .then(data => {
-            console.log(data)
+
             const jd = JSON.parse(data)
             if (jd.status == "failure") {
-                console.log(jd.error);
-                // document.getElementById("etfbody").innerHTML = jd.error
+
+
             } else {
-                console.log(jd);
+
                 let numofetfs = jd.Data.length;
                 document.getElementById("ruleslist").innerHTML = '';
 
@@ -1551,7 +1535,7 @@ function getRules() {
 
                 for (var i = 0; i < numofetfs; i++) {
                     if (jd.Data[i].ETFID == document.getElementById("options").value) {
-                        console.log(jd.Data[i].Rules)
+
                         exportValues.push(jd.Data[i].Rules);
                         for (var j = 0; j < jd.Data[i].Rules.length; j++) {
                             if (jd.Data[i].Rules[j][0] == "000") {
@@ -2075,7 +2059,7 @@ function getRules() {
                             } else if (jd.Data[i].Rules[j][0] == "104") {
                                 document.getElementById("ruleslist").innerHTML += "Request the companies with the highest market cap:" + jd.Data[i].Rules[j][1] + "<br>"
                             } else if (jd.Data[i].Rules[j][0] == "105") {
-                                console.log(jd.Data[i].Rules[j][1][0])
+
                                 if (jd.Data[i].Rules[j][1][0] == "AS") {
                                     document.getElementById("ruleslist").innerHTML += "Request companies based in: NYSE EURONEXT - EURONEXT AMSTERDAM " + jd.Data[i].Rules[j][1][1] + " " + jd.Data[i].Rules[j][1][2] + "<br>"
                                 } else if (jd.Data[i].Rules[j][1][0] == "AT") {
@@ -2242,7 +2226,7 @@ function getRules() {
 
                 //2
                 eName = selectedValue;
-                console.log(selectedValue);
+
 
                 document.getElementById("etfName").value = selectedValue;
 
@@ -2257,17 +2241,13 @@ function getRules() {
                     }
                 }
                 selEtfAmt = amt;
-                console.log(amt);
+
                 const loaderDiv = document.getElementById('exportBtn');
                 // loaderDiv.classList.add('show');
                 document.getElementById("etfAmount").value = "$" + amt;
                  document.getElementById("ruleslist").innerHTML += '<a class="waves-effect blue waves-light btn" onClick="exportRules()">Export ETF<i class="material-icons right">arrow_upward</i></a>';
 
 
-                //document.getElementById("last_name").remove();
-
-//Ai etf
-                //dropdown 2015-2021
             }
 
 
@@ -2300,20 +2280,20 @@ function getRules2() {
         }
     ).then(response => response.json())
         .then(data => {
-            console.log(data)
+
             const jd = JSON.parse(data)
             if (jd.status == "failure") {
-                console.log(jd.error);
+
                 // document.getElementById("etfbody").innerHTML = jd.error
             } else {
-                console.log(jd);
+
                 let numofetfs = jd.Data.length;
                 document.getElementById("ruleslist").innerHTML = '';
                 var theSelect = document.getElementById('options');
                 var eID = theSelect.options[theSelect.options.length - 1].value;
                 for (var i = 0; i < numofetfs; i++) {
                     if (jd.Data[i].ETFID == eID) {
-                        console.log(jd.Data[i].Rules)
+
                         for (var j = 0; j < jd.Data[i].Rules.length; j++) {
                             if (jd.Data[i].Rules[j][0] == "000") {
                                 document.getElementById("ruleslist").innerHTML += "Reject Company by Ticker: " + jd.Data[i].Rules[j][1] + "<br>"
@@ -2836,7 +2816,7 @@ function getRules2() {
                             } else if (jd.Data[i].Rules[j][0] == "104") {
                                 document.getElementById("ruleslist").innerHTML += "Request the companies with the highest market cap:" + jd.Data[i].Rules[j][1] + "<br>"
                             } else if (jd.Data[i].Rules[j][0] == "105") {
-                                console.log(jd.Data[i].Rules[j][1][0])
+
                                 if (jd.Data[i].Rules[j][1][0] == "AS") {
                                     document.getElementById("ruleslist").innerHTML += "Request companies based in: NYSE EURONEXT - EURONEXT AMSTERDAM " + jd.Data[i].Rules[j][1][1] + " " + jd.Data[i].Rules[j][1][2] + "<br>"
                                 } else if (jd.Data[i].Rules[j][1][0] == "AT") {
@@ -3041,9 +3021,9 @@ async function ConfirmRule(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -3074,9 +3054,9 @@ async function ConfirmRule(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -3105,9 +3085,9 @@ async function ConfirmRule(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -3136,9 +3116,9 @@ async function ConfirmRule(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -3183,9 +3163,9 @@ async function ConfirmRule(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -3232,9 +3212,9 @@ async function ConfirmRule(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
             });
@@ -3280,9 +3260,9 @@ async function ConfirmRule(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
             });
@@ -3322,9 +3302,9 @@ async function ConfirmRule(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
             });
@@ -3364,9 +3344,9 @@ async function ConfirmRule(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -3406,9 +3386,9 @@ async function ConfirmRule(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -3454,9 +3434,9 @@ async function ConfirmRule(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -3497,9 +3477,9 @@ async function ConfirmRule(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -3539,9 +3519,9 @@ async function ConfirmRule(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -3580,9 +3560,9 @@ async function ConfirmRule(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -3622,9 +3602,9 @@ async function ConfirmRule(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -3645,11 +3625,11 @@ async function ConfirmRule2(rulecode) {
         }
 
         rulecode = "000"
-        // var eID = document.getElementById("options").value;
+
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
 
-        //  var eID = document.getElementById("etfName").value
+
         var param1 = document.getElementById("input1").value
         var param2 = "";
         var param3 = "";
@@ -3671,9 +3651,9 @@ async function ConfirmRule2(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -3682,7 +3662,7 @@ async function ConfirmRule2(rulecode) {
     } else if (rulecode == 1) {
 
         rulecode = "001"
-        // var eID = document.getElementById("options").value;
+
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("secopt").value
@@ -3706,9 +3686,9 @@ async function ConfirmRule2(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -3716,7 +3696,7 @@ async function ConfirmRule2(rulecode) {
     } else if (rulecode == 2) {
 
         rulecode = "002"
-        // var eID = document.getElementById("options").value;
+
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("indopt").value
@@ -3739,9 +3719,9 @@ async function ConfirmRule2(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -3749,7 +3729,7 @@ async function ConfirmRule2(rulecode) {
     } else if (rulecode == 3) {
 
         rulecode = "003"
-        // var eID = document.getElementById("options").value;
+
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("cbropt").value
@@ -3772,9 +3752,9 @@ async function ConfirmRule2(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -3797,7 +3777,7 @@ async function ConfirmRule2(rulecode) {
 
 
         rulecode = "011"
-        // var eID = document.getElementById("options").value;
+
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("inputmin").value;
@@ -3821,9 +3801,9 @@ async function ConfirmRule2(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -3847,7 +3827,7 @@ async function ConfirmRule2(rulecode) {
 
 
         rulecode = "012"
-        // var eID = document.getElementById("options").value;
+
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("inputemin").value;
@@ -3872,9 +3852,9 @@ async function ConfirmRule2(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
             });
@@ -3922,9 +3902,9 @@ async function ConfirmRule2(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
             });
@@ -3966,9 +3946,9 @@ async function ConfirmRule2(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
             });
@@ -3986,7 +3966,7 @@ async function ConfirmRule2(rulecode) {
         }
 
         rulecode = "102"
-        //var eID = document.getElementById("options").value;
+
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("secopt2").value
@@ -4010,9 +3990,9 @@ async function ConfirmRule2(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -4030,7 +4010,7 @@ async function ConfirmRule2(rulecode) {
         }
 
         rulecode = "103"
-        // var eID = document.getElementById("options").value;
+
         var theSelect = document.getElementById('options');
         var eID = theSelect.options[theSelect.options.length - 1].value;
         var param1 = document.getElementById("indopt2").value
@@ -4054,9 +4034,9 @@ async function ConfirmRule2(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -4104,9 +4084,9 @@ async function ConfirmRule2(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -4149,9 +4129,9 @@ async function ConfirmRule2(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -4193,9 +4173,9 @@ async function ConfirmRule2(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -4236,9 +4216,9 @@ async function ConfirmRule2(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -4279,9 +4259,9 @@ async function ConfirmRule2(rulecode) {
             }
         ).then(response => response.json())
             .then(data => {
-                console.log(data)
+
                 const jd = JSON.parse(data)
-                console.log(jd)
+
                 document.getElementById("rule").innerHTML = ""
 
 
@@ -4340,9 +4320,9 @@ function editname() {
         }
     ).then(response => response.json())
         .then(data => {
-            console.log(data)
+
             const jd = JSON.parse(data)
-            console.log(jd)
+
             alert("ETF name has been updated.")
             window.location.href = "/addETF"
 
@@ -4376,9 +4356,9 @@ function editamount() {
         }
     ).then(response => response.json())
         .then(data => {
-            console.log(data)
+
             const jd = JSON.parse(data)
-            console.log(jd)
+
             alert("Amount has been updated.")
             window.location.href = "/addETF"
 
@@ -4406,9 +4386,9 @@ function clearRules() {
         }
     ).then(response => response.json())
         .then(data => {
-            console.log(data)
+
             const jd = JSON.parse(data)
-            console.log(jd)
+
             alert("Rules have been cleared.")
             // document.getElementById("ruleadder")
             window.location.href = "/addETF"
@@ -4437,11 +4417,11 @@ function deleteETF() {
         }
     ).then(response => response.json())
         .then(data => {
-            console.log(data)
+
             const jd = JSON.parse(data)
-            console.log(jd)
+
             if (jd.status == "failure") {
-                console.log(jd.error);
+
 
                 // alert(jd.error)
             } else {
@@ -4460,7 +4440,7 @@ function exportRules() {
         {
             "Data": [gloUserID, eName]
         }
-    console.log("Exp Dets: ", JSON.stringify(details))
+
     fetch("http://ec2-54-82-241-49.compute-1.amazonaws.com:6969/export",
         {
             method: 'POST',
@@ -4473,10 +4453,8 @@ function exportRules() {
         }
     ).then(response => response.json())
         .then(data => {
-            console.log("data:", data)
+
             expRules = JSON.parse(data)
-            console.log("jd: ", expRules)
-            // window.location.href = "/addETF"
 
             const anchor = document.createElement("a");
             anchor.href = URL.createObjectURL(new Blob([JSON.stringify(expRules, null, 2)], {
@@ -4495,4 +4473,5 @@ function importRules() {
     document.getElementById("jsonfileinput").click();
 
 }
+
 
