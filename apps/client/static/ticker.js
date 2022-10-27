@@ -20,7 +20,7 @@ function searchTicker() {
     loaderDiv.classList.add('show');
     var tick = document.getElementById('tickerInput').value;
     tick = tick.toUpperCase();
-    console.log(tick);
+
     //getCompanyInformation(tick)
     const details =
         {
@@ -38,11 +38,11 @@ function searchTicker() {
         }
     ).then(response => response.json())
         .then(data => {
-            console.log("data", data)
+
             graphName = data['Company Name']
-            console.log("name of Graph", graphName);
+
             obj = data.PriceHistory;
-            console.log("Price History", obj);
+
             const loaderDiv = document.getElementById('loader');
             loaderDiv.classList.remove('show');
             var showTable = document.getElementById("results");
@@ -51,7 +51,7 @@ function searchTicker() {
             }
             if (data.Ticker != null) {
                 document.getElementById("card-title").innerHTML = `<div class="row"><div class="col-8">${data.Ticker}:${data['Company Name']}</div><div class="col-4"><img src=${data.Logo} height="100%" width="100%"></div></div>`;
-                console.log(data['Company Name']);
+
                 document.getElementById("response").innerHTML = `<table><tbody><tr><td><b>Industry: </b>${data.Industry}</td></tr><tr><td>${data.Summary}</td></tr></tbody></table>`;
                 getGraph(graphName, obj);
             } else {
@@ -87,7 +87,7 @@ function getGraph(name, obj) {
             yaxis: {title: "price in dollars"},
             title: name
         };
-    console.log("Drawing Graph")
+
     Plotly.newPlot("notes", data2, layout);
 
 }
