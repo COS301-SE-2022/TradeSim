@@ -45,7 +45,7 @@ function getwow()
     ).then(response => response.json())
         .then(data => {
 
-            console.log(data)
+
 
             prevy = 0
             var xA = [];
@@ -61,8 +61,8 @@ function getwow()
                 }
 
             }
-            console.log(xA)
-            console.log(yA)
+
+
 
             var data2 = [{
                 x: xA,
@@ -620,7 +620,7 @@ function getwow()
                 } else if (data.Rules[j][0] == "104") {
                     document.getElementById("ruleslist").innerHTML += "<tr><td>Request the companies with the highest market cap:" + data.Rules[j][1] + "</td></tr>"
                 } else if (data.Rules[j][0] == "105") {
-                    console.log(data.Rules[j][1][0])
+
                     if (data.Rules[j][1][0] == "AS") {
                         document.getElementById("ruleslist").innerHTML += "<tr><td>Request companies based in: NYSE EURONEXT - EURONEXT AMSTERDAM " + data.Rules[j][1][1] + " " + data.Rules[j][1][2] + "</td></tr>"
                     } else if (data.Rules[j][1][0] == "AT") {
@@ -778,6 +778,7 @@ function getwow()
             }
 
         }).catch((error) => {
-        console.log("Error Notes: ", error);
+
     });
 }
+
